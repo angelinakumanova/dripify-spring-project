@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/src/output.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="shortcut icon" href="/static/images/favicon.ico" />
 </head>
 <body>
   
@@ -91,7 +92,7 @@
       
       <div class="relative isolate pt-14">
         <div class="overflow-hidden mt-8 bg-black py-2 opacity-90">
-          <div class="flex animate-marquee sm:h-72 md:h-96" style="height: 600px;">
+          <div class="marquee-container animate-marquee sm:h-[600px] h-[500px] flex" style="--marquee-offset: 0%;">
             <img src="/static/images/header/1.jpg" alt="style-showcase-photo">
             <img src="/static/images/header/2.jpg" alt="style showcase photo">
             <img src="/static/images/header/3.jpg" alt="style showcase photo">
@@ -127,7 +128,7 @@
   </div>
   
   
-
+  
   
   <!-- ABOUT -->
   <div class="bg-white py-24 sm:py-32">
@@ -195,7 +196,7 @@
       </div>
       
       
-  
+      
       
       <!-- CATEGORIES -->
       <div class="bg-white">
@@ -286,6 +287,24 @@
         <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
         <script>
           AOS.init();
+          
+          document.addEventListener('DOMContentLoaded', () => {
+            const marqueeContainer = document.querySelector('.marquee-container');
+            const images = marqueeContainer.querySelectorAll('img');
+            
+            // Get the total width of one set of images
+            const firstSet = Array.from(images).slice(0, images.length / 2);
+            const totalWidth = firstSet.reduce((sum, img) => sum + img.offsetWidth, 0);
+            
+            // Get container width
+            const containerWidth = marqueeContainer.offsetWidth;
+            
+            // Calculate gap offset in percentage (based on container width)
+            const gapOffset = (totalWidth / containerWidth) * 100;
+            
+            // Apply percentage gap offset to the CSS variable
+            marqueeContainer.style.setProperty('--marquee-offset', `-${gapOffset}%`);
+          });
         </script>
       </body>
       </html>
