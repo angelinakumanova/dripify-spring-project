@@ -27,8 +27,8 @@
           </a>
         </div>
         
-        <div class="flex lg:hidden">
-          <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+        <div class="mobile-menu flex lg:hidden">
+          <button type="button" class="hamburger -m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
             <span class="sr-only">Open main menu</span>
             <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -53,7 +53,7 @@
       
       
       <!-- Mobile menu, show/hide based on menu open state. -->
-      <div class="lg:hidden" role="dialog" aria-modal="true">
+      <div class="mobile-menu lg:hidden" role="dialog" aria-modal="true">
         <!-- Background backdrop, show/hide based on slide-over state. -->
         <div class="fixed inset-0 z-50"></div>
         <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
@@ -241,33 +241,41 @@
         <!-- CATEGORIES -->
         <div class="bg-white">
           <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32" data-aos="fade-up" data-aos-duration="1000">
-              <h2 class="text-2xl font-bold text-gray-900">EXPLORE OUR COLLECTIONS</h2>
+            <div class="mx-auto  py-16 sm:py-24 lg:max-w-none lg:py-32" data-aos="fade-up" data-aos-duration="1000">
+              <h2 class="text-2xl font-bold text-gray-900">POPULAR CATEGORIES</h2>
               
-              <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
+              <div class="mt-6 space-y-12 lg:grid lg:grid-cols-4 lg:gap-x-6 lg:space-y-0">
                 
-                <a href="#">
-                  <div class="group relative">
+                <a href="#" >
+                  <div class="group relative text-center ">
                     
-                    <img src="/static/images/categories/streetwear-category.jpg" alt="Streetwear category visual" class="w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
-                    <p class="text-lg font-semibold p-2 text-gray-900">STREETWEAR</p>
+                    <img src="/static/images/categories/coats-and-jackets-category.jpg" alt="coats and jackets category visual" class="object-top w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
+                    <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">COATS & JACKETS</p>
                   </div>
                 </a>
                 
                 <a href="#">
-                  <div class="group relative">
+                  <div class="group relative text-center">
                     
-                    <img src="/static/images/categories/classy-category.jpg" alt="Classy category visual" class="w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
-                    <p class="text-lg font-semibold p-2 text-gray-900">CLASSY</p>
+                    <img src="/static/images/categories/jeans-and-pants-category.jpg" alt="jeans and pants category visual" class="object-bottom w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
+                    <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">JEANS & PANTS</p>
                   </div>
                 </a>
                 
                 
                 <a href="#">
-                  <div class="group relative">
+                  <div class="group relative text-center">
                     
-                    <img src="/static/images/categories/accessories-category.jpg" alt="Accessories category visual" class="w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
-                    <p class="text-lg font-semibold p-2 text-gray-900">ACCESSORIES</p>
+                    <img src="/static/images/categories/sneakers-category.jpg" alt="sneakers category visual" class="w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
+                    <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">SNEAKERS</p>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="group relative text-center">
+                    
+                    <img src="/static/images/categories/accessories-category.jpg" alt="accessories category visual" class="w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
+                    <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">ACCESSORIES</p>
                   </div>
                 </a>
                 
@@ -281,15 +289,16 @@
         
         <!-- JOIN NOW -->
         <div class="bg-zinc-900 py-24 sm:py-32" >
-          <div class="mx-auto max-w-7xl px-6 lg:px-8" data-aos="fade-up" data-aos-duration="1000">
+          <div class="mx-auto max-w-7xl px-6 lg:px-8 text-center" data-aos="fade-up" data-aos-duration="1000">
             <h1 class="font-mono text-balance text-5xl text-white font-semibold tracking-wide sm:text-7xl">WHY WAIT? JOIN TODAY!</h1>
-            <p class="text-white max-w-xl mt-8 text-pretty text-lg font-medium  sm:text-xl/8" style="animation-delay: 1.5s;">
+            <p class="text-white mt-8 text-pretty text-lg font-medium  sm:text-xl/8" style="animation-delay: 1.5s;">
               Create your profile to unlock unlimited swapping potential. Post your items, explore fresh finds, and start building a wardrobe that truly reflects your vibe—all while making a positive impact on the planet.</p>
               
-              
-              
-            </div>
+            <a href="#" class="block mt-8 max-w-xl mx-auto bg-white px-6 py-3 text-2xl font-semibold rounded-full text-black ease-in duration-300 hover:ease-in hover:duration-300 hover:bg-zinc-600 hover:text-white uppercase">Become Part of the Community</a>
           </div>
+            
+            
+        </div>
           
           
           
@@ -351,11 +360,11 @@
             
             window.addEventListener('scroll', () => {
               if (window.scrollY > 1000) {
-                scrollToTopButton.classList.add('opacity-100', 'sm:block');
-                scrollToTopButton.classList.remove('opacity-0', 'sm:hidden');
+                scrollToTopButton.classList.add('opacity-100');
+                scrollToTopButton.classList.remove('opacity-0');
               } else {
-                scrollToTopButton.classList.add('opacity-0', 'sm:hidden');
-                scrollToTopButton.classList.remove('opacity-100', 'sm:block');
+                scrollToTopButton.classList.add('opacity-0');
+                scrollToTopButton.classList.remove('opacity-100');
               }
             });
             
@@ -365,6 +374,32 @@
                 behavior: 'smooth'
               });
             });
+            
+            // Get the elements
+            const mobileMenuButton = document.querySelector('.mobile-menu button.hamburger'); // Hamburger button
+            const mobileMenu = document.querySelector('div[role="dialog"]'); // Mobile menu
+            
+            const closeButton = mobileMenu.querySelector('button'); // Close button inside mobile menu
+            const backdrop = mobileMenu.querySelector('.fixed'); // The backdrop to close when clicked
+            
+            // Function to open the menu
+            const openMenu = () => {
+              mobileMenu.classList.remove('hidden'); // Show the mobile menu
+              backdrop.classList.remove('hidden'); // Show the backdrop
+            };
+            
+            // Function to close the menu
+            const closeMenu = () => {
+              mobileMenu.classList.add('hidden'); // Hide the mobile menu
+              backdrop.classList.add('hidden'); // Hide the backdrop
+            };
+            
+            // Event listener to open the menu
+            mobileMenuButton.addEventListener('click', openMenu);
+            
+            // Event listener to close the menu
+            closeButton.addEventListener('click', closeMenu);
+            backdrop.addEventListener('click', closeMenu);
           </script>
         </body>
         </html>
