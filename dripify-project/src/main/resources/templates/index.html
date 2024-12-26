@@ -15,118 +15,117 @@
   
   
   
-  <div class="site-container">
-    <div class="bg-white">
-      <header class="absolute inset-x-0 top-0 z-50">
-        <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-          
-          <div class="flex lg:flex-1">
+  <div class="bg-white">
+    <header class="absolute inset-x-0 top-0 z-50">
+      <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+        
+        <div class="flex lg:flex-1">
+          <a href="#" class="-m-1.5 p-1.5">
+            <span class="sr-only">Your Company</span>
+            
+            <img class="h-11 w-auto" src="/static/images/logo.png" alt="">
+          </a>
+        </div>
+        
+        <div class="flex lg:hidden">
+          <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+            <span class="sr-only">Open main menu</span>
+            <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </button>
+        </div>
+        
+        <div class="hidden lg:flex lg:gap-x-12">
+          <a href="#" class="hover:font-bold text-sm/6 font-semibold text-gray-900">NEW ARRIVALS</a>
+          <a href="#" class="hover:font-bold text-sm/6 font-semibold text-gray-900">SHOP</a>
+          <a href="#" class="hover:font-bold text-sm/6 font-semibold text-gray-900">SELL YOUR DRIP</a>
+          <a href="#" class="hover:font-bold text-sm/6 font-semibold text-gray-900">ABOUT US</a>
+        </div>
+        
+        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+          <a href="#" class="hover:font-bold text-sm/6 font-semibold text-gray-900 pr-4">LOG IN</a>
+          <a href="#" class="hover:font-bold text-sm/6 font-semibold text-gray-900">REGISTER</a>
+        </div>
+        
+      </nav>
+      
+      
+      
+      <!-- Mobile menu, show/hide based on menu open state. -->
+      <div class="lg:hidden" role="dialog" aria-modal="true">
+        <!-- Background backdrop, show/hide based on slide-over state. -->
+        <div class="fixed inset-0 z-50"></div>
+        <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <div class="flex items-center justify-between">
             <a href="#" class="-m-1.5 p-1.5">
               <span class="sr-only">Your Company</span>
-              
-              <img class="h-11 w-auto" src="/static/images/logo.png" alt="">
+              <img class="h-8 w-auto" src="/static/images/logo.png" alt="">
             </a>
-          </div>
-          
-          <div class="flex lg:hidden">
-            <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
-              <span class="sr-only">Open main menu</span>
+            <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+              <span class="sr-only">Close menu</span>
               <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
           
-          <div class="hidden lg:flex lg:gap-x-12">
-            <a href="#" class="hover:font-bold text-sm/6 font-semibold text-gray-900">NEW ARRIVALS</a>
-            <a href="#" class="hover:font-bold text-sm/6 font-semibold text-gray-900">SHOP</a>
-            <a href="#" class="hover:font-bold text-sm/6 font-semibold text-gray-900">SELL YOUR DRIP</a>
-            <a href="#" class="hover:font-bold text-sm/6 font-semibold text-gray-900">ABOUT US</a>
-          </div>
-          
-          <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="#" class="hover:font-bold text-sm/6 font-semibold text-gray-900 pr-4">LOG IN</a>
-            <a href="#" class="hover:font-bold text-sm/6 font-semibold text-gray-900">REGISTER</a>
-          </div>
-          
-        </nav>
-        
-        
-        
-        <!-- Mobile menu, show/hide based on menu open state. -->
-        <div class="lg:hidden" role="dialog" aria-modal="true">
-          <!-- Background backdrop, show/hide based on slide-over state. -->
-          <div class="fixed inset-0 z-50"></div>
-          <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-            <div class="flex items-center justify-between">
-              <a href="#" class="-m-1.5 p-1.5">
-                <span class="sr-only">Your Company</span>
-                <img class="h-8 w-auto" src="/static/images/logo.png" alt="">
-              </a>
-              <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
-                <span class="sr-only">Close menu</span>
-                <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-            
-            <div class="mt-6 flow-root">
-              <div class="-my-6 divide-y divide-gray-500/10">
-                <div class="space-y-2 py-6">
-                  <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">NEW ARRIVALS</a>
-                  <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">SHOP</a>
-                  <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">SELL YOUR DRIP</a>
-                  <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">ABOUT US</a>
-                </div>
-                <div class="py-6">
-                  <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">LOG IN</a>
-                  <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">REGISTER</a>
-                </div>
-                
+          <div class="mt-6 flow-root">
+            <div class="-my-6 divide-y divide-gray-500/10">
+              <div class="space-y-2 py-6">
+                <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">NEW ARRIVALS</a>
+                <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">SHOP</a>
+                <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">SELL YOUR DRIP</a>
+                <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">ABOUT US</a>
               </div>
+              <div class="py-6">
+                <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">LOG IN</a>
+                <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">REGISTER</a>
+              </div>
+              
             </div>
           </div>
         </div>
-      </header>
-      
-      
-      <div class="relative isolate pt-14">
-        <div class="overflow-hidden mt-8 bg-black py-2 opacity-90">
-          <div class="marquee-container animate-marquee sm:h-[600px] h-[500px] flex" style="--marquee-offset: 0%;">
-            <img src="/static/images/header/1.jpg" alt="style-showcase-photo">
-            <img src="/static/images/header/2.jpg" alt="style showcase photo">
-            <img src="/static/images/header/3.jpg" alt="style showcase photo">
-            <img src="/static/images/header/4.jpg" alt="style showcase photo">
-            <img src="/static/images/header/5.jpg" alt="style showcase photo">
-            <img src="/static/images/header/6.jpg" alt="style showcase photo">
-            <img src="/static/images/header/7.jpg" alt="style showcase photo">
-            
-            <img src="/static/images/header/1.jpg" alt="style showcase photo">
-            <img src="/static/images/header/2.jpg" alt="style showcase photo">
-            <img src="/static/images/header/3.jpg" alt="style showcase photo">
-            <img src="/static/images/header/4.jpg" alt="style showcase photo">
-            <img src="/static/images/header/5.jpg" alt="style showcase photo">
-            <img src="/static/images/header/6.jpg" alt="style showcase photo">
-            <img src="/static/images/header/7.jpg" alt="style showcase photo">
-          </div>
-        </div>
-        
-        <div class="absolute inset-0 mx-auto max-w-2xl pt-72 sm:py-48 lg:pt-80 ">
-          <div class="text-center">
-            
-            <h1 class="animate__animated animate__slideInDown mx-auto max-w-fit sm:max-w-full bg-black rounded-full text-white p-2 px-10 font-mono text-2xl font-bold tracking-wide sm:text-5xl">GET DRIP.GIVE DRIP.</h1>
-          </div>
-          
-          <div class="animate__animated animate__fadeInUp flex flex-col gap-2 items-center sm:flex-row justify-center gap-x-6 py-3" style="animation-delay: 0.5s;">
-            <a href="#" class="bg-black px-6 py-3 text-xl font-semibold text-white hover:ease-in duration-200 hover:bg-white hover:text-gray-900">BROWSE CLOTHING</a>
-            <a href="#" class="px-6 py-3 text-xl text-gray-900 font-semibold bg-white hover:ease-in duration-200 hover:bg-black hover:text-white">START SELLING</a>
-          </div>
-        </div>
-        
       </div>
+    </header>
+    
+    
+    <div class="relative isolate pt-14">
+      <div class="overflow-hidden mt-8 bg-black py-2 opacity-90">
+        <div class="marquee-container animate-marquee sm:h-[600px] h-[500px] flex" style="--marquee-offset: 0%;">
+          <img src="/static/images/header/1.jpg" alt="style-showcase-photo">
+          <img src="/static/images/header/2.jpg" alt="style showcase photo">
+          <img src="/static/images/header/3.jpg" alt="style showcase photo">
+          <img src="/static/images/header/4.jpg" alt="style showcase photo">
+          <img src="/static/images/header/5.jpg" alt="style showcase photo">
+          <img src="/static/images/header/6.jpg" alt="style showcase photo">
+          <img src="/static/images/header/7.jpg" alt="style showcase photo">
+          
+          <img src="/static/images/header/1.jpg" alt="style showcase photo">
+          <img src="/static/images/header/2.jpg" alt="style showcase photo">
+          <img src="/static/images/header/3.jpg" alt="style showcase photo">
+          <img src="/static/images/header/4.jpg" alt="style showcase photo">
+          <img src="/static/images/header/5.jpg" alt="style showcase photo">
+          <img src="/static/images/header/6.jpg" alt="style showcase photo">
+          <img src="/static/images/header/7.jpg" alt="style showcase photo">
+        </div>
+      </div>
+      
+      <div class="absolute inset-0 mx-auto max-w-2xl pt-72 sm:py-48 lg:pt-80 ">
+        <div class="text-center">
+          
+          <h1 class="animate__animated animate__slideInDown mx-auto max-w-fit sm:max-w-full bg-black rounded-full text-white p-2 px-10 font-mono text-2xl font-bold tracking-wide sm:text-5xl">GET DRIP.GIVE DRIP.</h1>
+        </div>
+        
+        <div class="animate__animated animate__fadeInUp flex flex-col gap-2 items-center sm:flex-row justify-center gap-x-6 py-3" style="animation-delay: 0.5s;">
+          <a href="#" class="bg-black px-6 py-3 text-xl font-semibold text-white hover:ease-in duration-200 hover:bg-white hover:text-gray-900">BROWSE CLOTHING</a>
+          <a href="#" class="px-6 py-3 text-xl text-gray-900 font-semibold bg-white hover:ease-in duration-200 hover:bg-black hover:text-white">START SELLING</a>
+        </div>
+      </div>
+      
     </div>
   </div>
+  
   
   
   
@@ -153,6 +152,8 @@
         
       </div>
       
+      
+      <!-- FAST FASHION IMPACT -->
       <div class="bg-white py-24 sm:py-32">
         <div class="mx-auto max-w-7xl px-6 lg:px-8 text-center" data-aos="fade-up" data-aos-duration="1000">
           <h1 class="font-mono text-balance text-5xl font-semibold tracking-wide sm:text-7xl" >FAST FASHION IMPACT ON PLANET</h1>
@@ -175,7 +176,7 @@
               </dl>
             </div>
           </div>
-
+          
         </div>
         
         
@@ -184,7 +185,6 @@
       
       
       <div class="bg-zinc-900 h-16 rounded-t-full"></div>
-      
       
       
       
@@ -286,10 +286,7 @@
             <p class="text-white max-w-xl mt-8 text-pretty text-lg font-medium  sm:text-xl/8" style="animation-delay: 1.5s;">
               Create your profile to unlock unlimited swapping potential. Post your items, explore fresh finds, and start building a wardrobe that truly reflects your vibe—all while making a positive impact on the planet.</p>
               
-              <div class="flex flex-col gap-2 items-center sm:flex-row gap-x-6 py-3" style="animation-delay: 0.5s;">
-                <a href="#" class="bg-black px-6 py-3 text-xl font-semibold text-white hover:ease-in duration-200 hover:bg-white hover:text-gray-900">BROWSE CLOTHING</a>
-                <a href="#" class="px-6 py-3 text-xl text-gray-900 font-semibold bg-white hover:ease-in duration-200 hover:bg-black hover:text-white">START SELLING</a>
-              </div>
+              
               
             </div>
           </div>
@@ -309,10 +306,10 @@
                     <a href="#" class="hover:underline me-4 md:me-6 uppercase">New Arrivals</a>
                   </li>
                   <li>
-                    <a href="#" class="hover:underline me-4 md:me-6 uppercase">Sell Your Drip</a>
+                    <a href="#" class="hover:underline me-4 md:me-6 uppercase">Shop</a>
                   </li>
                   <li>
-                    <a href="#" class="hover:underline me-4 md:me-6 uppercase">Shop</a>
+                    <a href="#" class="hover:underline me-4 md:me-6 uppercase">Sell Your Drip</a>
                   </li>
                   <li>
                     <a href="#" class="hover:underline uppercase">About Us</a>
@@ -323,6 +320,9 @@
               <span class="mt-5 block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025 Dripify™. All Rights Reserved.</span>
             </div>
           </footer>
+          
+          <button id="scrollToTop" class="hidden sm:block fixed bottom-5 right-5 bg-black text-white text-4xl rounded-full p-5 px-8 shadow-lg opacity-0 transition-opacity duration-300">↑</button>
+          
           
           
           <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -345,6 +345,25 @@
               
               // Apply percentage gap offset to the CSS variable
               marqueeContainer.style.setProperty('--marquee-offset', `-${gapOffset}%`);
+            });
+            
+            const scrollToTopButton = document.getElementById('scrollToTop');
+            
+            window.addEventListener('scroll', () => {
+              if (window.scrollY > 1000) {
+                scrollToTopButton.classList.add('opacity-100', 'sm:block');
+                scrollToTopButton.classList.remove('opacity-0', 'sm:hidden');
+              } else {
+                scrollToTopButton.classList.add('opacity-0', 'sm:hidden');
+                scrollToTopButton.classList.remove('opacity-100', 'sm:block');
+              }
+            });
+            
+            scrollToTopButton.addEventListener('click', () => {
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+              });
             });
           </script>
         </body>
