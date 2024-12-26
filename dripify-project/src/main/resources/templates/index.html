@@ -48,7 +48,7 @@
             </button>
             
             
-            <div id="flyout-menu" class="hidden absolute -left-[15rem] top-full z-10 mt-3 w-screen max-w-xl overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+            <div id="flyout-menu" class="opacity-0 transition-opacity duration-300 absolute -left-[15rem] top-full z-10 mt-3 w-screen max-w-xl overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
               <div class="p-4">
                 <div class="flex justify-evenly mb-2">
                   <p id="women-tab" 
@@ -616,14 +616,12 @@
           function toggleFlyout() {
             const isVisible = flyoutMenu.classList.contains('opacity-100');
             if (isVisible) {
-              // Hide the menu
-              flyoutMenu.classList.remove('opacity-100', 'translate-y-0');
-              flyoutMenu.classList.add('opacity-0', 'translate-y-1');
-              setTimeout(() => flyoutMenu.classList.add('hidden'), 200);
+              flyoutMenu.classList.remove('opacity-100');
+              flyoutMenu.classList.add('opacity-0');
             } else {
-              // Show the menu
-              flyoutMenu.classList.remove('hidden', 'opacity-0', 'translate-y-1');
-              flyoutMenu.classList.add('opacity-100', 'translate-y-0');
+
+              flyoutMenu.classList.remove('opacity-0');
+              flyoutMenu.classList.add('opacity-100');
             }
           }
         </script>
