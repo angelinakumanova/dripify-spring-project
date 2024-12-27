@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="font-size: 16px;">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,13 +17,13 @@
   
   <div class="bg-white">
     <header class="absolute inset-x-0 top-0 z-50">
-      <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+      <nav class="flex items-center justify-between p-6" aria-label="Global">
         
         <div class="flex lg:flex-1">
           <a href="#" class="-m-1.5 p-1.5">
             <span class="sr-only">Your Company</span>
             
-            <img class="h-11 w-auto" src="/static/images/logo.png" alt="">
+            <img class="h-11 w-auto lg:h-9" src="/static/images/logo.png" alt="">
           </a>
         </div>
         
@@ -36,11 +36,11 @@
           </button>
         </div>
         
-        <div class="hidden lg:flex lg:gap-x-12">
-          <a href="#" class="hover:font-bold text-sm/6 font-semibold text-gray-900">NEW ARRIVALS</a>
+        <div class="hidden lg:flex lg:gap-x-12 lg:items-center">
+          <a href="#" class="hover:font-bold text-xs lg:text-xs font-semibold text-gray-900">NEW ARRIVALS</a>
           
           <div class="relative">
-            <button type="button" class="hover:font-bold flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900" aria-expanded="false" onclick="toggleFlyout()">
+            <button type="button" class="hover:font-bold flex items-center gap-x-1 text-sm/6 lg:text-xs font-semibold text-gray-900" aria-expanded="false" onclick="toggleFlyout()">
               SHOP
               <svg class="size-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
                 <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
@@ -48,11 +48,11 @@
             </button>
             
             
-            <div id="flyout-menu" class="opacity-0 transition-opacity duration-300 absolute -left-[15rem] top-full z-10 mt-3 w-screen max-w-xl overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+            <div id="flyout-menu" class="hidden opacity-0 transition-opacity duration-300 absolute -left-[15rem] top-full z-10 mt-3 w-screen max-w-xl overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
               <div class="p-4">
                 <div class="flex justify-evenly mb-2">
                   <p id="women-tab" 
-                  class="relative group text-2xl p-2 px-5 font-semibold hover:cursor-pointer"
+                  class="relative group text-2xl p-2 px-5 font-bold underline hover:cursor-pointer"
                   onclick="showCategory('women')">
                   Women
                   <span
@@ -74,65 +74,65 @@
         
         
         
-        <div id="women-categories" class="grid grid-cols-2 grid-rows-5 grid-flow-col">
+        <div id="women-categories" class="grid grid-cols-2 grid-rows-5 grid-flow-col text-xl lg:text-sm">
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">tops</p>
             </div>
           </a>
           
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">jeans</p>
             </div>
           </a>
           
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">sweaters</p>
             </div>
           </a>
           
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">skirts</p>
             </div>
           </a>
           
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">dresses</p>
             </div>
           </a>
           
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">coats & jackets</p>
             </div>
           </a>
           
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">shoes</p>
             </div>
           </a>
           
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">bags & purses</p>
             </div>
           </a>
           
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">accessories</p>
             </div>
@@ -144,65 +144,65 @@
         
         
         
-        <div id="men-categories" class="hidden grid grid-cols-2 grid-rows-5 grid-flow-col">
+        <div id="men-categories" class="hidden grid grid-cols-2 grid-rows-5 grid-flow-col text-xl lg:text-sm">
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">t-shirts</p>
             </div>
           </a>
           
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">shirts</p>
             </div>
           </a>
           
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">hoodies</p>
             </div>
           </a>
           
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">jeans</p>
             </div>
           </a>
           
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">sweaters</p>
             </div>
           </a>
           
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">coats & jackets</p>
             </div>
           </a>
           
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">shoes</p>
             </div>
           </a>
           
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">bags</p>
             </div>
           </a>
           
           <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 text-xl hover:bg-gray-50">
+            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
               
               <p class="font-semibold text-gray-700 uppercase">accessories</p>
             </div>
@@ -223,13 +223,13 @@
   </div>
   
   
-  <a href="#" class="hover:font-bold text-sm/6 font-semibold text-gray-900">SELL YOUR DRIP</a>
-  <a href="#" class="hover:font-bold text-sm/6 font-semibold text-gray-900">ABOUT US</a>
+  <a href="#" class="hover:font-bold text-sm/6 lg:text-xs font-semibold text-gray-900">SELL YOUR DRIP</a>
+  <a href="#" class="hover:font-bold text-sm/6 lg:text-xs font-semibold text-gray-900">ABOUT US</a>
 </div>
 
 <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-  <a href="#" class="hover:font-bold text-sm/6 font-semibold text-gray-900 pr-4">LOG IN</a>
-  <a href="#" class="hover:font-bold text-sm/6 font-semibold text-gray-900">REGISTER</a>
+  <a href="#" class="hover:font-bold text-sm/6 lg:text-xs font-semibold text-gray-900 pr-4">LOG IN</a>
+  <a href="#" class="hover:font-bold text-sm/6 lg:text-xs font-semibold text-gray-900">REGISTER</a>
 </div>
 
 </nav>
@@ -276,7 +276,7 @@
 
 <div class="relative isolate pt-14">
   <div class="overflow-hidden mt-8 bg-black py-2 opacity-90">
-    <div class="marquee-container animate-marquee sm:h-[600px] h-[500px] flex" style="--marquee-offset: 0%;">
+    <div class="marquee-container animate-marquee sm:h-[600px] lg:h-[70vh] h-[500px] flex" style="--marquee-offset: 0%;">
       <img src="/static/images/header/1.jpg" alt="style-showcase-photo">
       <img src="/static/images/header/2.jpg" alt="style showcase photo">
       <img src="/static/images/header/3.jpg" alt="style showcase photo">
@@ -295,15 +295,15 @@
     </div>
   </div>
   
-  <div class="absolute inset-0 mx-auto max-w-2xl pt-72 sm:py-48 lg:pt-80 ">
+  <div class="absolute inset-0 mx-auto max-w-2xl pt-72 sm:pt-72 ">
     <div class="text-center">
       
-      <h1 class="animate__animated animate__slideInDown mx-auto max-w-fit sm:max-w-full bg-black rounded-full text-white p-2 px-10 font-mono text-2xl font-bold tracking-wide sm:text-5xl">GET DRIP.GIVE DRIP.</h1>
+      <h1 class="animate__animated animate__slideInDown mx-auto max-w-fit sm:max-w-full bg-black rounded-full text-white p-2 px-10 font-mono text-2xl sm:text-4xl font-bold tracking-wide ">GET DRIP.GIVE DRIP.</h1>
     </div>
     
     <div class="animate__animated animate__fadeInUp flex flex-col gap-2 items-center sm:flex-row justify-center gap-x-6 py-3" style="animation-delay: 0.5s;">
       <a href="#" class="bg-black px-6 py-3 text-xl font-semibold text-white hover:ease-in duration-200 hover:bg-white hover:text-gray-900">BROWSE CLOTHING</a>
-      <a href="#" class="px-6 py-3 text-xl text-gray-900 font-semibold bg-white hover:ease-in duration-200 hover:bg-black hover:text-white">START SELLING</a>
+      <a href="#" class="px-6 py-3 text-xl  text-gray-900 font-semibold bg-white hover:ease-in duration-200 hover:bg-black hover:text-white">START SELLING</a>
     </div>
   </div>
   
@@ -378,7 +378,7 @@
         <p class="mx-auto mt-2 text-balance text-center text-4xl font-bold tracking-wide text-white sm:text-5xl" >COMMUNITY REVIEWS</p>
         <div class="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2" >
           
-          <div class="relative lg:row-span-2 sm:h-[700px] h-[600px]" >
+          <div class="relative lg:row-span-2 sm:h-[90vh] h-[600px]" >
             <div class="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
             <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
               <div class="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10">
@@ -390,25 +390,25 @@
               </div>
             </div>
             
-            <div class="relative lg:row-span-2" style="max-height: 700px;">
+            <div class="relative lg:row-span-2 sm:h-[90vh] h-[600px]">
               <div class="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
               <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
                 <div class="max-h-96 max-w-80 rounded-r-full overflow-hidden"><img src="/static/images/reviews/yordan-koichev-oufit.jpg" alt="yordan-outfit-review-on-dripify"></div>
                 <div class="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10">
                   <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">Yordan Koychev - Vintage Fashion Collector</p>
-                  <p class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">I’m so happy I joined Dripify. I’ve found rare vintage items and unique streetwear I couldn’t find anywhere else. Plus, it feels great to give my old clothes a new home!</p>
+                  <p class="mt-2 mb-5 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">I’m so happy I joined Dripify. I’ve found rare vintage items and unique streetwear I couldn’t find anywhere else. Plus, it feels great to give my old clothes a new home!</p>
                 </div>
               </div>
             </div>
             
-            <div class="relative lg:row-span-2" style="max-height: 700px;">
+            <div class="relative lg:row-span-2 sm:h-[90vh] h-[600px]">
               <div class="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
               <div class="relative flex h-full flex-col items-end overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
                 <div class="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10 ">
                   <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">Daniela Velikova - Fashion Lover</p>
                   <p class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">I love how I can refresh both my clothes and accessories on Dripify. From scarves to rings, it’s all about finding eco-friendly options without compromising on style. This site has changed the way I shop!</p>
                 </div>
-                <div class="max-w-80  rounded-l-full overflow-hidden"><img  src="/static/images/reviews/daniela-velikova-outfit.jpg" alt="daniela-review-on-dripify"></div>
+                <div class="max-w-80  rounded-l-full overflow-hidden"><img class="lg:object-top" src="/static/images/reviews/daniela-velikova-outfit.jpg" alt="daniela-review-on-dripify"></div>
               </div>
             </div>
             
@@ -478,7 +478,7 @@
           <p class="text-white mt-8 text-pretty text-lg font-medium  sm:text-xl/8" style="animation-delay: 1.5s;">
             Create your profile to unlock unlimited swapping potential. Post your items, explore fresh finds, and start building a wardrobe that truly reflects your vibe—all while making a positive impact on the planet.</p>
             
-            <a href="#" class="block mt-8 max-w-xl mx-auto bg-white px-6 py-3 text-2xl font-semibold rounded-full text-black ease-in duration-300 hover:ease-in hover:duration-300 hover:bg-zinc-600 hover:text-white uppercase">Become Part of the Community</a>
+            <a href="#" class="block mt-8 max-w-xl mx-auto bg-white px-6 py-3 text-2xl  font-semibold rounded-full text-black ease-in duration-300 hover:ease-in hover:duration-300 hover:bg-zinc-600 hover:text-white uppercase">Become Part of the Community</a>
           </div>
           
           
@@ -597,16 +597,18 @@
               // Show women's categories and update tab styles
               womenCategories.classList.remove('hidden');
               menCategories.classList.add('hidden');
-              womenTab.classList.add('font-bold');
+              womenTab.classList.add('font-bold', 'underline');
               womenTab.classList.remove('font-semibold');
               menTab.classList.replace('font-bold', 'font-semibold');
+              menTab.classList.remove('underline');
             } else if (category === 'men') {
               // Show men's categories and update tab styles
               menCategories.classList.remove('hidden');
               womenCategories.classList.add('hidden');
-              menTab.classList.add('font-bold');
+              menTab.classList.add('font-bold', 'underline');
               menTab.classList.remove('font-semibold');
               womenTab.classList.replace('font-bold', 'font-semibold');
+              menTab.classList.remove('underline');
             }
           }
           
@@ -617,10 +619,10 @@
             const isVisible = flyoutMenu.classList.contains('opacity-100');
             if (isVisible) {
               flyoutMenu.classList.remove('opacity-100');
-              flyoutMenu.classList.add('opacity-0');
+              flyoutMenu.classList.add('opacity-0', 'hidden');
             } else {
 
-              flyoutMenu.classList.remove('opacity-0');
+              flyoutMenu.classList.remove('opacity-0', 'hidden');
               flyoutMenu.classList.add('opacity-100');
             }
           }
