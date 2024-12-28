@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" style="font-size: 16px;">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,631 +11,925 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <link rel="shortcut icon" href="/static/images/favicon.ico" />
 </head>
+
 <body>
-  
+
   <div class="bg-white">
     <header class="absolute inset-x-0 top-0 z-50">
       <nav class="flex items-center justify-between p-6" aria-label="Global">
-        
+
         <div class="flex lg:flex-1">
           <a href="#" class="-m-1.5 p-1.5">
             <span class="sr-only">Your Company</span>
-            
+
             <img class="h-11 w-auto lg:h-9" src="/static/images/logo.png" alt="">
           </a>
         </div>
-        
+
         <div class="mobile-menu flex lg:hidden">
-          <button type="button" class="hamburger -m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+          <button type="button"
+            class="hamburger -m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
             <span class="sr-only">Open main menu</span>
-            <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+            <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+              aria-hidden="true" data-slot="icon">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
           </button>
         </div>
-        
+
         <div class="hidden lg:flex lg:gap-x-12 lg:items-center ">
           <a href="#" class="hover:font-bold text-sm font-semibold text-gray-900">NEW ARRIVALS</a>
-          
+
           <div class="relative">
-            <button id="flyout-menu-button" type="button" class="hover:font-bold flex items-center gap-x-1 text-sm font-semibold text-gray-900" aria-expanded="false" onclick="toggleFlyoutMenu()">
+            <button id="flyout-menu-button" type="button"
+              class="hover:font-bold flex items-center gap-x-1 text-sm font-semibold text-gray-900"
+              aria-expanded="false" onclick="toggleFlyoutMenu()">
               SHOP
-              <svg class="size-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+              <svg class="size-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+                data-slot="icon">
+                <path fill-rule="evenodd"
+                  d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                  clip-rule="evenodd" />
               </svg>
             </button>
-            
-            
-            <div id="flyout-menu" onmouseleave="toggleFlyoutMenu()" class="opacity-0 transition-opacity ease-in duration-300 pointer-events-none absolute -left-[15rem] top-full z-10 mt-3 w-screen max-w-xl overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+
+
+            <div id="flyout-menu" onmouseleave="toggleFlyoutMenu()"
+              class="opacity-0 transition-opacity ease-in duration-300 pointer-events-none absolute -left-[15rem] top-full z-10 mt-3 w-screen max-w-xl overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
               <div class="p-4">
                 <div class="flex justify-evenly mb-2">
-                  <p id="women-tab" 
-                  class="relative group text-2xl p-2 px-5 font-bold hover:cursor-pointer"
-                  onclick="showCategory('women')">
+                  <p id="women-tab" class="relative group text-2xl p-2 px-5 font-bold hover:cursor-pointer"
+                    onclick="showCategory('women')">
+                    Women
+                    <span
+                      class="absolute bottom-0 left-0 h-[2px] w-full bg-gray-800 transition-all duration-300 group-hover:w-full">
+                    </span>
+                  </p>
+
+                  <p id="men-tab" class="relative group text-2xl p-2 px-5 font-semibold hover:cursor-pointer"
+                    onclick="showCategory('men')">
+                    Men
+                    <span
+                      class="absolute bottom-0 left-0 h-[2px] w-0 bg-gray-800 transition-all duration-300 group-hover:w-full">
+                    </span>
+                  </p>
+                </div>
+
+                <hr>
+
+
+
+                <div id="women-categories" class="grid grid-cols-2 grid-rows-5 grid-flow-col text-base">
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">tops</p>
+                    </div>
+                  </a>
+
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">jeans</p>
+                    </div>
+                  </a>
+
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">sweaters</p>
+                    </div>
+                  </a>
+
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">skirts</p>
+                    </div>
+                  </a>
+
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">dresses</p>
+                    </div>
+                  </a>
+
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">coats & jackets</p>
+                    </div>
+                  </a>
+
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">shoes</p>
+                    </div>
+                  </a>
+
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">bags & purses</p>
+                    </div>
+                  </a>
+
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">accessories</p>
+                    </div>
+                  </a>
+
+
+
+                </div>
+
+
+
+                <div id="men-categories" class="hidden grid grid-cols-2 grid-rows-5 grid-flow-col text-base">
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">t-shirts</p>
+                    </div>
+                  </a>
+
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">shirts</p>
+                    </div>
+                  </a>
+
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">hoodies</p>
+                    </div>
+                  </a>
+
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">jeans</p>
+                    </div>
+                  </a>
+
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">sweaters</p>
+                    </div>
+                  </a>
+
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">coats & jackets</p>
+                    </div>
+                  </a>
+
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">shoes</p>
+                    </div>
+                  </a>
+
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">bags</p>
+                    </div>
+                  </a>
+
+                  <a href="#">
+                    <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                      <p class="font-semibold text-gray-700 uppercase">accessories</p>
+                    </div>
+                  </a>
+
+
+
+                </div>
+
+
+
+
+
+
+              </div>
+
+            </div>
+          </div>
+
+
+          <a href="#" class="hover:font-bold text-sm font-semibold text-gray-900">SELL YOUR DRIP</a>
+          <a href="#" class="hover:font-bold text-sm font-semibold text-gray-900">ABOUT US</a>
+        </div>
+
+        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+          <a href="#" class="hover:font-bold text-sm font-semibold text-gray-900 pr-4">LOG IN</a>
+          <a href="#" class="hover:font-bold text-sm font-semibold text-gray-900">REGISTER</a>
+        </div>
+
+      </nav>
+
+
+
+      <!-- Mobile menu, show/hide based on menu open state. -->
+      <div class="hidden mobile-menu lg:hidden" role="dialog" aria-modal="true">
+        <!-- Background backdrop, show/hide based on slide-over state. -->
+        <div class="fixed inset-0 z-50"></div>
+
+        <div
+          class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <div class="flex items-center justify-between">
+            <a href="#" class="-m-1.5 p-1.5">
+              <span class="sr-only">Your Company</span>
+              <img class="h-8 w-auto" src="/static/images/logo.png" alt="">
+            </a>
+
+            <button id="mobile-close-button" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+              <span class="sr-only">Close menu</span>
+              <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                aria-hidden="true" data-slot="icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <button id="mobile-return-button" class="hidden text-gray-700" onclick="toggleMenu()">
+              <svg xmlns="http://www.w3.org/2000/svg"  width="28" height="28" fill="currentColor"
+                class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M15 8a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 0 1 .708.708L2.707 7.5H14.5A.5.5 0 0 1 15 8z" />
+              </svg>
+            </button>
+          </div>
+
+          <div id="mobile-nav" class="mt-6 flow-root">
+            <div class="-my-6 divide-y divide-gray-500/10">
+              <div class="space-y-2 py-6">
+                <a href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">NEW
+                  ARRIVALS</a>
+                <a href="#" id="shop-mobile-button"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50" onclick="toggleMenu()">SHOP</a>
+                <a href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">SELL
+                  YOUR DRIP</a>
+                <a href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">ABOUT
+                  US</a>
+              </div>
+              <div class="py-6">
+                <a href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">LOG
+                  IN</a>
+                <a href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">REGISTER</a>
+              </div>
+
+            </div>
+          </div>
+
+          <div id="mobile-categories" class="mt-6 flow-root hidden">
+
+
+
+            <div class="-my-6 divide-y divide-gray-500/10">
+              <div class=" py-6 flex items-center justify-between">
+                <p id="women-tab-mobile" class="relative group text-xl p-2 px-5 font-bold"
+                  onclick="showCategoryMobile('women')">
                   Women
                   <span
-                  class="absolute bottom-0 left-0 h-[2px] w-full bg-gray-800 transition-all duration-300 group-hover:w-full">
-                </span>
-              </p>
-              
-              <p id="men-tab"
-              class="relative group text-2xl p-2 px-5 font-semibold hover:cursor-pointer"
-              onclick="showCategory('men')">
-              Men
-              <span
-              class="absolute bottom-0 left-0 h-[2px] w-0 bg-gray-800 transition-all duration-300 group-hover:w-full">
-            </span>
-          </p>
+                    class="absolute bottom-0 left-0 h-[2px] w-full bg-gray-800 transition-all duration-300">
+                  </span>
+                </p>
+
+                <p id="men-tab-mobile" class="relative group text-xl p-2 px-5 font-semibold"
+                  onclick="showCategoryMobile('men')">
+                  Men
+                  <span
+                    class="absolute bottom-0 left-0 h-[2px] w-0 bg-gray-800 transition-all duration-300">
+                  </span>
+                </p>
+              </div>
+
+
+              <div id="women-categories-mobile" class="flex flex-col text-xl">
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">tops</p>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">jeans</p>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">sweaters</p>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">skirts</p>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">dresses</p>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">coats & jackets</p>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">shoes</p>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">bags & purses</p>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">accessories</p>
+                  </div>
+                </a>
+
+
+
+              </div>
+
+
+
+              <div id="men-categories-mobile" class="hidden flex flex-col text-xl">
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">t-shirts</p>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">shirts</p>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">hoodies</p>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">jeans</p>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">sweaters</p>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">coats & jackets</p>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">shoes</p>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">bags</p>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
+
+                    <p class="font-semibold text-gray-700 uppercase">accessories</p>
+                  </div>
+                </a>
+
+
+
+              </div>
+
+
+
+
+
+
+
+            </div>
+
+          </div>
         </div>
-        
-        <hr>
-        
-        
-        
-        <div id="women-categories" class="grid grid-cols-2 grid-rows-5 grid-flow-col text-base">
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">tops</p>
-            </div>
-          </a>
-          
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">jeans</p>
-            </div>
-          </a>
-          
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">sweaters</p>
-            </div>
-          </a>
-          
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">skirts</p>
-            </div>
-          </a>
-          
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">dresses</p>
-            </div>
-          </a>
-          
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">coats & jackets</p>
-            </div>
-          </a>
-          
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">shoes</p>
-            </div>
-          </a>
-          
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">bags & purses</p>
-            </div>
-          </a>
-          
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">accessories</p>
-            </div>
-          </a>
-          
-          
-          
-        </div>
-        
-        
-        
-        <div id="men-categories" class="hidden grid grid-cols-2 grid-rows-5 grid-flow-col text-base">
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">t-shirts</p>
-            </div>
-          </a>
-          
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">shirts</p>
-            </div>
-          </a>
-          
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">hoodies</p>
-            </div>
-          </a>
-          
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">jeans</p>
-            </div>
-          </a>
-          
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">sweaters</p>
-            </div>
-          </a>
-          
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">coats & jackets</p>
-            </div>
-          </a>
-          
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">shoes</p>
-            </div>
-          </a>
-          
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">bags</p>
-            </div>
-          </a>
-          
-          <a href="#" >
-            <div class="group relative text-center flex items-start rounded-lg p-4 hover:bg-gray-50">
-              
-              <p class="font-semibold text-gray-700 uppercase">accessories</p>
-            </div>
-          </a>
-          
-          
-          
-        </div>
-        
-        
-        
-        
-        
-        
+
+
       </div>
-      
+  </div>
+  </header>
+
+
+  <div class="relative isolate pt-14">
+    <div class="overflow-hidden mt-8 bg-black py-2 opacity-90">
+      <div class="marquee-container animate-marquee flex h-[350px] md:h-[400px] lg:h-[550px] "
+        style="--marquee-offset: 0%;">
+        <img src="/static/images/header/1.jpg" alt="style-showcase-photo">
+        <img src="/static/images/header/2.jpg" alt="style showcase photo">
+        <img src="/static/images/header/3.jpg" alt="style showcase photo">
+        <img src="/static/images/header/4.jpg" alt="style showcase photo">
+        <img src="/static/images/header/5.jpg" alt="style showcase photo">
+        <img src="/static/images/header/6.jpg" alt="style showcase photo">
+        <img src="/static/images/header/7.jpg" alt="style showcase photo">
+
+        <img src="/static/images/header/1.jpg" alt="style showcase photo">
+        <img src="/static/images/header/2.jpg" alt="style showcase photo">
+        <img src="/static/images/header/3.jpg" alt="style showcase photo">
+        <img src="/static/images/header/4.jpg" alt="style showcase photo">
+        <img src="/static/images/header/5.jpg" alt="style showcase photo">
+        <img src="/static/images/header/6.jpg" alt="style showcase photo">
+        <img src="/static/images/header/7.jpg" alt="style showcase photo">
+      </div>
+    </div>
+
+    <div class="absolute inset-0 mx-auto max-w-2xl pt-44 sm:pt-64 md:pt-72">
+      <div class="text-center">
+        <h1
+          class="animate__animated animate__slideInDown sm:mx-auto mx-2 sm:max-w-full bg-black rounded-full text-white p-2 px-10 font-mono text-xl sm:text-4xl font-bold tracking-wide ">
+          GET DRIP.GIVE DRIP.</h1>
+      </div>
+
+      <div
+        class="animate__animated animate__fadeInUp flex flex-col gap-2 items-center sm:flex-row justify-center gap-x-6 py-3"
+        style="animation-delay: 0.5s;">
+        <a href="#"
+          class="bg-black px-6 py-3 text-xl font-semibold text-white hover:ease-in duration-200 hover:bg-white hover:text-gray-900">BROWSE
+          CLOTHING</a>
+        <a href="#"
+          class="px-6 py-3 text-xl  text-gray-900 font-semibold bg-white hover:ease-in duration-200 hover:bg-black hover:text-white">START
+          SELLING</a>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+
+
+
+
+  <!-- ABOUT -->
+  <div class="bg-white px-5 py-24 sm:py-32">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8" data-aos="fade-up" data-aos-duration="1000">
+      <h1
+        class="animate__animated animate__zoomIn font-mono text-balance text-5xl font-semibold tracking-widest sm:text-7xl">
+        DRIPIFY</h1>
+      <p class="animate__animated animate__fadeInUp mt-8 text-pretty text-lg font-medium  sm:text-xl/8"
+        style="animation-delay: 1s;">
+        The ultimate destination for swapping and refreshing your wardrobe with ease. Our platform connects
+        trendsetters, fashion lovers,
+        and sustainability enthusiasts who believe in giving clothes a second chance. Say goodbye to fast fashion guilt
+        and hello to a world where your style evolves effortlessly.
+        It’s not just about clothes—it’s about creating a vibrant community where your drip finds new homes and your
+        wardrobe tells a story.</p>
+    </div>
+
+    <div class="bg-zinc-900 mx-auto max-w-6xl p-14 mt-40 rounded-full text-white text-center" data-aos="fade-up"
+      data-aos-duration="1000">
+      <h1 class="font-mono text-balance text-4xl font-semibold tracking-widest sm:text-7xl">WHAT'S OUR MISSION?</h1>
+      <p class="mt-8 text-pretty text-lg  sm:text-xl/8" style="animation-delay: 1s;">
+        At DRIPIFY, we believe that fashion should be kind to the planet, and that’s why we’re all about giving clothes
+        a second chance.
+        By choosing to buy and sell second-hand fashion, you're not just updating your wardrobe – you’re making a
+        positive impact on the environment.</p>
+
+
+    </div>
+
+
+  </div>
+
+
+  <!-- FAST FASHION IMPACT -->
+  <div class="bg-white py-24 sm:py-32">
+    <div class="mx-auto max-w-7xl xl:px-8 text-center" data-aos="fade-up" data-aos-duration="1000">
+      <h1 class="font-mono text-balance text-5xl font-semibold tracking-wide sm:text-7xl">FAST FASHION IMPACT ON OUR
+        PLANET</h1>
+
+      <div class="bg-white py-24 sm:py-28">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <dl class="grid grid-cols-1 gap-x-8 gap-y-16 text-center xl:grid-cols-3">
+            <div class="mx-auto flex max-w-xs flex-col gap-y-4">
+              <dt class="text-base/7 text-gray-600">of textile generated every year, most of which ends up in landfills
+                or is incinerated.</dt>
+              <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">92 million tons
+              </dd>
+            </div>
+            <div class="mx-auto flex max-w-xs flex-col gap-y-4">
+              <dt class="text-base/7 text-gray-600">of water consumed annually, enough to meet the needs of 5 million
+                people.</dt>
+              <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">93 billion m³</dd>
+            </div>
+            <div class="mx-auto flex-wrap md:flex-nowrap flex  max-w-xs flex-col gap-y-4 ">
+              <dt class="text-base/7 text-gray-600">surpassing the combined emissions of international flights and
+                maritime shipping.</dt>
+              <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl whitespace-nowrap">
+                10% of global CO₂</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+
+  <div class="bg-zinc-900 h-16 rounded-t-full"></div>
+
+
+
+  <!-- COMMUNITY REVIEWS -->
+  <div class="bg-zinc-900 sm:py-14">
+    <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8" data-aos="fade-up" data-aos-duration="1000">
+      <p class="mx-auto text-balance text-center text-4xl font-bold tracking-wide text-white sm:text-5xl">COMMUNITY
+        REVIEWS</p>
+      <div class="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 md:w-[500px] lg:w-auto md:mx-auto">
+
+        <div class="relative lg:row-span-2 h-[600px] md:h-[700px]  ">
+          <div class="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
+          <div
+            class="relative flex h-full flex-col justify-between overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
+            <div class="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10">
+              <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">Ivana Marinova -
+                Trendsetter</p>
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">I’ve swapped so many amazing pieces on
+                Dripify! It’s not just about getting new clothes—it's about finding unique,
+                one-of-a-kind items I wouldn’t find anywhere else. The whole process is so simple and fun!</p>
+            </div>
+            <div class="md:h-[450px] md:w-[450px] rounded-tr-full overflow-hidden">
+              <img class="object-cover object-top lg:object-left-top w-full h-full"
+                src="/static/images/reviews/ivana-marinova-outfit.jpg" alt="ivana-outfit-review-on-dripify">
+
+            </div>
+          </div>
+        </div>
+
+        <div class="relative lg:row-span-2 h-[600px] md:h-[700px]">
+          <div class="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
+          <div
+            class="relative flex h-full flex-col justify-between overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
+            <div class="md:h-[500px] md:w-[500px] rounded-r-full rounded-tr-none overflow-hidden">
+              <img class="object-cover object-top lg:object-top w-full h-full"
+                src="/static/images/reviews/yordan-koichev-oufit.jpg" alt="yordan-outfit-review-on-dripify">
+            </div>
+
+            <div class="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10">
+              <p class="text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">Yordan Koychev - Vintage
+                Fashion Collector</p>
+              <p class="mt-2 mb-5 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">I’m so happy I joined Dripify.
+                I’ve found rare vintage items and unique streetwear I couldn’t find anywhere else. Plus, it feels great
+                to give my old clothes a new home!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative lg:row-span-2 h-[600px] md:h-[700px]">
+          <div class="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
+          <div
+            class="relative flex h-full flex-col md:items-end justify-between overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
+            <div class="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10 ">
+              <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">Daniela Velikova -
+                Fashion Lover</p>
+              <p class="mt-2 mb-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">I love how I can refresh both my
+                clothes and accessories on Dripify. From scarves to rings, it’s all about finding eco-friendly options
+                without compromising on style. This site has changed the way I shop!</p>
+            </div>
+            <div class="md:w-[450px] md:h-[500px] rounded-tl-full overflow-hidden">
+              <img class="object-cover object-center w-full h-full"
+                src="/static/images/reviews/daniela-velikova-outfit.jpg" alt="daniela-review-on-dripify">
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
     </div>
   </div>
-  
-  
-  <a href="#" class="hover:font-bold text-sm font-semibold text-gray-900">SELL YOUR DRIP</a>
-  <a href="#" class="hover:font-bold text-sm font-semibold text-gray-900">ABOUT US</a>
-</div>
 
-<div class="hidden lg:flex lg:flex-1 lg:justify-end">
-  <a href="#" class="hover:font-bold text-sm font-semibold text-gray-900 pr-4">LOG IN</a>
-  <a href="#" class="hover:font-bold text-sm font-semibold text-gray-900">REGISTER</a>
-</div>
-
-</nav>
+  <div class="bg-zinc-900 h-16 rounded-b-full"></div>
 
 
+  <!-- CATEGORIES -->
+  <div class="bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto  py-16 sm:py-24 lg:max-w-none lg:py-32" data-aos="fade-up" data-aos-duration="1000">
+        <h2 class="text-2xl font-bold text-gray-900">POPULAR CATEGORIES</h2>
 
-<!-- Mobile menu, show/hide based on menu open state. -->
-<div class="hidden mobile-menu lg:hidden" role="dialog" aria-modal="true">
-  <!-- Background backdrop, show/hide based on slide-over state. -->
-  <div class="fixed inset-0 z-50"></div>
-  <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-    <div class="flex items-center justify-between">
-      <a href="#" class="-m-1.5 p-1.5">
-        <span class="sr-only">Your Company</span>
-        <img class="h-8 w-auto" src="/static/images/logo.png" alt="">
-      </a>
-      <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
-        <span class="sr-only">Close menu</span>
-        <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
-    
-    <div class="mt-6 flow-root">
-      <div class="-my-6 divide-y divide-gray-500/10">
-        <div class="space-y-2 py-6">
-          <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">NEW ARRIVALS</a>
-          <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">SHOP</a>
-          <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">SELL YOUR DRIP</a>
-          <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">ABOUT US</a>
+        <div
+          class="mt-6 space-y-12 md:grid md:grid-cols-2 md:grid-rows-2 lg:grid-cols-4 lg:grid-rows-none md:gap-x-6 md:space-y-0">
+
+          <a href="#">
+            <div class="group relative text-center">
+              <img src="/static/images/categories/coats-and-jackets-category.jpg"
+                alt="coats and jackets category visual"
+                class="object-top w-full lg:h-full md:h-[300px]  rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
+              <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">COATS & JACKETS</p>
+            </div>
+          </a>
+
+          <a href="#">
+            <div class="group relative text-center">
+              <img src="/static/images/categories/jeans-and-pants-category.jpg" alt="jeans and pants category visual"
+                class="lg:h-full md:h-[300px] object-bottom w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
+              <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">JEANS & PANTS</p>
+            </div>
+          </a>
+
+
+          <a href="#">
+            <div class="group relative text-center">
+              <img src="/static/images/categories/sneakers-category.jpg" alt="sneakers category visual"
+                class="lg:h-full md:h-[300px] w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
+              <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">SNEAKERS</p>
+            </div>
+          </a>
+
+          <a href="#">
+            <div class="group relative text-center">
+              <img src="/static/images/categories/accessories-category.jpg" alt="accessories category visual"
+                class="lg:h-full md:h-[300px] w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
+              <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">ACCESSORIES</p>
+            </div>
+          </a>
+
+
         </div>
-        <div class="py-6">
-          <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">LOG IN</a>
-          <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">REGISTER</a>
-        </div>
-        
       </div>
     </div>
   </div>
-</div>
-</header>
 
+  <div class="bg-zinc-900 h-28 rounded-t-full"></div>
 
-<div class="relative isolate pt-14">
-  <div class="overflow-hidden mt-8 bg-black py-2 opacity-90">
-    <div class="marquee-container animate-marquee flex h-[350px] md:h-[400px] lg:h-[550px] " style="--marquee-offset: 0%;">
-      <img src="/static/images/header/1.jpg" alt="style-showcase-photo">
-      <img src="/static/images/header/2.jpg" alt="style showcase photo">
-      <img src="/static/images/header/3.jpg" alt="style showcase photo">
-      <img src="/static/images/header/4.jpg" alt="style showcase photo">
-      <img src="/static/images/header/5.jpg" alt="style showcase photo">
-      <img src="/static/images/header/6.jpg" alt="style showcase photo">
-      <img src="/static/images/header/7.jpg" alt="style showcase photo">
-      
-      <img src="/static/images/header/1.jpg" alt="style showcase photo">
-      <img src="/static/images/header/2.jpg" alt="style showcase photo">
-      <img src="/static/images/header/3.jpg" alt="style showcase photo">
-      <img src="/static/images/header/4.jpg" alt="style showcase photo">
-      <img src="/static/images/header/5.jpg" alt="style showcase photo">
-      <img src="/static/images/header/6.jpg" alt="style showcase photo">
-      <img src="/static/images/header/7.jpg" alt="style showcase photo">
+  <!-- JOIN NOW -->
+  <div class="bg-zinc-900 sm:py-24">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8 text-center" data-aos="fade-up" data-aos-duration="1000">
+      <h1 class="font-mono text-balance text-5xl text-white font-semibold tracking-wide sm:text-7xl">WHY WAIT? JOIN
+        TODAY!</h1>
+      <p class="text-white mt-8 text-pretty text-lg font-medium  sm:text-xl/8" style="animation-delay: 1.5s;">
+        Create your profile to unlock unlimited swapping potential. Post your items, explore fresh finds, and start
+        building a wardrobe that truly reflects your vibe—all while making a positive impact on the planet.</p>
+
+      <a href="#"
+        class="block mt-8 max-w-xl mx-auto bg-white px-6 py-3 text-2xl  font-semibold rounded-full text-black ease-in duration-300 hover:ease-in hover:duration-300 hover:bg-zinc-600 hover:text-white uppercase">Become
+        Part of the Community</a>
     </div>
+
+
   </div>
-  
-  <div class="absolute inset-0 mx-auto max-w-2xl pt-44 sm:pt-64 md:pt-72">
-    <div class="text-center">
-      <h1 class="animate__animated animate__slideInDown sm:mx-auto mx-2 sm:max-w-full bg-black rounded-full text-white p-2 px-10 font-mono text-xl sm:text-4xl font-bold tracking-wide ">GET DRIP.GIVE DRIP.</h1>
-    </div>
-    
-    <div class="animate__animated animate__fadeInUp flex flex-col gap-2 items-center sm:flex-row justify-center gap-x-6 py-3" style="animation-delay: 0.5s;">
-      <a href="#" class="bg-black px-6 py-3 text-xl font-semibold text-white hover:ease-in duration-200 hover:bg-white hover:text-gray-900">BROWSE CLOTHING</a>
-      <a href="#" class="px-6 py-3 text-xl  text-gray-900 font-semibold bg-white hover:ease-in duration-200 hover:bg-black hover:text-white">START SELLING</a>
-    </div>
-  </div>
-  
-</div>
-</div>
 
 
 
-
-
-<!-- ABOUT -->
-<div class="bg-white px-5 py-24 sm:py-32">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8" data-aos="fade-up" data-aos-duration="1000">
-    <h1 class="animate__animated animate__zoomIn font-mono text-balance text-5xl font-semibold tracking-widest sm:text-7xl" >DRIPIFY</h1>
-    <p class="animate__animated animate__fadeInUp mt-8 text-pretty text-lg font-medium  sm:text-xl/8" style="animation-delay: 1s;" >
-      The ultimate destination for swapping and refreshing your wardrobe with ease. Our platform connects trendsetters, fashion lovers,
-      and sustainability enthusiasts who believe in giving clothes a second chance. Say goodbye to fast fashion guilt and hello to a world where your style evolves effortlessly.
-      It’s not just about clothes—it’s about creating a vibrant community where your drip finds new homes and your wardrobe tells a story.</p>
-    </div>
-    
-    <div class="bg-zinc-900 mx-auto max-w-6xl p-14 mt-40 rounded-full text-white text-center" data-aos="fade-up" data-aos-duration="1000">
-      <h1 class="font-mono text-balance text-4xl font-semibold tracking-widest sm:text-7xl" >WHAT'S OUR MISSION?</h1>
-      <p class="mt-8 text-pretty text-lg  sm:text-xl/8" style="animation-delay: 1s;" >
-        At DRIPIFY, we believe that fashion should be kind to the planet, and that’s why we’re all about giving clothes a second chance.
-        By choosing to buy and sell second-hand fashion, you're not just updating your wardrobe – you’re making a positive impact on the environment.</p>
-        
-        
+  <!-- FOOTER -->
+  <footer class="bg-zinc-900 pt-40">
+    <div class="w-full max-w-screen-xl mx-auto p-4">
+      <div class="sm:flex sm:items-center sm:justify-between">
+        <a href="#" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+          <img src="/static/images/white-logo.png" class="h-16" alt="Dripify Logo" />
+          <span class="text-white self-center text-2xl font-bold tracking-widest uppercase">Dripify</span>
+        </a>
+        <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-white sm:mb-0">
+          <li>
+            <a href="#" class="hover:underline me-4 md:me-6 uppercase">New Arrivals</a>
+          </li>
+          <li>
+            <a href="#" class="hover:underline me-4 md:me-6 uppercase">Shop</a>
+          </li>
+          <li>
+            <a href="#" class="hover:underline me-4 md:me-6 uppercase">Sell Your Drip</a>
+          </li>
+          <li>
+            <a href="#" class="hover:underline uppercase">About Us</a>
+          </li>
+        </ul>
       </div>
-      
-      
+
+      <span class="mt-5 block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025 Dripify™. All Rights
+        Reserved.</span>
     </div>
+  </footer>
+
+  <button id="scrollToTop"
+    class="hidden sm:block fixed bottom-5 right-5 bg-black text-white text-4xl rounded-full p-5 px-8 shadow-lg opacity-0 transition-opacity duration-300">↑</button>
+
+
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const marqueeContainer = document.querySelector('.marquee-container');
+      const images = marqueeContainer.querySelectorAll('img');
+
+      // Get the total width of one set of images
+      const firstSet = Array.from(images).slice(0, images.length / 2);
+      const totalWidth = firstSet.reduce((sum, img) => sum + img.offsetWidth, 0);
+
+      // Get container width
+      const containerWidth = marqueeContainer.offsetWidth;
+
+      // Calculate gap offset in percentage (based on container width)
+      const gapOffset = (totalWidth / containerWidth) * 100;
+
+      // Apply percentage gap offset to the CSS variable
+      marqueeContainer.style.setProperty('--marquee-offset', `-${gapOffset}%`);
+    });
+
+    const scrollToTopButton = document.getElementById('scrollToTop');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 1000) {
+        scrollToTopButton.classList.add('opacity-100');
+        scrollToTopButton.classList.remove('opacity-0');
+      } else {
+        scrollToTopButton.classList.add('opacity-0');
+        scrollToTopButton.classList.remove('opacity-100');
+      }
+    });
+
+    scrollToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+
+
+    // MOBILE MENU FUNCTIONALITY
+    // Get the elements
+    const mobileMenuButton = document.querySelector('.mobile-menu button.hamburger'); // Hamburger button
+    const mobileMenu = document.querySelector('div[role="dialog"]'); // Mobile menu
+
+    const closeButton = mobileMenu.querySelector('button'); // Close button inside mobile menu
+    const backdrop = mobileMenu.querySelector('.fixed'); // The backdrop to close when clicked
+
+
+    // Function to open the menu
+    const openMenu = () => {
+      mobileMenu.classList.remove('hidden'); // Show the mobile menu
+      backdrop.classList.remove('hidden'); // Show the backdrop
+    };
+
+    // Function to close the menu
+    const closeMenu = () => {
+      mobileMenu.classList.add('hidden'); // Hide the mobile menu
+      backdrop.classList.add('hidden'); // Hide the backdrop
+    };
+
+    // Event listener to open the menu
+    mobileMenuButton.addEventListener('click', openMenu);
+
+    // Event listener to close the menu
+    closeButton.addEventListener('click', closeMenu);
+    backdrop.addEventListener('click', closeMenu);
+
+
+
+    // SHOP BUTTON FUNCTIONALITY 
+    const mobileNav = document.getElementById("mobile-nav");
+    const mobileCloseButton = document.getElementById("mobile-close-button");
+    const mobileMenuShopButton = document.getElementById("shop-mobile-button");
+    const mobileReturnButton = document.getElementById("mobile-return-button");
+    const mobileCategoryMenu = document.getElementById("mobile-categories");
+
+    function toggleMenu() {
+      mobileNav.classList.toggle('hidden');
+      mobileCategoryMenu.classList.toggle('hidden');
+
+      mobileCloseButton.classList.toggle('hidden');
+      mobileReturnButton.classList.toggle('hidden');
+    }
     
-    
-    <!-- FAST FASHION IMPACT -->
-    <div class="bg-white py-24 sm:py-32">
-      <div class="mx-auto max-w-7xl xl:px-8 text-center" data-aos="fade-up" data-aos-duration="1000">
-        <h1 class="font-mono text-balance text-5xl font-semibold tracking-wide sm:text-7xl" >FAST FASHION IMPACT ON OUR PLANET</h1>
-        
-        <div class="bg-white py-24 sm:py-28">
-          <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <dl class="grid grid-cols-1 gap-x-8 gap-y-16 text-center xl:grid-cols-3">
-              <div class="mx-auto flex max-w-xs flex-col gap-y-4">
-                <dt class="text-base/7 text-gray-600">of textile generated every year, most of which ends up in landfills or is incinerated.</dt>
-                <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">92 million tons</dd>
-              </div>
-              <div class="mx-auto flex max-w-xs flex-col gap-y-4">
-                <dt class="text-base/7 text-gray-600">of water consumed annually, enough to meet the needs of 5 million people.</dt>
-                <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">93 billion m³</dd>
-              </div>
-              <div class="mx-auto flex-wrap md:flex-nowrap flex  max-w-xs flex-col gap-y-4 ">
-                <dt class="text-base/7 text-gray-600">surpassing the combined emissions of international flights and maritime shipping.</dt>
-                <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl whitespace-nowrap">10% of global CO₂</dd>
-              </div>
-            </dl>
-          </div>
-        </div>
-        
-      </div>
-      
-      
-      
-    </div>
-    
-    
-    <div class="bg-zinc-900 h-16 rounded-t-full"></div>
-    
-    
-    
-    <!-- COMMUNITY REVIEWS -->
-    <div class="bg-zinc-900 sm:py-14">
-      <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8" data-aos="fade-up" data-aos-duration="1000">
-        <p class="mx-auto text-balance text-center text-4xl font-bold tracking-wide text-white sm:text-5xl" >COMMUNITY REVIEWS</p>
-        <div class="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 md:w-[500px] lg:w-auto md:mx-auto" >
-          
-          <div class="relative lg:row-span-2 h-[600px] md:h-[700px]  " >
-            <div class="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
-            <div class="relative flex h-full flex-col justify-between overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
-              <div class="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10">
-                <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">Ivana Marinova - Trendsetter</p>
-                <p class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">I’ve swapped so many amazing pieces on Dripify! It’s not just about getting new clothes—it's about finding unique,
-                  one-of-a-kind items I wouldn’t find anywhere else. The whole process is so simple and fun!</p>
-                </div>
-                <div class="md:h-[450px] md:w-[450px] rounded-tr-full overflow-hidden">
-                  <img class="object-cover object-top lg:object-left-top w-full h-full" src="/static/images/reviews/ivana-marinova-outfit.jpg" alt="ivana-outfit-review-on-dripify">
-                  
-                </div>
-              </div>
-            </div>
-            
-            <div class="relative lg:row-span-2 h-[600px] md:h-[700px]">
-              <div class="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
-              <div class="relative flex h-full flex-col justify-between overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
-                <div class="md:h-[500px] md:w-[500px] rounded-r-full rounded-tr-none overflow-hidden">
-                  <img class="object-cover object-top lg:object-top w-full h-full" src="/static/images/reviews/yordan-koichev-oufit.jpg" alt="yordan-outfit-review-on-dripify">
-                </div>
-                
-                <div class="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10">
-                  <p class="text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">Yordan Koychev - Vintage Fashion Collector</p>
-                  <p class="mt-2 mb-5 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">I’m so happy I joined Dripify. I’ve found rare vintage items and unique streetwear I couldn’t find anywhere else. Plus, it feels great to give my old clothes a new home!</p>
-                </div>
-              </div>
-            </div>
-            
-            <div class="relative lg:row-span-2 h-[600px] md:h-[700px]">
-              <div class="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
-              <div class="relative flex h-full flex-col md:items-end justify-between overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
-                <div class="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10 ">
-                  <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">Daniela Velikova - Fashion Lover</p>
-                  <p class="mt-2 mb-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">I love how I can refresh both my clothes and accessories on Dripify. From scarves to rings, it’s all about finding eco-friendly options without compromising on style. This site has changed the way I shop!</p>
-                </div>
-                <div class="md:w-[450px] md:h-[500px] rounded-tl-full overflow-hidden">
-                  <img class="object-cover object-center w-full h-full" src="/static/images/reviews/daniela-velikova-outfit.jpg" alt="daniela-review-on-dripify">
-                </div>
-              </div>
-            </div>
-            
-            
-            
-            
-          </div>
-        </div>
-      </div>
-      
-      <div class="bg-zinc-900 h-16 rounded-b-full"></div>
-      
-      
-      <!-- CATEGORIES -->
-      <div class="bg-white">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div class="mx-auto  py-16 sm:py-24 lg:max-w-none lg:py-32" data-aos="fade-up" data-aos-duration="1000">
-            <h2 class="text-2xl font-bold text-gray-900">POPULAR CATEGORIES</h2>
-            
-            <div class="mt-6 space-y-12 md:grid md:grid-cols-2 md:grid-rows-2 lg:grid-cols-4 lg:grid-rows-none md:gap-x-6 md:space-y-0">
-              
-              <a href="#">
-                <div class="group relative text-center">
-                  <img src="/static/images/categories/coats-and-jackets-category.jpg" alt="coats and jackets category visual" class="object-top w-full lg:h-full md:h-[300px]  rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
-                  <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">COATS & JACKETS</p>
-                </div>
-              </a>
-              
-              <a href="#">
-                <div class="group relative text-center">
-                  <img src="/static/images/categories/jeans-and-pants-category.jpg" alt="jeans and pants category visual" class="lg:h-full md:h-[300px] object-bottom w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
-                  <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">JEANS & PANTS</p>
-                </div>
-              </a>
-              
-              
-              <a href="#">
-                <div class="group relative text-center">
-                  <img src="/static/images/categories/sneakers-category.jpg" alt="sneakers category visual" class="lg:h-full md:h-[300px] w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
-                  <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">SNEAKERS</p>
-                </div>
-              </a>
-              
-              <a href="#">
-                <div class="group relative text-center">
-                  <img src="/static/images/categories/accessories-category.jpg" alt="accessories category visual" class="lg:h-full md:h-[300px] w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
-                  <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">ACCESSORIES</p>
-                </div>
-              </a>
-              
-              
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="bg-zinc-900 h-28 rounded-t-full"></div>
-      
-      <!-- JOIN NOW -->
-      <div class="bg-zinc-900 sm:py-24" >
-        <div class="mx-auto max-w-7xl px-6 lg:px-8 text-center" data-aos="fade-up" data-aos-duration="1000">
-          <h1 class="font-mono text-balance text-5xl text-white font-semibold tracking-wide sm:text-7xl">WHY WAIT? JOIN TODAY!</h1>
-          <p class="text-white mt-8 text-pretty text-lg font-medium  sm:text-xl/8" style="animation-delay: 1.5s;">
-            Create your profile to unlock unlimited swapping potential. Post your items, explore fresh finds, and start building a wardrobe that truly reflects your vibe—all while making a positive impact on the planet.</p>
-            
-            <a href="#" class="block mt-8 max-w-xl mx-auto bg-white px-6 py-3 text-2xl  font-semibold rounded-full text-black ease-in duration-300 hover:ease-in hover:duration-300 hover:bg-zinc-600 hover:text-white uppercase">Become Part of the Community</a>
-          </div>
-          
-          
-        </div>
-        
-        
-        
-        <!-- FOOTER -->
-        <footer class="bg-zinc-900 pt-40">
-          <div class="w-full max-w-screen-xl mx-auto p-4">
-            <div class="sm:flex sm:items-center sm:justify-between">
-              <a href="#" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-                <img src="/static/images/white-logo.png" class="h-16" alt="Dripify Logo" />
-                <span class="text-white self-center text-2xl font-bold tracking-widest uppercase">Dripify</span>
-              </a>
-              <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-white sm:mb-0">
-                <li>
-                  <a href="#" class="hover:underline me-4 md:me-6 uppercase">New Arrivals</a>
-                </li>
-                <li>
-                  <a href="#" class="hover:underline me-4 md:me-6 uppercase">Shop</a>
-                </li>
-                <li>
-                  <a href="#" class="hover:underline me-4 md:me-6 uppercase">Sell Your Drip</a>
-                </li>
-                <li>
-                  <a href="#" class="hover:underline uppercase">About Us</a>
-                </li>
-              </ul>
-            </div>
-            
-            <span class="mt-5 block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025 Dripify™. All Rights Reserved.</span>
-          </div>
-        </footer>
-        
-        <button id="scrollToTop" class="hidden sm:block fixed bottom-5 right-5 bg-black text-white text-4xl rounded-full p-5 px-8 shadow-lg opacity-0 transition-opacity duration-300">↑</button>
-        
-        
-        
-        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-        <script>
-          AOS.init();
-          
-          document.addEventListener('DOMContentLoaded', () => {
-            const marqueeContainer = document.querySelector('.marquee-container');
-            const images = marqueeContainer.querySelectorAll('img');
-            
-            // Get the total width of one set of images
-            const firstSet = Array.from(images).slice(0, images.length / 2);
-            const totalWidth = firstSet.reduce((sum, img) => sum + img.offsetWidth, 0);
-            
-            // Get container width
-            const containerWidth = marqueeContainer.offsetWidth;
-            
-            // Calculate gap offset in percentage (based on container width)
-            const gapOffset = (totalWidth / containerWidth) * 100;
-            
-            // Apply percentage gap offset to the CSS variable
-            marqueeContainer.style.setProperty('--marquee-offset', `-${gapOffset}%`);
-          });
-          
-          const scrollToTopButton = document.getElementById('scrollToTop');
-          
-          window.addEventListener('scroll', () => {
-            if (window.scrollY > 1000) {
-              scrollToTopButton.classList.add('opacity-100');
-              scrollToTopButton.classList.remove('opacity-0');
-            } else {
-              scrollToTopButton.classList.add('opacity-0');
-              scrollToTopButton.classList.remove('opacity-100');
-            }
-          });
-          
-          scrollToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-            });
-          });
-          
-          // Get the elements
-          const mobileMenuButton = document.querySelector('.mobile-menu button.hamburger'); // Hamburger button
-          const mobileMenu = document.querySelector('div[role="dialog"]'); // Mobile menu
-          
-          const closeButton = mobileMenu.querySelector('button'); // Close button inside mobile menu
-          const backdrop = mobileMenu.querySelector('.fixed'); // The backdrop to close when clicked
-          
-          // Function to open the menu
-          const openMenu = () => {
-            mobileMenu.classList.remove('hidden'); // Show the mobile menu
-            backdrop.classList.remove('hidden'); // Show the backdrop
-          };
-          
-          // Function to close the menu
-          const closeMenu = () => {
-            mobileMenu.classList.add('hidden'); // Hide the mobile menu
-            backdrop.classList.add('hidden'); // Hide the backdrop
-          };
-          
-          // Event listener to open the menu
-          mobileMenuButton.addEventListener('click', openMenu);
-          
-          // Event listener to close the menu
-          closeButton.addEventListener('click', closeMenu);
-          backdrop.addEventListener('click', closeMenu);
-          
-          
-          function showCategory(category) {
-            // Get category elements
-            const womenCategories = document.getElementById('women-categories');
-            const menCategories = document.getElementById('men-categories');
+    function showCategoryMobile(category) {
+      const womenCategories = document.getElementById('women-categories-mobile');
+      const menCategories = document.getElementById('men-categories-mobile');
 
-            const womenTab = document.getElementById('women-tab');
-            const menTab = document.getElementById('men-tab');
+      const womenTab = document.getElementById('women-tab-mobile');
+      const menTab = document.getElementById('men-tab-mobile');
 
-            const womenTabUnderline = womenTab.children[0];
-            const menTabUnderline = menTab.children[0];
-            
-            if (category === 'women') {
-              // Show women's categories and update tab styles
-              womenCategories.classList.remove('hidden');
-              menCategories.classList.add('hidden');
-
-              womenTab.classList.add('font-bold');
-              womenTab.classList.remove('font-semibold');
-              menTab.classList.replace('font-bold', 'font-semibold');
-
-              womenTabUnderline.classList.add('w-full');
-              menTabUnderline.classList.replace('w-full', 'w-0');
-            } else if (category === 'men') {
-              // Show men's categories and update tab styles  
-              menCategories.classList.remove('hidden');
-              womenCategories.classList.add('hidden');
-
-              menTab.classList.add('font-bold');
-              menTab.classList.remove('font-semibold');
-              womenTab.classList.replace('font-bold', 'font-semibold');
-
-              menTabUnderline.classList.add('w-full');
-              womenTabUnderline.classList.replace('w-full', 'w-0');
-            }
-          }
-          
-          
-          const flyoutMenu = document.getElementById('flyout-menu');
-
-          function toggleFlyoutMenu() {
-            flyoutMenu.classList.toggle('opacity-0');
-            flyoutMenu.classList.toggle('opacity-100');
-
-            flyoutMenu.classList.toggle('pointer-events-none');
-            flyoutMenu.classList.toggle('pointer-events-auto');
-          }
-          
-          
-        </script>
-      </body>
-      </html>
       
+      toggleCategoryVisibility(category, womenCategories, menCategories, womenTab, menTab)
+    }
+
+
+
+
+    function showCategory(category) {
+      // Get category elements
+      const womenCategories = document.getElementById('women-categories');
+      const menCategories = document.getElementById('men-categories');
+
+      const womenTab = document.getElementById('women-tab');
+      const menTab = document.getElementById('men-tab');
+
+      
+      toggleCategoryVisibility(category, womenCategories, menCategories, womenTab, menTab)
+    }
+
+    function toggleCategoryVisibility(category, womenCategories, menCategories, womenTab, menTab) {
+      const womenTabUnderline = womenTab.children[0];
+      const menTabUnderline = menTab.children[0];
+
+      if (category === 'women') {
+        // Show women's categories and update tab styles
+        womenCategories.classList.remove('hidden');
+        menCategories.classList.add('hidden');
+
+        womenTab.classList.add('font-bold');
+        womenTab.classList.remove('font-semibold');
+        menTab.classList.replace('font-bold', 'font-semibold');
+
+        womenTabUnderline.classList.add('w-full');
+        menTabUnderline.classList.replace('w-full', 'w-0');
+      } else if (category === 'men') {
+        // Show men's categories and update tab styles  
+        menCategories.classList.remove('hidden');
+        womenCategories.classList.add('hidden');
+
+        menTab.classList.add('font-bold');
+        menTab.classList.remove('font-semibold');
+        womenTab.classList.replace('font-bold', 'font-semibold');
+
+        menTabUnderline.classList.add('w-full');
+        womenTabUnderline.classList.replace('w-full', 'w-0');
+      }
+    }
+
+
+    const flyoutMenu = document.getElementById('flyout-menu');
+
+    function toggleFlyoutMenu() {
+      flyoutMenu.classList.toggle('opacity-0');
+      flyoutMenu.classList.toggle('opacity-100');
+
+      flyoutMenu.classList.toggle('pointer-events-none');
+      flyoutMenu.classList.toggle('pointer-events-auto');
+    }
+
+
+  </script>
+</body>
+
+</html>
