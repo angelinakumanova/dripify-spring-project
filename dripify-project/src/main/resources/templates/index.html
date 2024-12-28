@@ -45,7 +45,7 @@
             </button>
             
             
-            <div id="flyout-menu" onmouseleave="toggleFlyoutMenu()" class="hidden transition-all duration-200 ease-in-out absolute -left-[15rem] top-full z-10 mt-3 w-screen max-w-xl overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+            <div id="flyout-menu" onmouseleave="toggleFlyoutMenu()" class="opacity-0 transition-opacity ease-in duration-300 pointer-events-none absolute -left-[15rem] top-full z-10 mt-3 w-screen max-w-xl overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
               <div class="p-4">
                 <div class="flex justify-evenly mb-2">
                   <p id="women-tab" 
@@ -609,7 +609,7 @@
               womenTabUnderline.classList.add('w-full');
               menTabUnderline.classList.replace('w-full', 'w-0');
             } else if (category === 'men') {
-              // Show men's categories and update tab styles
+              // Show men's categories and update tab styles  
               menCategories.classList.remove('hidden');
               womenCategories.classList.add('hidden');
 
@@ -626,7 +626,11 @@
           const flyoutMenu = document.getElementById('flyout-menu');
 
           function toggleFlyoutMenu() {
-            flyoutMenu.classList.toggle('hidden');
+            flyoutMenu.classList.toggle('opacity-0');
+            flyoutMenu.classList.toggle('opacity-100');
+
+            flyoutMenu.classList.toggle('pointer-events-none');
+            flyoutMenu.classList.toggle('pointer-events-auto');
           }
           
           
