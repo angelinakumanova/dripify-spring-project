@@ -606,8 +606,8 @@
               womenTab.classList.remove('font-semibold');
               menTab.classList.replace('font-bold', 'font-semibold');
 
-              womenTabUnderline.style.width = "100%";
-              menTabUnderline.style.width = "0%";
+              womenTabUnderline.classList.add('w-full');
+              menTabUnderline.classList.replace('w-full', 'w-0');
             } else if (category === 'men') {
               // Show men's categories and update tab styles
               menCategories.classList.remove('hidden');
@@ -617,8 +617,8 @@
               menTab.classList.remove('font-semibold');
               womenTab.classList.replace('font-bold', 'font-semibold');
 
-              menTabUnderline.style.width = "100%";
-              womenTabUnderline.style.width = "0%";
+              menTabUnderline.classList.add('w-full');
+              womenTabUnderline.classList.replace('w-full', 'w-0');
             }
           }
           
