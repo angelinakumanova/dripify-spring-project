@@ -14,8 +14,8 @@
 
 
   <div>
-    <div class="logo ">
-      <a href="/templates/index.html" class="-m-1.5 p-1.5 flex gap-2 items-center absolute p-12">
+    <div class="logo">
+      <a href="/templates/index.html" class="flex gap-2 items-center absolute m-12">
         <img class="h-12 w-auto" src="/static/images/logo.png" alt="dripify-logo">
         <p class="font-bold text-xl tracking-widest">DRIPIFY</p>
 
@@ -24,9 +24,7 @@
     </div>
 
 
-    <div class="flex justify-between p-4 overflow-hidden">
-
-
+    <div class=" flex justify-between p-4 overflow-hidden">
 
       <!-- FORM -->
       <div class="animate__animated animate__fadeInLeft mx-auto flex min-h-full w-[500px] flex-col justify-center">
@@ -52,9 +50,9 @@
                 <label for="password" class="block text-sm/6 font-medium text-gray-900">Password</label>
 
                 <!-- TODO: Look up if there is possible implementation -->
-                <!-- <div class="text-sm">
-                  <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
-                </div> -->
+                <div class="text-sm">
+                  <a href="#" class="font-semibold text-gray-600 hover:text-gray-900 ease-in duration-300">Forgot password?</a>
+                </div>
               </div>
               <div class="mt-2">
                 <input type="password" name="password" id="password" autocomplete="current-password" required
@@ -78,7 +76,7 @@
 
 
       <div class="animate__animated animate__fadeInRight image-box w-[700px]
-       rounded-lg overflow-hidden">
+       rounded-tl-full rounded-tr-3xl rounded-b-[15em] overflow-hidden">
         <img class="object-cover" src="/static/images/dripify-poster.png" alt="">
       </div>
     </div>
