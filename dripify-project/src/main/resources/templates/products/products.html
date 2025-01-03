@@ -486,12 +486,13 @@
         </header>
     </div>
 
+
     <div class="mt-32 max-w-3xl mx-auto">
         <div class="categories grid grid-cols-4 gap-x-8">
             <a href="#">
-                <div
-                    class="relative group text-center category  ">
-                    <div class="image-box rounded-full aspect-square overflow-hidden border-gray-500 border-2 border-opacity-50">
+                <div class="relative group text-center category  ">
+                    <div
+                        class="image-box rounded-full aspect-square overflow-hidden border-gray-500 border-2 border-opacity-50">
                         <img src="/static/images/categories/products/coat-women.jpg" alt="coats category women"
                             class="object-contain bg-white group-hover:opacity-75">
                     </div>
@@ -501,9 +502,9 @@
             </a>
 
             <a href="#">
-                <div
-                    class="relative group text-center category  ">
-                    <div class="image-box rounded-full aspect-square overflow-hidden border-gray-500 border-2 border-opacity-50">
+                <div class="relative group text-center category  ">
+                    <div
+                        class="image-box rounded-full aspect-square overflow-hidden border-gray-500 border-2 border-opacity-50">
                         <img src="/static/images/categories/products/tops-women.jpg" alt="tops category women"
                             class="object-contain bg-white group-hover:opacity-75">
                     </div>
@@ -513,9 +514,9 @@
             </a>
 
             <a href="#">
-                <div
-                    class="relative group text-center category  ">
-                    <div class="image-box rounded-full aspect-square overflow-hidden border-gray-500 border-2 border-opacity-50">
+                <div class="relative group text-center category  ">
+                    <div
+                        class="image-box rounded-full aspect-square overflow-hidden border-gray-500 border-2 border-opacity-50">
                         <img src="/static/images/categories/products/dresses-women.jpg" alt="dresses category women"
                             class="object-bottom w-full h-full object-cover bg-white group-hover:opacity-75">
                     </div>
@@ -525,9 +526,9 @@
             </a>
 
             <a href="#">
-                <div
-                    class="relative group text-center category  ">
-                    <div class="image-box rounded-full aspect-square overflow-hidden border-gray-500 border-2 border-opacity-50">
+                <div class="relative group text-center category  ">
+                    <div
+                        class="image-box rounded-full aspect-square overflow-hidden border-gray-500 border-2 border-opacity-50">
                         <img src="/static/images/categories/products/shoes-women.jpg" alt="shoes category women"
                             class="w-full h-full object-cover bg-white group-hover:opacity-75">
                     </div>
@@ -535,12 +536,234 @@
                     </p>
                 </div>
             </a>
-
-
-
-
         </div>
     </div>
+
+
+
+    <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <div class="relative flex justify-between items-end">
+            <div class="filter-box hover:cursor-pointer">
+                <svg class="inline-block w-8 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16"></path>
+                    <path d="M7 9h10"></path>
+                    <path d="M10 14h4"></path>
+                </svg>
+
+                <h2 onclick="toggleFilterMenu()" class="inline-block text-2xl font-bold tracking-tight text-gray-900">Filter</h2>
+            </div>
+
+
+
+            <!-- Dropdown menu -->
+            <div id="dropdown-filter"
+                class="opacity-0 transition-opacity ease-in duration-300 pointer-events-none top-full transform translate-y-0 absolute z-10 w-56 p-3 rounded-lg shadow bg-white border border-opacity-30 border-black">
+
+                <div class="filter-section p-2">
+                    <button class="toggle-btn font-medium text-gray-900 mb-2">Categories</button>
+                    <ul class="filter-content space-y-2 text-sm text-gray-700 font-semibold uppercase">
+                        <li><input type="checkbox" id="tops" class="checkbox" /> <label for="tops">Tops</label></li>
+                        <li><input type="checkbox" id="jeans" class="checkbox" /> <label for="jeans">Jeans</label></li>
+                        <li><input type="checkbox" id="sweaters" class="checkbox" /> <label
+                                for="sweaters">Sweaters</label></li>
+                        <li><input type="checkbox" id="skirts" class="checkbox" /> <label for="skirts">Skirts</label>
+                        </li>
+                        <li><input type="checkbox" id="dresses" class="checkbox" /> <label for="dresses">Dresses</label>
+                        </li>
+                        <li><input type="checkbox" id="coats" class="checkbox" /> <label for="coats">Coats</label></li>
+                        <li><input type="checkbox" id="jackets" class="checkbox" /> <label for="jackets">Jackets</label>
+                        </li>
+                        <li><input type="checkbox" id="shoes" class="checkbox" /> <label for="shoes">Shoes</label></li>
+                        <li><input type="checkbox" id="bags" class="checkbox" /> <label for="bags">Bags</label></li>
+                        <li><input type="checkbox" id="accessories" class="checkbox" /> <label
+                                for="accessories">Accessories</label></li>
+                    </ul>
+                    <hr class="m-2 ml-0">
+                </div>
+
+                <!-- Gender -->
+                <div class="filter-section p-2">
+                    <button class="toggle-btn font-medium text-gray-900 mb-2">Gender</button>
+                    <ul class="filter-content space-y-2 text-sm text-gray-700 font-semibold uppercase hidden ">
+                        <li><input type="checkbox" id="men" class="checkbox" /> <label for="men">Men</label></li>
+                        <li><input type="checkbox" id="women" class="checkbox" /> <label for="women">Women</label></li>
+                    </ul>
+                    <hr class="m-2 ml-0">
+                </div>
+
+                <!-- Clothing Size -->
+                <div class="filter-section p-2">
+                    <button class="toggle-btn font-medium text-gray-900 mb-2">Clothing Size</button>
+                    <ul class="filter-content grid grid-cols-4 gap-2 text-sm text-gray-700 font-semibold uppercase hidden">
+                        <li><input type="checkbox" id="xs" class="checkbox" /> <label for="xs">XS</label></li>
+                        <li><input type="checkbox" id="s" class="checkbox" /> <label for="s">S</label></li>
+                        <li><input type="checkbox" id="m" class="checkbox" /> <label for="m">M</label></li>
+                        <li><input type="checkbox" id="l" class="checkbox" /> <label for="l">L</label></li>
+                        <li><input type="checkbox" id="xl" class="checkbox" /> <label for="xl">XL</label></li>
+                    </ul>
+                    <hr class="m-2 ml-0">
+                </div>
+
+                <!-- Shoe Size -->
+                <div class="filter-section p-2">
+                    <button class="toggle-btn font-medium text-gray-900 mb-2">Shoe Size</button>
+                    <ul class="filter-content grid grid-cols-5 gap-2 text-sm text-gray-700 font-semibold uppercase hidden">
+                        <li><input type="checkbox" id="shoe-36" class="checkbox" /> <label for="shoe-36">36</label></li>
+                        <li><input type="checkbox" id="shoe-37" class="checkbox" /> <label for="shoe-37">37</label></li>
+                        <li><input type="checkbox" id="shoe-38" class="checkbox" /> <label for="shoe-38">38</label></li>
+                        <li><input type="checkbox" id="shoe-39" class="checkbox" /> <label for="shoe-39">39</label></li>
+                        <li><input type="checkbox" id="shoe-40" class="checkbox" /> <label for="shoe-40">40</label></li>
+                        <li><input type="checkbox" id="shoe-41" class="checkbox" /> <label for="shoe-41">41</label></li>
+                        <li><input type="checkbox" id="shoe-42" class="checkbox" /> <label for="shoe-42">42</label></li>
+                    </ul>
+                    <hr class="m-2 ml-0">
+
+                </div>
+            </div>
+
+
+
+            <form class="w-[25%]">
+                <label for="default-search"
+                    class="mb-2 text-sm font-medium text-gray-900 dark:text-white">Search</label>
+                <div class="relative border-2 border-zinc-900 border-opacity-50  rounded-full p-1">
+                    <input type="search" id="default-search"
+                        class="block w-full p-2 ps-10 text-sm text-gray-900 rounded-full bg-gray-50 outline-none  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-zinc-900"
+                        placeholder="Search.." />
+                    <button type="submit"
+                        class="text-white absolute end-5 bottom-1.5 font-medium rounded-full text-sm px-2 py-2 hover:bg-zinc-900 hover:bg-opacity-10 ease-in duration-300">
+                        <div>
+                            <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            <div class="group relative">
+                <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
+                    alt="Front of men&#039;s Basic Tee in black."
+                    class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                <div class="mt-4 flex justify-between">
+                    <div>
+                        <h3 class="text-sm text-gray-700">
+                            <a href="#">
+                                <span aria-hidden="true" class="absolute inset-0"></span>
+                                Basic Tee
+                            </a>
+                        </h3>
+                        <p class="mt-1 text-sm text-gray-500">Black</p>
+                    </div>
+                    <p class="text-sm font-medium text-gray-900">$35</p>
+                </div>
+            </div>
+
+            <div class="group relative">
+                <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
+                    alt="Front of men&#039;s Basic Tee in black."
+                    class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                <div class="mt-4 flex justify-between">
+                    <div>
+                        <h3 class="text-sm text-gray-700">
+                            <a href="#">
+                                <span aria-hidden="true" class="absolute inset-0"></span>
+                                Basic Tee
+                            </a>
+                        </h3>
+                        <p class="mt-1 text-sm text-gray-500">Black</p>
+                    </div>
+                    <p class="text-sm font-medium text-gray-900">$35</p>
+                </div>
+            </div>
+
+
+            <div class="group relative">
+                <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
+                    alt="Front of men&#039;s Basic Tee in black."
+                    class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                <div class="mt-4 flex justify-between">
+                    <div>
+                        <h3 class="text-sm text-gray-700">
+                            <a href="#">
+                                <span aria-hidden="true" class="absolute inset-0"></span>
+                                Basic Tee
+                            </a>
+                        </h3>
+                        <p class="mt-1 text-sm text-gray-500">Black</p>
+                    </div>
+                    <p class="text-sm font-medium text-gray-900">$35</p>
+                </div>
+            </div>
+
+
+            <div class="group relative">
+                <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
+                    alt="Front of men&#039;s Basic Tee in black."
+                    class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                <div class="mt-4 flex justify-between">
+                    <div>
+                        <h3 class="text-sm text-gray-700">
+                            <a href="#">
+                                <span aria-hidden="true" class="absolute inset-0"></span>
+                                Basic Tee
+                            </a>
+                        </h3>
+                        <p class="mt-1 text-sm text-gray-500">Black</p>
+                    </div>
+                    <p class="text-sm font-medium text-gray-900">$35</p>
+                </div>
+            </div>
+
+            <div class="group relative">
+                <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
+                    alt="Front of men&#039;s Basic Tee in black."
+                    class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                <div class="mt-4 flex justify-between">
+                    <div>
+                        <h3 class="text-sm text-gray-700">
+                            <a href="#">
+                                <span aria-hidden="true" class="absolute inset-0"></span>
+                                Basic Tee
+                            </a>
+                        </h3>
+                        <p class="mt-1 text-sm text-gray-500">Black</p>
+                    </div>
+                    <p class="text-sm font-medium text-gray-900">$35</p>
+                </div>
+            </div>
+
+
+            <div class="group relative">
+                <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
+                    alt="Front of men&#039;s Basic Tee in black."
+                    class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                <div class="mt-4 flex justify-between">
+                    <div>
+                        <h3 class="text-sm text-gray-700">
+                            <a href="#">
+                                <span aria-hidden="true" class="absolute inset-0"></span>
+                                Basic Tee
+                            </a>
+                        </h3>
+                        <p class="mt-1 text-sm text-gray-500">Black</p>
+                    </div>
+                    <p class="text-sm font-medium text-gray-900">$35</p>
+                </div>
+            </div>
+
+            <!-- More products... -->
+        </div>
+    </div>
+
+
+    <button id="scrollToTop"
+    class="hidden sm:block fixed bottom-5 right-5 bg-black text-white text-4xl rounded-full p-5 px-8 shadow-lg opacity-0 transition-opacity duration-300">↑</button>
 
 
 
@@ -567,6 +790,26 @@
                 behavior: 'smooth'
             });
         });
+        
+
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                console.log(content);
+                
+                content.classList.toggle('hidden');
+            });
+        });
+
+        const filterMenu = document.getElementById("dropdown-filter");
+
+        function toggleFilterMenu() {
+            filterMenu.classList.toggle('opacity-0');
+            filterMenu.classList.toggle('opacity-100');
+
+            filterMenu.classList.toggle('pointer-events-none');
+            filterMenu.classList.toggle('pointer-events-auto');
+    }
     </script>
 </body>
 
