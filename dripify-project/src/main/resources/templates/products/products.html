@@ -543,7 +543,7 @@
 
     <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <div class="relative flex justify-between items-end">
-            <div class="filter-box hover:cursor-pointer">
+            <div onclick="toggleFilterMenu()" class="filter-box hover:cursor-pointer">
                 <svg class="inline-block w-8 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                     stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 4h16"></path>
@@ -551,7 +551,7 @@
                     <path d="M10 14h4"></path>
                 </svg>
 
-                <h2 onclick="toggleFilterMenu()" class="inline-block text-2xl font-bold tracking-tight text-gray-900">Filter</h2>
+                <h2 class="inline-block text-2xl font-bold tracking-tight text-gray-900">Filter</h2>
             </div>
 
 
@@ -586,8 +586,8 @@
                 <div class="filter-section p-2">
                     <button class="toggle-btn font-medium text-gray-900 mb-2">Gender</button>
                     <ul class="filter-content space-y-2 text-sm text-gray-700 font-semibold uppercase hidden ">
-                        <li><input type="checkbox" id="men" class="checkbox" /> <label for="men">Men</label></li>
                         <li><input type="checkbox" id="women" class="checkbox" /> <label for="women">Women</label></li>
+                        <li><input type="checkbox" id="men" class="checkbox" /> <label for="men">Men</label></li>
                     </ul>
                     <hr class="m-2 ml-0">
                 </div>
@@ -595,7 +595,8 @@
                 <!-- Clothing Size -->
                 <div class="filter-section p-2">
                     <button class="toggle-btn font-medium text-gray-900 mb-2">Clothing Size</button>
-                    <ul class="filter-content grid grid-cols-4 gap-2 text-sm text-gray-700 font-semibold uppercase hidden">
+                    <ul
+                        class="filter-content grid grid-cols-4 gap-2 text-sm text-gray-700 font-semibold uppercase hidden">
                         <li><input type="checkbox" id="xs" class="checkbox" /> <label for="xs">XS</label></li>
                         <li><input type="checkbox" id="s" class="checkbox" /> <label for="s">S</label></li>
                         <li><input type="checkbox" id="m" class="checkbox" /> <label for="m">M</label></li>
@@ -608,7 +609,8 @@
                 <!-- Shoe Size -->
                 <div class="filter-section p-2">
                     <button class="toggle-btn font-medium text-gray-900 mb-2">Shoe Size</button>
-                    <ul class="filter-content grid grid-cols-5 gap-2 text-sm text-gray-700 font-semibold uppercase hidden">
+                    <ul
+                        class="filter-content grid grid-cols-5 gap-2 text-sm text-gray-700 font-semibold uppercase hidden">
                         <li><input type="checkbox" id="shoe-36" class="checkbox" /> <label for="shoe-36">36</label></li>
                         <li><input type="checkbox" id="shoe-37" class="checkbox" /> <label for="shoe-37">37</label></li>
                         <li><input type="checkbox" id="shoe-38" class="checkbox" /> <label for="shoe-38">38</label></li>
@@ -763,7 +765,7 @@
 
 
     <button id="scrollToTop"
-    class="hidden sm:block fixed bottom-5 right-5 bg-black text-white text-4xl rounded-full p-5 px-8 shadow-lg opacity-0 transition-opacity duration-300">↑</button>
+        class="hidden sm:block fixed bottom-5 right-5 bg-black text-white text-4xl rounded-full p-5 px-8 shadow-lg opacity-0 transition-opacity duration-300">↑</button>
 
 
 
@@ -790,13 +792,13 @@
                 behavior: 'smooth'
             });
         });
-        
+
 
         document.querySelectorAll('.toggle-btn').forEach(button => {
             button.addEventListener('click', () => {
                 const content = button.nextElementSibling;
                 console.log(content);
-                
+
                 content.classList.toggle('hidden');
             });
         });
@@ -809,7 +811,7 @@
 
             filterMenu.classList.toggle('pointer-events-none');
             filterMenu.classList.toggle('pointer-events-auto');
-    }
+        }
     </script>
 </body>
 
