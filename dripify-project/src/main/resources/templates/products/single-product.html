@@ -25,7 +25,26 @@
                     </a>
                 </div>
 
-                <div class="mobile-menu flex lg:hidden">
+                <div class="mobile-menu flex gap-5 lg:hidden">
+                    <form>
+                        <div class="relative border-2 border-zinc-900 border-opacity-50 rounded-full">
+                            <label for="default-search"></label>
+                            <input type="search" id="default-search"
+                                class="block w-full p-2 ps-10 text-sm text-gray-900 rounded-full bg-gray-50 outline-none"
+                                placeholder="Search.." />
+                            <button type="submit"
+                                class="text-white absolute end-5 bottom-0.5 font-medium rounded-full text-sm px-2 py-2 hover:bg-zinc-900 hover:bg-opacity-10 ease-in duration-300">
+                                <div>
+                                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </div>
+                    </form>
+
                     <button type="button"
                         class="hamburger -m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
                         <span class="sr-only">Open main menu</span>
@@ -234,7 +253,25 @@
                         US</a>
                 </div>
 
-                <div class="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-3">
+                <div class="hidden ml-5 lg:flex lg:flex-1 lg:justify-end items-center gap-3">
+                    <form class="flex items-center">
+                        <div class="relative border-2 border-zinc-900 border-opacity-50 rounded-full">
+                            <label for="default-search"></label>
+                            <input type="search" id="default-search"
+                                class="block w-full p-2 ps-5 xl:ps-10 text-sm text-gray-900 rounded-full bg-gray-50 outline-none"
+                                placeholder="Search.." />
+                            <button type="submit"
+                                class="text-white absolute end-2 xl:end-5 bottom-0.5 font-medium rounded-full text-sm px-2 py-2 hover:bg-zinc-900 hover:bg-opacity-10 ease-in duration-300">
+                                <div>
+                                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </div>
+                    </form>
                     <!-- TODO: IMPLEMENT CART AND PROFILE FUNCTIONALITY FOR LOGGED IN USER (MOBILE TOO) -->
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
                         class="hidden size-8 hover:cursor-pointer">
@@ -254,10 +291,16 @@
                     </svg>
 
 
-                    <a href="/templates/login.html" class="hover:font-bold text-sm font-semibold text-gray-900">LOG
-                        IN</a>
-                    <a href="/templates/register.html"
-                        class="hover:font-bold text-sm font-semibold text-gray-900">REGISTER</a>
+
+
+                    <div class="flex gap-4 flex-shrink-0">
+                        <a href="/templates/login.html" class="hover:font-bold text-sm font-semibold text-gray-900">
+                            LOG IN
+                        </a>
+                        <a href="/templates/register.html" class="hover:font-bold text-sm font-semibold text-gray-900">
+                            REGISTER
+                        </a>
+                    </div>
                 </div>
 
             </nav>
@@ -492,9 +535,35 @@
             <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
                 <!-- IMAGES -->
                 <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
-                    <img src="https://media-photos.depop.com/b1/5913802/1997839635_8240334744bf42e191e6c596467700fd/P0.jpg"
-                        alt="">
+                    <div class="carousel flex flex-col items-center">
+                        <!-- Main Image -->
+                        <div class="relative w-72 h-72">
+                            <img id="main-image"
+                                src="https://media-photos.depop.com/b1/5913802/1997839635_8240334744bf42e191e6c596467700fd/P0.jpg"
+                                alt="Main Product" class="w-full h-full object-cover rounded-lg">
+                            <!-- Navigation Arrows -->
+                            <button id="prev"
+                                class="absolute top-full left-0 mt-6   bg-black bg-opacity-50 text-white p-2 rounded-full">
+                                ❮
+                            </button>
+                            <button id="next"
+                                class="absolute top-full right-0 mt-6   bg-black bg-opacity-50 text-white p-2 rounded-full">
+                                ❯
+                            </button>
+                        </div>
+
+                        <!-- Thumbnails -->
+                        <div class="thumbnails flex gap-2 mt-4">
+                            <img src="https://media-photos.depop.com/b1/5913802/1997839635_8240334744bf42e191e6c596467700fd/P0.jpg" alt="Thumbnail 1"
+                                class="thumbnail w-16 h-16 object-cover rounded-md border-2 border-transparent cursor-pointer active:border-gray-700"
+                                data-index="0">
+                            <img src="https://media-photos.depop.com/b1/5913802/1997839689_85b18f0eb9a04b0c947d2ab72acc5d10/P0.jpg" alt="Thumbnail 2"
+                                class="thumbnail w-16 h-16 object-cover rounded-md border-2 border-transparent cursor-pointer"
+                                data-index="1">
+                        </div>
+                    </div>
                 </div>
+
 
 
 
@@ -516,7 +585,7 @@
                     </div>
 
 
-                    <a href="#" class="text-sm font-medium leading-none text-gray-900">
+                    <a href="#" class="text-sm font-medium text-gray-900">
                         Emilia Dimitrova
                     </a>
                     <a href="#" class="text-sm font-medium text-gray-900">
@@ -525,7 +594,7 @@
 
                     <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
                         <a href="#" title=""
-                            class="w-full bg-zinc-900 mt-4 sm:mt-0 text-white focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
+                            class="w-full bg-zinc-900 mt-4 sm:mt-0 text-white hover:bg-zinc-700 ease-in duration-300 font-medium rounded-full text-sm px-5 py-2.5 flex items-center justify-center"
                             role="button">
                             <svg class="w-5 h-5 -ms-2 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -541,18 +610,23 @@
                     <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
 
                     <ul class="list-none space-y-2">
-                        <li><strong>Description:</strong> A stylish and lightweight summer top, perfect for warm weather. Designed with breathable fabric to keep you comfortable all day.</li>
+                        <li><strong>Description:</strong> A stylish and lightweight summer top, perfect for warm
+                            weather. Designed with breathable fabric to keep you comfortable all day.</li>
                         <li><strong>Size:</strong> Medium</li>
                         <li><strong>Brand:</strong> Zara</li>
                         <li><strong>Material:</strong> 100% Cotton</li>
                         <li><strong>Color:</strong> Pastel Yellow</li>
                         <li><strong>Condition:</strong> Gently Used</li>
-                        <li><strong>Additional Details:</strong> Features adjustable straps and a delicate floral pattern, ideal for casual outings or beach days.</li>
-                      </ul>
+                        <li><strong>Additional Details:</strong> Features adjustable straps and a delicate floral
+                            pattern, ideal for casual outings or beach days.</li>
+                    </ul>
                 </div>
             </div>
         </div>
+
+
     </section>
+
 
     <button id="scrollToTop"
         class="hidden sm:block fixed bottom-5 right-5 bg-black text-white text-4xl rounded-full p-5 px-8 shadow-lg opacity-0 transition-opacity duration-300">↑</button>
@@ -587,6 +661,42 @@
             svg.setAttribute('fill', svg.getAttribute('fill') === 'none' ? 'black' : 'none');
 
         }
+
+        // Carousel
+        const mainImage = document.getElementById('main-image');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+
+        let currentIndex = 0;
+
+        // Function to update the main image
+        function updateMainImage(index) {
+            const activeThumbnail = document.querySelector('.thumbnail.active');
+            if (activeThumbnail) activeThumbnail.classList.remove('active', 'border-gray-700');
+
+            thumbnails[index].classList.add('active', 'border-gray-700');
+            mainImage.src = thumbnails[index].src;
+        }
+
+        // Add click event to thumbnails
+        thumbnails.forEach((thumbnail, index) => {
+            thumbnail.addEventListener('click', () => {
+                currentIndex = index;
+                updateMainImage(currentIndex);
+            });
+        });
+
+        // Navigate with arrows
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : thumbnails.length - 1;
+            updateMainImage(currentIndex);
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex < thumbnails.length - 1) ? currentIndex + 1 : 0;
+            updateMainImage(currentIndex);
+        });
     </script>
 </body>
 
