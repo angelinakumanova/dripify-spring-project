@@ -605,17 +605,18 @@
 
 
             <!-- Filter Form -->
-            <form id="dropdown-filter" class="opacity-0 transition-opacity ease-in duration-300 pointer-events-none top-full transform translate-y-0 absolute z-10">
+            <form id="dropdown-filter"
+                class="opacity-0 transition-opacity ease-in duration-300 pointer-events-none top-full transform translate-y-0 absolute z-10">
                 <!-- Dropdown Menu -->
                 <div class=" w-56 p-3 rounded-lg shadow bg-white border border-opacity-30 border-black">
                     <!-- Reset Button -->
 
                     <div class="text-center">
                         <button type="reset"
-                        class="px-4 py-2 text-white font-semibold bg-zinc-900 rounded-full hover:bg-zinc-600 ease-in duration-300 uppercase">reset
-                        filters</button>
+                            class="px-4 py-2 text-white font-semibold bg-zinc-900 rounded-full hover:bg-zinc-600 ease-in duration-300 uppercase">reset
+                            filters</button>
                     </div>
-                    
+
 
 
                     <!-- Categories Filter -->
@@ -667,7 +668,8 @@
                     <!-- Clothing Size Filter -->
                     <div class="filter-section p-2">
                         <button type="button" class="toggle-btn font-medium text-gray-900 mb-2">Clothing Size</button>
-                        <ul class="filter-content grid grid-cols-4 gap-2 text-sm text-gray-700 font-semibold uppercase hidden">
+                        <ul
+                            class="filter-content grid grid-cols-4 gap-2 text-sm text-gray-700 font-semibold uppercase hidden">
                             <li><input type="checkbox" id="xs" class="checkbox" name="clothing_size" value="XS" />
                                 <label for="xs">XS</label>
                             </li>
@@ -834,6 +836,37 @@
             <!-- More products... -->
         </div>
     </div>
+
+
+    <!-- FOOTER -->
+    <footer class="bg-zinc-900 pt-20">
+        <div class="w-full max-w-screen-xl mx-auto p-4">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <div class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                    <img src="/static/images/white-logo.png" class="h-16" alt="Dripify Logo" />
+                    <span class="text-white self-center text-2xl font-bold tracking-widest uppercase">Dripify</span>
+                </div>
+
+                <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-white sm:mb-0">
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6 uppercase">New Arrivals</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6 uppercase">Shop</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6 uppercase">Sell Your Drip</a>
+                    </li>
+                    <li>
+                        <a href="/templates/about-us.html" class="hover:underline uppercase">About Us</a>
+                    </li>
+                </ul>
+            </div>
+
+            <span class="mt-5 block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025 Dripify™. All Rights
+                Reserved.</span>
+        </div>
+    </footer>
 
 
     <button id="scrollToTop"
