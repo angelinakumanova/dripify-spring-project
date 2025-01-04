@@ -25,7 +25,26 @@
                     </a>
                 </div>
 
-                <div class="mobile-menu flex lg:hidden">
+                <div class="mobile-menu flex gap-5 lg:hidden">
+                    <form>
+                        <div class="relative border-2 border-zinc-900 border-opacity-50 rounded-full">
+                            <label for="default-search"></label>
+                            <input type="search" id="default-search"
+                                class="block w-full p-2 ps-10 text-sm text-gray-900 rounded-full bg-gray-50 outline-none"
+                                placeholder="Search.." />
+                            <button type="submit"
+                                class="text-white absolute end-5 bottom-0.5 font-medium rounded-full text-sm px-2 py-2 hover:bg-zinc-900 hover:bg-opacity-10 ease-in duration-300">
+                                <div>
+                                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 20 20">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </div>
+                    </form>
+
                     <button type="button"
                         class="hamburger -m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
                         <span class="sr-only">Open main menu</span>
@@ -234,7 +253,25 @@
                         US</a>
                 </div>
 
-                <div class="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-3">
+                <div class="hidden ml-5 lg:flex lg:flex-1 lg:justify-end items-center gap-3">
+                    <form class="flex items-center">
+                        <div class="relative border-2 border-zinc-900 border-opacity-50 rounded-full">
+                            <label for="default-search"></label>
+                            <input type="search" id="default-search"
+                                class="block w-full p-2 ps-5 xl:ps-10 text-sm text-gray-900 rounded-full bg-gray-50 outline-none"
+                                placeholder="Search.." />
+                            <button type="submit"
+                                class="text-white absolute end-2 xl:end-5 bottom-0.5 font-medium rounded-full text-sm px-2 py-2 hover:bg-zinc-900 hover:bg-opacity-10 ease-in duration-300">
+                                <div>
+                                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 20 20">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </div>
+                    </form>
                     <!-- TODO: IMPLEMENT CART AND PROFILE FUNCTIONALITY FOR LOGGED IN USER (MOBILE TOO) -->
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
                         class="hidden size-8 hover:cursor-pointer">
@@ -253,11 +290,17 @@
                         </g>
                     </svg>
 
+                    
 
-                    <a href="/templates/login.html" class="hover:font-bold text-sm font-semibold text-gray-900">LOG
-                        IN</a>
-                    <a href="/templates/register.html"
-                        class="hover:font-bold text-sm font-semibold text-gray-900">REGISTER</a>
+
+                    <div class="flex gap-4 flex-shrink-0">
+                        <a href="/templates/login.html" class="hover:font-bold text-sm font-semibold text-gray-900">
+                            LOG IN
+                        </a>
+                        <a href="/templates/register.html" class="hover:font-bold text-sm font-semibold text-gray-900">
+                            REGISTER
+                        </a>
+                    </div>
                 </div>
 
             </nav>
@@ -486,8 +529,10 @@
         </header>
     </div>
 
+    <div class="mt-28"></div>
 
-    <div class="mt-32 max-w-3xl mx-auto">
+    
+    <!-- <div class="max-w-3xl mx-auto">
         <div class="categories grid grid-cols-4 gap-x-8">
             <a href="#">
                 <div class="relative group text-center category  ">
@@ -537,12 +582,14 @@
                 </div>
             </a>
         </div>
-    </div>
+    </div> -->
+
 
 
 
     <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <div class="relative flex justify-between items-end">
+
+        <div class="relative flex justify-between sm:items-center">
             <div onclick="toggleFilterMenu()" class="filter-box hover:cursor-pointer">
                 <svg class="inline-block w-8 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                     stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -551,9 +598,10 @@
                     <path d="M10 14h4"></path>
                 </svg>
 
-                <h2 class="inline-block text-2xl font-bold tracking-tight text-gray-900">Filter</h2>
+                <h2 class="inline-block text-xl sm:text-2xl font-bold tracking-tight text-gray-900">Filter</h2>
             </div>
 
+            <h2 class="text-lg sm:text-3xl font-bold tracking-tight mb-5 text-gray-900 uppercase">new arrivals</h2>
 
 
             <!-- Dropdown menu -->
@@ -623,33 +671,11 @@
 
                 </div>
             </div>
-
-
-
-            <form class="w-[25%]">
-                <label for="default-search"
-                    class="mb-2 text-sm font-medium text-gray-900 dark:text-white">Search</label>
-                <div class="relative border-2 border-zinc-900 border-opacity-50  rounded-full p-1">
-                    <input type="search" id="default-search"
-                        class="block w-full p-2 ps-10 text-sm text-gray-900 rounded-full bg-gray-50 outline-none  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-zinc-900"
-                        placeholder="Search.." />
-                    <button type="submit"
-                        class="text-white absolute end-5 bottom-1.5 font-medium rounded-full text-sm px-2 py-2 hover:bg-zinc-900 hover:bg-opacity-10 ease-in duration-300">
-                        <div>
-                            <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                            </svg>
-                        </div>
-                    </button>
-                </div>
-            </form>
         </div>
 
-        <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+        <div class="mt-6 grid gap-x-6 gap-y-10 grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             <div class="group relative">
-                <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
+                <img src="https://media-photos.depop.com/b1/5913802/1997839635_8240334744bf42e191e6c596467700fd/P0.jpg"
                     alt="Front of men&#039;s Basic Tee in black."
                     class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
                 <div class="mt-4 flex justify-between">
@@ -667,26 +693,7 @@
             </div>
 
             <div class="group relative">
-                <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
-                    alt="Front of men&#039;s Basic Tee in black."
-                    class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
-                <div class="mt-4 flex justify-between">
-                    <div>
-                        <h3 class="text-sm text-gray-700">
-                            <a href="#">
-                                <span aria-hidden="true" class="absolute inset-0"></span>
-                                Basic Tee
-                            </a>
-                        </h3>
-                        <p class="mt-1 text-sm text-gray-500">Black</p>
-                    </div>
-                    <p class="text-sm font-medium text-gray-900">$35</p>
-                </div>
-            </div>
-
-
-            <div class="group relative">
-                <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
+                <img src="https://media-photos.depop.com/b1/6406248/2026089428_ef0319f8890a4042907e698563b270d7/P0.jpg"
                     alt="Front of men&#039;s Basic Tee in black."
                     class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
                 <div class="mt-4 flex justify-between">
@@ -705,25 +712,7 @@
 
 
             <div class="group relative">
-                <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
-                    alt="Front of men&#039;s Basic Tee in black."
-                    class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
-                <div class="mt-4 flex justify-between">
-                    <div>
-                        <h3 class="text-sm text-gray-700">
-                            <a href="#">
-                                <span aria-hidden="true" class="absolute inset-0"></span>
-                                Basic Tee
-                            </a>
-                        </h3>
-                        <p class="mt-1 text-sm text-gray-500">Black</p>
-                    </div>
-                    <p class="text-sm font-medium text-gray-900">$35</p>
-                </div>
-            </div>
-
-            <div class="group relative">
-                <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
+                <img src="https://media-photos.depop.com/b1/24561642/1466869370_056963a4d606494c9aa9ea4ce8a854e2/P0.jpg"
                     alt="Front of men&#039;s Basic Tee in black."
                     class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
                 <div class="mt-4 flex justify-between">
@@ -742,7 +731,44 @@
 
 
             <div class="group relative">
-                <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
+                <img src="https://media-photos.depop.com/b1/51541544/2061800626_7dd0ca1cdde045a9a0c695dedac0bed5/P0.jpg"
+                    alt="Front of men&#039;s Basic Tee in black."
+                    class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                <div class="mt-4 flex justify-between">
+                    <div>
+                        <h3 class="text-sm text-gray-700">
+                            <a href="#">
+                                <span aria-hidden="true" class="absolute inset-0"></span>
+                                Basic Tee
+                            </a>
+                        </h3>
+                        <p class="mt-1 text-sm text-gray-500">Black</p>
+                    </div>
+                    <p class="text-sm font-medium text-gray-900">$35</p>
+                </div>
+            </div>
+
+            <div class="group relative">
+                <img src="https://media-photos.depop.com/b1/24561642/2007067225_c9a335dd839e47aab8caf79f37b9653f/P0.jpg"
+                    alt="Front of men&#039;s Basic Tee in black."
+                    class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                <div class="mt-4 flex justify-between">
+                    <div>
+                        <h3 class="text-sm text-gray-700">
+                            <a href="#">
+                                <span aria-hidden="true" class="absolute inset-0"></span>
+                                Basic Tee
+                            </a>
+                        </h3>
+                        <p class="mt-1 text-sm text-gray-500">Black</p>
+                    </div>
+                    <p class="text-sm font-medium text-gray-900">$35</p>
+                </div>
+            </div>
+
+
+            <div class="group relative">
+                <img src="https://media-photos.depop.com/b1/33154282/2037056174_ede1821cbdcd4317b297234cfef46908/P0.jpg"
                     alt="Front of men&#039;s Basic Tee in black."
                     class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
                 <div class="mt-4 flex justify-between">
