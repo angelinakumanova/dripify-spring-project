@@ -590,9 +590,9 @@
                     <a href="#" class="text-sm font-medium text-gray-900">
                         Emilia Dimitrova
                     </a>
-                    <a href="#" class="text-sm font-medium text-gray-900">
+                    <button onclick="toggleModal()" class="hover:underline text-sm font-medium text-gray-900">
                         (345 Reviews)
-                    </a>
+                    </button>
 
                     <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
                         <a href="#" title=""
@@ -633,34 +633,106 @@
 
     <div id="seller-reviews" class="mt-32">
         <h1 class="text-xl font-semibold text-center text-gray-900 sm:text-2xl uppercase">
-            seller reviews <button class="hover:underline">(374 reviews)</button>
+            seller reviews <button class="hover:underline" onclick="toggleModal()">(374 reviews)</button>
         </h1>
 
-        
+        <!-- Modal -->
+        <div id="modal"
+            class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex justify-center items-center hidden z-50">
+            <div class="bg-white w-11/12 max-w-4xl rounded-lg shadow-lg overflow-y-auto max-h-[90vh] p-6 relative">
+                <!-- Close Button -->
+                <button onclick="toggleModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                <!-- Modal Header -->
+                <h2 class="text-2xl font-bold mb-4">Customer Reviews</h2>
+
+                <!-- Reviews Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Review 1 (Matching Upper One) -->
+                    <div class="bg-zinc-100 p-4 rounded-lg shadow">
+                        <p class="text-gray-800">"Absolutely fantastic experience! The seller was so kind and
+                            professional."</p>
+                        <span class="block mt-2 text-gray-500 text-sm">- Emilia Dimitrova</span>
+                    </div>
+
+                    <!-- Review 2 (Matching Upper One) -->
+                    <div class="bg-zinc-100 p-4 rounded-lg shadow">
+                        <p class="text-gray-800">"Fast shipping and excellent packaging. Highly recommended seller!"</p>
+                        <span class="block mt-2 text-gray-500 text-sm">- Sofia Ivanova</span>
+                    </div>
+
+                    <!-- Review 3 (Matching Upper One) -->
+                    <div class="bg-zinc-100 p-4 rounded-lg shadow">
+                        <p class="text-gray-800">"Great communication and high-quality products. Will buy again!"</p>
+                        <span class="block mt-2 text-gray-500 text-sm">- Nikol Petrov</span>
+                    </div>
+
+                    <!-- Additional Reviews -->
+                    <div class="bg-zinc-100 p-4 rounded-lg shadow">
+                        <p class="text-gray-800">"Love my purchase! The item was exactly as described."</p>
+                        <span class="block mt-2 text-gray-500 text-sm">- Maria K.</span>
+                    </div>
+
+                    <div class="bg-zinc-100 p-4 rounded-lg shadow">
+                        <p class="text-gray-800">"Very reliable seller. Thank you for the amazing service!"</p>
+                        <span class="block mt-2 text-gray-500 text-sm">- Ivan Dimitrov</span>
+                    </div>
+
+                    <div class="bg-zinc-100 p-4 rounded-lg shadow">
+                        <p class="text-gray-800">"Perfect transaction from start to finish. Highly recommend!"</p>
+                        <span class="block mt-2 text-gray-500 text-sm">- Anna G.</span>
+                    </div>
+
+                    <!-- Add 14 More Reviews Following the Same Pattern -->
+                    <!-- Feel free to repeat or adjust the content -->
+                    <!-- Example -->
+                    <div class="bg-zinc-100 p-4 rounded-lg shadow">
+                        <p class="text-gray-800">"I am beyond satisfied with my purchase. The seller is amazing!"</p>
+                        <span class="block mt-2 text-gray-500 text-sm">- Vesela Yaneva</span>
+                    </div>
+
+                    <div class="bg-zinc-100 p-4 rounded-lg shadow">
+                        <p class="text-gray-800">"Top-notch service. Couldn't ask for better!"</p>
+                        <span class="block mt-2 text-gray-500 text-sm">- Kaloyan T.</span>
+                    </div>
+
+                    <!-- Repeat until 20 reviews are filled -->
+                </div>
+            </div>
+        </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
             <div class="p-4 bg-gray-50 rounded-lg shadow-md">
-              <h3 class="text-lg font-semibold text-gray-900">Amazing Seller!</h3>
-              <p class="mt-2 text-sm text-gray-700">
-                The seller was very responsive and shipped my order quickly. The product was exactly as described. Would definitely recommend!
-              </p>
-              <p class="mt-4 text-sm font-medium text-gray-500">- Emily R.</p>
+                <h3 class="text-lg font-semibold text-gray-900">Amazing Seller!</h3>
+                <p class="mt-2 text-sm text-gray-700">
+                    The seller was very responsive and shipped my order quickly. The product was exactly as described.
+                    Would definitely recommend!
+                </p>
+                <p class="mt-4 text-sm font-medium text-gray-500">- Emily R.</p>
             </div>
             <div class="p-4 bg-gray-50 rounded-lg shadow-md">
-              <h3 class="text-lg font-semibold text-gray-900">Great Experience</h3>
-              <p class="mt-2 text-sm text-gray-700">
-                Excellent customer service! The seller answered all my questions and ensured I got my order on time. Will shop again soon.
-              </p>
-              <p class="mt-4 text-sm font-medium text-gray-500">- Jason P.</p>
+                <h3 class="text-lg font-semibold text-gray-900">Great Experience</h3>
+                <p class="mt-2 text-sm text-gray-700">
+                    Excellent customer service! The seller answered all my questions and ensured I got my order on time.
+                    Will shop again soon.
+                </p>
+                <p class="mt-4 text-sm font-medium text-gray-500">- Jason P.</p>
             </div>
             <div class="p-4 bg-gray-50 rounded-lg shadow-md">
-              <h3 class="text-lg font-semibold text-gray-900">Highly Recommend</h3>
-              <p class="mt-2 text-sm text-gray-700">
-                Very reliable seller with top-notch quality products. Packaging was great, and delivery was faster than expected. Five stars!
-              </p>
-              <p class="mt-4 text-sm font-medium text-gray-500">- Sarah L.</p>
+                <h3 class="text-lg font-semibold text-gray-900">Highly Recommend</h3>
+                <p class="mt-2 text-sm text-gray-700">
+                    Very reliable seller with top-notch quality products. Packaging was great, and delivery was faster
+                    than expected. Five stars!
+                </p>
+                <p class="mt-4 text-sm font-medium text-gray-500">- Sarah L.</p>
             </div>
-          </div>
+        </div>
     </div>
 
     <div id="popular-items" class="mt-32">
@@ -742,7 +814,7 @@
                     </div>
                 </div>
 
-                
+
 
                 <!-- More products... -->
             </div>
@@ -848,6 +920,12 @@
             currentIndex = (currentIndex < thumbnails.length - 1) ? currentIndex + 1 : 0;
             updateMainImage(currentIndex);
         });
+
+
+        function toggleModal() {
+            const modal = document.getElementById("modal");
+            modal.classList.toggle("hidden");
+        }
     </script>
 </body>
 
