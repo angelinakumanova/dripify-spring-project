@@ -530,7 +530,7 @@
     </div>
 
     <div class="mt-32"></div>
-    <section class="py-8 bg-white md:py-16 ">
+    <div class="py-8 md:py-16 ">
         <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
             <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
                 <!-- IMAGES -->
@@ -543,21 +543,23 @@
                                 alt="Main Product" class="w-full h-full object-cover rounded-lg">
                             <!-- Navigation Arrows -->
                             <button id="prev"
-                                class="absolute top-full left-0 mt-6   bg-black bg-opacity-50 text-white p-2 rounded-full">
+                                class="absolute top-full left-0 mt-6   bg-black bg-opacity-50 text-white p-2 px-4 rounded-full">
                                 ❮
                             </button>
                             <button id="next"
-                                class="absolute top-full right-0 mt-6   bg-black bg-opacity-50 text-white p-2 rounded-full">
+                                class="absolute top-full right-0 mt-6   bg-black bg-opacity-50 text-white p-2 px-4 rounded-full">
                                 ❯
                             </button>
                         </div>
 
                         <!-- Thumbnails -->
                         <div class="thumbnails flex gap-2 mt-4">
-                            <img src="https://media-photos.depop.com/b1/5913802/1997839635_8240334744bf42e191e6c596467700fd/P0.jpg" alt="Thumbnail 1"
+                            <img src="https://media-photos.depop.com/b1/5913802/1997839635_8240334744bf42e191e6c596467700fd/P0.jpg"
+                                alt="Thumbnail 1"
                                 class="thumbnail w-16 h-16 object-cover rounded-md border-2 border-transparent cursor-pointer active:border-gray-700"
                                 data-index="0">
-                            <img src="https://media-photos.depop.com/b1/5913802/1997839689_85b18f0eb9a04b0c947d2ab72acc5d10/P0.jpg" alt="Thumbnail 2"
+                            <img src="https://media-photos.depop.com/b1/5913802/1997839689_85b18f0eb9a04b0c947d2ab72acc5d10/P0.jpg"
+                                alt="Thumbnail 2"
                                 class="thumbnail w-16 h-16 object-cover rounded-md border-2 border-transparent cursor-pointer"
                                 data-index="1">
                         </div>
@@ -573,7 +575,7 @@
                     </h1>
                     <div class="mt-4 sm:items-center sm:gap-4 sm:flex justify-between">
                         <p class="text-2xl font-extrabold text-gray-900 sm:text-3xl">
-                            20BGN
+                            20 BGN
                         </p>
                         <svg onclick="toggleFillColor(event)"
                             class="hover:cursor-pointer transition-all ease-in-out duration-300" aria-hidden="true"
@@ -621,12 +623,129 @@
                             pattern, ideal for casual outings or beach days.</li>
                     </ul>
                 </div>
+
+
             </div>
         </div>
 
 
-    </section>
+    </div>
 
+    <div id="seller-reviews" class="mt-32">
+        <h1 class="text-xl font-semibold text-center text-gray-900 sm:text-2xl uppercase">
+            seller reviews (374 reviews)
+        </h1>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md">
+              <h3 class="text-lg font-semibold text-gray-900">Amazing Seller!</h3>
+              <p class="mt-2 text-sm text-gray-700">
+                The seller was very responsive and shipped my order quickly. The product was exactly as described. Would definitely recommend!
+              </p>
+              <p class="mt-4 text-sm font-medium text-gray-500">- Emily R.</p>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md">
+              <h3 class="text-lg font-semibold text-gray-900">Great Experience</h3>
+              <p class="mt-2 text-sm text-gray-700">
+                Excellent customer service! The seller answered all my questions and ensured I got my order on time. Will shop again soon.
+              </p>
+              <p class="mt-4 text-sm font-medium text-gray-500">- Jason P.</p>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md">
+              <h3 class="text-lg font-semibold text-gray-900">Highly Recommend</h3>
+              <p class="mt-2 text-sm text-gray-700">
+                Very reliable seller with top-notch quality products. Packaging was great, and delivery was faster than expected. Five stars!
+              </p>
+              <p class="mt-4 text-sm font-medium text-gray-500">- Sarah L.</p>
+            </div>
+          </div>
+    </div>
+
+    <div id="popular-items" class="mt-32">
+        <h1 class="text-xl font-semibold text-center text-gray-900 sm:text-2xl uppercase">
+            customers are also looking at
+        </h1>
+
+        <div class="mx-auto max-w-2xl px-4 py-14 sm:px-6 lg:max-w-7xl lg:px-8">
+            <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                <div class="group relative">
+                    <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
+                        alt="Front of men&#039;s Basic Tee in black."
+                        class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                    <div class="mt-4 flex justify-between">
+                        <div>
+                            <h3 class="text-sm text-gray-700">
+                                <a href="#">
+                                    <span aria-hidden="true" class="absolute inset-0"></span>
+                                    Basic Tee
+                                </a>
+                            </h3>
+                            <p class="mt-1 text-sm text-gray-500">Black</p>
+                        </div>
+                        <p class="text-sm font-medium text-gray-900">$35</p>
+                    </div>
+                </div>
+
+                <div class="group relative">
+                    <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
+                        alt="Front of men&#039;s Basic Tee in black."
+                        class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                    <div class="mt-4 flex justify-between">
+                        <div>
+                            <h3 class="text-sm text-gray-700">
+                                <a href="#">
+                                    <span aria-hidden="true" class="absolute inset-0"></span>
+                                    Basic Tee
+                                </a>
+                            </h3>
+                            <p class="mt-1 text-sm text-gray-500">Black</p>
+                        </div>
+                        <p class="text-sm font-medium text-gray-900">$35</p>
+                    </div>
+                </div>
+
+                <div class="group relative">
+                    <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
+                        alt="Front of men&#039;s Basic Tee in black."
+                        class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                    <div class="mt-4 flex justify-between">
+                        <div>
+                            <h3 class="text-sm text-gray-700">
+                                <a href="#">
+                                    <span aria-hidden="true" class="absolute inset-0"></span>
+                                    Basic Tee
+                                </a>
+                            </h3>
+                            <p class="mt-1 text-sm text-gray-500">Black</p>
+                        </div>
+                        <p class="text-sm font-medium text-gray-900">$35</p>
+                    </div>
+                </div>
+
+                <div class="group relative">
+                    <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
+                        alt="Front of men&#039;s Basic Tee in black."
+                        class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                    <div class="mt-4 flex justify-between">
+                        <div>
+                            <h3 class="text-sm text-gray-700">
+                                <a href="#">
+                                    <span aria-hidden="true" class="absolute inset-0"></span>
+                                    Basic Tee
+                                </a>
+                            </h3>
+                            <p class="mt-1 text-sm text-gray-500">Black</p>
+                        </div>
+                        <p class="text-sm font-medium text-gray-900">$35</p>
+                    </div>
+                </div>
+
+                
+
+                <!-- More products... -->
+            </div>
+        </div>
+    </div>
 
     <button id="scrollToTop"
         class="hidden sm:block fixed bottom-5 right-5 bg-black text-white text-4xl rounded-full p-5 px-8 shadow-lg opacity-0 transition-opacity duration-300">↑</button>
