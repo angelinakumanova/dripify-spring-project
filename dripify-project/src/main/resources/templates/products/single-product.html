@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="font-size: 16px;">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Jeans | DRIPIFY</title>
+    <title>Summer Crop Top - Emilia Dimitrova | DRIPIFY</title>
     <link rel="stylesheet" href="/src/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- TODO: add aos to package -->
@@ -573,24 +573,35 @@
                     <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl uppercase">
                         Summer Crop Top
                     </h1>
-                    <div class="mt-4 sm:items-center sm:gap-4 sm:flex justify-between">
+                    <div class="mt-4 items-center gap-4 flex justify-between">
                         <p class="text-2xl font-extrabold text-gray-900 sm:text-3xl">
                             20 BGN
                         </p>
-                        <svg onclick="toggleFillColor(event)"
-                            class="hover:cursor-pointer transition-all ease-in-out duration-300" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24">
-                            <path class="svg-path" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
-                        </svg>
+                        <span id="heart" class="hover:cursor-pointer">
+                            <!-- Outlined Heart -->
+                            <svg id="outlined-heart" width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" class="w-8 h-8">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M15.1294 5.99275C12.2065 3.27396 7.6325 3.33719 4.78644 6.18243C1.87569 9.09317 2.04563 13.2328 4.78644 16.7221C5.08873 17.1069 5.46075 17.5433 5.88344 18.0151L6.41377 18.5973C6.50581 18.6968 6.59957 18.7975 6.69489 18.8992L7.28447 19.521L7.90439 20.1613L8.54733 20.8142L9.53892 21.8034L10.0124 22.2696L11.0539 23.2833L12.2627 24.443L14.3606 26.4202L16 27.9356L18.4446 25.6661L20.946 23.2833L22.461 21.8034L23.4526 20.8142L24.0955 20.1613L24.7155 19.521L25.305 18.8992C25.4004 18.7975 25.4941 18.6968 25.5861 18.5973L26.1165 18.0151C26.5392 17.5433 26.9112 17.1069 27.2135 16.7221C29.9543 13.2328 30.1242 9.09317 27.2135 6.18243C24.3027 3.27252 19.5846 3.27252 16.6739 6.18243L16 6.85633L15.3261 6.18243L15.1294 5.99275ZM18.2685 7.42416C20.4084 5.46936 23.7289 5.52686 25.7995 7.59685C27.887 9.68439 27.8524 12.6709 25.6407 15.4866C25.5974 15.5417 25.5523 15.5982 25.5054 15.6563L25.2024 16.0219L24.8571 16.4216L24.4709 16.8541L24.045 17.3182L23.581 17.8127L23.08 18.3364L22.2622 19.1739L21.6747 19.765L20.5844 20.8444L19.7953 21.6138C18.7299 22.6468 17.6159 23.7046 16.5028 24.7451L16 25.213L14.6629 23.9621C13.5523 22.9155 12.4529 21.8618 11.4128 20.8417L10.9421 20.3782L10.0256 19.4645L9.42081 18.8516L8.85462 18.2687L8.32866 17.7173L7.84457 17.1991L7.40396 16.7154L7.00845 16.2677L6.65966 15.8576C6.55137 15.7274 6.45114 15.6036 6.35923 15.4866C4.14747 12.6709 4.1129 9.68439 6.20045 7.59685C8.33019 5.46772 11.7823 5.46772 13.9121 7.59685L16 9.68476L18.0881 7.59664L18.2685 7.42416Z"
+                                    fill="currentColor"></path>
+                            </svg>
+
+                            <!-- Filled Heart -->
+                            <svg id="filled-heart" width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" class="hidden w-8 h-8">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M4.78644 6.18243C7.6325 3.33719 12.2065 3.27396 15.1294 5.99275L15.3261 6.18243L16 6.85633L16.6739 6.18243C19.5846 3.27252 24.3027 3.27252 27.2135 6.18243C30.1242 9.09317 29.9543 13.2328 27.2135 16.7221C26.9112 17.1069 26.5392 17.5433 26.1165 18.0151L25.5861 18.5973C25.4941 18.6968 25.4004 18.7975 25.305 18.8992L24.7155 19.521L24.0955 20.1613L23.4526 20.8142L22.461 21.8034L20.946 23.2833L18.4446 25.6661L16 27.9356L13.5554 25.6661L11.054 23.2833L9.53898 21.8034L8.54733 20.8142L7.90439 20.1613L7.28447 19.521L6.69489 18.8992C6.59957 18.7975 6.50581 18.6968 6.41377 18.5973L5.88344 18.0151C5.46075 17.5433 5.08873 17.1069 4.78644 16.7221C2.04563 13.2328 1.87569 9.09317 4.78644 6.18243Z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </span>
+
                     </div>
 
 
                     <a href="#" class="text-sm font-medium text-gray-900">
                         Emilia Dimitrova
                     </a>
-                    <button onclick="toggleModal()" class="hover:underline text-sm font-medium text-gray-900">
+                    <button onclick="toggleModal()" class="hover:underline text-sm font-bold text-gray-900">
                         (345 Reviews)
                     </button>
 
@@ -612,14 +623,14 @@
                     <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
 
                     <ul class="list-none space-y-2">
-                        <li><strong>Description:</strong> A stylish and lightweight summer top, perfect for warm
+                        <li><span class="font-bold">Description:</span> A stylish and lightweight summer top, perfect for warm
                             weather. Designed with breathable fabric to keep you comfortable all day.</li>
-                        <li><strong>Size:</strong> Medium</li>
-                        <li><strong>Brand:</strong> Zara</li>
-                        <li><strong>Material:</strong> 100% Cotton</li>
-                        <li><strong>Color:</strong> Pastel Yellow</li>
-                        <li><strong>Condition:</strong> Gently Used</li>
-                        <li><strong>Additional Details:</strong> Features adjustable straps and a delicate floral
+                        <li><span class="font-bold">Size:</span> Medium</li>
+                        <li><span class="font-bold">Brand:</span> Zara</li>
+                        <li><span class="font-bold">Material:</span> 100% Cotton</li>
+                        <li><span class="font-bold">Color:</span> Pastel Yellow</li>
+                        <li><span class="font-bold">Condition:</span> Gently Used</li>
+                        <li><span class="font-bold">Additional Details:</span> Features adjustable straps and a delicate floral
                             pattern, ideal for casual outings or beach days.</li>
                     </ul>
                 </div>
@@ -633,7 +644,7 @@
 
     <div id="seller-reviews" class="mt-32">
         <h1 class="text-xl font-semibold text-center text-gray-900 sm:text-2xl uppercase">
-            seller reviews <button class="hover:underline" onclick="toggleModal()">(374 reviews)</button>
+            seller reviews <button class="hover:underline font-bold" onclick="toggleModal()">(374 reviews)</button>
         </h1>
 
         <!-- Modal -->
@@ -707,7 +718,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-4 p-4">
             <div class="p-4 bg-gray-50 rounded-lg shadow-md">
                 <h3 class="text-lg font-semibold text-gray-900">Amazing Seller!</h3>
                 <p class="mt-2 text-sm text-gray-700">
@@ -736,13 +747,14 @@
     </div>
 
     <div id="popular-items" class="mt-32">
-        <h1 class="text-xl font-semibold text-center text-gray-900 sm:text-2xl uppercase">
+        <h1 class="text-xl px-4 font-semibold text-center text-gray-900 sm:text-2xl uppercase">
             customers are also looking at
         </h1>
-
+    
         <div class="mx-auto max-w-2xl px-4 py-14 sm:px-6 lg:max-w-7xl lg:px-8">
-            <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                <div class="group relative">
+            <!-- Scrollable container for small screens -->
+            <div class="flex overflow-x-auto space-x-6 sm:grid sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8 sm:space-x-0">
+                <div class="group relative flex-shrink-0 w-48 sm:w-auto">
                     <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
                         alt="Front of men&#039;s Basic Tee in black."
                         class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
@@ -759,8 +771,8 @@
                         <p class="text-sm font-medium text-gray-900">$35</p>
                     </div>
                 </div>
-
-                <div class="group relative">
+    
+                <div class="group relative flex-shrink-0 w-48 sm:w-auto">
                     <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
                         alt="Front of men&#039;s Basic Tee in black."
                         class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
@@ -777,8 +789,8 @@
                         <p class="text-sm font-medium text-gray-900">$35</p>
                     </div>
                 </div>
-
-                <div class="group relative">
+    
+                <div class="group relative flex-shrink-0 w-48 sm:w-auto">
                     <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
                         alt="Front of men&#039;s Basic Tee in black."
                         class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
@@ -795,8 +807,8 @@
                         <p class="text-sm font-medium text-gray-900">$35</p>
                     </div>
                 </div>
-
-                <div class="group relative">
+    
+                <div class="group relative flex-shrink-0 w-48 sm:w-auto">
                     <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
                         alt="Front of men&#039;s Basic Tee in black."
                         class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
@@ -813,10 +825,6 @@
                         <p class="text-sm font-medium text-gray-900">$35</p>
                     </div>
                 </div>
-
-
-
-                <!-- More products... -->
             </div>
         </div>
     </div>
@@ -879,12 +887,6 @@
             });
         });
 
-        function toggleFillColor(e) {
-            const svg = e.target;
-            svg.setAttribute('fill', svg.getAttribute('fill') === 'none' ? 'black' : 'none');
-
-        }
-
         // Carousel
         const mainImage = document.getElementById('main-image');
         const thumbnails = document.querySelectorAll('.thumbnail');
@@ -926,6 +928,15 @@
             const modal = document.getElementById("modal");
             modal.classList.toggle("hidden");
         }
+
+        const heart = document.getElementById('heart');
+        const outlinedHeart = document.getElementById('outlined-heart');
+        const filledHeart = document.getElementById('filled-heart');
+
+        heart.addEventListener('click', () => {
+            outlinedHeart.classList.toggle('hidden');
+            filledHeart.classList.toggle('hidden');
+        });
     </script>
 </body>
 
