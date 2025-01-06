@@ -85,19 +85,19 @@ const toggleCategoryVisibility = (current) => {
   const { categories: menCategories, tab: menTab, underline: menUnderline } = getCategoryElements('men', current.id.includes('mobile'));
 
   if (current.getAttribute('category') === 'women') {
-    toggleVisibility(womenCategories, true);
-    toggleVisibility(menCategories, false);
+    toggleVisibility(womenCategories);
+    toggleVisibility(menCategories);
     toggleClasses(womenTab, ['font-bold'], ['font-semibold']);
     toggleClasses(menTab, ['font-semibold'], ['font-bold']);
     toggleClasses(womenUnderline, ['w-full'], []);
     toggleClasses(menUnderline, [], ['w-full']);
   } else if (current.getAttribute('category') === 'men') {
-    toggleVisibility(menCategories, true);
-    toggleVisibility(womenCategories, false);
+    toggleVisibility(menCategories);
+    toggleVisibility(womenCategories);
     toggleClasses(menTab, ['font-bold'], ['font-semibold']);
     toggleClasses(womenTab, ['font-semibold'], ['font-bold']);
-    toggleClasses(menUnderline, ['w-full'], []);
-    toggleClasses(womenUnderline, [], ['w-full']);
+    toggleClasses(menUnderline, ['w-full'], ['w-0']);
+    toggleClasses(womenUnderline, ['w-0'], ['w-full']);
   }
 };
 
