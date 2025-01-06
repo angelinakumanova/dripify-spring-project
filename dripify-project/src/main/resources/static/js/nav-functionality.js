@@ -36,8 +36,9 @@ const toggleClasses = (element, classesToAdd, classesToRemove) => {
 
 // MOBILE MENU FUNCTIONALITY
 const mobileMenuButton = document.querySelector('.mobile-menu button.hamburger');
-const mobileMenu = document.querySelector('div[role="dialog"]');
+const mobileMenu = document.getElementById('mobile-menu');
 const closeButton = mobileMenu.querySelector('button');
+
 const backdrop = mobileMenu.querySelector('.fixed');
 
 const toggleMenu = () => {
@@ -121,7 +122,52 @@ function getCategoryElements(category, isMobile = false) {
   }
 };
 
+const scMenu = document.getElementById('shopping-cart-menu');
+const scButton = document.getElementById('shopping-cart-button');
+const scBackdrop = document.getElementById('sc-backdrop');
+const scSlidePanel = document.getElementById('sc-panel');
+const scCloseButtons = scSlidePanel.querySelectorAll('.close-button');
+const scSubtotalElement = scSlidePanel.querySelector('.sc-subtotal');
+const scRemoveButtons = scSlidePanel.querySelectorAll('button:not(.close-button)');
+const scProductList = scSlidePanel.querySelector('ul');
 
 
+// Toggle Panel Visibility
+function togglePanel() {
+  scSlidePanel.classList.toggle('translate-x-0');
+  scSlidePanel.classList.toggle('translate-x-full');
+  scBackdrop.classList.toggle('opacity-0');
+  scBackdrop.classList.toggle('opacity-100');
+  scMenu.classList.toggle('opacity-0');
+  scMenu.classList.toggle('opacity-100');
+}
 
+// Update Subtotal
+function updateSubtotal() {
+  let subtotal = 0;
+  const items = scSlidePanel.querySelectorAll('ul li');
+  
+  items.forEach(item => {
+    const priceElement = item.querySelector('.price');
+    if (priceElement) {
+      const price = parseFloat(priceElement.textContent.replace('$', '').trim());
+      if (!isNaN(price)) {
+        subtotal += price;
+      }
+    }
+  });
+
+  scSubtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+}
+
+scProductList.addEventListener('click', event => {
+  if (event.target.matches('button:not(.close-button)')) {
+    const item = event.target.closest('li');
+    scProductList.removeChild(item);
+    updateSubtotal();
+  }
+});
+
+scButton.addEventListener('click', togglePanel);
+scCloseButtons.forEach(button => button.addEventListener('click', togglePanel));
 
