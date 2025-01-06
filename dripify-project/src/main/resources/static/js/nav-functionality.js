@@ -99,12 +99,12 @@
     }
 
 
-    const flyoutMenu = document.getElementById('flyout-menu');
+    function toggleOpacityAnimation(element) {
+      element.classList.toggle('opacity-0');
+      element.classList.toggle('opacity-100');
 
-    function toggleFlyoutMenu() {
-      flyoutMenu.classList.toggle('opacity-0');
-      flyoutMenu.classList.toggle('opacity-100');
-
-      flyoutMenu.classList.toggle('pointer-events-none');
-      flyoutMenu.classList.toggle('pointer-events-auto');
+      element.classList.toggle('pointer-events-none');
+      element.classList.toggle('pointer-events-auto');
     }
+
+    

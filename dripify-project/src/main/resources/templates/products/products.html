@@ -62,7 +62,7 @@
                     <div class="relative">
                         <button id="flyout-menu-button" type="button"
                             class="hover:font-bold flex items-center gap-x-1 text-sm font-semibold text-gray-900"
-                            aria-expanded="false" onclick="toggleFlyoutMenu()">
+                            aria-expanded="false" onclick="toggleOpacityAnimation(document.getElementById('flyout-menu'))">
                             SHOP
                             <svg class="size-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor"
                                 aria-hidden="true" data-slot="icon">
@@ -73,7 +73,7 @@
                         </button>
 
 
-                        <div id="flyout-menu" onmouseleave="toggleFlyoutMenu()"
+                        <div id="flyout-menu" onmouseleave="toggleOpacityAnimation(this)"
                             class="opacity-0 transition-opacity ease-in duration-300 pointer-events-none absolute -left-[15rem] top-full z-10 mt-3 w-screen max-w-xl overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                             <div class="p-4">
                                 <div class="flex justify-evenly mb-2">
@@ -272,28 +272,66 @@
                             </button>
                         </div>
                     </form>
-                    <!-- TODO: IMPLEMENT CART AND PROFILE FUNCTIONALITY FOR LOGGED IN USER (MOBILE TOO) -->
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
-                        class="hidden size-8 hover:cursor-pointer">
-                        <defs>
-                            <style>
-                                .cls-1 {
-                                    fill: #231f20
-                                }
-                            </style>
-                        </defs>
-                        <g id="cart">
-                            <path class="cls-1"
-                                d="M29.46 10.14A2.94 2.94 0 0 0 27.1 9H10.22L8.76 6.35A2.67 2.67 0 0 0 6.41 5H3a1 1 0 0 0 0 2h3.41a.68.68 0 0 1 .6.31l1.65 3 .86 9.32a3.84 3.84 0 0 0 4 3.38h10.37a3.92 3.92 0 0 0 3.85-2.78l2.17-7.82a2.58 2.58 0 0 0-.45-2.27zM28 11.86l-2.17 7.83A1.93 1.93 0 0 1 23.89 21H13.48a1.89 1.89 0 0 1-2-1.56L10.73 11H27.1a1 1 0 0 1 .77.35.59.59 0 0 1 .13.51z" />
-                            <circle class="cls-1" cx="14" cy="26" r="2" />
-                            <circle class="cls-1" cx="24" cy="26" r="2" />
-                        </g>
-                    </svg>
+
+
+                    <div class="logged-in flex gap-4 items-center flex-shrink-0">
+                        <!-- TODO: IMPLEMENT CART AND PROFILE FUNCTIONALITY FOR LOGGED IN USER (MOBILE TOO) -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="size-8 hover:cursor-pointer">
+                            <defs>
+                                <style>
+                                    .cls-1 {
+                                        fill: #231f20
+                                    }
+                                </style>
+                            </defs>
+                            <g id="cart">
+                                <path class="cls-1"
+                                    d="M29.46 10.14A2.94 2.94 0 0 0 27.1 9H10.22L8.76 6.35A2.67 2.67 0 0 0 6.41 5H3a1 1 0 0 0 0 2h3.41a.68.68 0 0 1 .6.31l1.65 3 .86 9.32a3.84 3.84 0 0 0 4 3.38h10.37a3.92 3.92 0 0 0 3.85-2.78l2.17-7.82a2.58 2.58 0 0 0-.45-2.27zM28 11.86l-2.17 7.83A1.93 1.93 0 0 1 23.89 21H13.48a1.89 1.89 0 0 1-2-1.56L10.73 11H27.1a1 1 0 0 1 .77.35.59.59 0 0 1 .13.51z" />
+                                <circle class="cls-1" cx="14" cy="26" r="2" />
+                                <circle class="cls-1" cx="24" cy="26" r="2" />
+                            </g>
+                        </svg>
+
+                        <span id="profile-name" class="flex items-center hover:cursor-pointer hover:underline" onclick="toggleOpacityAnimation(document.getElementById('profile-dropdown'))">
+                            <p class="font-semibold">angieusername</p>
+                            <svg class="size-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true" data-slot="icon">
+                                <path fill-rule="evenodd"
+                                    d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </span>
+
+                        <div id="profile-dropdown" onmouseleave="toggleOpacityAnimation(this)" class="opacity-0 pointer-events-none transition ease-in duration-300 absolute top-16 right-2 z-10 w-40 divide-y divide-gray-100 rounded-md bg-white shadow-lg border border-black border-opacity-30"
+                            role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                            <div class="py-1" role="none">
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
+                                    role="menuitem" tabindex="-1" id="menu-item-0">my profile</a>
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
+                                    role="menuitem" tabindex="-1" id="menu-item-0">orders</a>
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
+                                    role="menuitem" tabindex="-1" id="menu-item-0">wishlist</a>
+                            </div>
+                            <div class="py-1" role="none">
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
+                                    role="menuitem" tabindex="-1" id="menu-item-0">settings</a>
+                                    <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
+                                    role="menuitem" tabindex="-1" id="menu-item-0">log out</a>
+                            </div>
+                        </div>
+
+                    </div>
 
 
 
 
-                    <div class="flex gap-4 flex-shrink-0">
+
+                    <div class="flex gap-4 flex-shrink-0 hidden">
                         <a href="/templates/login.html" class="hover:font-bold text-sm font-semibold text-gray-900">
                             LOG IN
                         </a>
@@ -917,6 +955,8 @@
             filterMenu.classList.toggle('pointer-events-none');
             filterMenu.classList.toggle('pointer-events-auto');
         }
+
+
     </script>
 </body>
 
