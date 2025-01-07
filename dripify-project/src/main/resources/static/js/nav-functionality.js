@@ -84,15 +84,15 @@ menTabMobile.addEventListener('click', () => toggleCategoryVisibility(menTabMobi
 const toggleCategoryVisibility = (current) => {
   const { categories: womenCategories, tab: womenTab, underline: womenUnderline } = getCategoryElements('women', current.id.includes('mobile'));
   const { categories: menCategories, tab: menTab, underline: menUnderline } = getCategoryElements('men', current.id.includes('mobile'));
-
-  if (current.getAttribute('category') === 'women') {
+  
+  if (current.getAttribute('category') === 'women' && womenCategories.classList.contains('hidden')) {
     toggleVisibility(womenCategories);
     toggleVisibility(menCategories);
     toggleClasses(womenTab, ['font-bold'], ['font-semibold']);
     toggleClasses(menTab, ['font-semibold'], ['font-bold']);
     toggleClasses(womenUnderline, ['w-full'], []);
     toggleClasses(menUnderline, [], ['w-full']);
-  } else if (current.getAttribute('category') === 'men') {
+  } else if (current.getAttribute('category') === 'men' && menCategories.classList.contains('hidden')) {
     toggleVisibility(menCategories);
     toggleVisibility(womenCategories);
     toggleClasses(menTab, ['font-bold'], ['font-semibold']);
@@ -122,31 +122,68 @@ function getCategoryElements(category, isMobile = false) {
   }
 };
 
-const scMenu = document.getElementById('shopping-cart-menu');
-const scButton = document.getElementById('shopping-cart-button');
-const scBackdrop = document.getElementById('sc-backdrop');
-const scSlidePanel = document.getElementById('sc-panel');
-const scCloseButtons = scSlidePanel.querySelectorAll('.close-button');
-const scSubtotalElement = scSlidePanel.querySelector('.sc-subtotal');
-const scRemoveButtons = scSlidePanel.querySelectorAll('button:not(.close-button)');
-const scProductList = scSlidePanel.querySelector('ul');
+
+// //SHOPPING CART FUNCTIONALITY
 
 
-// Toggle Panel Visibility
-function togglePanel() {
-  scSlidePanel.classList.toggle('translate-x-0');
-  scSlidePanel.classList.toggle('translate-x-full');
-  scBackdrop.classList.toggle('opacity-0');
-  scBackdrop.classList.toggle('opacity-100');
-  scMenu.classList.toggle('opacity-0');
-  scMenu.classList.toggle('opacity-100');
+
+
+// // Toggle Panel Visibility
+// function togglePanel() {
+//   scSlidePanel.classList.toggle('translate-x-0');
+//   scSlidePanel.classList.toggle('translate-x-full');
+//   scBackdrop.classList.toggle('opacity-0');
+//   scBackdrop.classList.toggle('opacity-100');
+//   scMenu.classList.toggle('opacity-0');
+//   scMenu.classList.toggle('opacity-100');
+// }
+
+// // Update Subtotal
+// function updateSubtotal() {
+//   let subtotal = 0;
+//   const items = scSlidePanel.querySelectorAll('ul li');
+  
+//   items.forEach(item => {
+//     const priceElement = item.querySelector('.price');
+//     if (priceElement) {
+//       const price = parseFloat(priceElement.textContent.replace('$', '').trim());
+//       if (!isNaN(price)) {
+//         subtotal += price;
+//       }
+//     }
+//   });
+
+//   scSubtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+// }
+
+
+// // REMOVE ITEM
+// scProductList.addEventListener('click', event => {
+//   if (event.target.matches('button:not(.close-button)')) {
+//     const item = event.target.closest('li');
+//     scProductList.removeChild(item);
+//     updateSubtotal();
+//   }
+// });
+
+// scButton.addEventListener('click', togglePanel);
+// scCloseButtons.forEach(button => button.addEventListener('click', togglePanel));
+
+// Utility Function to Toggle Panel Visibility
+function togglePanel(panel, backdrop, menu) {
+  panel.classList.toggle('translate-x-0');
+  panel.classList.toggle('translate-x-full');
+  backdrop.classList.toggle('opacity-0');
+  backdrop.classList.toggle('opacity-100');
+  menu.classList.toggle('opacity-0');
+  menu.classList.toggle('opacity-100');
 }
 
-// Update Subtotal
-function updateSubtotal() {
+// Utility Function to Update Subtotal
+function updateSubtotal(panel, subtotalElement) {
   let subtotal = 0;
-  const items = scSlidePanel.querySelectorAll('ul li');
-  
+  const items = panel.querySelectorAll('ul li');
+
   items.forEach(item => {
     const priceElement = item.querySelector('.price');
     if (priceElement) {
@@ -157,17 +194,49 @@ function updateSubtotal() {
     }
   });
 
-  scSubtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+  subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
 }
 
-scProductList.addEventListener('click', event => {
+// Utility Function to Remove Items
+function handleRemoveItem(event, panel, subtotalElement) {
   if (event.target.matches('button:not(.close-button)')) {
     const item = event.target.closest('li');
-    scProductList.removeChild(item);
-    updateSubtotal();
+    item.remove();
+    updateSubtotal(panel, subtotalElement);
   }
-});
+}
 
-scButton.addEventListener('click', togglePanel);
-scCloseButtons.forEach(button => button.addEventListener('click', togglePanel));
+// Initialize Panel Functionality
+function initPanel(button, panel, backdrop, menu, closeButtons, subtotalElement) {
+  button.addEventListener('click', () => togglePanel(panel, backdrop, menu));
+  
+  closeButtons.forEach(button => 
+    button.addEventListener('click', () => togglePanel(panel, backdrop, menu))
+  );
+  
+  const productList = panel.querySelector('ul');
+  productList.addEventListener('click', event => 
+    handleRemoveItem(event, panel, subtotalElement)
+  );
+}
+const regularShoppingCart = {
+  menu: document.getElementById('shopping-cart-menu'),
+  button: document.getElementById('shopping-cart-button'),
+  panel: document.getElementById('sc-panel'),
+  backdrop: document.getElementById('sc-backdrop'),
+  closeButtons: document.getElementById('sc-panel').querySelectorAll('.close-button'),
+  subtotalElement: document.getElementById('sc-panel').querySelector('.sc-subtotal'),
+}
 
+const mobileShoppingCart = {
+  menu: document.getElementById('shopping-cart-menu-mobile'),
+  button: document.getElementById('shopping-cart-button-mobile'),
+  panel: document.getElementById('sc-panel-mobile'),
+  backdrop: document.getElementById('sc-backdrop-mobile'),
+  closeButtons: document.getElementById('sc-panel-mobile').querySelectorAll('.close-button'),
+  subtotalElement: document.getElementById('sc-panel-mobile').querySelector('.sc-subtotal'),
+};
+
+
+initPanel(regularShoppingCart.button, regularShoppingCart.panel, regularShoppingCart.backdrop, regularShoppingCart.menu, regularShoppingCart.closeButtons, regularShoppingCart.subtotalElement);
+initPanel(mobileShoppingCart.button, mobileShoppingCart.panel, mobileShoppingCart.backdrop, mobileShoppingCart.menu, mobileShoppingCart.closeButtons, mobileShoppingCart.subtotalElement);
