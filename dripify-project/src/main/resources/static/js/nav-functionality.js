@@ -123,53 +123,9 @@ function getCategoryElements(category, isMobile = false) {
 };
 
 
-// //SHOPPING CART FUNCTIONALITY
+// SHOPPING CART FUNCTIONALITY
 
 
-
-
-// // Toggle Panel Visibility
-// function togglePanel() {
-//   scSlidePanel.classList.toggle('translate-x-0');
-//   scSlidePanel.classList.toggle('translate-x-full');
-//   scBackdrop.classList.toggle('opacity-0');
-//   scBackdrop.classList.toggle('opacity-100');
-//   scMenu.classList.toggle('opacity-0');
-//   scMenu.classList.toggle('opacity-100');
-// }
-
-// // Update Subtotal
-// function updateSubtotal() {
-//   let subtotal = 0;
-//   const items = scSlidePanel.querySelectorAll('ul li');
-  
-//   items.forEach(item => {
-//     const priceElement = item.querySelector('.price');
-//     if (priceElement) {
-//       const price = parseFloat(priceElement.textContent.replace('$', '').trim());
-//       if (!isNaN(price)) {
-//         subtotal += price;
-//       }
-//     }
-//   });
-
-//   scSubtotalElement.textContent = `$${subtotal.toFixed(2)}`;
-// }
-
-
-// // REMOVE ITEM
-// scProductList.addEventListener('click', event => {
-//   if (event.target.matches('button:not(.close-button)')) {
-//     const item = event.target.closest('li');
-//     scProductList.removeChild(item);
-//     updateSubtotal();
-//   }
-// });
-
-// scButton.addEventListener('click', togglePanel);
-// scCloseButtons.forEach(button => button.addEventListener('click', togglePanel));
-
-// Utility Function to Toggle Panel Visibility
 function togglePanel(panel, backdrop, menu) {
   panel.classList.toggle('translate-x-0');
   panel.classList.toggle('translate-x-full');
@@ -179,7 +135,6 @@ function togglePanel(panel, backdrop, menu) {
   menu.classList.toggle('opacity-100');
 }
 
-// Utility Function to Update Subtotal
 function updateSubtotal(panel, subtotalElement) {
   let subtotal = 0;
   const items = panel.querySelectorAll('ul li');
@@ -197,7 +152,6 @@ function updateSubtotal(panel, subtotalElement) {
   subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
 }
 
-// Utility Function to Remove Items
 function handleRemoveItem(event, panel, subtotalElement) {
   if (event.target.matches('button:not(.close-button)')) {
     const item = event.target.closest('li');
@@ -206,7 +160,6 @@ function handleRemoveItem(event, panel, subtotalElement) {
   }
 }
 
-// Initialize Panel Functionality
 function initPanel(button, panel, backdrop, menu, closeButtons, subtotalElement) {
   button.addEventListener('click', () => togglePanel(panel, backdrop, menu));
   
@@ -219,6 +172,8 @@ function initPanel(button, panel, backdrop, menu, closeButtons, subtotalElement)
     handleRemoveItem(event, panel, subtotalElement)
   );
 }
+
+
 const regularShoppingCart = {
   menu: document.getElementById('shopping-cart-menu'),
   button: document.getElementById('shopping-cart-button'),
