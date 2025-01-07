@@ -1,6 +1,7 @@
 function bindToggleAnimation(trigger, target) {
   const triggerElement = document.getElementById(trigger);
   const targetElement = document.getElementById(target);
+  
 
   if (!triggerElement || !targetElement) {
     console.warn(`Missing element: ${trigger || target}`);
@@ -22,6 +23,10 @@ function toggleOpacityAnimation(element) {
   element.classList.toggle('pointer-events-none');
   element.classList.toggle('pointer-events-auto');
 }
+
+const profileNameMobile = document.getElementById('profile-name-mobile');
+const profileDropdownMobile = document.getElementById('mobile-profile-dropdown');
+profileNameMobile.addEventListener('click', () => profileDropdownMobile.classList.toggle('hidden'));
 
 
 // Utility Functions
