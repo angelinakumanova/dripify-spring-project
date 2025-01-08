@@ -1215,13 +1215,14 @@
     const addToCartBtn = document.getElementById('add-to-cart-btn');
     addToCartBtn.addEventListener('click', () => {
       addToCartBtn.classList.add('bg-pink-700', 'hover:bg-pink-700');
+      addToCartBtn.classList.remove('bg-zinc-900', 'hover:bg-zinc-700');
 
 
       setTimeout(() => {
         addToCartBtn.classList.remove('bg-pink-700', 'hover:bg-pink-800');
-      }, 1000);
+        addToCartBtn.classList.add('bg-zinc-900', 'hover:bg-zinc-700')
+      }, 2000);
     });
   </script>
 </body>
-
 </html>
