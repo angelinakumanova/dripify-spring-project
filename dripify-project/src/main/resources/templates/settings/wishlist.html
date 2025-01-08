@@ -837,7 +837,7 @@
     </div>
 
     <div class="mt-24 sm:mt-28"></div>
-    <div class="bg-white sm:w-[70%] mx-auto flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-[#161931]">
+    <div class="bg-white flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-[#161931]">
         <aside class="py-4 md:w-1/3 lg:w-1/4">
             <div class="sticky flex flex-col gap-2 p-4 text-sm border-r border-indigo-100 top-12">
 
@@ -866,18 +866,19 @@
         </aside>
         <section class="w-full min-h-screen py-8 md:w-2/3 lg:w-3/4">
             <div class="p-4">
-                <div class="w-full px-8 py-6">
+                <div class="max-w-screen px-8 py-6">
                     <h3 class="text-xl font-bold text-gray-800">Your Wishlist</h3>
                     <p class="mt-2 text-sm text-gray-600">Manage your wishlist items here.</p>
 
-                    <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
                         <!-- Wishlist Item 1 -->
+                        
                         <div
-                            class="item relative p-4 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                            <img class="w-full h-40 object-cover rounded-md mb-4"
+                            class="item relative p-4 border border-gray-200 rounded-lg shadow-md">
+                            <img class="w-full aspect-square object-cover rounded-md mb-4"
                                 src="https://media-photos.depop.com/b1/5913802/1997839635_8240334744bf42e191e6c596467700fd/P0.jpg"
                                 alt="Wishlist Item">
-                            <h4 class="text-lg font-semibold text-gray-800">Summer Crop Top</h4>
+                            <h4 class="text-lg font-semibold text-gray-800"><a href="/templates/products/single-product.html" class="hover:underline">Summer Crop Top</a></h4>
                             <p class="mt-2 text-sm text-gray-600">Seller: <span class="font-medium">Emilia
                                     Dimitrova</span></p>
                             <p class="mt-1 text-sm text-gray-800 font-medium">25.00 BGN</p>
@@ -905,20 +906,20 @@
                             </div>
                         </div>
 
-                        <!-- Wishlist Item 2 -->
+                        
                         <div
-                            class="item relative p-4 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                            <img class="w-full h-40 object-cover rounded-md mb-4"
-                                src="https://media-photos.depop.com/b1/6406248/2026089428_ef0319f8890a4042907e698563b270d7/P0.jpg"
+                            class="item relative p-4 border border-gray-200 rounded-lg shadow-md">
+                            <img class="w-full aspect-square object-cover rounded-md mb-4"
+                                src="https://media-photos.depop.com/b1/5913802/1997839635_8240334744bf42e191e6c596467700fd/P0.jpg"
                                 alt="Wishlist Item">
-                            <h4 class="text-lg font-semibold text-gray-800">Pink Crop Polo</h4>
-                            <p class="mt-2 text-sm text-gray-600">Seller: <span class="font-medium">Petya Emilova</span>
-                            </p>
-                            <p class="mt-1 text-sm text-gray-800 font-medium">45.00 BGN</p>
+                            <h4 class="text-lg font-semibold text-gray-800"><a href="/templates/products/single-product.html" class="hover:underline">Summer Crop Top</a></h4>
+                            <p class="mt-2 text-sm text-gray-600">Seller: <span class="font-medium">Emilia
+                                    Dimitrova</span></p>
+                            <p class="mt-1 text-sm text-gray-800 font-medium">25.00 BGN</p>
 
                             <div class="flex justify-between items-center mt-4">
                                 <button
-                                    class="add-to-cart-btn transition ease-in duration-300 flex items-center px-4 py-2 gap-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-700 focus:outline-none ">
+                                    class="transition ease-in duration-300 add-to-cart-btn flex items-center px-4 py-2 gap-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-700">
                                     <svg class="size-5" fill="white" viewBox="0 0 902.86 902.86">
                                         <path
                                             d="M671.504,577.829l110.485-432.609H902.86v-68H729.174L703.128,179.2L0,178.697l74.753,399.129h596.751V577.829z M685.766,247.188l-67.077,262.64H131.199L81.928,246.756L685.766,247.188z">
@@ -939,7 +940,6 @@
                             </div>
                         </div>
 
-                        <!-- Add more items as needed -->
                     </div>
                 </div>
             </div>
