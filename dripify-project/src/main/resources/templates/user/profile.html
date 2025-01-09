@@ -837,7 +837,7 @@
 
     <div class="mt-24 sm:mt-28"></div>
     <div class="bg-white flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-[#161931]">
-        <aside class="py-4 md:w-1/3 lg:w-1/4">
+        <aside class="animate__animated animate__fadeInLeft py-4 md:w-1/3 lg:w-1/4 flex-none basis-1/4">
             <div class="sticky flex flex-col gap-2 p-4 text-sm sm:border-r border-indigo-100 top-12">
 
                 <span class="flex items-center flex-col-reverse">
@@ -849,33 +849,381 @@
                         src="/static/images/user-pfp.jpg" alt="Profile Picture">
                 </span>
 
-                <p class="mt-4 text-center">Selling trends, sharing style—your next favorite fit is just a click away! 🛍️✨</p>
+                <p class="mt-4 text-center">Selling trends, sharing style—your next favorite fit is just a click away!
+                    🛍️✨</p>
                 <!-- ONLY IF IT IS USER'S ACCOUNT -->
-                <button class="self-center w-full mt-4 px-4 py-2 bg-zinc-900 text-white font-semibold rounded-full hover:bg-zinc-600 transition-all duration-300 focus:outline-none">Edit Profile</button>
+                <button
+                    class="self-center w-full mt-4 px-4 py-2 bg-zinc-900 text-white font-semibold rounded-full hover:bg-zinc-600 transition-all duration-300 focus:outline-none">Edit
+                    Profile</button>
 
 
                 <hr class="my-3">
-                <button
-                    class="flex items-center px-3 py-2.5 font-bold bg-white border rounded-full">
-                    Items
+                <button id="items-btn"
+                    class="flex items-center px-3 py-2.5 font-bold bg-white border rounded-full hover:font-bold hover:border hover:rounded-full">
+                    Items (6)
                 </button>
-                <button
-                    class="flex items-center px-3 py-2.5 font-semibold hover:font-bold hover:border hover:rounded-full">
+                <button id="reviews-btn"
+                    class="flex items-center px-3 py-2.5 font-semibold rounded-full hover:font-bold hover:border hover:rounded-full">
                     Reviews (240)
                 </button>
             </div>
         </aside>
-        <section class="w-full min-h-screen py-8 md:w-2/3 lg:w-3/4">
-            <div class="p-4">
-                <div class="w-full px-8 py-6 ">
+        <section id="items-section"
+            class=" animate__animated animate__fadeInUp mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+            <div class="mt-6 grid gap-x-6 gap-y-10 grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 xl:gap-x-3">
+                <div class="group relative">
+                    <img src="https://media-photos.depop.com/b1/5913802/1997839635_8240334744bf42e191e6c596467700fd/P0.jpg"
+                        alt="Front of men&#039;s Basic Tee in black."
+                        class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                    <div class="mt-4 flex justify-between">
+                        <div>
+                            <h3 class="text-sm text-gray-700">
+                                <a href="/templates/products/single-product.html">
+                                    <span aria-hidden="true" class="absolute inset-0"></span>
+                                    Basic Tee
+                                </a>
+                            </h3>
+                            <p class="mt-1 text-sm text-gray-500">Black</p>
+                        </div>
+                        <p class="text-sm font-medium text-gray-900">$35</p>
+                    </div>
+                </div>
 
+                <div class="group relative">
+                    <img src="https://media-photos.depop.com/b1/6406248/2026089428_ef0319f8890a4042907e698563b270d7/P0.jpg"
+                        alt="Front of men&#039;s Basic Tee in black."
+                        class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                    <div class="mt-4 flex justify-between">
+                        <div>
+                            <h3 class="text-sm text-gray-700">
+                                <a href="#">
+                                    <span aria-hidden="true" class="absolute inset-0"></span>
+                                    Basic Tee
+                                </a>
+                            </h3>
+                            <p class="mt-1 text-sm text-gray-500">Black</p>
+                        </div>
+                        <p class="text-sm font-medium text-gray-900">$35</p>
+                    </div>
+                </div>
+
+
+                <div class="group relative">
+                    <img src="https://media-photos.depop.com/b1/24561642/1466869370_056963a4d606494c9aa9ea4ce8a854e2/P0.jpg"
+                        alt="Front of men&#039;s Basic Tee in black."
+                        class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                    <div class="mt-4 flex justify-between">
+                        <div>
+                            <h3 class="text-sm text-gray-700">
+                                <a href="#">
+                                    <span aria-hidden="true" class="absolute inset-0"></span>
+                                    Basic Tee
+                                </a>
+                            </h3>
+                            <p class="mt-1 text-sm text-gray-500">Black</p>
+                        </div>
+                        <p class="text-sm font-medium text-gray-900">$35</p>
+                    </div>
+                </div>
+
+
+                <div class="group relative">
+                    <img src="https://media-photos.depop.com/b1/51541544/2061800626_7dd0ca1cdde045a9a0c695dedac0bed5/P0.jpg"
+                        alt="Front of men&#039;s Basic Tee in black."
+                        class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                    <div class="mt-4 flex justify-between">
+                        <div>
+                            <h3 class="text-sm text-gray-700">
+                                <a href="#">
+                                    <span aria-hidden="true" class="absolute inset-0"></span>
+                                    Basic Tee
+                                </a>
+                            </h3>
+                            <p class="mt-1 text-sm text-gray-500">Black</p>
+                        </div>
+                        <p class="text-sm font-medium text-gray-900">$35</p>
+                    </div>
+                </div>
+
+                <div class="group relative">
+                    <img src="https://media-photos.depop.com/b1/24561642/2007067225_c9a335dd839e47aab8caf79f37b9653f/P0.jpg"
+                        alt="Front of men&#039;s Basic Tee in black."
+                        class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                    <div class="mt-4 flex justify-between">
+                        <div>
+                            <h3 class="text-sm text-gray-700">
+                                <a href="#">
+                                    <span aria-hidden="true" class="absolute inset-0"></span>
+                                    Basic Tee
+                                </a>
+                            </h3>
+                            <p class="mt-1 text-sm text-gray-500">Black</p>
+                        </div>
+                        <p class="text-sm font-medium text-gray-900">$35</p>
+                    </div>
+                </div>
+
+
+                <div class="group relative">
+                    <img src="https://media-photos.depop.com/b1/33154282/2037056174_ede1821cbdcd4317b297234cfef46908/P0.jpg"
+                        alt="Front of men&#039;s Basic Tee in black."
+                        class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+                    <div class="mt-4 flex justify-between">
+                        <div>
+                            <h3 class="text-sm text-gray-700">
+                                <a href="#">
+                                    <span aria-hidden="true" class="absolute inset-0"></span>
+                                    Basic Tee
+                                </a>
+                            </h3>
+                            <p class="mt-1 text-sm text-gray-500">Black</p>
+                        </div>
+                        <p class="text-sm font-medium text-gray-900">$35</p>
+                    </div>
+                </div>
+
+                <!-- More products... -->
+            </div>
+
+
+
+
+        </section>
+
+        <section id="reviews-section"
+            class="hidden animate__animated animate__fadeInRight mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+            <div class="w-full max-w-7xl lg-6 mx-auto">
+                <div class="w-full">
+
+
+                    <div class="pt-11 pb-8 border-b border-gray-100 max-xl:max-w-2xl max-xl:mx-auto">
+                        <div class="flex items-center gap-3 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                fill="none">
+                                <g clip-path="url(#clip0_13624_2892)">
+                                    <path
+                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                                        fill="#FBBF24" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_13624_2892">
+                                        <rect width="30" height="30" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                fill="none">
+                                <g clip-path="url(#clip0_13624_2892)">
+                                    <path
+                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                                        fill="#FBBF24" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_13624_2892">
+                                        <rect width="30" height="30" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                fill="none">
+                                <g clip-path="url(#clip0_13624_2892)">
+                                    <path
+                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                                        fill="#FBBF24" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_13624_2892">
+                                        <rect width="30" height="30" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                fill="none">
+                                <g clip-path="url(#clip0_13624_2892)">
+                                    <path
+                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                                        fill="#FBBF24" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_13624_2892">
+                                        <rect width="30" height="30" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                fill="none">
+                                <g clip-path="url(#clip0_13624_2892)">
+                                    <path
+                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                                        fill="#FBBF24" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_13624_2892">
+                                        <rect width="30" height="30" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h3 class="font-manrope font-semibold text-xl sm:text-2xl leading-9 text-black mb-6">Outstanding
+                            Experience!!!
+                        </h3>
+                        <div class="flex sm:items-center flex-col min-[400px]:flex-row justify-between gap-5 mb-4">
+                            <div class="flex items-center gap-3">
+                                <img src="https://pagedone.io/asset/uploads/1704349572.png" alt="John image"
+                                    class="w-8 h-8 rounded-full object-cover">
+                                <h6 class="font-semibold text-lg leading-8 text-indigo-600 ">John Watson</h6>
+                            </div>
+                            <p class="font-normal text-lg leading-8 text-gray-400">Nov 01, 2023</p>
+                        </div>
+                        <p class="font-normal text-lg leading-8 text-gray-400 max-xl:text-justify">One of the standout
+                            features of Pagedone is its intuitive and user-friendly interface. Navigating through the
+                            system feels natural, and the layout makes it easy to locate and utilize various design
+                            elements. This is particularly beneficial for designers looking to streamline their
+                            workflow.</p>
+                    </div>
+                    <div class="pt-8 max-xl:max-w-2xl max-xl:mx-auto">
+                        <div class="flex items-center gap-3 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                fill="none">
+                                <g clip-path="url(#clip0_13624_2892)">
+                                    <path
+                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                                        fill="#FBBF24" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_13624_2892">
+                                        <rect width="30" height="30" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                fill="none">
+                                <g clip-path="url(#clip0_13624_2892)">
+                                    <path
+                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                                        fill="#FBBF24" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_13624_2892">
+                                        <rect width="30" height="30" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                fill="none">
+                                <g clip-path="url(#clip0_13624_2892)">
+                                    <path
+                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                                        fill="#FBBF24" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_13624_2892">
+                                        <rect width="30" height="30" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                fill="none">
+                                <g clip-path="url(#clip0_13624_2892)">
+                                    <path
+                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                                        fill="#FBBF24" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_13624_2892">
+                                        <rect width="30" height="30" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                fill="none">
+                                <g clip-path="url(#clip0_13624_2892)">
+                                    <path
+                                        d="M14.1033 2.56698C14.4701 1.82374 15.5299 1.82374 15.8967 2.56699L19.1757 9.21093C19.3214 9.50607 19.6029 9.71064 19.9287 9.75797L27.2607 10.8234C28.0809 10.9426 28.4084 11.9505 27.8149 12.5291L22.5094 17.7007C22.2737 17.9304 22.1662 18.2614 22.2218 18.5858L23.4743 25.8882C23.6144 26.7051 22.7569 27.3281 22.0233 26.9424L15.4653 23.4946C15.174 23.3415 14.826 23.3415 14.5347 23.4946L7.9767 26.9424C7.24307 27.3281 6.38563 26.7051 6.52574 25.8882L7.7782 18.5858C7.83384 18.2614 7.72629 17.9304 7.49061 17.7007L2.1851 12.5291C1.59159 11.9505 1.91909 10.9426 2.73931 10.8234L10.0713 9.75797C10.3971 9.71064 10.6786 9.50607 10.8243 9.21093L14.1033 2.56698Z"
+                                        fill="#FBBF24" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_13624_2892">
+                                        <rect width="30" height="30" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h3 class="font-manrope font-semibold text-xl sm:text-2xl leading-9 text-black mb-6">Pagedone's
+                            design system seamlessly bridges the gap between designers and developers!
+                        </h3>
+                        <div class="flex sm:items-center flex-col min-[400px]:flex-row justify-between gap-5 mb-4">
+                            <div class="flex items-center gap-3">
+                                <img src="https://pagedone.io/asset/uploads/1704351103.png" alt="Robert image"
+                                    class="w-8 h-8 rounded-full object-cover">
+                                <h6 class="font-semibold text-lg leading-8 text-indigo-600">Robert Karmazov</h6>
+                            </div>
+                            <p class="font-normal text-lg leading-8 text-gray-400">Nov 01, 2023</p>
+                        </div>
+                        <p class="font-normal text-lg leading-8 text-gray-400 max-xl:text-justify">Pagedone doesn't
+                            disappoint when it comes to the variety and richness of its design components. From
+                            pre-built templates to customizable elements, the system caters to both beginners and
+                            seasoned designers. The extensive library ensures a diverse range of options to bring
+                            creative visions to life.</p>
+                    </div>
                 </div>
             </div>
         </section>
-
     </div>
 
+
+    <!-- FOOTER -->
+    <footer class="bg-zinc-900 pt-20">
+        <div class="w-full max-w-screen-xl mx-auto p-4">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <div class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                    <img src="/static/images/white-logo.png" class="h-16" alt="Dripify Logo" />
+                    <span class="text-white self-center text-2xl font-bold tracking-widest uppercase">Dripify</span>
+                </div>
+
+                <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-white sm:mb-0">
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6 uppercase">New Arrivals</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6 uppercase">Shop</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6 uppercase">Sell Your Drip</a>
+                    </li>
+                    <li>
+                        <a href="/templates/about-us.html" class="hover:underline uppercase">About Us</a>
+                    </li>
+                </ul>
+            </div>
+
+            <span class="mt-5 block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025 Dripify™. All Rights
+                Reserved.</span>
+        </div>
+    </footer>
+
     <script src="/static/js/nav-functionality.js"></script>
+    <script>
+        const itemsButton = document.getElementById('items-btn');
+        const reviewsButton = document.getElementById('reviews-btn');
+        const itemsSection = document.getElementById('items-section');
+        const reviewsSection = document.getElementById('reviews-section');
+
+
+        //TODO: SAME FUNCTION AS IN ORDERS.HTML MERGE THEM
+        function toggleAsideClasses(activeTab, inactiveTab, activeDiv, inactiveDiv) {
+            activeTab.classList.replace('font-semibold', 'font-bold');
+            activeTab.classList.add('border');
+            activeDiv.classList.remove('hidden');
+
+            inactiveTab.classList.replace('font-bold', 'font-semibold');
+            inactiveTab.classList.remove('border');
+            inactiveDiv.classList.add('hidden');
+        }
+
+        itemsButton.addEventListener('click', () => toggleAsideClasses(itemsButton, reviewsButton, itemsSection, reviewsSection));
+        reviewsButton.addEventListener('click', () => toggleAsideClasses(reviewsButton, itemsButton, reviewsSection, itemsSection));
+    </script>
 </body>
 
 </html>
