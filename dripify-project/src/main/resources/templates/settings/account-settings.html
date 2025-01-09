@@ -29,8 +29,8 @@
         <div class="mobile-menu flex items-center gap-5 lg:hidden">
           <form>
             <div class="relative border-2 border-zinc-900 border-opacity-50 rounded-full">
-              <label for="default-search"></label>
-              <input type="search" id="default-search"
+              <label for="default-search-mobile"></label>
+              <input type="search" id="default-search-mobile"
                 class="block w-full p-2 ps-10 text-sm text-gray-900 rounded-full bg-gray-50 outline-none"
                 placeholder="Search.." />
               <button type="submit"
@@ -811,7 +811,7 @@
     <aside class="py-4 md:w-1/3 lg:w-1/4">
       <div class="sticky flex flex-col gap-2 p-4 text-sm border-r border-indigo-100 top-12">
 
-        <a href="#"  class="pl-3 mb-4 text-2xl font-semibold hover:underline">angieusername</a>
+        <a href="#" class="pl-3 mb-4 text-2xl font-semibold hover:underline">angieusername</a>
 
         <a href="/templates/settings/orders.html"
           class="flex items-center px-3 py-2.5 font-semibold hover:font-bold hover:border hover:rounded-full">
@@ -825,13 +825,13 @@
         <hr>
         <h3 class="pl-3 mb-2 text-lg font-bold">Settings</h2>
           <a href="/templates/settings/public-profile.html"
-          class="flex items-center px-3 py-2.5 font-semibold hover:font-bold hover:border hover:rounded-full">
-          Public Profile
-        </a>
-        <a href="/templates/settings/account-settings.html"
-          class="flex items-center px-3 py-2.5 font-bold bg-white border rounded-full">
-          Account Settings
-        </a>
+            class="flex items-center px-3 py-2.5 font-semibold hover:font-bold hover:border hover:rounded-full">
+            Public Profile
+          </a>
+          <a href="/templates/settings/account-settings.html"
+            class="flex items-center px-3 py-2.5 font-bold bg-white border rounded-full">
+            Account Settings
+          </a>
       </div>
     </aside>
     <section class="w-full min-h-screen py-8 md:w-2/3 lg:w-3/4">
@@ -854,11 +854,12 @@
                   </button>
                 </div>
                 <span class="hidden text-sm text-green-500" id="username-success">Username updated successfully!</span>
-                <span class="hidden text-sm text-red-500" id="username-error">Failed to update username. Please try again.</span>
+                <span class="hidden text-sm text-red-500" id="username-error">Failed to update username. Please try
+                  again.</span>
                 <p class="text-xs text-gray-500">You can change your username every 30 days.</p>
               </div>
             </form>
-          
+
             <!-- Email -->
             <form id="email-form">
               <div class="space-y-2">
@@ -872,10 +873,11 @@
                   </button>
                 </div>
                 <span class="hidden text-sm text-green-500" id="email-success">Email updated successfully!</span>
-                <span class="hidden text-sm text-red-500" id="email-error">Failed to update email. Please try again.</span>
+                <span class="hidden text-sm text-red-500" id="email-error">Failed to update email. Please try
+                  again.</span>
               </div>
             </form>
-          
+
             <!-- Password -->
             <form id="password-form">
               <div class="space-y-2">
@@ -889,10 +891,11 @@
                   Change Password
                 </button>
                 <span class="hidden text-sm text-green-500" id="password-success">Password changed successfully!</span>
-                <span class="hidden text-sm text-red-500" id="password-error">Failed to change password. Please try again.</span>
+                <span class="hidden text-sm text-red-500" id="password-error">Failed to change password. Please try
+                  again.</span>
               </div>
             </form>
-          
+
             <!-- Email Notifications with sliding toggle -->
             <form id="notifications-form">
               <div class="flex items-center justify-between">
@@ -902,23 +905,85 @@
                 </div>
                 <label class="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" value="" class="sr-only peer" id="notifications-toggle" checked>
-                  <div class="w-11 h-6 rounded-full peer bg-gray-700 peer-checked:bg-pink-600 peer-focus:outline-none"></div>
+                  <div class="w-11 h-6 rounded-full peer bg-gray-700 peer-checked:bg-pink-600 peer-focus:outline-none">
+                  </div>
                   <div
                     class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform peer-checked:translate-x-5">
                   </div>
                 </label>
               </div>
             </form>
-          
+
             <!-- Deactivate Account Section -->
             <form id="deactivate-form">
               <div class="border-t border-gray-200 mt-8 pt-6">
                 <h3 class="text-lg font-semibold text-red-600">Deactivate Account</h3>
-                <p class="mt-1 text-sm text-gray-600">Once you deactivate your account, there is no going back. Please be certain.</p>
-                <button type="button"
+                <p class="mt-1 text-sm text-gray-600">Once you deactivate your account, there is no going back. Please
+                  be certain.</p>
+                <button id="deactivate-btn" type="button"
                   class="text-nowrap mt-4 px-4 py-2 border border-red-600 text-red-600 bg-white rounded-lg hover:bg-red-50 focus:ring focus:ring-red-500 focus:outline-none">
                   Deactivate your account
                 </button>
+
+                <div id="deactivate-modal" class="relative z-50 pointer-events-none" aria-labelledby="modal-title" role="dialog"
+                  aria-modal="true">
+                  <!--
+                    Background backdrop, show/hide based on modal state.
+                
+                    Entering: "ease-out duration-300"
+                      From: "opacity-0"
+                      To: "opacity-100"
+                    Leaving: "ease-in duration-200"
+                      From: "opacity-100"
+                      To: "opacity-0"
+                  -->
+                  <div id="deactivate-backdrop"
+                    class="opacity-0 ease-in-out duration-300 fixed inset-0 bg-gray-500/75 transition-opacity"
+                    aria-hidden="true"></div>
+
+                  <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                      <!--
+                        Modal panel, show/hide based on modal state.
+                
+                        Entering: "ease-out duration-300"
+                          From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                          To: "opacity-100 translate-y-0 sm:scale-100"
+                        Leaving: "ease-in duration-200"
+                          From: "opacity-100 translate-y-0 sm:scale-100"
+                          To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                      -->
+                      <div id="deactivate-panel"
+                        class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95 ease-in-out duration-300 relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                        <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                          <div class="sm:flex sm:items-start">
+                            <div
+                              class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10">
+                              <svg class="size-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true" data-slot="icon">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                              </svg>
+                            </div>
+                            <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                              <h3 class="text-base font-semibold text-gray-900" id="modal-title">Deactivate account</h3>
+                              <div class="mt-2">
+                                <p class="text-sm text-gray-500">Are you sure you want to deactivate your account? All
+                                  of your data will be permanently removed. This action cannot be undone.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                          <button type="button"
+                            class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">Deactivate</button>
+                          <button id="deactivate-cancel-btn" type="button"
+                            class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </form>
           </div>
@@ -933,6 +998,43 @@
 
 
   <script src="/static/js/nav-functionality.js"></script>
+  <script>
+    const deactivateButton = document.getElementById('deactivate-btn');
+    const deactivateCancelButton = document.getElementById('deactivate-cancel-btn');
+    const deactivateModal = document.getElementById('deactivate-modal');
+    const deactivateBackdrop = document.getElementById('deactivate-backdrop');
+    const deactivatePanel = document.getElementById('deactivate-panel');
+
+    function toggleDeactivateModal() {
+      deactivateModal.classList.toggle('pointer-events-none');
+      deactivateModal.classList.toggle('pointer-events-auto');
+      deactivateBackdrop.classList.toggle('opacity-0');
+      deactivateBackdrop.classList.toggle('opacity-100');
+      deactivateBackdrop.classList.toggle('pointer-events-none');
+      deactivateBackdrop.classList.toggle('pointer-events-auto');
+
+
+      if (deactivatePanel.classList.contains('opacity-0')) {
+        deactivatePanel.classList.remove(
+          'opacity-0',
+          'translate-y-4',
+          'sm:translate-y-0',
+          'sm:scale-95'
+        );
+        deactivatePanel.classList.add('opacity-100', 'translate-y-0', 'sm:scale-100');
+      } else {
+        deactivatePanel.classList.remove('opacity-100', 'translate-y-0', 'sm:scale-100');
+        deactivatePanel.classList.add(
+          'opacity-0',
+          'translate-y-4',
+          'sm:translate-y-0',
+          'sm:scale-95'
+        );
+      }
+    }
+    deactivateButton.addEventListener('click', toggleDeactivateModal);
+    deactivateCancelButton.addEventListener('click', toggleDeactivateModal);
+  </script>
 </body>
 
 </html>
