@@ -851,21 +851,26 @@
           <div id="purchased-orders" class="mt-6">
             <div class="mt-4 space-y-6">
 
-              <div class="relative p-4 border border-gray-200 rounded-lg shadow-md">
+              <div class="order relative p-4 border border-gray-200 rounded-lg shadow-md">
                 <h5 class="text-lg font-semibold text-zinc-800">Order
                   #001</h5>
 
                 <p class="mt-2 text-sm text-zinc-600 upper">Purchased on: 2025-01-07</p>
                 <p class="mt-2 text-sm text-zinc-600">Items: 3 | Seller: <span
                     class="font-semibold text-zinc-800">John's Store</span></p>
-                <p class="mt-2 text-lg text-zinc-800 font-bold uppercase">Total: 150 BGN</p>
+                <p class="mt-2 text-lg text-zinc-800 font-bold uppercase">Total: 
+                  <span>150 BGN</span></p>
                 <p class="mt-2 text-sm text-zinc-900">Status: <span
-                    class="text-green-600 font-semibold">Completed</span></p>
+                    class="status text-orange-600 font-semibold">Shipped</span></p>
 
 
                 <button
                   class="details-btn mt-4 px-4 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-600 transition-all duration-300 focus:outline-none view-details">
                   View Details
+                </button>
+                <button
+                class="status-btn mt-4 px-4 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-600 transition-all duration-300 focus:outline-none">
+                  Mark as Received
                 </button>
 
                 <div class="order-details hidden">
@@ -913,7 +918,7 @@
           <!-- Sent Orders Section -->
           <div id="shipped-orders" class="hidden mt-6">
             <div class="mt-4 space-y-6">
-              <div class="relative p-4 border border-gray-200 rounded-lg shadow-md">
+              <div class="order relative p-4 border border-gray-200 rounded-lg shadow-md">
                 <h5 class="text-lg font-semibold text-zinc-800">Order
                   #001</h5>
 
@@ -922,12 +927,16 @@
                     class="font-semibold text-zinc-800">John's Store</span></p>
                 <p class="mt-2 text-lg text-zinc-800 font-bold uppercase">Total: 150 BGN</p>
                 <p class="mt-2 text-sm text-zinc-900">Status: <span
-                    class="text-yellow-600 font-semibold">Pending</span></p>
+                    class="status text-yellow-600 font-semibold">Pending</span></p>
 
 
                 <button
                   class="details-btn mt-4 px-4 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-600 transition-all duration-300 focus:outline-none view-details">
                   View Details
+                </button>
+                <button
+                class="status-btn mt-4 px-4 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-600 transition-all duration-300 focus:outline-none">
+                  Mark as Shipped
                 </button>
 
                 <div class="order-details hidden">
@@ -1001,8 +1010,8 @@
     purchasedBtn.addEventListener('click', () => toggleOrderClasses(purchasedBtn, shippedBtn, purchasedOrders, shippedOrders));
     shippedBtn.addEventListener('click', () => toggleOrderClasses(shippedBtn, purchasedBtn, shippedOrders, purchasedOrders));
 
-    const detailsButton = document.querySelectorAll('.details-btn');
-    detailsButton.forEach(b => {
+    const detailsButtons = document.querySelectorAll('.details-btn');
+    detailsButtons.forEach(b => {
       b.addEventListener('click', () => {
         const items = b.nextElementSibling;
 
@@ -1018,8 +1027,26 @@
         } else {
           b.textContent = 'Close Details'
         }
-      })
+      });
+    });
 
+
+    // TODO: MIGHT BE DIFFRENT AS DB FETCH MAY BE NEEDED
+    const statusButtons = document.querySelectorAll('.status-btn');
+    statusButtons.forEach(b => {
+      b.addEventListener('click', () => {
+        const statusElement = b.closest('.order').querySelector('.status');
+
+        if (b.textContent.includes('Shipped')) {
+          statusElement.classList.replace('text-yellow-600', 'text-orange-600');
+          statusElement.textContent = 'Shipped';
+        } else {
+          statusElement.classList.replace('text-orange-600', 'text-green-600');
+          statusElement.textContent = 'Completed';
+        }
+
+        b.remove();
+      })
     })
   </script>
 </body>
