@@ -858,8 +858,9 @@
                 <p class="mt-2 text-sm text-zinc-600 upper">Purchased on: 2025-01-07</p>
                 <p class="mt-2 text-sm text-zinc-600">Items: 3 | Seller: <span
                     class="font-semibold text-zinc-800">John's Store</span></p>
-                <p class="mt-2 text-lg text-zinc-800 font-bold uppercase">Total: 
-                  <span>150 BGN</span></p>
+                <p class="mt-2 text-lg text-zinc-800 font-bold uppercase">Total:
+                  <span>150 BGN</span>
+                </p>
                 <p class="mt-2 text-sm text-zinc-900">Status: <span
                     class="status text-orange-600 font-semibold">Shipped</span></p>
 
@@ -868,20 +869,141 @@
                   class="details-btn mt-4 px-4 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-600 transition-all duration-300 focus:outline-none view-details">
                   View Details
                 </button>
-                <button
-                class="status-btn mt-4 px-4 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-600 transition-all duration-300 focus:outline-none">
-                  Mark as Received
-                </button>
+
+                <span>
+                  <button
+                    class="status-btn mt-4 px-4 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-600 transition-all duration-300 focus:outline-none">
+                    Mark as Received
+                  </button>
+
+                  <form class="form-rating">
+                    <div class="review-modal relative z-50 pointer-events-none" aria-labelledby="modal-title"
+                      role="dialog" aria-modal="true">
+                      <!--
+                    Background backdrop, show/hide based on modal state.
+                
+                    Entering: "ease-out duration-300"
+                      From: "opacity-0"
+                      To: "opacity-100"
+                    Leaving: "ease-in duration-200"
+                      From: "opacity-100"
+                      To: "opacity-0"
+                  -->
+                      <div
+                        class="review-backdrop opacity-0 ease-in-out duration-300 fixed inset-0 bg-gray-500/75 transition-opacity"
+                        aria-hidden="true"></div>
+
+                      <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                          <!--
+                        Modal panel, show/hide based on modal state.
+                
+                        Entering: "ease-out duration-300"
+                          From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                          To: "opacity-100 translate-y-0 sm:scale-100"
+                        Leaving: "ease-in duration-200"
+                          From: "opacity-100 translate-y-0 sm:scale-100"
+                          To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                      -->
+                          <div
+                            class="review-panel opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95 ease-in-out duration-300 relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                            <div class="bg-white px-6 py-5 sm:p-6">
+                              <div class="sm:flex sm:items-start">
+                                <div
+                                  class="mx-auto flex size-12 shrink-0 items-center justify-center sm:mx-0 sm:size-10">
+                                  <svg fill="#000000" height="200px" width="200px" version="1.1" id="Layer_1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    viewBox="0 0 512 512" xml:space="preserve">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                      <g>
+                                        <g>
+                                          <path
+                                            d="M368.08,90.944l-67.065-9.744l-29.992-60.771c-6.116-12.393-23.836-12.386-29.949,0l-29.992,60.771l-67.065,9.744 c-13.676,1.987-19.145,18.842-9.254,28.483l48.529,47.304l-11.457,66.794c-2.337,13.618,12.003,24.034,24.229,17.604 l59.984-31.535l59.984,31.535c12.127,6.377,26.583-3.879,24.229-17.604l-11.456-66.794l48.529-47.304 C387.231,109.78,381.748,92.931,368.08,90.944z">
+                                          </path>
+                                        </g>
+                                      </g>
+                                      <g>
+                                        <g>
+                                          <path
+                                            d="M120.435,253.713H16.699C7.477,253.713,0,261.189,0,270.411v213.754c0,9.222,7.477,16.699,16.699,16.699h103.736 c9.222,0,16.699-7.476,16.699-16.699V270.411C137.134,261.189,129.657,253.713,120.435,253.713z">
+                                          </path>
+                                        </g>
+                                      </g>
+                                      <g>
+                                        <g>
+                                          <path
+                                            d="M501.108,326.303c-18.077-22.784-51.249-26.096-73.456-7.46l-79.113,66.383c-24.799,0-44.492,0-67.177,0l35.938-30.155 c27.34-22.941,12.375-68.954-24.879-68.954H170.532v198.715c8.896,7.193,20.04,11.154,31.496,11.154h156.498 c11.757,0,23.192-4.161,32.201-11.719l102.571-86.061C514.766,380.19,518.272,347.935,501.108,326.303z">
+                                          </path>
+                                        </g>
+                                      </g>
+                                    </g>
+                                  </svg>
+                                </div>
+                                <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                                  <h3 class="text-3xl font-semibold text-gray-900" id="modal-title">Rate Order and
+                                    Seller
+                                  </h3>
+                                  <div class="mt-4">
+                                    <!-- Order Rating -->
+                                    <div>
+                                      <p class="text-2xl font-semibold text-gray-700">Rate your order:</p>
+                                      <div class="order-rating flex space-x-1 mt-2">
+                                        <button type="button"  class="star text-2xl" data-value="1">☆</button>
+                                        <button type="button" class="star text-2xl" data-value="2">☆</button>
+                                        <button type="button" class="star text-2xl" data-value="3">☆</button>
+                                        <button type="button" class="star text-2xl" data-value="4">☆</button>
+                                        <button type="button" class="star text-2xl" data-value="5">☆</button>
+                                      </div>
+                                    </div>
+                                    <!-- Seller Rating -->
+                                    <div class="mt-4">
+                                      <p class="text-2xl font-semibold text-gray-700">Rate the seller:</p>
+                                      <div class="seller-rating flex space-x-1 mt-2">
+                                        <button type="button" class="star text-2xl" data-value="1">☆</button>
+                                        <button type="button" class="star text-2xl" data-value="2">☆</button>
+                                        <button type="button" class="star text-2xl" data-value="3">☆</button>
+                                        <button type="button" class="star text-2xl" data-value="4">☆</button>
+                                        <button type="button" class="star text-2xl" data-value="5">☆</button>
+                                      </div>
+                                    </div>
+                                    <!-- Comment Box -->
+                                    <div class="mt-4">
+                                      <label for="rating-comment" class="text-2xl font-semibold text-gray-700">Add a
+                                        comment:</label>
+                                      <textarea id="rating-comment" rows="3"
+                                        class="mt-2 w-full rounded-md border border-gray-300 p-2 text-sm text-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                        placeholder="Write your feedback here..."></textarea>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="bg-gray-50 px-6 py-4 sm:flex sm:flex-row-reverse sm:px-6">
+                              <button type="submit"
+                                class="submit-rating inline-flex w-full justify-center rounded-md bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">Submit
+                                Rating</button>
+                              <button type="button"
+                                class="cancel-rating mt-3 inline-flex w-full justify-center rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+
+                </span>
 
                 <div class="order-details hidden">
                   <hr class="my-5">
                   <div class="relative p-4 flex flex-col gap-y-5">
                     <p class="text-2xl font-semibold text-gray-800 p-1 uppercase">Items</p>
 
-                    <div class="item-details flex gap-3">
+                    <div class="item-details flex lg:flex-row flex-col gap-3">
                       <img
                         src="https://media-photos.depop.com/b1/6406248/2026089428_ef0319f8890a4042907e698563b270d7/P0.jpg"
-                        class="aspect-square w-[10%] rounded-md bg-gray-200 object-cover">
+                        class="aspect-square xl:w-[10%] lg:w-[30%] w-[70%] rounded-md bg-gray-200 object-cover">
 
                       <span>
                         <h4 class="text-base text-left sm:text-lg font-semibold text-gray-800">Summer Crop Top</h4>
@@ -892,10 +1014,10 @@
                     </div>
 
 
-                    <div class="item-details flex gap-3">
+                    <div class="item-details flex lg:flex-row flex-col gap-3">
                       <img
                         src="https://media-photos.depop.com/b1/6406248/2026089428_ef0319f8890a4042907e698563b270d7/P0.jpg"
-                        class="aspect-square w-[10%] rounded-md bg-gray-200 object-cover">
+                        class="aspect-square xl:w-[10%] lg:w-[30%] w-[70%] rounded-md bg-gray-200 object-cover">
 
                       <span>
                         <h4 class="text-base text-left sm:text-lg font-semibold text-gray-800">Summer Crop Top</h4>
@@ -923,8 +1045,8 @@
                   #001</h5>
 
                 <p class="mt-2 text-sm text-zinc-600 upper">Sent on: 2025-01-07</p>
-                <p class="mt-2 text-sm text-zinc-600">Items: 3 | Buyer: <span
-                    class="font-semibold text-zinc-800">John's Store</span></p>
+                <p class="mt-2 text-sm text-zinc-600">Items: 3 | Buyer: <span class="font-semibold text-zinc-800">John's
+                    Store</span></p>
                 <p class="mt-2 text-lg text-zinc-800 font-bold uppercase">Total: 150 BGN</p>
                 <p class="mt-2 text-sm text-zinc-900">Status: <span
                     class="status text-yellow-600 font-semibold">Pending</span></p>
@@ -935,19 +1057,19 @@
                   View Details
                 </button>
                 <button
-                class="status-btn mt-4 px-4 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-600 transition-all duration-300 focus:outline-none">
+                  class="status-btn mt-4 px-4 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-600 transition-all duration-300 focus:outline-none">
                   Mark as Shipped
                 </button>
 
                 <div class="order-details hidden">
                   <hr class="my-5">
-                  <div class="relative p-4  flex flex-col gap-y-5">
+                  <div class="relative p-4 flex flex-col gap-y-5">
                     <p class="text-2xl font-semibold text-gray-800 p-1 uppercase">Items</p>
 
-                    <div class="item-details flex gap-3">
+                    <div class="item-details flex lg:flex-row flex-col gap-3">
                       <img
                         src="https://media-photos.depop.com/b1/6406248/2026089428_ef0319f8890a4042907e698563b270d7/P0.jpg"
-                        class="aspect-square w-[10%] rounded-md bg-gray-200 object-cover">
+                        class="aspect-square xl:w-[10%] lg:w-[30%] w-[70%] rounded-md bg-gray-200 object-cover">
 
                       <span>
                         <h4 class="text-base text-left sm:text-lg font-semibold text-gray-800">Summer Crop Top</h4>
@@ -958,10 +1080,10 @@
                     </div>
 
 
-                    <div class="item-details flex gap-3">
+                    <div class="item-details flex lg:flex-row flex-col gap-3">
                       <img
                         src="https://media-photos.depop.com/b1/6406248/2026089428_ef0319f8890a4042907e698563b270d7/P0.jpg"
-                        class="aspect-square w-[10%] rounded-md bg-gray-200 object-cover">
+                        class="aspect-square xl:w-[10%] lg:w-[30%] w-[70%] rounded-md bg-gray-200 object-cover">
 
                       <span>
                         <h4 class="text-base text-left sm:text-lg font-semibold text-gray-800">Summer Crop Top</h4>
@@ -1013,16 +1135,16 @@
     const detailsButtons = document.querySelectorAll('.details-btn');
     detailsButtons.forEach(b => {
       b.addEventListener('click', () => {
-        const items = b.nextElementSibling;
+        const items = b.closest('.order').querySelector('.order-details');
 
         if (!items.classList.contains('order-details')) {
           console.warn('Incorrect element')
           return;
         }
-        
-        
+
+
         items.classList.toggle('hidden');
-        if (items.classList.contains('hidden'))  {
+        if (items.classList.contains('hidden')) {
           b.textContent = 'View Details';
         } else {
           b.textContent = 'Close Details'
@@ -1035,7 +1157,8 @@
     const statusButtons = document.querySelectorAll('.status-btn');
     statusButtons.forEach(b => {
       b.addEventListener('click', () => {
-        const statusElement = b.closest('.order').querySelector('.status');
+        const parentElement = b.closest('.order');
+        const statusElement = parentElement.querySelector('.status');
 
         if (b.textContent.includes('Shipped')) {
           statusElement.classList.replace('text-yellow-600', 'text-orange-600');
@@ -1043,11 +1166,51 @@
         } else {
           statusElement.classList.replace('text-orange-600', 'text-green-600');
           statusElement.textContent = 'Completed';
+
+          // TODO: SAME AS IN ACCOUNT SETTINGS - MERGE THEM
+          const formElement = parentElement.querySelector('.form-rating');
+          const reviewCancelButton = formElement.querySelector('.cancel-rating');
+          const reviewModal = formElement.querySelector('.review-modal');
+          const reviewBackdrop = formElement.querySelector('.review-backdrop');
+          const reviewPanel = formElement.querySelector('.review-panel');
+
+          function toggleDeactivateModal() {
+            reviewModal.classList.toggle('pointer-events-none');
+            reviewBackdrop.classList.toggle('opacity-0');
+            reviewBackdrop.classList.toggle('opacity-100');
+            reviewPanel.classList.toggle('opacity-0');
+            reviewPanel.classList.toggle('translate-y-4');
+            reviewPanel.classList.toggle('translate-y-0');
+            reviewPanel.classList.toggle('sm:scale-95');
+            reviewPanel.classList.toggle('sm:scale-100');
+          }
+
+          function setupStarRating(section) {
+            const stars = document.querySelectorAll(`.${section} .star`);
+            stars.forEach((star) => {
+              star.addEventListener('click', () => {
+                const value = star.getAttribute('data-value');
+                stars.forEach((s, index) => {
+                  s.textContent = index < value ? '⭐' : '☆';
+                });
+                star.parentElement.setAttribute('data-rating', value);
+              });
+            });
+          }
+
+          toggleDeactivateModal();
+          reviewCancelButton.addEventListener('click', toggleDeactivateModal);
+          setupStarRating('seller-rating');
+          setupStarRating('order-rating');
         }
 
         b.remove();
       })
-    })
+    });
+
+
+
+
   </script>
 </body>
 
