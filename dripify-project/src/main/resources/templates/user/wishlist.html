@@ -917,27 +917,7 @@
 
 
     <script src="/static/js/nav-functionality.js"></script>
-    <script>
-        const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
-        addToCartBtns.forEach(b => {
-            b.addEventListener('click', () => {
-                b.classList.add('bg-pink-700', 'hover:bg-pink-700');
-                b.classList.remove('bg-zinc-900', 'hover:bg-zinc-700');
-
-
-                setTimeout(() => {
-                    b.classList.remove('bg-pink-700', 'hover:bg-pink-800');
-                    b.classList.add('bg-zinc-900', 'hover:bg-zinc-700')
-                }, 2000);
-            });
-        });
-
-        document.querySelectorAll('.remove-btn').forEach(b => {
-            b.addEventListener('click', () => {
-                b.closest('.item').remove();
-            });
-        });
-    </script>
+    <script src="/static/js/common.js"></script>
 </body>
 
 </html>

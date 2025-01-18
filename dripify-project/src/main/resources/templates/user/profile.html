@@ -1170,27 +1170,7 @@
     </footer>
 
     <script src="/static/js/nav-functionality.js"></script>
-    <script>
-        const itemsButton = document.getElementById('items-btn');
-        const reviewsButton = document.getElementById('reviews-btn');
-        const itemsSection = document.getElementById('items-section');
-        const reviewsSection = document.getElementById('reviews-section');
-
-
-        //TODO: SAME FUNCTION AS IN ORDERS.HTML MERGE THEM
-        function toggleAsideClasses(activeTab, inactiveTab, activeDiv, inactiveDiv) {
-            activeTab.classList.replace('font-semibold', 'font-bold');
-            activeTab.classList.add('border');
-            activeDiv.classList.remove('hidden');
-
-            inactiveTab.classList.replace('font-bold', 'font-semibold');
-            inactiveTab.classList.remove('border');
-            inactiveDiv.classList.add('hidden');
-        }
-
-        itemsButton.addEventListener('click', () => toggleAsideClasses(itemsButton, reviewsButton, itemsSection, reviewsSection));
-        reviewsButton.addEventListener('click', () => toggleAsideClasses(reviewsButton, itemsButton, reviewsSection, itemsSection));
-    </script>
+    <script src="/static/js/common.js"></script>
 </body>
 
 </html>

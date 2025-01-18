@@ -1147,50 +1147,8 @@
 
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script src="/static/js/nav-functionality.js"></script>
-  <script>
-    AOS.init();
-
-    const scrollToTopButton = document.getElementById('scrollToTop');
-
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 1000) {
-        scrollToTopButton.classList.add('opacity-100');
-        scrollToTopButton.classList.remove('opacity-0');
-      } else {
-        scrollToTopButton.classList.add('opacity-0');
-        scrollToTopButton.classList.remove('opacity-100');
-      }
-    });
-
-    scrollToTopButton.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-
-
-    document.querySelectorAll('.toggle-btn').forEach(button => {
-      button.addEventListener('click', () => {
-        const content = button.nextElementSibling;
-        console.log(content);
-
-        content.classList.toggle('hidden');
-      });
-    });
-
-    const filterMenu = document.getElementById("dropdown-filter");
-
-    function toggleFilterMenu() {
-      filterMenu.classList.toggle('opacity-0');
-      filterMenu.classList.toggle('opacity-100');
-
-      filterMenu.classList.toggle('pointer-events-none');
-      filterMenu.classList.toggle('pointer-events-auto');
-    }
-
-
-  </script>
+  <script src="/static/js/common.js"></script>
+  <script src="/static/js/products-func.js"></script>
 </body>
 
 </html>
