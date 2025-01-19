@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" style="font-size: 16px;">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page | DRIPIFY</title>
-  <link rel="stylesheet" href="/src/output.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-  <link rel="stylesheet" href="/node_modules/aos/dist/aos.css">
-  <link rel="shortcut icon" href="/static/images/favicon.ico" />
-</head>
+<head th:insert="~{fragments/head}"></head>
 
 <body>
 
@@ -21,7 +13,7 @@
         <a href="/templates/index.html" class="-m-1.5 p-1.5">
           <span class="sr-only">Your Company</span>
 
-          <img class="h-9" src="/static/images/logo.png" alt="">
+          <img class="h-9" src="/images/logo.png" alt="">
         </a>
       </div>
 
@@ -555,7 +547,7 @@
         <div class="flex items-center justify-between">
           <a href="#" class="-m-1.5 p-1.5">
             <span class="sr-only">Your Company</span>
-            <img class="h-8 w-auto" src="/static/images/logo.png" alt="">
+            <img class="h-8 w-auto" src="/images/logo.png" alt="">
           </a>
 
           <button id="mobile-close-button" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
@@ -807,21 +799,21 @@
     <div class="overflow-hidden mt-8 bg-black py-2 opacity-90">
       <div class="marquee-container animate-marquee flex h-[350px] md:h-[400px] lg:h-[550px] "
         style="--marquee-offset: 0%;">
-        <img src="/static/images/header/1.jpg" alt="style-showcase-photo">
-        <img src="/static/images/header/2.jpg" alt="style showcase photo">
-        <img src="/static/images/header/3.jpg" alt="style showcase photo">
-        <img src="/static/images/header/4.jpg" alt="style showcase photo">
-        <img src="/static/images/header/5.jpg" alt="style showcase photo">
-        <img src="/static/images/header/6.jpg" alt="style showcase photo">
-        <img src="/static/images/header/7.jpg" alt="style showcase photo">
+        <img src="/images/header/1.jpg" alt="style-showcase-photo">
+        <img src="/images/header/2.jpg" alt="style showcase photo">
+        <img src="/images/header/3.jpg" alt="style showcase photo">
+        <img src="/images/header/4.jpg" alt="style showcase photo">
+        <img src="/images/header/5.jpg" alt="style showcase photo">
+        <img src="/images/header/6.jpg" alt="style showcase photo">
+        <img src="/images/header/7.jpg" alt="style showcase photo">
 
-        <img src="/static/images/header/1.jpg" alt="style showcase photo">
-        <img src="/static/images/header/2.jpg" alt="style showcase photo">
-        <img src="/static/images/header/3.jpg" alt="style showcase photo">
-        <img src="/static/images/header/4.jpg" alt="style showcase photo">
-        <img src="/static/images/header/5.jpg" alt="style showcase photo">
-        <img src="/static/images/header/6.jpg" alt="style showcase photo">
-        <img src="/static/images/header/7.jpg" alt="style showcase photo">
+        <img src="/images/header/1.jpg" alt="style showcase photo">
+        <img src="/images/header/2.jpg" alt="style showcase photo">
+        <img src="/images/header/3.jpg" alt="style showcase photo">
+        <img src="/images/header/4.jpg" alt="style showcase photo">
+        <img src="/images/header/5.jpg" alt="style showcase photo">
+        <img src="/images/header/6.jpg" alt="style showcase photo">
+        <img src="/images/header/7.jpg" alt="style showcase photo">
       </div>
     </div>
 
@@ -944,7 +936,7 @@
             </div>
             <div class="md:h-[450px] md:w-[450px] rounded-tr-full overflow-hidden">
               <img class="object-cover object-top lg:object-left-top w-full h-full"
-                src="/static/images/reviews/ivana-marinova-outfit.jpg" alt="ivana-outfit-review-on-dripify">
+                src="/images/reviews/ivana-marinova-outfit.jpg" alt="ivana-outfit-review-on-dripify">
 
             </div>
           </div>
@@ -956,7 +948,7 @@
             class="relative flex h-full flex-col justify-between overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
             <div class="md:h-[500px] md:w-[500px] rounded-r-full rounded-tr-none overflow-hidden">
               <img class="object-cover object-top lg:object-top w-full h-full"
-                src="/static/images/reviews/yordan-koichev-oufit.jpg" alt="yordan-outfit-review-on-dripify">
+                src="/images/reviews/yordan-koichev-oufit.jpg" alt="yordan-outfit-review-on-dripify">
             </div>
 
             <div class="px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10">
@@ -982,7 +974,7 @@
             </div>
             <div class="md:w-[450px] md:h-[500px] rounded-tl-full overflow-hidden">
               <img class="object-cover object-center w-full h-full"
-                src="/static/images/reviews/daniela-velikova-outfit.jpg" alt="daniela-review-on-dripify">
+                src="/images/reviews/daniela-velikova-outfit.jpg" alt="daniela-review-on-dripify">
             </div>
           </div>
         </div>
@@ -1008,7 +1000,7 @@
 
           <a href="#">
             <div class="group relative text-center">
-              <img src="/static/images/categories/coats-and-jackets-category.jpg"
+              <img src="/images/categories/coats-and-jackets-category.jpg"
                 alt="coats and jackets category visual"
                 class="object-top w-full lg:h-full md:h-[300px]  rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
               <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">COATS & JACKETS</p>
@@ -1017,7 +1009,7 @@
 
           <a href="#">
             <div class="group relative text-center">
-              <img src="/static/images/categories/jeans-and-pants-category.jpg" alt="jeans and pants category visual"
+              <img src="/images/categories/jeans-and-pants-category.jpg" alt="jeans and pants category visual"
                 class="lg:h-full md:h-[300px] object-bottom w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
               <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">JEANS & PANTS</p>
             </div>
@@ -1026,7 +1018,7 @@
 
           <a href="#">
             <div class="group relative text-center">
-              <img src="/static/images/categories/sneakers-category.jpg" alt="sneakers category visual"
+              <img src="/images/categories/sneakers-category.jpg" alt="sneakers category visual"
                 class="lg:h-full md:h-[300px] w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
               <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">SNEAKERS</p>
             </div>
@@ -1034,7 +1026,7 @@
 
           <a href="#">
             <div class="group relative text-center">
-              <img src="/static/images/categories/accessories-category.jpg" alt="accessories category visual"
+              <img src="/images/categories/accessories-category.jpg" alt="accessories category visual"
                 class="lg:h-full md:h-[300px] w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
               <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">ACCESSORIES</p>
             </div>
@@ -1072,7 +1064,7 @@
     <div class="w-full max-w-screen-xl mx-auto p-4">
       <div class="sm:flex sm:items-center sm:justify-between">
         <div class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-          <img src="/static/images/white-logo.png" class="h-16" alt="Dripify Logo" />
+          <img src="/images/white-logo.png" class="h-16" alt="Dripify Logo" />
           <span class="text-white self-center text-2xl font-bold tracking-widest uppercase">Dripify</span>
         </div>
 
@@ -1101,10 +1093,5 @@
     class="hidden sm:block fixed bottom-5 right-5 bg-black text-white text-4xl rounded-full p-5 px-8 shadow-lg opacity-0 transition-opacity duration-300">↑</button>
 
 
-
-  <script src="/node_modules/aos/dist/aos.js"></script>
-  <script src="/static/js/nav-functionality.js"></script>
-  <script src="/static/js/index-func.js"></script>
-  <script src="/static/js/common.js"></script>
 </body>
 </html>

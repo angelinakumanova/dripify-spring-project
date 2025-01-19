@@ -3,6 +3,6 @@ spring:
     name: "dripify"
   datasource:
     driver-class-name: "com.mysql.jdbc.Driver"
-    url: "jdbc:mysql://localhost:3306/dripify?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
+    url: "jdbc:mysql://localhost:3306/dripify_app?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
     username: ${dbName}
     password: ${dbPassword}
