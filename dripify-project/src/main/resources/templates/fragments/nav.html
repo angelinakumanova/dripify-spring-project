@@ -6,7 +6,7 @@
                 <a href="/templates/index.html" class="-m-1.5 p-1.5">
                     <span class="sr-only">Your Company</span>
 
-                    <img class="h-9" src="/static/images/logo.png" alt="">
+                    <img class="h-9" src="/images/logo.png" alt="">
                 </a>
             </div>
 
@@ -103,7 +103,7 @@
 
                                                                         <div class="flex">
                                                                             <button type="button"
-                                                                                    class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
+                                                                                    class="font-medium text-zinc-900 hover:text-zinc-600">Remove</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -122,14 +122,14 @@
                                                 </div>
                                                 <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                                 <div class="mt-6">
-                                                    <a href="#"
-                                                       class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
+                                                    <a href="/templates/checkout.html"
+                                                       class="flex items-center justify-center rounded-md border border-transparent bg-zinc-900 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-zinc-600">Checkout</a>
                                                 </div>
                                                 <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                                                     <p>
                                                         or
                                                         <button type="button"
-                                                                class="close-button font-medium text-indigo-600 hover:text-indigo-500">
+                                                                class="close-button font-medium text-zinc-700 hover:text-zinc-900">
                                                             Continue Shopping
                                                             <span aria-hidden="true"> &rarr;</span>
                                                         </button>
@@ -181,7 +181,7 @@
                                     Women
                                     <span
                                             class="absolute bottom-0 left-0 h-[2px] w-full bg-gray-800 transition-all duration-300 group-hover:w-full">
-                    </span>
+                                    </span>
                                 </p>
 
                                 <p id="men-tab" category="men"
@@ -189,7 +189,7 @@
                                     Men
                                     <span
                                             class="absolute bottom-0 left-0 h-[2px] w-0 bg-gray-800 transition-all duration-300 group-hover:w-full">
-                    </span>
+                                    </span>
                                 </p>
                             </div>
 
@@ -362,7 +362,7 @@
 
 
                 <!-- LOGGED IN USER VISUALS -->
-                <div class="logged-in flex gap-4 items-center flex-shrink-0">
+                <div class="hidden logged-in flex gap-4 items-center flex-shrink-0">
                     <div class="cart">
                         <button id="shopping-cart-button">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="size-8 hover:cursor-pointer">
@@ -435,7 +435,7 @@
 
                                                                             <div class="flex">
                                                                                 <button type="button"
-                                                                                        class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
+                                                                                        class="font-medium text-zinc-900 hover:text-zinc-600">Remove</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -454,14 +454,14 @@
                                                     </div>
                                                     <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                                     <div class="mt-6">
-                                                        <a href="#"
-                                                           class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
+                                                        <a href="/templates/checkout.html"
+                                                           class="flex items-center justify-center rounded-md border border-transparent bg-zinc-900 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-zinc-600">Checkout</a>
                                                     </div>
                                                     <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                                                         <p>
                                                             or
                                                             <button type="button"
-                                                                    class="close-button font-medium text-indigo-600 hover:text-indigo-500">
+                                                                    class="close-button font-medium text-zinc-700 hover:text-zinc-900">
                                                                 Continue Shopping
                                                                 <span aria-hidden="true"> &rarr;</span>
                                                             </button>
@@ -514,11 +514,11 @@
 
                 </div>
 
-                <div class="flex gap-4 flex-shrink-0 hidden">
+                <div class="flex gap-4 flex-shrink-0">
                     <a href="/templates/login.html" class="hover:font-bold text-sm font-semibold text-gray-900">
                         LOG IN
                     </a>
-                    <a href="/templates/register.html" class="hover:font-bold text-sm font-semibold text-gray-900">
+                    <a th:href="@{/register}" class="hover:font-bold text-sm font-semibold text-gray-900">
                         REGISTER
                     </a>
                 </div>
@@ -540,7 +540,7 @@
                 <div class="flex items-center justify-between">
                     <a href="#" class="-m-1.5 p-1.5">
                         <span class="sr-only">Your Company</span>
-                        <img class="h-8 w-auto" src="/static/images/logo.png" alt="">
+                        <img class="h-8 w-auto" src="/images/logo.png" alt="">
                     </a>
 
                     <button id="mobile-close-button" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">

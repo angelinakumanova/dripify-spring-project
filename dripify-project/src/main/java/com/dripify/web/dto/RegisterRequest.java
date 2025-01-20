@@ -1,0 +1,70 @@
+package com.dripify.web.dto;
+
+import jakarta.validation.constraints.*;
+
+
+public class RegisterRequest {
+    @Size(min = 2, max = 30)
+    @Pattern(regexp = "[A-Za-z][A-Za-z0-9]+")
+    private String username;
+    @Size(min = 2)
+    private String firstName;
+    @Size(min = 2)
+    private String lastName;
+    @NotBlank
+    @Email
+    private String email;
+    @Size(min = 6)
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,20}$")
+    private String password;
+
+    private String confirmPassword;
+
+    public @Size(min = 2, max = 30) @Pattern(regexp = "[A-Za-z][A-Za-z0-9]+") String getUsername() {
+        return username;
+    }
+
+    public void setUsername(@Size(min = 2, max = 30) @Pattern(regexp = "[A-Za-z][A-Za-z0-9]+") String username) {
+        this.username = username;
+    }
+
+    public @Size(min = 2) String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(@Size(min = 2) String firstName) {
+        this.firstName = firstName;
+    }
+
+    public @Size(min = 2) String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(@Size(min = 2) String lastName) {
+        this.lastName = lastName;
+    }
+
+    public @Email String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@Email String email) {
+        this.email = email;
+    }
+
+    public @Size(min = 6) @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,20}$") String getPassword() {
+        return password;
+    }
+
+    public void setPassword(@Size(min = 6) @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,20}$") String password) {
+        this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+}

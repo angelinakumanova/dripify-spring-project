@@ -1,125 +1,168 @@
 <!DOCTYPE html>
 <html lang="en" style="font-size: 16px;">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register | DRIPIFY</title>
-    <link rel="stylesheet" href="/src/output.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="shortcut icon" href="/static/images/favicon.ico" />
-</head>
+<head th:replace="~{fragments/head::head(pageName = 'Register')}"></head>
 
 <body>
 
 
-    <div >
-        <div class="logo">
-            <a href="/templates/index.html"
-                class="z-10 flex gap-2 items-center justify-center mt-12 lg:absolute lg:right-0 lg:-top-7 xl:top-0 lg:m-12 xl:m-12">
-                <img class="h-12 w-auto" src="/static/images/logo.png" alt="dripify-logo">
-                <p class="font-bold text-xl tracking-widest">DRIPIFY</p>
+<div>
+    <div class="logo">
+        <a th:href="@{/}"
+           class="z-10 flex gap-2 items-center justify-center mt-12 lg:absolute lg:right-0 lg:-top-7 xl:top-0 lg:m-12 xl:m-12">
+            <img class="h-12 w-auto" src="/images/logo.png" alt="dripify-logo">
+            <p class="font-bold text-xl tracking-widest">DRIPIFY</p>
 
-            </a>
+        </a>
 
-        </div>
+    </div>
 
 
-        <!-- TODO: CHECK IF TERMS AND CONDITIONS SHOULD BE ADD AS CHECK -->
-        <div class="flex flex-row-reverse justify-between p-4 overflow-hidden xl:gap-0 lg:gap-6">
 
-            <!-- FORM -->
-            <div
+    <div class="flex flex-row-reverse justify-between p-4 overflow-hidden xl:gap-0 lg:gap-6">
+
+        <!-- FORM -->
+        <div
                 class="animate__animated animate__fadeInRight mx-auto flex min-h-full w-[500px] flex-col justify-center">
-                <div>
+            <div>
 
-                    <div class="sm:mb-14 lg:mb-5 xl:mb-14">
-                        <h2 class="mt-10 text-center text-3xl font-bold tracking-tight text-gray-900">Join the Drip
-                            Movement!</h2>
-                        <h3 class="mt-2 text-center text-gray-500">Sign up and start swapping styles with a community
-                            that cares.</h4>
+                <div class="sm:mb-14 lg:mb-5 xl:mb-14">
+                    <h2 class="mt-10 text-center text-3xl font-bold tracking-tight text-gray-900">Join the Drip
+                        Movement!</h2>
+                    <h3 class="mt-2 text-center text-gray-500">Sign up and start swapping styles with a community
+                        that cares.</h3>
+                </div>
+
+
+                <form th:action="@{/register}" th:method="POST" th:object="${userRegister}"
+                      class="space-y-6" action="#" method="POST" novalidate>
+                    <div>
+                        <label for="username"
+                               class="block text-sm/6 font-medium text-gray-900 required">Username</label>
+                        <div class="mt-2">
+                            <input th:field="*{username}"
+                                   th:errorclass="invalid"
+                                   type="text" name="username" id="username" placeholder=""
+                                   pattern="[A-Za-z][A-Za-z0-9]+" required
+
+                                   class="peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
+                            <span class="mt-2 ml-1 hidden text-sm text-red-500
+                             peer-[&:not(:placeholder-shown):invalid]:block
+                             peer-[.invalid]:block">
+                                Username must start with a letter and contain only letters and numbers.
+                            </span>
+                            <span th:classappend="${isTaken} == true ? '' : 'hidden'"
+                                  class="mt-2 ml-1 text-sm text-red-500">
+                                    Username already exists.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="first-name-box w-full">
+                        <label for="firstName" class="block text-sm/6 font-medium text-gray-900">First
+                            Name</label>
+                        <div class="mt-2">
+                            <input th:field="*{firstName}"
+                                   th:errorclass="invalid"
+                                   type="text" name="firstName" id="firstName" placeholder="" pattern="[A-Za-z]+"
+                                   required class="peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full
+                                   bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1
+                                   outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2
+                                   focus:outline-pink-600 sm:text-sm/6">
+                            <span class="mt-2 ml-1 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block  peer-[.invalid]:block">
+                                Please enter a valid first name. Only alphabetic characters are allowed.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="last-name-box w-full">
+                        <label for="lastName" class="block text-sm/6 font-medium text-gray-900">Last
+                            Name</label>
+                        <div class="mt-2">
+                            <input th:field="*{lastName}"
+                                   th:errorclass="invalid"
+                                   type="text" name="lastName" id="lastName" placeholder="" pattern="[A-Za-z]+"
+                                   required
+                                   class="peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
+                            <span class="mt-2 ml-1 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block  peer-[.invalid]:block">
+                                Please enter a valid last name. Only alphabetic characters are allowed.
+                            </span>
+                        </div>
                     </div>
 
 
-                    <form class="space-y-6" action="#" method="POST">
-                        <div>
-                            <label for="username" class="block text-sm/6 font-medium text-gray-900 required">Username</label>
-                            <div class="mt-2">
-                                <input type="text" name="username" id="username" required
-                                    class="block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
-                            </div>
+                    <div>
+                        <label for="email" class="block text-sm/6 font-medium text-gray-900">Email address</label>
+                        <div class="mt-2">
+                            <input th:field="*{email}"
+                                   th:errorclass="invalid"
+                                   type="email" name="email" id="email" autocomplete="email" required placeholder=""
+                                   class="peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full bg-white
+                                     px-3 py-1.5 text-base text-gray-900 outline outline-1
+                                    -outline-offset-1 outline-gray-300 placeholder:text-gray-400
+                                    focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
+                            <span class="hidden mt-2 ml-1 text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block peer-[.invalid]:block">
+                                Please enter a valid email address
+                            </span>
                         </div>
+                    </div>
 
-                        <div class="flex justify-between gap-3">
-                            <div class="first-name-box w-full">
-                                <label for="firstName" class="block text-sm/6 font-medium text-gray-900">First
-                                    Name</label>
-                                <div class="mt-2">
-                                    <input type="text" name="firstName" id="firstName" required
-                                        class="block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
-                                </div>
-                            </div>
+                    <div>
+                        <label for="password" class="block text-sm/6 font-medium text-gray-900">Password</label>
 
-                            <div class="last-name-box w-full">
-                                <label for="lastName" class="block text-sm/6 font-medium text-gray-900">Last
-                                    Name</label>
-                                <div class="mt-2">
-                                    <input type="text" name="lastName" id="lastName" required
-                                        class="block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
-                                </div>
-                            </div>
-
+                        <div class="mt-2">
+                            <input th:field="*{password}"
+                                   th:errorclass="invalid"
+                                   type="password" name="password" id="password" placeholder=""
+                                   pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$" autocomplete="current-password"
+                                   required
+                                   class="peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
+                            <span class="mt-2 ml-1 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block peer-[.invalid]:block">
+                                Must be 6 - 20 characters long and at least 1 uppercase letter
+                            </span>
                         </div>
+                    </div>
 
-                        <div>
-                            <label for="email" class="block text-sm/6 font-medium text-gray-900">Email address</label>
-                            <div class="mt-2">
-                                <input type="email" name="email" id="email" autocomplete="email" required
-                                    class="block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
-                            </div>
+                    <div>
+                        <label for="confirmPassword" class="block text-sm/6 font-medium text-gray-900">Confirm
+                            Password</label>
+
+                        <div class="mt-2">
+                            <input th:field="*{confirmPassword}" type="password" name="confirmPassword" id="confirmPassword" required
+                                   class="block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1
+                                     -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2
+                                      focus:outline-pink-600 sm:text-sm/6">
+                            <span   th:classappend="${areMatching} == true ? 'hidden' : ''"
+                                    class="mt-2 ml-1 text-sm text-red-500">
+                                    Passwords do not match
+                                </span>
                         </div>
-
-                        <div>
-                            <label for="password" class="block text-sm/6 font-medium text-gray-900">Password</label>
-
-                            <div class="mt-2">
-                                <input type="password" name="password" id="password" autocomplete="current-password"
-                                    required
-                                    class="block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label for="confirmPassword" class="block text-sm/6 font-medium text-gray-900">Confirm Password</label>
-
-                            <div class="mt-2">
-                                <input type="confirmPassword" name="confirmPassword" id="confirmPassword"
-                                    required
-                                    class="block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
-                            </div>
-                        </div>
-
-                        <div>
-                            <button type="submit"
-                                class="flex w-full justify-center rounded-full bg-zinc-900 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-zinc-600 ease-in duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600">Sign
-                                up</button>
-                        </div>
-                    </form>
-
-                    <p class="mt-10 text-center text-sm/6 text-gray-500">
-                        Already have an account?
-                        <a href="/templates/login.html" class="font-semibold text-pink-600 hover:text-pink-800 ease-in duration-300">Log in</a>
-                    </p>
-                </div>
-            </div>
+                    </div>
 
 
-            <div class="hidden lg:block animate__animated animate__fadeInLeft image-box w-[38%]
-       rounded-tr-full rounded-tl-3xl rounded-b-[15em] overflow-hidden">
-                <img class="object-contain xl:h-full xl:w-full" src="/static/images/dripify-register-poster.png" alt="">
+                    <button type="submit" class="flex w-full justify-center
+                     rounded-full bg-zinc-900 px-3 py-1.5 text-sm/6 font-semibold
+                      text-white shadow-sm hover:bg-zinc-600 ease-in duration-300
+                       focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                        focus-visible:outline-pink-600">Sign up</button>
+
+                </form>
+
+                <p class="mt-10 text-center text-sm/6 text-gray-500">
+                    Already have an account?
+                    <a href="/templates/login.html"
+                       class="font-semibold text-pink-600 hover:text-pink-800 ease-in duration-300">Log in</a>
+                </p>
             </div>
         </div>
+
+
+        <div class="hidden lg:block animate__animated animate__fadeInLeft image-box w-[38%]
+       rounded-tr-full rounded-tl-3xl rounded-b-[15em] overflow-hidden">
+            <img class="object-contain xl:h-full xl:w-full" src="/images/dripify-register-poster.png" alt="">
+        </div>
     </div>
+</div>
 
 
 
