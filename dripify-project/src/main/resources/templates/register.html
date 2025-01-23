@@ -42,24 +42,27 @@
                         <div class="mt-2">
                             <input th:field="*{username}"
                                    type="text" name="username" id="username" placeholder=""
-                                   pattern="[A-Za-z][A-Za-z0-9]+" required
-                                   class="user-input peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full
-                                    bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1
-                                    outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2
-                                    focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
+                                   pattern="^[a-zA-Z][a-zA-Z0-9]{4,}$" required
+                                   class="register-user-input user-input peer invalid:[&:not(:placeholder-shown)] block
+                                    w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1
+                                    -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline
+                                    focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
+
                             <span class="mt-2 ml-1 hidden text-sm text-red-500
                              peer-[&:not(:placeholder-shown):invalid]:block">
-                                Username must start with a letter and contain only letters and numbers.
+                                • Must begin with a letter, consist only of letters and numbers,
+                                and be at least 5 characters long.
+                            </span>
+
+                            <span class="register-user-status hidden mt-2 ml-1 text-sm text-red-500">
+                                    Username already exists.
                             </span>
 
                             <span th:if="${#fields.hasErrors('username')}"
                                   th:text="${#fields.errors('username')}"
                                   class="server mt-2 ml-1 text-sm text-red-500">
                             </span>
-                            <span
-                                  class="server mt-2 ml-1 text-sm text-red-500">
-                                    Username already exists.
-                            </span>
+
                         </div>
                     </div>
 

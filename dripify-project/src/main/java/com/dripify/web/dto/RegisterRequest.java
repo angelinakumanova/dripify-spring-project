@@ -4,8 +4,8 @@ import jakarta.validation.constraints.*;
 
 @MatchFields(firstField = "password", secondField = "confirmPassword")
 public class RegisterRequest {
-    @Size(min = 2, max = 30, message = "Length must be between 2 and 30 chars")
-    @Pattern(regexp = "[A-Za-z][A-Za-z0-9]+")
+    @Size(min = 5, max = 30, message = "Length must be between 5 and 30 chars")
+    @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9]{4,}$")
     private String username;
     @Size(min = 2)
     private String firstName;

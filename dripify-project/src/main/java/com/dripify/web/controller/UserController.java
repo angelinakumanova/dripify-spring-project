@@ -4,15 +4,15 @@ import com.dripify.user.service.UserService;
 import com.dripify.web.dto.LoginRequest;
 import com.dripify.web.dto.RegisterRequest;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@Slf4j
 public class UserController {
 
     private final UserService userService;
@@ -42,13 +42,19 @@ public class UserController {
     }
 
 
+    @GetMapping("/register/validate-username")
+    @ResponseBody
+    public boolean checkUsernameExists(@RequestParam String username) {
+        return userService.existsByUsername(username);
+    }
+
     @PostMapping("/register")
     public ModelAndView registerPost(@Valid RegisterRequest registerRequest,
                                      BindingResult bindingResult, RedirectAttributes rAtt) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("register");
 
-        if (userService.getUserByUsername(registerRequest.getUsername()) == null) {
+        if (userService.existsByUsername(registerRequest.getUsername())) {
             bindingResult.rejectValue("username", "username.exists", "Username is already taken.");
         }
 

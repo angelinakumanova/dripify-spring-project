@@ -16,8 +16,8 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User getUserByUsername(String username) {
-        return this.userRepository.getUserByUsername(username).orElse(null);
+    public boolean existsByUsername(String username) {
+        return this.userRepository.getUserByUsername(username).isPresent();
     }
 
     public boolean existsByEmailAndPassword(String email, String password) {
@@ -29,4 +29,6 @@ public class UserService {
 
         return passwordEncoder.matches(password, user.getPassword());
     }
+
+
 }
