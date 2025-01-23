@@ -1,5 +1,7 @@
 package com.dripify.web.controller;
 
+import com.dripify.user.service.UserService;
+import com.dripify.web.dto.LoginRequest;
 import com.dripify.web.dto.RegisterRequest;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -13,15 +15,30 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class UserController {
 
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @ModelAttribute("userRegister")
     public RegisterRequest userRegister() {
-        // Initializes the RegisterRequest object for the model
         return new RegisterRequest();
     }
+
+    @ModelAttribute("userLogin")
+    public LoginRequest userLogin() {
+        return new LoginRequest();
+    }
+
     @GetMapping("/register")
     public String getRegister() {
-
         return "register";
+    }
+
+    @GetMapping("/login")
+    public String getLogin() {
+        return "login";
     }
 
 
@@ -31,9 +48,11 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("register");
 
+        if (userService.getUserByUsername(registerRequest.getUsername()) == null) {
+            bindingResult.rejectValue("username", "username.exists", "Username is already taken.");
+        }
+
         if (bindingResult.hasErrors()) {
-            rAtt.addFlashAttribute("isTaken", true);
-            rAtt.addFlashAttribute("areMatching", registerRequest.getPassword().equals(registerRequest.getConfirmPassword()));
             rAtt.addFlashAttribute("userRegister", registerRequest);
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.userRegister", bindingResult);
 
@@ -41,5 +60,17 @@ public class UserController {
         }
 
         return modelAndView;
+    }
+
+    @PostMapping("/login")
+    public ModelAndView loginPost(LoginRequest loginRequest, RedirectAttributes rAtt) {
+
+        if (!this.userService.existsByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword())) {
+            rAtt.addFlashAttribute("userExists", false);
+
+            return new ModelAndView("redirect:/login");
+        }
+
+        return new ModelAndView("redirect:/");
     }
 }

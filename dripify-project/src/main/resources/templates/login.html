@@ -1,23 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" style="font-size: 16px;">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login | DRIPIFY</title>
-  <link rel="stylesheet" href="/src/output.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-  <link rel="shortcut icon" href="/static/images/favicon.ico" />
-</head>
+<head th:replace="~{fragments/head::head(pageName = 'Login')}"></head>
 
 <body>
 
 
   <div>
     <div class="logo">
-      <a href="/templates/index.html"
+      <a th:href="@{/}"
         class="z-10 flex gap-2 items-center justify-center mt-12 lg:absolute lg:m-6 xl:m-12">
-        <img class="h-12 w-auto" src="/static/images/logo.png" alt="dripify-logo">
+        <img class="h-12 w-auto" src="/images/logo.png" alt="dripify-logo">
         <p class="font-bold text-xl tracking-widest">DRIPIFY</p>
       </a>
     </div>
@@ -31,16 +24,19 @@
 
           <div class="mb-14">
             <h2 class="mt-10 text-center text-3xl font-bold tracking-tight text-gray-900">Good to see you again!</h2>
-            <h3 class="mt-2 text-center text-gray-500">Time to swap, sell, and shine.</h4>
+            <h4 class="mt-2 text-center text-gray-500">Time to swap, sell, and shine.</h4>
           </div>
 
 
-          <form class="space-y-6" action="#" method="POST">
+          <form class="space-y-6" th:action="@{/login}" th:method="POST" th:object="${userLogin}">
+
             <div>
               <label for="email" class="block text-sm/6 font-medium text-gray-900">Email address</label>
               <div class="mt-2">
-                <input type="email" name="email" id="email" autocomplete="email" required
-                  class="block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
+                <input th:field="*{email}" type="email" name="email" id="email" autocomplete="email"
+                  class="block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline
+                   outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline
+                   focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
               </div>
             </div>
 
@@ -55,21 +51,27 @@
                 </div>
               </div>
               <div class="mt-2">
-                <input type="password" name="password" id="password" autocomplete="current-password" required
-                  class="block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
+                <input th:field="*{password}" type="password" name="password" id="password" autocomplete="current-password"
+                  class="block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline
+                   outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline
+                   focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
               </div>
             </div>
 
-            <div>
-              <button type="submit"
-                class="flex w-full justify-center rounded-full bg-zinc-900 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-zinc-600 ease-in duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600">Sign
-                in</button>
-            </div>
+            <span th:classappend="${userExists} == false ? '' : 'hidden'"
+                  class="mt-2 ml-1 text-sm text-red-500">Invalid username or password</span>
+
+
+            <button type="submit" class="flex w-full justify-center rounded-full bg-zinc-900 px-3
+             py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-zinc-600 ease-in duration-300
+              focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600">
+              Sign in</button>
+
           </form>
 
           <p class="mt-10 text-center text-sm/6 text-gray-500">
             Not a member?
-            <a href="/templates/register.html"
+            <a th:href="@{/register}"
               class="font-semibold text-pink-600 hover:text-pink-800 ease-in duration-300">Join the community now</a>
           </p>
         </div>
@@ -78,7 +80,7 @@
 
       <div class="hidden lg:block animate__animated animate__fadeInRight image-box w-[38%]
        rounded-tl-full rounded-tr-3xl rounded-b-[15em] overflow-hidden">
-        <img class="object-contain xl:h-full xl:w-full" src="/static/images/dripify-poster.png" alt="">
+        <img class="object-cover xl:h-full xl:w-full" src="/images/dripify-poster.png" alt="login-poster">
       </div>
     </div>
   </div>

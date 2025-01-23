@@ -41,18 +41,23 @@
                                class="block text-sm/6 font-medium text-gray-900 required">Username</label>
                         <div class="mt-2">
                             <input th:field="*{username}"
-                                   th:errorclass="invalid"
                                    type="text" name="username" id="username" placeholder=""
                                    pattern="[A-Za-z][A-Za-z0-9]+" required
-
-                                   class="peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
+                                   class="user-input peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full
+                                    bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1
+                                    outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2
+                                    focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
                             <span class="mt-2 ml-1 hidden text-sm text-red-500
-                             peer-[&:not(:placeholder-shown):invalid]:block
-                             peer-[.invalid]:block">
+                             peer-[&:not(:placeholder-shown):invalid]:block">
                                 Username must start with a letter and contain only letters and numbers.
                             </span>
-                            <span th:classappend="${isTaken} == true ? '' : 'hidden'"
-                                  class="mt-2 ml-1 text-sm text-red-500">
+
+                            <span th:if="${#fields.hasErrors('username')}"
+                                  th:text="${#fields.errors('username')}"
+                                  class="server mt-2 ml-1 text-sm text-red-500">
+                            </span>
+                            <span
+                                  class="server mt-2 ml-1 text-sm text-red-500">
                                     Username already exists.
                             </span>
                         </div>
@@ -63,13 +68,12 @@
                             Name</label>
                         <div class="mt-2">
                             <input th:field="*{firstName}"
-                                   th:errorclass="invalid"
                                    type="text" name="firstName" id="firstName" placeholder="" pattern="[A-Za-z]+"
-                                   required class="peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full
+                                   required class="user-input peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full
                                    bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1
                                    outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2
                                    focus:outline-pink-600 sm:text-sm/6">
-                            <span class="mt-2 ml-1 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block  peer-[.invalid]:block">
+                            <span class="mt-2 ml-1 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block">
                                 Please enter a valid first name. Only alphabetic characters are allowed.
                             </span>
                         </div>
@@ -80,11 +84,13 @@
                             Name</label>
                         <div class="mt-2">
                             <input th:field="*{lastName}"
-                                   th:errorclass="invalid"
                                    type="text" name="lastName" id="lastName" placeholder="" pattern="[A-Za-z]+"
                                    required
-                                   class="peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
-                            <span class="mt-2 ml-1 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block  peer-[.invalid]:block">
+                                   class="user-input peer invalid:[&:not(:placeholder-shown)] block w-full
+                                    rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1
+                                    -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline
+                                    focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
+                            <span class="mt-2 ml-1 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block  ">
                                 Please enter a valid last name. Only alphabetic characters are allowed.
                             </span>
                         </div>
@@ -95,13 +101,12 @@
                         <label for="email" class="block text-sm/6 font-medium text-gray-900">Email address</label>
                         <div class="mt-2">
                             <input th:field="*{email}"
-                                   th:errorclass="invalid"
                                    type="email" name="email" id="email" autocomplete="email" required placeholder=""
-                                   class="peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full bg-white
-                                     px-3 py-1.5 text-base text-gray-900 outline outline-1
+                                   class="user-input peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full
+                                    bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1
                                     -outline-offset-1 outline-gray-300 placeholder:text-gray-400
                                     focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
-                            <span class="hidden mt-2 ml-1 text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block peer-[.invalid]:block">
+                            <span class="hidden mt-2 ml-1 text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block ">
                                 Please enter a valid email address
                             </span>
                         </div>
@@ -112,12 +117,11 @@
 
                         <div class="mt-2">
                             <input th:field="*{password}"
-                                   th:errorclass="invalid"
                                    type="password" name="password" id="password" placeholder=""
                                    pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$" autocomplete="current-password"
                                    required
-                                   class="peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
-                            <span class="mt-2 ml-1 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block peer-[.invalid]:block">
+                                   class="user-input peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
+                            <span class="mt-2 ml-1 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block ">
                                 Must be 6 - 20 characters long and at least 1 uppercase letter
                             </span>
                         </div>
@@ -128,14 +132,14 @@
                             Password</label>
 
                         <div class="mt-2">
-                            <input th:field="*{confirmPassword}" type="password" name="confirmPassword" id="confirmPassword" required
-                                   class="block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1
+                            <input th:field="*{confirmPassword}"
+                                   type="password" name="confirmPassword" id="confirmPassword" required
+                                   class="user-input peer block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1
                                      -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2
                                       focus:outline-pink-600 sm:text-sm/6">
-                            <span   th:classappend="${areMatching} == true ? 'hidden' : ''"
-                                    class="mt-2 ml-1 text-sm text-red-500">
+                            <span class="mt-2 ml-1 hidden text-sm text-red-500 ">
                                     Passwords do not match
-                                </span>
+                            </span>
                         </div>
                     </div>
 
@@ -159,7 +163,7 @@
 
         <div class="hidden lg:block animate__animated animate__fadeInLeft image-box w-[38%]
        rounded-tr-full rounded-tl-3xl rounded-b-[15em] overflow-hidden">
-            <img class="object-contain xl:h-full xl:w-full" src="/images/dripify-register-poster.png" alt="">
+            <img class="object-cover xl:h-full xl:w-full" src="/images/dripify-register-poster.png" alt="register-poster">
         </div>
     </div>
 </div>

@@ -2,9 +2,9 @@ package com.dripify.web.dto;
 
 import jakarta.validation.constraints.*;
 
-
+@MatchFields(firstField = "password", secondField = "confirmPassword")
 public class RegisterRequest {
-    @Size(min = 2, max = 30)
+    @Size(min = 2, max = 30, message = "Length must be between 2 and 30 chars")
     @Pattern(regexp = "[A-Za-z][A-Za-z0-9]+")
     private String username;
     @Size(min = 2)
@@ -14,7 +14,6 @@ public class RegisterRequest {
     @NotBlank
     @Email
     private String email;
-    @Size(min = 6)
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,20}$")
     private String password;
 
