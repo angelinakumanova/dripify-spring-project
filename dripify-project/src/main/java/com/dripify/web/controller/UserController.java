@@ -51,13 +51,15 @@ public class UserController {
                                      BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView("register");
 
+
+        if (userService.existsByUsername(registerRequest.getUsername())) {
+            bindingResult.rejectValue("username", "username.exists", "Username already exists");
+            modelAndView.addObject("userExists", true);
+        }
+
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("userRegister", registerRequest);
             modelAndView.addObject("org.springframework.validation.BindingResult.userRegister", bindingResult);
-
-            if (userService.existsByUsername(registerRequest.getUsername())) {
-                modelAndView.addObject("userExists", true);
-            }
 
             return modelAndView;
         }

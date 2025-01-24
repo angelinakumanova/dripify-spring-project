@@ -1,4 +1,4 @@
-package com.dripify.web.dto;
+package com.dripify.validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
