@@ -4,7 +4,6 @@ import com.dripify.user.service.UserService;
 import com.dripify.web.dto.LoginRequest;
 import com.dripify.web.dto.RegisterRequest;
 import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@Slf4j
 public class UserController {
 
     private final UserService userService;
