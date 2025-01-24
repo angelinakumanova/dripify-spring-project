@@ -54,10 +54,10 @@
                                 • Use only letters & numbers, 5–20 characters.
                             </span>
 
-                            <span th:classappend="${userExists} == true ? '' : 'hidden'"
-                                  class="register-user-status mt-2 ml-1 text-sm text-red-500">
-                                    Username already exists.
-                            </span>
+                            <div th:classappend="${userExists} == true ? '' : 'hidden'"
+                                  class="register-user-status server mt-2 ml-1 text-sm text-red-500">
+                                • Username already exists.
+                            </div>
 
                         </div>
                     </div>
@@ -68,15 +68,15 @@
                         <div class="mt-2">
                             <input th:field="*{firstName}"
                                    type="text" name="firstName" id="firstName" placeholder="" pattern="[A-Za-z]+"
-                                   required class="peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full
+                                   required class="user-input peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full
                                    bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1
                                    outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2
                                    focus:outline-pink-600 sm:text-sm/6">
 
                             <span th:classappend="${#fields.hasErrors('firstName')} == true ? '' : 'hidden'"
-                                    class="mt-2 ml-1 hidden text-sm text-red-500
-                             peer-[&:not(:placeholder-shown):invalid]:block">
-                                Please enter a valid first name. Only alphabetic characters are allowed.
+                                class="server mt-2 ml-1 text-sm text-red-500
+                                peer-[&:not(:placeholder-shown):invalid]:block">
+                                • Please enter a valid first name. Only alphabetic characters are allowed.
                             </span>
 
                         </div>
@@ -93,8 +93,10 @@
                                     rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1
                                     -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline
                                     focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
-                            <span class="mt-2 ml-1 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block  ">
-                                Please enter a valid last name. Only alphabetic characters are allowed.
+
+                            <span th:classappend="${#fields.hasErrors('lastName')} == true ? '' : 'hidden'"
+                                  class="server mt-2 ml-1 text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block">
+                                • Please enter a valid last name. Only alphabetic characters are allowed.
                             </span>
                         </div>
                     </div>
@@ -109,8 +111,10 @@
                                     bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1
                                     -outline-offset-1 outline-gray-300 placeholder:text-gray-400
                                     focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
-                            <span class="hidden mt-2 ml-1 text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block ">
-                                Please enter a valid email address
+
+                            <span th:classappend="${#fields.hasErrors('email')} == true ? '' : 'hidden'"
+                                  class="server mt-2 ml-1 text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block">
+                                • Please enter a valid email address.
                             </span>
                         </div>
                     </div>
@@ -123,9 +127,14 @@
                                    type="password" name="password" id="password" placeholder=""
                                    pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$" autocomplete="current-password"
                                    required
-                                   class="user-input peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
-                            <span class="mt-2 ml-1 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block ">
-                                Must be 6 - 20 characters long and at least 1 uppercase letter
+                                   class="user-input peer invalid:[&:not(:placeholder-shown)] block w-full rounded-full
+                                    bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1
+                                    outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2
+                                     focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
+
+                            <span th:classappend="${#fields.hasErrors('password')} == true ? '' : 'hidden'"
+                                  class="server mt-2 ml-1 text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block">
+                                • 6 - 20 characters long, at least 1 uppercase letter.
                             </span>
                         </div>
                     </div>
@@ -137,10 +146,12 @@
                         <div class="mt-2">
                             <input th:field="*{confirmPassword}"
                                    type="password" name="confirmPassword" id="confirmPassword" required
-                                   class="user-input peer block w-full rounded-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1
-                                     -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2
-                                      focus:outline-pink-600 sm:text-sm/6">
-                            <span class="mt-2 ml-1 hidden text-sm text-red-500 ">
+                                   class="user-input peer block w-full rounded-full bg-white px-3 py-1.5 text-base
+                                    text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400
+                                     focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
+
+                            <span th:classappend="${#fields.hasGlobalErrors()} == true ? '' : 'hidden'"
+                                  class="server mt-2 ml-1 text-sm text-red-500 ">
                                     Passwords do not match
                             </span>
                         </div>

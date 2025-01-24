@@ -14,6 +14,7 @@ public class RegisterRequest {
     @NotBlank
     @Email
     private String email;
+    @Size(min = 6)
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,20}$")
     private String password;
 
