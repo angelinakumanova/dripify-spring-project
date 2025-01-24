@@ -50,22 +50,23 @@ public class UserController {
 
     @PostMapping("/register")
     public ModelAndView registerPost(@Valid RegisterRequest registerRequest,
-                                     BindingResult bindingResult, RedirectAttributes rAtt) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("register");
-
-        if (userService.existsByUsername(registerRequest.getUsername())) {
-            bindingResult.rejectValue("username", "username.exists", "Username is already taken.");
-        }
+                                     BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView("register");
 
         if (bindingResult.hasErrors()) {
-            rAtt.addFlashAttribute("userRegister", registerRequest);
-            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.userRegister", bindingResult);
+            modelAndView.addObject("userRegister", registerRequest);
+            modelAndView.addObject("org.springframework.validation.BindingResult.userRegister", bindingResult);
 
-            return new ModelAndView("redirect:/register");
+            if (userService.existsByUsername(registerRequest.getUsername())) {
+                modelAndView.addObject("userExists", true);
+            }
+
+            return modelAndView;
         }
 
-        return modelAndView;
+        //REGISTER USER
+
+        return new ModelAndView("redirect:/");
     }
 
     @PostMapping("/login")
