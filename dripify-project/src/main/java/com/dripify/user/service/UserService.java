@@ -30,5 +30,7 @@ public class UserService {
         return passwordEncoder.matches(password, user.getPassword());
     }
 
+    //TODO: implement check on uniqueness of user
+
 
 }

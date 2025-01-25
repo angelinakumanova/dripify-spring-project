@@ -19,26 +19,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @ModelAttribute("userRegister")
-    public RegisterRequest userRegister() {
-        return new RegisterRequest();
-    }
-
-    @ModelAttribute("userLogin")
-    public LoginRequest userLogin() {
-        return new LoginRequest();
-    }
-
-    @GetMapping("/register")
-    public String getRegister() {
-        return "register";
-    }
-
-    @GetMapping("/login")
-    public String getLogin() {
-        return "login";
-    }
-
 
     @GetMapping("/register/validate-username")
     @ResponseBody
@@ -49,19 +29,13 @@ public class UserController {
     @PostMapping("/register")
     public ModelAndView registerPost(@Valid RegisterRequest registerRequest,
                                      BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView("register");
-
-
-        if (userService.existsByUsername(registerRequest.getUsername())) {
-            bindingResult.rejectValue("username", "username.exists", "Username already exists");
-            modelAndView.addObject("userExists", true);
-        }
 
         if (bindingResult.hasErrors()) {
-            modelAndView.addObject("userRegister", registerRequest);
-            modelAndView.addObject("org.springframework.validation.BindingResult.userRegister", bindingResult);
+            ModelAndView register = new ModelAndView("register");
+            register.addObject("userRegister", registerRequest);
+            register.addObject("org.springframework.validation.BindingResult.userRegister", bindingResult);
 
-            return modelAndView;
+            return register ;
         }
 
         //REGISTER USER
