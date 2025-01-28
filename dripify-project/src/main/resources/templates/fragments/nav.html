@@ -1,9 +1,9 @@
-<div class="bg-white">
+<div class="bg-white" th:fragment="nav">
     <header class="absolute inset-x-0 top-0 z-50">
         <nav class="flex items-center justify-between p-3 sm:p-6" aria-label="Global">
 
             <div class="flex flex-shrink-0 lg:flex-1">
-                <a href="/templates/index.html" class="-m-1.5 p-1.5">
+                <a th:href="@{/}" class="-m-1.5 p-1.5">
                     <span class="sr-only">Your Company</span>
 
                     <img class="h-9" src="/images/logo.png" alt="">
@@ -194,149 +194,32 @@
                             </div>
 
                             <hr>
-
-
-
+                            
                             <div id="women-categories" class="grid grid-rows-5 grid-flow-col text-base">
-                                <a href="#">
+                                <a th:each="category: ${categoriesForWomen}" href="#">
                                     <div class="rounded-lg p-4 hover:bg-gray-50">
-                                        <p class="font-semibold text-gray-700 uppercase">tops</p>
+                                        <p class="font-semibold text-gray-700 uppercase" th:text="${category.name}"></p>
                                     </div>
                                 </a>
-
-                                <a href="#">
-                                    <div class="rounded-lg p-4 hover:bg-gray-50">
-                                        <p class="font-semibold text-gray-700 uppercase">jeans</p>
-                                    </div>
-                                </a>
-
-
-                                <a href="#">
-                                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                        <p class="font-semibold text-gray-700 uppercase">sweaters</p>
-                                    </div>
-                                </a>
-
-                                <a href="#">
-                                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                        <p class="font-semibold text-gray-700 uppercase">skirts</p>
-                                    </div>
-                                </a>
-
-                                <a href="#">
-                                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                        <p class="font-semibold text-gray-700 uppercase">dresses</p>
-                                    </div>
-                                </a>
-
-                                <a href="#">
-                                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                        <p class="font-semibold text-gray-700 uppercase">coats & jackets</p>
-                                    </div>
-                                </a>
-
-                                <a href="#">
-                                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                        <p class="font-semibold text-gray-700 uppercase">shoes</p>
-                                    </div>
-                                </a>
-
-                                <a href="#">
-                                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                        <p class="font-semibold text-gray-700 uppercase">bags & purses</p>
-                                    </div>
-                                </a>
-
-                                <a href="#">
-                                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                        <p class="font-semibold text-gray-700 uppercase">accessories</p>
-                                    </div>
-                                </a>
-
-
-
                             </div>
 
 
 
                             <div id="men-categories" class="hidden grid grid-rows-5 grid-flow-col text-base">
-                                <a href="#">
+                                <a th:each="category: ${categoriesForMen}" href="#">
                                     <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                        <p class="font-semibold text-gray-700 uppercase">t-shirts</p>
-                                    </div>
-                                </a>
-
-                                <a href="#">
-                                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                        <p class="font-semibold text-gray-700 uppercase">shirts</p>
-                                    </div>
-                                </a>
-
-                                <a href="#">
-                                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                        <p class="font-semibold text-gray-700 uppercase">hoodies</p>
-                                    </div>
-                                </a>
-
-                                <a href="#">
-                                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                        <p class="font-semibold text-gray-700 uppercase">jeans</p>
-                                    </div>
-                                </a>
-
-                                <a href="#">
-                                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                        <p class="font-semibold text-gray-700 uppercase">sweaters</p>
-                                    </div>
-                                </a>
-
-                                <a href="#">
-                                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                        <p class="font-semibold text-gray-700 uppercase">coats & jackets</p>
-                                    </div>
-                                </a>
-
-                                <a href="#">
-                                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                        <p class="font-semibold text-gray-700 uppercase">shoes</p>
-                                    </div>
-                                </a>
-
-                                <a href="#">
-                                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                        <p class="font-semibold text-gray-700 uppercase">bags</p>
-                                    </div>
-                                </a>
-
-                                <a href="#">
-                                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                        <p class="font-semibold text-gray-700 uppercase">accessories</p>
+                                        <p class="font-semibold text-gray-700 uppercase" th:text="${category.name}"></p>
                                     </div>
                                 </a>
                             </div>
+
                         </div>
                     </div>
                 </div>
 
 
                 <a href="#" class="hover:font-bold text-sm font-semibold text-gray-900">SELL YOUR DRIP</a>
-                <a href="/templates/about-us.html" class="hover:font-bold text-sm font-semibold text-gray-900">ABOUT
+                <a th:href="@{/about-us}" class="hover:font-bold text-sm font-semibold text-gray-900">ABOUT
                     US</a>
             </div>
 
@@ -575,7 +458,7 @@
                             <a href="#"
                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">SELL
                                 YOUR DRIP</a>
-                            <a href="/templates/about-us.html"
+                            <a th:href="@{/about-us}"
                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">ABOUT
                                 US</a>
                         </div>
@@ -583,10 +466,10 @@
 
 
                         <div class="py-6">
-                            <a href="/templates/login.html"
+                            <a th:href="@{/login}"
                                class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">LOG
                                 IN</a>
-                            <a href="/templates/register.html"
+                            <a th:href="@{/register}"
                                class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">REGISTER</a>
                             <div>
                   <span id="profile-name-mobile" class="flex items-center">

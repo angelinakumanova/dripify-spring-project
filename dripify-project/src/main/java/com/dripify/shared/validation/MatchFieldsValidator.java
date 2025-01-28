@@ -1,4 +1,4 @@
-package com.dripify.validation;
+package com.dripify.shared.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

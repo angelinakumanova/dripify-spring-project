@@ -1,6 +1,6 @@
 package com.dripify.web.dto;
 
-import com.dripify.validation.MatchFields;
+import com.dripify.shared.validation.MatchFields;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 

@@ -48,13 +48,12 @@
                                     -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline
                                     focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
 
-                            <span th:classappend="${#fields.hasErrors('username')} == true ? '' : 'hidden'"
-                                  class="server mt-2 ml-1 text-sm text-red-500
+                            <span class="hidden mt-2 ml-1 text-sm text-red-500
                              peer-[&:not(:placeholder-shown):invalid]:block">
                                 • Use only letters & numbers, 5–20 characters.
                             </span>
 
-                            <div class="register-user-status server mt-2 ml-1 text-sm text-red-500">
+                            <div class="register-user-status hidden mt-2 ml-1 text-sm text-red-500">
                                 • Username already exists.
                             </div>
 
@@ -181,7 +180,7 @@
 
         <div class="hidden lg:block animate__animated animate__fadeInLeft image-box w-[38%]
        rounded-tr-full rounded-tl-3xl rounded-b-[15em] overflow-hidden">
-            <img class="object-cover xl:h-full xl:w-full" src="/images/dripify-register-poster.png" alt="register-poster">
+            <img class="object-cover object-left xl:h-full xl:w-full" src="/images/dripify-register-poster.png" alt="register-poster">
         </div>
     </div>
 </div>

@@ -29,4 +29,15 @@ public class IndexController {
 
         return mav;
     }
+
+    @GetMapping("/about-us")
+    public String getAboutUs() {
+
+        return "about-us";
+    }
+
+    @GetMapping("/products")
+    public String getProducts() {
+        return "/products/products";
+    }
 }
