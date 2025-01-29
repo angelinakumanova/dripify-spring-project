@@ -21,4 +21,6 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
             @Param("categoryName") String categoryName,
             @Param("gender") Gender gender
     );
+
+    Product getProductById(UUID id);
 }

@@ -7,6 +7,7 @@ import jakarta.annotation.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -20,6 +21,11 @@ public class ProductService {
 
     public List<Product> getFilteredProducts(@Nullable String category, @Nullable Gender gender) {
         return productRepository.findProducts(category, gender);
+    }
+
+
+    public Product getProductById(UUID id) {
+        return productRepository.getProductById(id);
     }
 }
 
