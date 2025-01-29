@@ -1,1120 +1,237 @@
 <!DOCTYPE html>
 <html lang="en" style="font-size: 16px;">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Products | DRIPIFY</title>
-  <link rel="stylesheet" href="/src/output.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-  <!-- TODO: add aos to package -->
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <link rel="shortcut icon" href="/static/images/favicon.ico" />
-</head>
+<head th:replace="/fragments/head::head(pageName='Products')">
 
 <body>
-  <div class="bg-white">
-    <header class="absolute inset-x-0 top-0 z-50">
-      <nav class="flex items-center justify-between p-3 sm:p-6" aria-label="Global">
+<div th:replace="/fragments/nav::nav"></div>
 
-        <div class="flex flex-shrink-0 lg:flex-1">
-          <a href="/templates/index.html" class="-m-1.5 p-1.5">
-            <span class="sr-only">Your Company</span>
+  <div>
+    <div class="mt-28"></div>
 
-            <img class="h-9" src="/static/images/logo.png" alt="">
-          </a>
-        </div>
 
-        <div class="mobile-menu flex items-center gap-5 xl:hidden">
-          <form>
-            <div class="relative border-2 border-zinc-900 border-opacity-50 rounded-full">
-              <label for="default-search"></label>
-              <input type="search" id="default-search"
-                class="block w-full p-2 ps-10 text-sm text-gray-900 rounded-full bg-gray-50 outline-none"
-                placeholder="Search.." />
-              <button type="submit"
-                class="text-white absolute end-5 bottom-0.5 font-medium rounded-full text-sm px-2 py-2 hover:bg-zinc-900 hover:bg-opacity-10 ease-in duration-300">
-                <div>
-                  <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                  </svg>
-                </div>
-              </button>
-            </div>
-          </form>
-
-          <div class="cart">
-            <button id="shopping-cart-button-mobile">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="size-8 hover:cursor-pointer">
-                <defs>
-                  <style>
-                    .cls-1 {
-                      fill: #231f20
-                    }
-                  </style>
-                </defs>
-                <g id="cart">
-                  <path class="cls-1"
-                    d="M29.46 10.14A2.94 2.94 0 0 0 27.1 9H10.22L8.76 6.35A2.67 2.67 0 0 0 6.41 5H3a1 1 0 0 0 0 2h3.41a.68.68 0 0 1 .6.31l1.65 3 .86 9.32a3.84 3.84 0 0 0 4 3.38h10.37a3.92 3.92 0 0 0 3.85-2.78l2.17-7.82a2.58 2.58 0 0 0-.45-2.27zM28 11.86l-2.17 7.83A1.93 1.93 0 0 1 23.89 21H13.48a1.89 1.89 0 0 1-2-1.56L10.73 11H27.1a1 1 0 0 1 .77.35.59.59 0 0 1 .13.51z" />
-                  <circle class="cls-1" cx="14" cy="26" r="2" />
-                  <circle class="cls-1" cx="24" cy="26" r="2" />
-                </g>
-              </svg>
-            </button>
-
-            <div id="shopping-cart-menu-mobile"
-              class="absolute transition ease-in duration-300 opacity-0 pointer-events-none"
-              aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
-              <div id="sc-backdrop-mobile" class="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true">
-              </div>
-
-              <div class="fixed inset-0 overflow-hidden">
-                <div class="absolute inset-0 overflow-hidden">
-                  <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-                    <div id="sc-panel-mobile"
-                      class="transform translate-x-full transition ease-in-out duration-500 sm:duration-700 pointer-events-auto w-screen max-w-md">
-                      <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                        <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
-                          <div class="flex items-start justify-between">
-                            <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Shopping cart</h2>
-                            <div class="ml-3 flex h-7 items-center">
-                              <button type="button"
-                                class="close-button relative -m-2 p-2 text-gray-400 hover:text-gray-500">
-                                <span class="absolute -inset-0.5"></span>
-                                <span class="sr-only">Close panel</span>
-                                <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                  stroke="currentColor" aria-hidden="true" data-slot="icon">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                </svg>
-                              </button>
-                            </div>
-                          </div>
-
-                          <div class="mt-8">
-                            <div class="flow-root">
-                              <ul role="list" class="-my-6 divide-y divide-gray-200">
-                                <li class="flex py-6">
-                                  <div class="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                    <img
-                                      src="https://tailwindui.com/plus/img/ecommerce-images/shopping-cart-page-04-product-02.jpg"
-                                      alt="Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch."
-                                      class="size-full object-cover">
-                                  </div>
-
-                                  <div class="ml-4 flex flex-1 flex-col">
-                                    <div>
-                                      <div class="flex justify-between text-base font-medium text-gray-900">
-                                        <h3>
-                                          <a href="#">Medium Stuff Satchel</a>
-                                        </h3>
-                                        <p class="price ml-4">$32.00</p>
-                                      </div>
-                                      <p class="mt-1 text-sm text-gray-500">Blue</p>
-                                    </div>
-                                    <div class="flex flex-1 items-end justify-between text-sm">
-                                      <p class="text-gray-500">Qty 1</p>
-
-                                      <div class="flex">
-                                        <button type="button"
-                                          class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </li>
-
-                                <!-- More products... -->
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
-                          <div class="flex justify-between text-base font-medium text-gray-900">
-                            <p>Subtotal</p>
-                            <p class="sc-subtotal">$32.00</p>
-                          </div>
-                          <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                          <div class="mt-6">
-                            <a href="#"
-                              class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
-                          </div>
-                          <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
-                            <p>
-                              or
-                              <button type="button"
-                                class="close-button font-medium text-indigo-600 hover:text-indigo-500">
-                                Continue Shopping
-                                <span aria-hidden="true"> &rarr;</span>
-                              </button>
-                            </p>
-                          </div>
-                        </div>
+     <div class="max-w-3xl mx-auto">
+          <div class="categories grid grid-cols-4 gap-x-8">
+              <a href="#">
+                  <div class="relative group text-center category  ">
+                      <div
+                          class="image-box rounded-full aspect-square overflow-hidden border-gray-500 border-2 border-opacity-50">
+                          <img src="/images/categories/products/coat-women.jpg" alt="coats category women"
+                              class="object-contain bg-white group-hover:opacity-75">
                       </div>
-                    </div>
+                      <p class="text-sm font-semibold p-2 text-gray-900 group-hover:font-bold text-center">COATS & JACKETS
+                      </p>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
+              </a>
 
-          <button type="button"
-            class="hamburger -m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
-            <span class="sr-only">Open main menu</span>
-            <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-              aria-hidden="true" data-slot="icon">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-          </button>
-        </div>
-
-        <div class="hidden xl:flex xl:gap-x-12 xl:items-center ">
-          <a href="/templates/products/products.html" class="hover:font-bold text-sm font-semibold text-gray-900">NEW
-            ARRIVALS</a>
-
-          <div class="relative">
-            <button id="flyout-menu-button" type="button"
-              class="hover:font-bold flex items-center gap-x-1 text-sm font-semibold text-gray-900"
-              aria-expanded="false">
-              SHOP
-              <svg class="size-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
-                data-slot="icon">
-                <path fill-rule="evenodd"
-                  d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                  clip-rule="evenodd" />
-              </svg>
-            </button>
-
-
-            <div id="flyout-menu"
-              class="opacity-0 transition-opacity ease-in duration-300 pointer-events-none absolute -left-[15rem] top-full z-10 mt-3 w-screen max-w-xl overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
-              <div class="p-4">
-                <div class="flex justify-evenly mb-2">
-                  <p id="women-tab" category="women"
-                    class="relative group text-2xl p-2 px-5 font-bold hover:cursor-pointer">
-                    Women
-                    <span
-                      class="absolute bottom-0 left-0 h-[2px] w-full bg-gray-800 transition-all duration-300 group-hover:w-full">
-                    </span>
-                  </p>
-
-                  <p id="men-tab" category="men"
-                    class="relative group text-2xl p-2 px-5 font-semibold hover:cursor-pointer">
-                    Men
-                    <span
-                      class="absolute bottom-0 left-0 h-[2px] w-0 bg-gray-800 transition-all duration-300 group-hover:w-full">
-                    </span>
-                  </p>
-                </div>
-
-                <hr>
-
-
-
-                <div id="women-categories" class="grid grid-rows-5 grid-flow-col text-base">
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-                      <p class="font-semibold text-gray-700 uppercase">tops</p>
-                    </div>
-                  </a>
-
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-                      <p class="font-semibold text-gray-700 uppercase">jeans</p>
-                    </div>
-                  </a>
-
-
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                      <p class="font-semibold text-gray-700 uppercase">sweaters</p>
-                    </div>
-                  </a>
-
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                      <p class="font-semibold text-gray-700 uppercase">skirts</p>
-                    </div>
-                  </a>
-
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                      <p class="font-semibold text-gray-700 uppercase">dresses</p>
-                    </div>
-                  </a>
-
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                      <p class="font-semibold text-gray-700 uppercase">coats & jackets</p>
-                    </div>
-                  </a>
-
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                      <p class="font-semibold text-gray-700 uppercase">shoes</p>
-                    </div>
-                  </a>
-
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                      <p class="font-semibold text-gray-700 uppercase">bags & purses</p>
-                    </div>
-                  </a>
-
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                      <p class="font-semibold text-gray-700 uppercase">accessories</p>
-                    </div>
-                  </a>
-
-
-
-                </div>
-
-
-
-                <div id="men-categories" class="hidden grid grid-rows-5 grid-flow-col text-base">
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                      <p class="font-semibold text-gray-700 uppercase">t-shirts</p>
-                    </div>
-                  </a>
-
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                      <p class="font-semibold text-gray-700 uppercase">shirts</p>
-                    </div>
-                  </a>
-
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                      <p class="font-semibold text-gray-700 uppercase">hoodies</p>
-                    </div>
-                  </a>
-
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                      <p class="font-semibold text-gray-700 uppercase">jeans</p>
-                    </div>
-                  </a>
-
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                      <p class="font-semibold text-gray-700 uppercase">sweaters</p>
-                    </div>
-                  </a>
-
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                      <p class="font-semibold text-gray-700 uppercase">coats & jackets</p>
-                    </div>
-                  </a>
-
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                      <p class="font-semibold text-gray-700 uppercase">shoes</p>
-                    </div>
-                  </a>
-
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                      <p class="font-semibold text-gray-700 uppercase">bags</p>
-                    </div>
-                  </a>
-
-                  <a href="#">
-                    <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                      <p class="font-semibold text-gray-700 uppercase">accessories</p>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <a href="#" class="hover:font-bold text-sm font-semibold text-gray-900">SELL YOUR DRIP</a>
-          <a href="/templates/about-us.html" class="hover:font-bold text-sm font-semibold text-gray-900">ABOUT
-            US</a>
-        </div>
-
-        <div class="hidden ml-5 xl:flex xl:flex-1 xl:justify-end items-center gap-3">
-          <form class="flex items-center">
-            <div class="relative border-2 border-zinc-900 border-opacity-50 rounded-full">
-              <label for="default-search"></label>
-              <input type="search" id="default-search"
-                class="block w-full p-2 ps-5 xl:ps-10 text-sm text-gray-900 rounded-full bg-gray-50 outline-none"
-                placeholder="Search.." />
-              <button type="submit"
-                class="text-white absolute end-2 xl:end-5 bottom-0.5 font-medium rounded-full text-sm px-2 py-2 hover:bg-zinc-900 hover:bg-opacity-10 ease-in duration-300">
-                <div>
-                  <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                  </svg>
-                </div>
-              </button>
-            </div>
-          </form>
-
-
-          <!-- LOGGED IN USER VISUALS -->
-          <div class="logged-in flex gap-4 items-center flex-shrink-0">
-            <div class="cart">
-              <button id="shopping-cart-button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="size-8 hover:cursor-pointer">
-                  <defs>
-                    <style>
-                      .cls-1 {
-                        fill: #231f20
-                      }
-                    </style>
-                  </defs>
-                  <g id="cart">
-                    <path class="cls-1"
-                      d="M29.46 10.14A2.94 2.94 0 0 0 27.1 9H10.22L8.76 6.35A2.67 2.67 0 0 0 6.41 5H3a1 1 0 0 0 0 2h3.41a.68.68 0 0 1 .6.31l1.65 3 .86 9.32a3.84 3.84 0 0 0 4 3.38h10.37a3.92 3.92 0 0 0 3.85-2.78l2.17-7.82a2.58 2.58 0 0 0-.45-2.27zM28 11.86l-2.17 7.83A1.93 1.93 0 0 1 23.89 21H13.48a1.89 1.89 0 0 1-2-1.56L10.73 11H27.1a1 1 0 0 1 .77.35.59.59 0 0 1 .13.51z" />
-                    <circle class="cls-1" cx="14" cy="26" r="2" />
-                    <circle class="cls-1" cx="24" cy="26" r="2" />
-                  </g>
-                </svg>
-              </button>
-
-              <div id="shopping-cart-menu"
-                class="absolute transition ease-in duration-300 opacity-0 pointer-events-none"
-                aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
-                <div id="sc-backdrop" class="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true"></div>
-
-                <div class="fixed inset-0 overflow-hidden">
-                  <div class="absolute inset-0 overflow-hidden">
-                    <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-                      <div id="sc-panel"
-                        class="transform translate-x-full transition ease-in-out duration-500 sm:duration-700 pointer-events-auto w-screen max-w-md">
-                        <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                          <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
-                            <div class="flex items-start justify-between">
-                              <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Shopping cart</h2>
-                              <div class="ml-3 flex h-7 items-center">
-                                <button type="button"
-                                  class="close-button relative -m-2 p-2 text-gray-400 hover:text-gray-500">
-                                  <span class="absolute -inset-0.5"></span>
-                                  <span class="sr-only">Close panel</span>
-                                  <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                    stroke="currentColor" aria-hidden="true" data-slot="icon">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                  </svg>
-                                </button>
-                              </div>
-                            </div>
-
-                            <div class="mt-8">
-                              <div class="flow-root">
-                                <ul role="list" class="-my-6 divide-y divide-gray-200">
-                                  <li class="flex py-6">
-                                    <div class="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                      <img
-                                        src="https://tailwindui.com/plus/img/ecommerce-images/shopping-cart-page-04-product-02.jpg"
-                                        alt="Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch."
-                                        class="size-full object-cover">
-                                    </div>
-
-                                    <div class="ml-4 flex flex-1 flex-col">
-                                      <div>
-                                        <div class="flex justify-between text-base font-medium text-gray-900">
-                                          <h3>
-                                            <a href="#">Medium Stuff Satchel</a>
-                                          </h3>
-                                          <p class="price ml-4">$32.00</p>
-                                        </div>
-                                        <p class="mt-1 text-sm text-gray-500">Blue</p>
-                                      </div>
-                                      <div class="flex flex-1 items-end justify-between text-sm">
-                                        <p class="text-gray-500">Qty 1</p>
-
-                                        <div class="flex">
-                                          <button type="button"
-                                            class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </li>
-
-                                  <!-- More products... -->
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
-                            <div class="flex justify-between text-base font-medium text-gray-900">
-                              <p>Subtotal</p>
-                              <p class="sc-subtotal">$32.00</p>
-                            </div>
-                            <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                            <div class="mt-6">
-                              <a href="#"
-                                class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
-                            </div>
-                            <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
-                              <p>
-                                or
-                                <button type="button"
-                                  class="close-button font-medium text-indigo-600 hover:text-indigo-500">
-                                  Continue Shopping
-                                  <span aria-hidden="true"> &rarr;</span>
-                                </button>
-                              </p>
-                            </div>
-                          </div>
-                        </div>
+              <a href="#">
+                  <div class="relative group text-center category  ">
+                      <div
+                          class="image-box rounded-full aspect-square overflow-hidden border-gray-500 border-2 border-opacity-50">
+                          <img src="/images/categories/products/tops-women.jpg" alt="tops category women"
+                              class="object-contain bg-white group-hover:opacity-75">
                       </div>
-                    </div>
+                      <p class="text-sm font-semibold p-2 text-gray-900 group-hover:font-bold text-center">TOPS
+                      </p>
                   </div>
-                </div>
-              </div>
-            </div>
+              </a>
 
+              <a href="#">
+                  <div class="relative group text-center category  ">
+                      <div
+                          class="image-box rounded-full aspect-square overflow-hidden border-gray-500 border-2 border-opacity-50">
+                          <img src="/images/categories/products/dresses-women.jpg" alt="dresses category women"
+                              class="object-bottom w-full h-full object-cover bg-white group-hover:opacity-75">
+                      </div>
+                      <p class="text-sm font-semibold p-2 text-gray-900 group-hover:font-bold text-center">DRESSES
+                      </p>
+                  </div>
+              </a>
 
-
-            <span id="profile-name" class="flex items-center hover:cursor-pointer hover:underline">
-              <p class="font-semibold">angieusername</p>
-              <svg class="size-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
-                data-slot="icon">
-                <path fill-rule="evenodd"
-                  d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                  clip-rule="evenodd" />
-              </svg>
-            </span>
-
-            <div id="profile-dropdown"
-              class="opacity-0 pointer-events-none transition ease-in duration-300 absolute top-16 right-2 z-10 w-40 divide-y divide-gray-100 rounded-md bg-white shadow-lg border border-black border-opacity-30"
-              role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-              <div class="py-1" role="none">
-                <a href="/templates/user/profile.html"
-                  class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
-                  role="menuitem" tabindex="-1" id="menu-item-0">my profile</a>
-                <a href="/templates/user/orders.html"
-                  class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
-                  role="menuitem" tabindex="-1" id="menu-item-0">orders</a>
-                <a href="/templates/user/wishlist.html"
-                  class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
-                  role="menuitem" tabindex="-1" id="menu-item-0">wishlist</a>
-              </div>
-              <div class="py-1" role="none">
-                <a href="/templates/user/public-profile.html"
-                  class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
-                  role="menuitem" tabindex="-1" id="menu-item-0">settings</a>
-                <a href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
-                  role="menuitem" tabindex="-1" id="menu-item-0">log out</a>
-              </div>
-            </div>
-
+              <a href="#">
+                  <div class="relative group text-center category  ">
+                      <div
+                          class="image-box rounded-full aspect-square overflow-hidden border-gray-500 border-2 border-opacity-50">
+                          <img src="/images/categories/products/shoes-women.jpg" alt="shoes category women"
+                              class="w-full h-full object-cover bg-white group-hover:opacity-75">
+                      </div>
+                      <p class="text-sm font-semibold p-2 text-gray-900 group-hover:font-bold text-center">SHOES
+                      </p>
+                  </div>
+              </a>
           </div>
+      </div>
 
-          <div class="flex gap-4 flex-shrink-0 hidden">
-            <a href="/templates/login.html" class="hover:font-bold text-sm font-semibold text-gray-900">
-              LOG IN
-            </a>
-            <a href="/templates/register.html" class="hover:font-bold text-sm font-semibold text-gray-900">
-              REGISTER
-            </a>
-          </div>
+
+
+
+    <div class="animate__animated animate__fadeInUp mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+
+      <div class="relative flex justify-between sm:items-center">
+        <div class="filter-box hover:cursor-pointer">
+          <svg class="inline-block w-8 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16"></path>
+            <path d="M7 9h10"></path>
+            <path d="M10 14h4"></path>
+          </svg>
+
+          <h2 class="inline-block text-xl sm:text-2xl font-bold tracking-tight text-gray-900">Filter</h2>
         </div>
 
+        <h2 class="text-lg sm:text-3xl font-bold tracking-tight mb-5 text-gray-900 uppercase">new arrivals</h2>
 
 
+        <!-- Filter Form -->
+        <form id="dropdown-filter"
+              class="opacity-0 transition-opacity ease-in duration-300 pointer-events-none top-full transform translate-y-0 absolute z-10">
+          <!-- Dropdown Menu -->
+          <div class=" w-56 p-3 rounded-lg shadow bg-white border border-opacity-30 border-black">
+            <!-- Reset Button -->
 
-      </nav>
-
-
-
-      <!-- Mobile menu, show/hide based on menu open state. -->
-      <div id="mobile-menu" class="hidden mobile-menu xl:hidden" role="dialog" aria-modal="true">
-        <!-- Background backdrop, show/hide based on slide-over state. -->
-        <div class="fixed inset-0 z-50"></div>
-        <div
-          class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-          <div class="flex items-center justify-between">
-            <a href="#" class="-m-1.5 p-1.5">
-              <span class="sr-only">Your Company</span>
-              <img class="h-8 w-auto" src="/static/images/logo.png" alt="">
-            </a>
-
-            <button id="mobile-close-button" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
-              <span class="sr-only">Close menu</span>
-              <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                aria-hidden="true" data-slot="icon">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-              </svg>
-            </button>
-
-            <button id="mobile-return-button" class="hidden text-gray-700">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
-                class="bi bi-arrow-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                  d="M15 8a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 0 1 .708.708L2.707 7.5H14.5A.5.5 0 0 1 15 8z" />
-              </svg>
-            </button>
-          </div>
-
-          <div id="mobile-nav" class="mt-6 flow-root">
-            <div class="-my-6 divide-y divide-gray-500/10">
-              <div class="space-y-2 py-6">
-                <a href="/templates/products/products.html"
-                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">NEW
-                  ARRIVALS</a>
-                <button id="shop-mobile-button"
-                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">SHOP</button>
-
-
-
-
-                <a href="#"
-                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">SELL
-                  YOUR DRIP</a>
-                <a href="/templates/about-us.html"
-                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">ABOUT
-                  US</a>
-              </div>
-
-
-
-              <div class="py-6">
-                <a href="/templates/login.html"
-                  class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">LOG
-                  IN</a>
-                <a href="/templates/register.html"
-                  class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">REGISTER</a>
-                <div>
-                  <span id="profile-name-mobile" class="flex items-center">
-                    <button
-                      class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">angieusername</button>
-                    <svg class="size-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor"
-                      aria-hidden="true" data-slot="icon">
-                      <path fill-rule="evenodd"
-                        d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                        clip-rule="evenodd" />
-                    </svg>
-                  </span>
-
-                  <div id="mobile-profile-dropdown" class="hidden indent-3 my-6 flow-root">
-                    <div class="-my-6 divide-y divide-gray-500/10">
-                      <div class="flex flex-col text-xl">
-                        <a href="/templates/user/profile.html"
-                          class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">my
-                          profile</a>
-
-                        <a href="/templates/user/orders.html"
-                          class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">orders</a>
-
-                        <a href="/templates/user/wishlist.html"
-                          class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">wishlist</a>
-
-                        <a href="/templates/user/public-profile.html"
-                          class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">settings</a>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <a href="#"
-                  class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">log
-                  out</a>
-
-              </div>
-
+            <div class="text-center">
+              <button type="reset"
+                      class="px-4 py-2 text-white font-semibold bg-zinc-900 rounded-full hover:bg-zinc-600 ease-in duration-300 uppercase">reset
+                filters</button>
             </div>
-          </div>
-
-          <div id="mobile-categories" class="mt-6 flow-root hidden">
-            <div class="-my-6 divide-y divide-gray-500/10">
-              <div class=" py-6 flex items-center justify-evenly">
-                <p id="women-tab-mobile" category="women" class="relative group text-2xl p-2 px-5 font-bold">
-                  Women
-                  <span class="absolute bottom-0 left-0 h-[2px] w-full bg-gray-800 transition-all duration-300">
-                  </span>
-                </p>
-
-                <p id="men-tab-mobile" category="men" class="relative group text-2xl p-2 px-5 font-semibold">
-                  Men
-                  <span class="absolute bottom-0 left-0 h-[2px] w-0 bg-gray-800 transition-all duration-300">
-                  </span>
-                </p>
-              </div>
 
 
-              <div id="women-categories-mobile" class="flex flex-col text-xl">
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
 
-                    <p class="font-semibold text-gray-700 uppercase">tops</p>
-                  </div>
-                </a>
-
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                    <p class="font-semibold text-gray-700 uppercase">jeans</p>
-                  </div>
-                </a>
-
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                    <p class="font-semibold text-gray-700 uppercase">sweaters</p>
-                  </div>
-                </a>
-
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                    <p class="font-semibold text-gray-700 uppercase">skirts</p>
-                  </div>
-                </a>
-
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                    <p class="font-semibold text-gray-700 uppercase">dresses</p>
-                  </div>
-                </a>
-
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                    <p class="font-semibold text-gray-700 uppercase">coats & jackets</p>
-                  </div>
-                </a>
-
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                    <p class="font-semibold text-gray-700 uppercase">shoes</p>
-                  </div>
-                </a>
-
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                    <p class="font-semibold text-gray-700 uppercase">bags & purses</p>
-                  </div>
-                </a>
-
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                    <p class="font-semibold text-gray-700 uppercase">accessories</p>
-                  </div>
-                </a>
-              </div>
-
-              <div id="men-categories-mobile" class="hidden flex flex-col text-xl">
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                    <p class="font-semibold text-gray-700 uppercase">t-shirts</p>
-                  </div>
-                </a>
-
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                    <p class="font-semibold text-gray-700 uppercase">shirts</p>
-                  </div>
-                </a>
-
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                    <p class="font-semibold text-gray-700 uppercase">hoodies</p>
-                  </div>
-                </a>
-
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                    <p class="font-semibold text-gray-700 uppercase">jeans</p>
-                  </div>
-                </a>
-
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                    <p class="font-semibold text-gray-700 uppercase">sweaters</p>
-                  </div>
-                </a>
-
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                    <p class="font-semibold text-gray-700 uppercase">coats & jackets</p>
-                  </div>
-                </a>
-
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                    <p class="font-semibold text-gray-700 uppercase">shoes</p>
-                  </div>
-                </a>
-
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                    <p class="font-semibold text-gray-700 uppercase">bags</p>
-                  </div>
-                </a>
-
-                <a href="#">
-                  <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                    <p class="font-semibold text-gray-700 uppercase">accessories</p>
-                  </div>
-                </a>
-              </div>
+            <!-- Categories Filter -->
+            <div class="filter-section p-2">
+              <button type="button" class="toggle-btn font-medium text-gray-900 mb-2">Categories</button>
+              <ul class="filter-content space-y-2 text-sm text-gray-700 font-semibold uppercase">
+                <li><input type="checkbox" id="tops" class="checkbox" name="categories" value="tops" />
+                  <label for="tops">Tops</label>
+                </li>
+                <li><input type="checkbox" id="jeans" class="checkbox" name="categories" value="jeans" />
+                  <label for="jeans">Jeans</label>
+                </li>
+                <li><input type="checkbox" id="sweaters" class="checkbox" name="categories" value="sweaters" /> <label
+                        for="sweaters">Sweaters</label></li>
+                <li><input type="checkbox" id="skirts" class="checkbox" name="categories" value="skirts" />
+                  <label for="skirts">Skirts</label>
+                </li>
+                <li><input type="checkbox" id="dresses" class="checkbox" name="categories" value="dresses" /> <label
+                        for="dresses">Dresses</label></li>
+                <li><input type="checkbox" id="coats" class="checkbox" name="categories" value="coats" />
+                  <label for="coats">Coats</label>
+                </li>
+                <li><input type="checkbox" id="jackets" class="checkbox" name="categories" value="jackets" /> <label
+                        for="jackets">Jackets</label></li>
+                <li><input type="checkbox" id="shoes" class="checkbox" name="categories" value="shoes" />
+                  <label for="shoes">Shoes</label>
+                </li>
+                <li><input type="checkbox" id="bags" class="checkbox" name="categories" value="bags" />
+                  <label for="bags">Bags</label>
+                </li>
+                <li><input type="checkbox" id="accessories" class="checkbox" name="categories" value="accessories" />
+                  <label for="accessories">Accessories</label></li>
+              </ul>
+              <hr class="m-2 ml-0">
             </div>
+
+            <!-- Gender Filter -->
+            <div class="filter-section p-2">
+              <button type="button" class="toggle-btn font-medium text-gray-900 mb-2">Gender</button>
+              <ul class="filter-content space-y-2 text-sm text-gray-700 font-semibold uppercase hidden">
+                <li><input type="checkbox" id="women" class="checkbox" name="gender" value="women" /> <label
+                        for="women">Women</label></li>
+                <li><input type="checkbox" id="men" class="checkbox" name="gender" value="men" /> <label
+                        for="men">Men</label></li>
+              </ul>
+              <hr class="m-2 ml-0">
+            </div>
+
+            <!-- Clothing Size Filter -->
+            <div class="filter-section p-2">
+              <button type="button" class="toggle-btn font-medium text-gray-900 mb-2">Clothing Size</button>
+              <ul class="filter-content grid grid-cols-4 gap-2 text-sm text-gray-700 font-semibold uppercase hidden">
+                <li><input type="checkbox" id="xs" class="checkbox" name="clothing_size" value="XS" />
+                  <label for="xs">XS</label>
+                </li>
+                <li><input type="checkbox" id="s" class="checkbox" name="clothing_size" value="S" /> <label
+                        for="s">S</label></li>
+                <li><input type="checkbox" id="m" class="checkbox" name="clothing_size" value="M" /> <label
+                        for="m">M</label></li>
+                <li><input type="checkbox" id="l" class="checkbox" name="clothing_size" value="L" /> <label
+                        for="l">L</label></li>
+                <li><input type="checkbox" id="xl" class="checkbox" name="clothing_size" value="XL" />
+                  <label for="xl">XL</label>
+                </li>
+              </ul>
+              <hr class="m-2 ml-0">
+            </div>
+
+            <!-- Shoe Size Filter -->
+            <div class="filter-section p-2">
+              <button type="button" class="toggle-btn font-medium text-gray-900 mb-2">Shoe Size</button>
+              <ul class="filter-content grid grid-cols-5 gap-2 text-sm text-gray-700 font-semibold uppercase hidden">
+                <li><input type="checkbox" id="shoe-36" class="checkbox" name="shoe_size" value="36" />
+                  <label for="shoe-36">36</label>
+                </li>
+                <li><input type="checkbox" id="shoe-37" class="checkbox" name="shoe_size" value="37" />
+                  <label for="shoe-37">37</label>
+                </li>
+                <li><input type="checkbox" id="shoe-38" class="checkbox" name="shoe_size" value="38" />
+                  <label for="shoe-38">38</label>
+                </li>
+                <li><input type="checkbox" id="shoe-39" class="checkbox" name="shoe_size" value="39" />
+                  <label for="shoe-39">39</label>
+                </li>
+                <li><input type="checkbox" id="shoe-40" class="checkbox" name="shoe_size" value="40" />
+                  <label for="shoe-40">40</label>
+                </li>
+                <li><input type="checkbox" id="shoe-41" class="checkbox" name="shoe_size" value="41" />
+                  <label for="shoe-41">41</label>
+                </li>
+                <li><input type="checkbox" id="shoe-42" class="checkbox" name="shoe_size" value="42" />
+                  <label for="shoe-42">42</label>
+                </li>
+              </ul>
+              <hr class="m-2 ml-0">
+            </div>
+
+
           </div>
+        </form>
+      </div>
 
+      <div class="mx-auto" th:if="${products.isEmpty()}">
+        <h1 class="text-lg sm:text-3xl font-bold text-center">No products available</h1>
+      </div>
 
-
+      <div th:if="${products}"  class="mt-6 grid gap-x-6 gap-y-10 grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+        <div th:each="product: ${products}" class="group relative">
+          <img src="https://media-photos.depop.com/b1/5913802/1997839635_8240334744bf42e191e6c596467700fd/P0.jpg"
+               th:alt="${product.name}"
+               class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+          <div class="mt-4 flex justify-between">
+            <div>
+              <h3 class="text-sm text-gray-700">
+                <a href="/templates/products/single-product.html" th:text="${product.name}">
+                  <span aria-hidden="true" class="absolute inset-0"></span>
+                </a>
+              </h3>
+              <p class="mt-1 text-sm text-gray-500">Black</p>
+            </div>
+            <p class="text-sm font-medium text-gray-900" th:text="${product.price}"></p>
+          </div>
 
         </div>
       </div>
-    </header>
-  </div>
-
-  <div class="mt-28"></div>
-
-
-  <!-- <div class="max-w-3xl mx-auto">
-        <div class="categories grid grid-cols-4 gap-x-8">
-            <a href="#">
-                <div class="relative group text-center category  ">
-                    <div
-                        class="image-box rounded-full aspect-square overflow-hidden border-gray-500 border-2 border-opacity-50">
-                        <img src="/static/images/categories/products/coat-women.jpg" alt="coats category women"
-                            class="object-contain bg-white group-hover:opacity-75">
-                    </div>
-                    <p class="text-sm font-semibold p-2 text-gray-900 group-hover:font-bold text-center">COATS & JACKETS
-                    </p>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="relative group text-center category  ">
-                    <div
-                        class="image-box rounded-full aspect-square overflow-hidden border-gray-500 border-2 border-opacity-50">
-                        <img src="/static/images/categories/products/tops-women.jpg" alt="tops category women"
-                            class="object-contain bg-white group-hover:opacity-75">
-                    </div>
-                    <p class="text-sm font-semibold p-2 text-gray-900 group-hover:font-bold text-center">TOPS
-                    </p>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="relative group text-center category  ">
-                    <div
-                        class="image-box rounded-full aspect-square overflow-hidden border-gray-500 border-2 border-opacity-50">
-                        <img src="/static/images/categories/products/dresses-women.jpg" alt="dresses category women"
-                            class="object-bottom w-full h-full object-cover bg-white group-hover:opacity-75">
-                    </div>
-                    <p class="text-sm font-semibold p-2 text-gray-900 group-hover:font-bold text-center">DRESSES
-                    </p>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="relative group text-center category  ">
-                    <div
-                        class="image-box rounded-full aspect-square overflow-hidden border-gray-500 border-2 border-opacity-50">
-                        <img src="/static/images/categories/products/shoes-women.jpg" alt="shoes category women"
-                            class="w-full h-full object-cover bg-white group-hover:opacity-75">
-                    </div>
-                    <p class="text-sm font-semibold p-2 text-gray-900 group-hover:font-bold text-center">SHOES
-                    </p>
-                </div>
-            </a>
-        </div>
-    </div> -->
-
-
-
-
-  <div class="animate__animated animate__fadeInUp mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-
-    <div class="relative flex justify-between sm:items-center">
-      <div onclick="toggleFilterMenu()" class="filter-box hover:cursor-pointer">
-        <svg class="inline-block w-8 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black"
-          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 4h16"></path>
-          <path d="M7 9h10"></path>
-          <path d="M10 14h4"></path>
-        </svg>
-
-        <h2 class="inline-block text-xl sm:text-2xl font-bold tracking-tight text-gray-900">Filter</h2>
-      </div>
-
-      <h2 class="text-lg sm:text-3xl font-bold tracking-tight mb-5 text-gray-900 uppercase">new arrivals</h2>
-
-
-      <!-- Filter Form -->
-      <form id="dropdown-filter"
-        class="opacity-0 transition-opacity ease-in duration-300 pointer-events-none top-full transform translate-y-0 absolute z-10">
-        <!-- Dropdown Menu -->
-        <div class=" w-56 p-3 rounded-lg shadow bg-white border border-opacity-30 border-black">
-          <!-- Reset Button -->
-
-          <div class="text-center">
-            <button type="reset"
-              class="px-4 py-2 text-white font-semibold bg-zinc-900 rounded-full hover:bg-zinc-600 ease-in duration-300 uppercase">reset
-              filters</button>
-          </div>
-
-
-
-          <!-- Categories Filter -->
-          <div class="filter-section p-2">
-            <button type="button" class="toggle-btn font-medium text-gray-900 mb-2">Categories</button>
-            <ul class="filter-content space-y-2 text-sm text-gray-700 font-semibold uppercase">
-              <li><input type="checkbox" id="tops" class="checkbox" name="categories" value="tops" />
-                <label for="tops">Tops</label>
-              </li>
-              <li><input type="checkbox" id="jeans" class="checkbox" name="categories" value="jeans" />
-                <label for="jeans">Jeans</label>
-              </li>
-              <li><input type="checkbox" id="sweaters" class="checkbox" name="categories" value="sweaters" /> <label
-                  for="sweaters">Sweaters</label></li>
-              <li><input type="checkbox" id="skirts" class="checkbox" name="categories" value="skirts" />
-                <label for="skirts">Skirts</label>
-              </li>
-              <li><input type="checkbox" id="dresses" class="checkbox" name="categories" value="dresses" /> <label
-                  for="dresses">Dresses</label></li>
-              <li><input type="checkbox" id="coats" class="checkbox" name="categories" value="coats" />
-                <label for="coats">Coats</label>
-              </li>
-              <li><input type="checkbox" id="jackets" class="checkbox" name="categories" value="jackets" /> <label
-                  for="jackets">Jackets</label></li>
-              <li><input type="checkbox" id="shoes" class="checkbox" name="categories" value="shoes" />
-                <label for="shoes">Shoes</label>
-              </li>
-              <li><input type="checkbox" id="bags" class="checkbox" name="categories" value="bags" />
-                <label for="bags">Bags</label>
-              </li>
-              <li><input type="checkbox" id="accessories" class="checkbox" name="categories" value="accessories" />
-                <label for="accessories">Accessories</label></li>
-            </ul>
-            <hr class="m-2 ml-0">
-          </div>
-
-          <!-- Gender Filter -->
-          <div class="filter-section p-2">
-            <button type="button" class="toggle-btn font-medium text-gray-900 mb-2">Gender</button>
-            <ul class="filter-content space-y-2 text-sm text-gray-700 font-semibold uppercase hidden">
-              <li><input type="checkbox" id="women" class="checkbox" name="gender" value="women" /> <label
-                  for="women">Women</label></li>
-              <li><input type="checkbox" id="men" class="checkbox" name="gender" value="men" /> <label
-                  for="men">Men</label></li>
-            </ul>
-            <hr class="m-2 ml-0">
-          </div>
-
-          <!-- Clothing Size Filter -->
-          <div class="filter-section p-2">
-            <button type="button" class="toggle-btn font-medium text-gray-900 mb-2">Clothing Size</button>
-            <ul class="filter-content grid grid-cols-4 gap-2 text-sm text-gray-700 font-semibold uppercase hidden">
-              <li><input type="checkbox" id="xs" class="checkbox" name="clothing_size" value="XS" />
-                <label for="xs">XS</label>
-              </li>
-              <li><input type="checkbox" id="s" class="checkbox" name="clothing_size" value="S" /> <label
-                  for="s">S</label></li>
-              <li><input type="checkbox" id="m" class="checkbox" name="clothing_size" value="M" /> <label
-                  for="m">M</label></li>
-              <li><input type="checkbox" id="l" class="checkbox" name="clothing_size" value="L" /> <label
-                  for="l">L</label></li>
-              <li><input type="checkbox" id="xl" class="checkbox" name="clothing_size" value="XL" />
-                <label for="xl">XL</label>
-              </li>
-            </ul>
-            <hr class="m-2 ml-0">
-          </div>
-
-          <!-- Shoe Size Filter -->
-          <div class="filter-section p-2">
-            <button type="button" class="toggle-btn font-medium text-gray-900 mb-2">Shoe Size</button>
-            <ul class="filter-content grid grid-cols-5 gap-2 text-sm text-gray-700 font-semibold uppercase hidden">
-              <li><input type="checkbox" id="shoe-36" class="checkbox" name="shoe_size" value="36" />
-                <label for="shoe-36">36</label>
-              </li>
-              <li><input type="checkbox" id="shoe-37" class="checkbox" name="shoe_size" value="37" />
-                <label for="shoe-37">37</label>
-              </li>
-              <li><input type="checkbox" id="shoe-38" class="checkbox" name="shoe_size" value="38" />
-                <label for="shoe-38">38</label>
-              </li>
-              <li><input type="checkbox" id="shoe-39" class="checkbox" name="shoe_size" value="39" />
-                <label for="shoe-39">39</label>
-              </li>
-              <li><input type="checkbox" id="shoe-40" class="checkbox" name="shoe_size" value="40" />
-                <label for="shoe-40">40</label>
-              </li>
-              <li><input type="checkbox" id="shoe-41" class="checkbox" name="shoe_size" value="41" />
-                <label for="shoe-41">41</label>
-              </li>
-              <li><input type="checkbox" id="shoe-42" class="checkbox" name="shoe_size" value="42" />
-                <label for="shoe-42">42</label>
-              </li>
-            </ul>
-            <hr class="m-2 ml-0">
-          </div>
-
-
-        </div>
-      </form>
     </div>
 
-    <div class="mt-6 grid gap-x-6 gap-y-10 grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-      <div class="group relative">
-        <img src="https://media-photos.depop.com/b1/5913802/1997839635_8240334744bf42e191e6c596467700fd/P0.jpg"
-          alt="Front of men&#039;s Basic Tee in black."
-          class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
-        <div class="mt-4 flex justify-between">
-          <div>
-            <h3 class="text-sm text-gray-700">
-              <a href="/templates/products/single-product.html">
-                <span aria-hidden="true" class="absolute inset-0"></span>
-                Basic Tee
-              </a>
-            </h3>
-            <p class="mt-1 text-sm text-gray-500">Black</p>
-          </div>
-          <p class="text-sm font-medium text-gray-900">$35</p>
-        </div>
-      </div>
-
-      <div class="group relative">
-        <img src="https://media-photos.depop.com/b1/6406248/2026089428_ef0319f8890a4042907e698563b270d7/P0.jpg"
-          alt="Front of men&#039;s Basic Tee in black."
-          class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
-        <div class="mt-4 flex justify-between">
-          <div>
-            <h3 class="text-sm text-gray-700">
-              <a href="#">
-                <span aria-hidden="true" class="absolute inset-0"></span>
-                Basic Tee
-              </a>
-            </h3>
-            <p class="mt-1 text-sm text-gray-500">Black</p>
-          </div>
-          <p class="text-sm font-medium text-gray-900">$35</p>
-        </div>
-      </div>
-
-
-      <div class="group relative">
-        <img src="https://media-photos.depop.com/b1/24561642/1466869370_056963a4d606494c9aa9ea4ce8a854e2/P0.jpg"
-          alt="Front of men&#039;s Basic Tee in black."
-          class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
-        <div class="mt-4 flex justify-between">
-          <div>
-            <h3 class="text-sm text-gray-700">
-              <a href="#">
-                <span aria-hidden="true" class="absolute inset-0"></span>
-                Basic Tee
-              </a>
-            </h3>
-            <p class="mt-1 text-sm text-gray-500">Black</p>
-          </div>
-          <p class="text-sm font-medium text-gray-900">$35</p>
-        </div>
-      </div>
-
-
-      <div class="group relative">
-        <img src="https://media-photos.depop.com/b1/51541544/2061800626_7dd0ca1cdde045a9a0c695dedac0bed5/P0.jpg"
-          alt="Front of men&#039;s Basic Tee in black."
-          class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
-        <div class="mt-4 flex justify-between">
-          <div>
-            <h3 class="text-sm text-gray-700">
-              <a href="#">
-                <span aria-hidden="true" class="absolute inset-0"></span>
-                Basic Tee
-              </a>
-            </h3>
-            <p class="mt-1 text-sm text-gray-500">Black</p>
-          </div>
-          <p class="text-sm font-medium text-gray-900">$35</p>
-        </div>
-      </div>
-
-      <div class="group relative">
-        <img src="https://media-photos.depop.com/b1/24561642/2007067225_c9a335dd839e47aab8caf79f37b9653f/P0.jpg"
-          alt="Front of men&#039;s Basic Tee in black."
-          class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
-        <div class="mt-4 flex justify-between">
-          <div>
-            <h3 class="text-sm text-gray-700">
-              <a href="#">
-                <span aria-hidden="true" class="absolute inset-0"></span>
-                Basic Tee
-              </a>
-            </h3>
-            <p class="mt-1 text-sm text-gray-500">Black</p>
-          </div>
-          <p class="text-sm font-medium text-gray-900">$35</p>
-        </div>
-      </div>
-
-
-      <div class="group relative">
-        <img src="https://media-photos.depop.com/b1/33154282/2037056174_ede1821cbdcd4317b297234cfef46908/P0.jpg"
-          alt="Front of men&#039;s Basic Tee in black."
-          class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
-        <div class="mt-4 flex justify-between">
-          <div>
-            <h3 class="text-sm text-gray-700">
-              <a href="#">
-                <span aria-hidden="true" class="absolute inset-0"></span>
-                Basic Tee
-              </a>
-            </h3>
-            <p class="mt-1 text-sm text-gray-500">Black</p>
-          </div>
-          <p class="text-sm font-medium text-gray-900">$35</p>
-        </div>
-      </div>
-
-      <!-- More products... -->
-    </div>
   </div>
+
 
 
   <!-- FOOTER -->
   <footer class="bg-zinc-900 pt-20">
-    <div class="w-full max-w-screen-xl mx-auto p-4">
+    <div class="fixed bottom-0 w-full max-w-screen-xl mx-auto p-4">
       <div class="sm:flex sm:items-center sm:justify-between">
         <div class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-          <img src="/static/images/white-logo.png" class="h-16" alt="Dripify Logo" />
+          <img src="/images/white-logo.png" class="h-16" alt="Dripify Logo" />
           <span class="text-white self-center text-2xl font-bold tracking-widest uppercase">Dripify</span>
         </div>
 
@@ -1144,11 +261,5 @@
     class="hidden sm:block fixed bottom-5 right-5 bg-black text-white text-4xl rounded-full p-5 px-8 shadow-lg opacity-0 transition-opacity duration-300">↑</button>
 
 
-
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script src="/static/js/nav-functionality.js"></script>
-  <script src="/static/js/common.js"></script>
-  <script src="/static/js/products-func.js"></script>
 </body>
-
 </html>

@@ -5,6 +5,7 @@ import com.dripify.shared.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -25,10 +26,14 @@ public class Product {
     @Column(nullable = false)
     private String description;
 
+    @Column(nullable = false)
+    private BigDecimal price;
+
     @ManyToOne
     private Category category;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @Column(nullable = false)

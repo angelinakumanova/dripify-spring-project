@@ -4,6 +4,7 @@ import com.dripify.web.dto.LoginRequest;
 import com.dripify.web.dto.RegisterRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -36,8 +37,9 @@ public class IndexController {
         return "about-us";
     }
 
-    @GetMapping("/products")
-    public String getProducts() {
-        return "/products/products";
+    @GetMapping("/single-product")
+    public String getSingleProduct() {
+        return "/products/single-product";
     }
+
 }

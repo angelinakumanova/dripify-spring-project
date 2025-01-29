@@ -3,12 +3,10 @@ package com.dripify.shared.advice;
 import com.dripify.category.model.Category;
 import com.dripify.category.service.CategoryService;
 import com.dripify.shared.enums.Gender;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
-import java.util.Map;
 
 @ControllerAdvice
 public class NavBarInitializer {
