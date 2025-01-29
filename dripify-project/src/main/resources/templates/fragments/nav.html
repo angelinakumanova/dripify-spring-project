@@ -196,7 +196,8 @@
                             <hr>
                             
                             <div id="women-categories" class="grid grid-rows-5 grid-flow-col text-base">
-                                <a th:each="category: ${categoriesForWomen}" href="#">
+                                <a th:each="category: ${categoriesForWomen}"
+                                   th:href="@{/products/{gender}/{category}(gender='women', category=${category.name.toLowerCase()})}">
                                     <div class="rounded-lg p-4 hover:bg-gray-50">
                                         <p class="font-semibold text-gray-700 uppercase" th:text="${category.name}"></p>
                                     </div>
@@ -206,7 +207,8 @@
 
 
                             <div id="men-categories" class="hidden grid grid-rows-5 grid-flow-col text-base">
-                                <a th:each="category: ${categoriesForMen}" href="#">
+                                <a th:each="category: ${categoriesForMen}"
+                                   th:href="@{/products/{gender}/{category}(gender='men', category=${category.name.toLowerCase()})}">
                                     <div class="rounded-lg p-4 hover:bg-gray-50">
                                         <p class="font-semibold text-gray-700 uppercase" th:text="${category.name}"></p>
                                     </div>

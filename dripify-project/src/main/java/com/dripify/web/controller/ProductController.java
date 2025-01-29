@@ -4,6 +4,7 @@ import com.dripify.product.service.ProductService;
 import com.dripify.shared.enums.Gender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,13 +19,16 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping
-    public ModelAndView getProducts(@RequestParam(required = false) String category,
-                                    @RequestParam(required = false) Gender gender) {
+    @GetMapping("/{gender}/{category}")
+    public ModelAndView getProducts(@PathVariable String category,
+                                    @PathVariable String gender) {
         ModelAndView modelAndView = new ModelAndView("products/products");
 
-        modelAndView.addObject("products", productService.getFilteredProducts(category, gender));
+        modelAndView.addObject("products", productService
+                .getFilteredProducts(category, Gender.valueOf(gender.toUpperCase())));
 
         return modelAndView;
     }
+
+
 }
