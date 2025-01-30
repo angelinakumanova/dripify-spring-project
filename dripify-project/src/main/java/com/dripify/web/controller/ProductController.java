@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.UUID;
+
 @Controller
 @RequestMapping("/products")
 public class ProductController {
@@ -24,8 +26,17 @@ public class ProductController {
                                     @PathVariable String gender) {
         ModelAndView modelAndView = new ModelAndView("products/products");
 
+        String actualCategory = category.replace("-", " & ");
         modelAndView.addObject("products", productService
-                .getFilteredProducts(category, Gender.valueOf(gender.toUpperCase())));
+                .getFilteredProducts(actualCategory, Gender.valueOf(gender.toUpperCase())));
+
+        return modelAndView;
+    }
+
+    @GetMapping("/{id}")
+    public ModelAndView getProduct(@PathVariable UUID id) {
+        ModelAndView modelAndView = new ModelAndView("/products/single-product");
+        modelAndView.addObject("product", productService.getProductById(id));
 
         return modelAndView;
     }

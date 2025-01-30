@@ -8,19 +8,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, UUID> {
-    @Query("""
-    SELECT p FROM Product p
-    WHERE (:categoryName IS NULL OR p.category.name = :categoryName)
-    AND (:gender IS NULL OR p.gender = :gender OR p.gender = com.dripify.shared.enums.Gender.UNISEX)
-        """)
-    List<Product> findProducts(
-            @Param("categoryName") String categoryName,
-            @Param("gender") Gender gender
-    );
+    List<Product> findProductsByCategoryNameAndGenderIn(String categoryName, List<Gender> gender);
 
-    Product getProductById(UUID id);
+    Optional<Product> getProductById(UUID id);
 }

@@ -1,5 +1,6 @@
 package com.dripify.product.service;
 
+import com.dripify.exception.DomainException;
 import com.dripify.product.model.Product;
 import com.dripify.product.repository.ProductRepository;
 import com.dripify.shared.enums.Gender;
@@ -20,12 +21,12 @@ public class ProductService {
 
 
     public List<Product> getFilteredProducts(@Nullable String category, @Nullable Gender gender) {
-        return productRepository.findProducts(category, gender);
+        return productRepository.findProductsByCategoryNameAndGenderIn(category, List.of(gender, Gender.UNISEX));
     }
 
 
     public Product getProductById(UUID id) {
-        return productRepository.getProductById(id);
+        return productRepository.getProductById(id).orElseThrow(() -> new DomainException("Product not found"));
     }
 }
 
