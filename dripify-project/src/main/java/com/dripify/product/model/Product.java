@@ -27,6 +27,18 @@ public class Product {
     private String description;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Brand brand;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Color color;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Size size;
+
+    @Column(nullable = false)
     private BigDecimal price;
 
     @ManyToOne
