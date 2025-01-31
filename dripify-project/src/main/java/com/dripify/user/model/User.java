@@ -1,8 +1,11 @@
 package com.dripify.user.model;
 
+import com.dripify.product.model.Product;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Builder
@@ -25,4 +28,6 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @OneToMany(mappedBy = "seller")
+    private List<Product> products = new ArrayList<>();
 }

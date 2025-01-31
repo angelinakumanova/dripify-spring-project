@@ -1,4 +1,4 @@
-package com.dripify.product.model;
+package com.dripify.product.model.enums;
 
 
 public enum Color {

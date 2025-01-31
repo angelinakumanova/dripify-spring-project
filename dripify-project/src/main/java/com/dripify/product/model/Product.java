@@ -1,7 +1,9 @@
 package com.dripify.product.model;
 
 import com.dripify.category.model.Category;
+import com.dripify.product.model.enums.*;
 import com.dripify.shared.enums.Gender;
+import com.dripify.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +22,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @ManyToOne
+    private User seller;
+
     @Column(nullable = false)
     private String name;
 
@@ -32,11 +37,19 @@ public class Product {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Color color;
+    private Size size;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Size size;
+    private Material material;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Color color;
+
+    @Column(name = "product_condition", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Condition condition;
 
     @Column(nullable = false)
     private BigDecimal price;

@@ -73,10 +73,10 @@
           </div>
 
 
-          <a href="#" class="text-sm font-medium text-gray-900">
-            Emilia Dimitrova
-          </a>
-          <button onclick="toggleModal()" class="hover:underline text-sm font-bold text-gray-900">
+          <a href="#" th:text="${product.seller.username}" class="text-sm font-medium text-gray-900"></a>
+
+<!--          TODO: TOGGLE-->
+          <button class="hover:underline text-sm font-bold text-gray-900">
             (345 Reviews)
           </button>
 
@@ -97,12 +97,12 @@
           <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
 
           <ul class="list-none space-y-2">
-            <li th:text="${product.description}"><span class="font-bold">Description:</span></li>
-            <li><span class="font-bold">Size:</span> Medium</li>
-            <li><span class="font-bold">Brand:</span> Zara</li>
-            <li><span class="font-bold">Material:</span> 100% Cotton</li>
-            <li><span class="font-bold">Color:</span> Pastel Yellow</li>
-            <li><span class="font-bold">Condition:</span> Gently Used</li>
+            <li><span class="font-bold">Description:</span> <span th:text="${product.description}"></span></li>
+            <li><span class="font-bold">Size:</span> <span th:text="${product.size.toString()}"></span></li>
+            <li><span class="font-bold">Brand:</span> <span th:text="${product.brand.toString()}"></span></li>
+            <li><span class="font-bold">Material:</span> <span th:text="${product.material.toString()}"></span></li>
+            <li><span class="font-bold">Color:</span> <span th:text="${product.color.toString()}"></span></li>
+            <li><span class="font-bold">Condition:</span> <span th:text="${product.condition.toString()}"></span></li>
           </ul>
         </div>
 
