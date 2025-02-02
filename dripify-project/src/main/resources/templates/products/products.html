@@ -197,9 +197,10 @@
         <h1 class="text-lg sm:text-3xl font-bold text-center">No products available</h1>
       </div>
 
-      <div th:if="${products}"  class="mt-6 grid gap-x-6 gap-y-10 grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+      <div th:if="${products}" class="mt-6 grid gap-x-6 gap-y-10 grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
-        <a th:each="product: ${products}" th:href="@{'/products/' + ${product.id}} ">
+        <a th:each="product: ${products}" th:href="@{/products/{id}(id=${product.id})}">
+
           <div class="group relative group-hover:cursor-pointer">
             <img src="https://media-photos.depop.com/b1/5913802/1997839635_8240334744bf42e191e6c596467700fd/P0.jpg"
                  th:alt="${product.name}"
@@ -209,11 +210,12 @@
                 <h3 class="text-sm text-gray-700" th:text="${product.name}">
                   <span aria-hidden="true" class="absolute inset-0"></span>
                 </h3>
-                <p class="mt-1 text-sm text-gray-500">Black</p>
+                <p class="mt-1 text-sm text-gray-500" th:text="${product.color}"></p>
               </div>
               <p class="text-sm font-medium text-gray-900" th:text="${product.price}"></p>
             </div>
           </div>
+
         </a>
 
       </div>

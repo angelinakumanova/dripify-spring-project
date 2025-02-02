@@ -19,6 +19,6 @@ public class CategoryService {
 
     @Cacheable("categoriesByGender")
     public List<Category> getCategoriesByGenders(List<Gender> genders) {
-        return categoryRepository.findByGenderIn(genders);
+        return categoryRepository.findByGenderInAndParentCategoryIsNull(genders);
     }
 }

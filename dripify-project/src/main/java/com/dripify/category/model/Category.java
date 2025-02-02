@@ -28,6 +28,9 @@ public class Category {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @ManyToOne
+    private Category parentCategory;
+
     @OneToMany(mappedBy = "category")
     private List<Product> products = new ArrayList<>();
 }

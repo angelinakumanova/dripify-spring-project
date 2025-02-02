@@ -18,7 +18,7 @@ public class IndexController {
     @GetMapping("/register")
     public ModelAndView getRegister() {
         ModelAndView mav = new ModelAndView("register");
-        mav.addObject("userRegister", new RegisterRequest());
+        mav.addObject("registerRequest", new RegisterRequest());
 
         return mav;
     }

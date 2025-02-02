@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, UUID> {
-    List<Product> findProductsByCategoryNameAndGenderIn(String categoryName, List<Gender> gender);
+    List<Product> findProductsByCategoryNameInAndGenderIn(List<String> categoryNames, List<Gender> gender);
 
     Optional<Product> getProductById(UUID id);
 }

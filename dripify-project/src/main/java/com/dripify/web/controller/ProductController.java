@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -22,13 +22,12 @@ public class ProductController {
     }
 
     @GetMapping("/{gender}/{category}")
-    public ModelAndView getProducts(@PathVariable String category,
+    public ModelAndView getProducts(@PathVariable String categoryName,
                                     @PathVariable String gender) {
         ModelAndView modelAndView = new ModelAndView("products/products");
-
-        String actualCategory = category.replace("-", " & ");
-        modelAndView.addObject("products", productService
-                .getFilteredProducts(actualCategory, Gender.valueOf(gender.toUpperCase())));
+//
+//        modelAndView.addObject("products", productService
+//                .getFilteredProducts(categoryName, Gender.valueOf(gender.toUpperCase())));
 
         return modelAndView;
     }

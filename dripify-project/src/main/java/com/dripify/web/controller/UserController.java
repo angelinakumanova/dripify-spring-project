@@ -31,14 +31,10 @@ public class UserController {
                                      BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            ModelAndView register = new ModelAndView("register");
-            register.addObject("userRegister", registerRequest);
-            register.addObject("org.springframework.validation.BindingResult.userRegister", bindingResult);
-
-            return register ;
+            return new ModelAndView("register");
         }
 
-        //REGISTER USER
+        //TODO: REGISTER USER
 
         return new ModelAndView("redirect:/");
     }
