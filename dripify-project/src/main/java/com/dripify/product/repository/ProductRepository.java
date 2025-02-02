@@ -13,7 +13,11 @@ import java.util.UUID;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, UUID> {
-    List<Product> findProductsByCategoryNameInAndGenderIn(List<String> categoryNames, List<Gender> gender);
+    @Query("SELECT p FROM Product p" +
+            " WHERE (p.category.name = :categoryName OR p.category.parentCategory.name = :categoryName)" +
+            " AND p.gender IN :gender")
+    List<Product> findProductsByCategoryAndGender(
+            String categoryName, List<Gender> gender);
 
     Optional<Product> getProductById(UUID id);
 }

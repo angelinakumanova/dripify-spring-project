@@ -20,8 +20,8 @@ public class ProductService {
     }
 
 
-    public List<Product> getFilteredProducts(List<String> categoryNames, Gender gender) {
-        return productRepository.findProductsByCategoryNameInAndGenderIn(categoryNames, List.of(gender, Gender.UNISEX));
+    public List<Product> getFilteredProducts(String categoryName, Gender gender) {
+        return productRepository.findProductsByCategoryAndGender(categoryName, List.of(gender, Gender.UNISEX));
     }
 
 

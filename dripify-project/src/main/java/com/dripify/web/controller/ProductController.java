@@ -22,12 +22,12 @@ public class ProductController {
     }
 
     @GetMapping("/{gender}/{category}")
-    public ModelAndView getProducts(@PathVariable String categoryName,
+    public ModelAndView getProducts(@PathVariable(name = "category") String categoryName,
                                     @PathVariable String gender) {
         ModelAndView modelAndView = new ModelAndView("products/products");
-//
-//        modelAndView.addObject("products", productService
-//                .getFilteredProducts(categoryName, Gender.valueOf(gender.toUpperCase())));
+
+        modelAndView.addObject("products", productService
+                .getFilteredProducts(categoryName, Gender.valueOf(gender.toUpperCase())));
 
         return modelAndView;
     }
