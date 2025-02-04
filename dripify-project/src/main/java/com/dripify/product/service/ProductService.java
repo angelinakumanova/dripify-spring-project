@@ -4,7 +4,9 @@ import com.dripify.exception.DomainException;
 import com.dripify.product.model.Product;
 import com.dripify.product.repository.ProductRepository;
 import com.dripify.shared.enums.Gender;
-import jakarta.annotation.Nullable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +22,9 @@ public class ProductService {
     }
 
 
-    public List<Product> getFilteredProducts(String categoryName, Gender gender) {
-        return productRepository.findProductsByCategoryAndGender(categoryName, List.of(gender, Gender.UNISEX));
+    public Page<Product> getFilteredProducts(String category, List<Gender> genders, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return productRepository.findProductsByCategoryAndGender(category, genders, pageable);
     }
 
 

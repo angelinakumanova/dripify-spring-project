@@ -536,131 +536,21 @@
 
 
                         <div id="women-categories-mobile" class="flex flex-col text-xl">
-                            <a href="#">
+                            <a th:each="category: ${categoriesForWomen}"
+                               th:href="@{/products/{gender}/{category}(gender='women',
+                                    category=${category.name})}">
                                 <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">tops</p>
-                                </div>
-                            </a>
-
-                            <a href="#">
-                                <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">jeans</p>
-                                </div>
-                            </a>
-
-                            <a href="#">
-                                <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">sweaters</p>
-                                </div>
-                            </a>
-
-                            <a href="#">
-                                <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">skirts</p>
-                                </div>
-                            </a>
-
-                            <a href="#">
-                                <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">dresses</p>
-                                </div>
-                            </a>
-
-                            <a href="#">
-                                <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">coats & jackets</p>
-                                </div>
-                            </a>
-
-                            <a href="#">
-                                <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">shoes</p>
-                                </div>
-                            </a>
-
-                            <a href="#">
-                                <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">bags & purses</p>
-                                </div>
-                            </a>
-
-                            <a href="#">
-                                <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">accessories</p>
+                                    <p class="font-semibold text-gray-700 uppercase" th:text="${category.name}"></p>
                                 </div>
                             </a>
                         </div>
 
                         <div id="men-categories-mobile" class="hidden flex flex-col text-xl">
-                            <a href="#">
+                            <a th:each="category: ${categoriesForMen}"
+                               th:href="@{/products/{gender}/{category}(gender='men',
+                                    category=${category.name})}">
                                 <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">t-shirts</p>
-                                </div>
-                            </a>
-
-                            <a href="#">
-                                <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">shirts</p>
-                                </div>
-                            </a>
-
-                            <a href="#">
-                                <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">hoodies</p>
-                                </div>
-                            </a>
-
-                            <a href="#">
-                                <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">jeans</p>
-                                </div>
-                            </a>
-
-                            <a href="#">
-                                <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">sweaters</p>
-                                </div>
-                            </a>
-
-                            <a href="#">
-                                <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">coats & jackets</p>
-                                </div>
-                            </a>
-
-                            <a href="#">
-                                <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">shoes</p>
-                                </div>
-                            </a>
-
-                            <a href="#">
-                                <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">bags</p>
-                                </div>
-                            </a>
-
-                            <a href="#">
-                                <div class="rounded-lg p-4 hover:bg-gray-50">
-
-                                    <p class="font-semibold text-gray-700 uppercase">accessories</p>
+                                    <p class="font-semibold text-gray-700 uppercase" th:text="${category.name}"></p>
                                 </div>
                             </a>
                         </div>
