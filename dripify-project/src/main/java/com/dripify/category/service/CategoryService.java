@@ -21,4 +21,8 @@ public class CategoryService {
     public List<Category> getCategoriesByGenders(List<Gender> genders) {
         return categoryRepository.findByGenderInAndParentCategoryIsNull(genders);
     }
+
+    public List<Category> getCategories() {
+        return categoryRepository.findAll();
+    }
 }

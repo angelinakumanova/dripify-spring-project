@@ -1,10 +1,12 @@
 package com.dripify.web.controller;
 
+import com.dripify.category.service.CategoryService;
 import com.dripify.product.model.Product;
 import com.dripify.product.service.ProductService;
 import com.dripify.shared.enums.Gender;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,27 +21,59 @@ import java.util.UUID;
 public class ProductController {
 
     private final ProductService productService;
+    private final CategoryService categoryService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, CategoryService categoryService) {
         this.productService = productService;
+        this.categoryService = categoryService;
     }
 
-    @GetMapping("/{gender}/{category}")
-    public ModelAndView getProducts(@PathVariable String category,
-                                    @PathVariable String gender,
-                                    @RequestParam(defaultValue = "0") int page,
-                                    @RequestParam(defaultValue = "20") int size) {
+    @GetMapping({"/{gender}/{category}", "/{gender}", "", "/{category}"})
+    public ModelAndView getFilteredProducts(@PathVariable(required = false) String gender,
+                                            @PathVariable(required = false) String category,
+                                            @RequestParam(defaultValue = "0") int page,
+                                            @RequestParam(defaultValue = "20") int size) {
         ModelAndView modelAndView = new ModelAndView("/products/products");
 
-        Page<Product> productPage = productService.getFilteredProducts(category, List.of(Gender.valueOf(gender.toUpperCase())), page, size);
+        List<Gender> genderFilter = (gender != null) ? List.of(Gender.valueOf(gender.toUpperCase())) : null;
+        
+        Page<Product> productPage = productService.getFilteredProducts(category, genderFilter, page, size);
 
-        modelAndView.addObject("products", productPage.getContent());
+        // Dynamic category title
+        String currentCategory;
+        if (gender != null && category != null) {
+            currentCategory = String.format("%s's %s", gender, category);
+        } else if (gender != null) {
+            currentCategory = gender + "'s Products";
+        } else if (category != null) {
+            currentCategory = category;
+        } else {
+            currentCategory = "All Products";
+        }
+
+        modelAndView.addObject("productPage", productPage);
         modelAndView.addObject("currentPage", productPage.getNumber());
-        modelAndView.addObject("totalPages", productPage.getTotalPages());
-        modelAndView.addObject("totalItems", productPage.getTotalElements());
+        modelAndView.addObject("currentCategory", currentCategory);
 
         return modelAndView;
     }
+
+//    @GetMapping("/{gender}/{category}")
+//    public ModelAndView getProductsByGenderAndCategory(@PathVariable String category,
+//                                    @PathVariable String gender,
+//                                    @RequestParam(defaultValue = "0") int page,
+//                                    @RequestParam(defaultValue = "20") int size) {
+//        ModelAndView modelAndView = new ModelAndView("/products/products");
+//
+//        Page<Product> productPage = productService.getFilteredProducts(category,
+//                List.of(Gender.valueOf(gender.toUpperCase())), page, size);
+//
+//        modelAndView.addObject("productPage", productPage);
+//        modelAndView.addObject("currentPage", productPage.getNumber());
+//        modelAndView.addObject("currentCategory", (String.format("%s's %s", gender, category)));
+//
+//        return modelAndView;
+//    }
 
 
     @GetMapping("/{id}")
