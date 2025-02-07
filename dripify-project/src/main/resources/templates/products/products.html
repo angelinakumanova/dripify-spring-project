@@ -6,132 +6,200 @@
 <body class="flex flex-col min-h-screen">
 <div th:replace="~{/fragments/nav::nav}"></div>
 
-  <div class="main-site-content">
-    <div class="mt-24"></div>
-
+  <div class="main-site-content mt-24">
       <div class="flex gap-2 mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-screen-2xl lg:px-8">
-          <div class="hidden sm:block border-r border-opacity-50 p-2">
-              <div class="p-2 pl-0">
-                  <svg class="inline-block w-8 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                       stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M4 4h16"></path>
-                      <path d="M7 9h10"></path>
-                      <path d="M10 14h4"></path>
-                  </svg>
+          <div class="hidden sm:block border-r border-opacity-50 p-2 mr-2">
+              <div class="w-48 p-3 border-2 border-opacity-50 rounded-3xl">
 
-                  <h2 class="inline-block text-xl sm:text-2xl font-bold tracking-tight text-gray-900">Filter</h2>
-              </div>
-
-
-              <!-- Filter Form -->
-              <form id="dropdown-filter">
-                  <!-- Dropdown Menu -->
-                  <div class="w-64 h-[35vh]
-                  overflow-y-auto
-                  [&::-webkit-scrollbar]:w-2
-                  [&::-webkit-scrollbar-track]:rounded-full
-                  [&::-webkit-scrollbar-track]:bg-gray-100
-                  [&::-webkit-scrollbar-thumb]:rounded-full
-                  [&::-webkit-scrollbar-thumb]:bg-gray-300
-                  p-3 border border-opacity-50 rounded-lg">
-                      <div class="text-center">
-                          <button type="reset"
-                                  class="px-4 py-2 text-white font-semibold bg-zinc-900
-                                   rounded-full hover:bg-zinc-600 ease-in duration-300 uppercase">reset
-                              filters</button>
-                      </div>
-
-
-
-                      <!-- Categories Filter -->
-                      <div class="filter-section p-2">
-                          <button type="button" class="toggle-btn font-medium text-gray-900 mb-2">Categories</button>
-                          <ul class="filter-content space-y-2 text-sm text-gray-700 font-semibold uppercase">
-                              <li th:each="category: ${categories}">
-                                  <input type="checkbox" th:id="${category.name}" class="checkbox" name="categories"
-                                         th:value="${category.name}" />
-                                  <label th:for="${category.name}" th:text="${category.name}"></label>
-                              </li>
-                          </ul>
-                          <hr class="m-2 ml-0">
-                      </div>
-
-                      <!-- Gender Filter -->
-                      <div class="filter-section p-2">
-                          <button type="button" class="toggle-btn font-medium text-gray-900 mb-2">Gender</button>
-                          <ul class="filter-content space-y-2 text-sm text-gray-700 font-semibold uppercase hidden">
-                              <li><input type="checkbox" id="women" class="checkbox" name="gender" value="women" /> <label
-                                      for="women">Women</label></li>
-                              <li><input type="checkbox" id="men" class="checkbox" name="gender" value="men" /> <label
-                                      for="men">Men</label></li>
-                          </ul>
-                          <hr class="m-2 ml-0">
-                      </div>
-
-                      <!-- Clothing Size Filter -->
-                      <div class="filter-section p-2">
-                          <button type="button" class="toggle-btn font-medium text-gray-900 mb-2">Clothing Size</button>
-                          <ul class="filter-content grid grid-cols-4 gap-2 text-sm text-gray-700 font-semibold uppercase hidden">
-                              <li><input type="checkbox" id="xs" class="checkbox" name="clothing_size" value="XS" />
-                                  <label for="xs">XS</label>
-                              </li>
-                              <li><input type="checkbox" id="s" class="checkbox" name="clothing_size" value="S" /> <label
-                                      for="s">S</label></li>
-                              <li><input type="checkbox" id="m" class="checkbox" name="clothing_size" value="M" /> <label
-                                      for="m">M</label></li>
-                              <li><input type="checkbox" id="l" class="checkbox" name="clothing_size" value="L" /> <label
-                                      for="l">L</label></li>
-                              <li><input type="checkbox" id="xl" class="checkbox" name="clothing_size" value="XL" />
-                                  <label for="xl">XL</label>
-                              </li>
-                          </ul>
-                          <hr class="m-2 ml-0">
-                      </div>
-
-                      <!-- Shoe Size Filter -->
-                      <div class="filter-section p-2">
-                          <button type="button" class="toggle-btn font-medium text-gray-900 mb-2">Shoe Size</button>
-                          <ul class="filter-content grid grid-cols-5 gap-2 text-sm text-gray-700 font-semibold uppercase hidden">
-                              <li><input type="checkbox" id="shoe-36" class="checkbox" name="shoe_size" value="36" />
-                                  <label for="shoe-36">36</label>
-                              </li>
-                              <li><input type="checkbox" id="shoe-37" class="checkbox" name="shoe_size" value="37" />
-                                  <label for="shoe-37">37</label>
-                              </li>
-                              <li><input type="checkbox" id="shoe-38" class="checkbox" name="shoe_size" value="38" />
-                                  <label for="shoe-38">38</label>
-                              </li>
-                              <li><input type="checkbox" id="shoe-39" class="checkbox" name="shoe_size" value="39" />
-                                  <label for="shoe-39">39</label>
-                              </li>
-                              <li><input type="checkbox" id="shoe-40" class="checkbox" name="shoe_size" value="40" />
-                                  <label for="shoe-40">40</label>
-                              </li>
-                              <li><input type="checkbox" id="shoe-41" class="checkbox" name="shoe_size" value="41" />
-                                  <label for="shoe-41">41</label>
-                              </li>
-                              <li><input type="checkbox" id="shoe-42" class="checkbox" name="shoe_size" value="42" />
-                                  <label for="shoe-42">42</label>
-                              </li>
-                          </ul>
-                          <hr class="m-2 ml-0">
-                      </div>
-
-
+                  <!-- All Categories -->
+                  <div class="p-2">
+                      <button type="button" class="categories-toggle-btn font-medium text-gray-600 mb-2 text-2xl">All Products</button>
+                      <ul class="hidden indent-3 space-y-2 text-base text-gray-600 font-semibold uppercase">
+                          <hr>
+                          <li><a href="#" class="transition duration-200 ease-in hover:text-white hover:bg-zinc-400 p-1 px-2  rounded-2xl">Tops</a></label>
+                          </li>
+                      </ul>
                   </div>
-              </form>
+
+                  <!-- Women Categories -->
+                  <div class="p-2">
+                      <button type="button" class="categories-toggle-btn font-medium text-gray-600 mb-2 text-2xl">Women</button>
+                      <ul class="hidden indent-3 space-y-2 text-base text-gray-600 font-semibold uppercase">
+                          <hr>
+                          <li><a href="#" class="transition duration-200 ease-in hover:text-white hover:bg-zinc-400 p-1 px-2  rounded-2xl">Tops</a></label>
+                          </li>
+                      </ul>
+                  </div>
+
+                  <!-- Men Categories -->
+                  <div class="p-2">
+                      <button type="button" class="categories-toggle-btn font-medium text-gray-600 mb-2 text-2xl">Men</button>
+                      <ul class="hidden indent-3 space-y-2 text-base text-gray-600 font-semibold uppercase">
+                          <hr>
+                          <li><a href="#" class="transition duration-200 ease-in hover:text-white hover:bg-zinc-400 p-1 px-2  rounded-2xl">Tops</a></label>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
           </div>
 
 
           <div class="flex-grow">
 
-              <div>
-                  <h2 class="text-lg sm:text-3xl font-bold
-               tracking-tight uppercase
-               bg-zinc-900 text-white p-2 px-5 rounded-full inline-block" th:text="${currentCategory}"></h2>
 
-                  <h3 class="text-xl p-2 uppercase font-bold" th:text="${productPage.getTotalElements() + ' products found'}"></h3>
+              <div class="flex xl:flex-row flex-col justify-between">
+                  <div>
+                      <h2 class="text-lg sm:text-3xl font-bold
+                 tracking-tight uppercase
+                 bg-zinc-900 text-white p-2 px-5 rounded-full inline-block" th:text="${currentCategory}"></h2>
+
+                      <h3 class="text-xl p-2 uppercase font-bold" th:text="${productPage.getContent().size() + ' products found'}"></h3>
+                  </div>
+
+                  <div class="sm:flex gap-2 grid grid-cols-2 flex-wrap">
+                      <div class="sort-by-box space-y-1 sm:space-y-3">
+                          <div id="sort-by-btn"
+                               class="inline-block font-bold p-2 px-4 rounded-full border-2 border-opacity-60 hover:bg-zinc-700 hover:text-white duration-300 ease-in-out hover:cursor-pointer hover:border-zinc-700">
+                              Sort By
+                          </div>
+
+                          <div id="sort-by-dropdown"
+                               class="z-50 opacity-0 transition-opacity ease-in duration-300 pointer-events-none absolute p-2 bg-white rounded-lg shadow-lg border-2 border-opacity-60">
+                              <button id="sort-price-low"
+                                      class="w-full text-left p-2 rounded-lg text-gray-700 font-semibold hover:bg-zinc-200 flex items-center justify-between">
+                                  Price Low to High
+                              </button>
+                              <button id="sort-price-high"
+                                      class="w-full text-left p-2 rounded-lg text-gray-700 font-semibold hover:bg-zinc-200 flex items-center justify-between">
+                                  Price High to Low
+                              </button>
+                          </div>
+                      </div>
+
+                      <div class="material-box relative space-y-3">
+                          <div id="material-btn"
+                               class="inline-block font-bold p-2 px-4 rounded-full border-2 border-opacity-60 hover:bg-zinc-700 hover:text-white duration-300 ease-in-out hover:cursor-pointer hover:border-zinc-700">Material</div>
+
+                          <div id="material-dropdown"
+                               class="z-50 opacity-0 transition-opacity ease-in duration-300 pointer-events-none left-[50%] translate-x-[-50%] min-w-48 h-[15vh] overflow-y-auto [&::-webkit-scrollbar]:w-2
+                [&::-webkit-scrollbar-track]:rounded-full
+              [&::-webkit-scrollbar-track]:bg-gray-100
+                [&::-webkit-scrollbar-thumb]:rounded-full
+              [&::-webkit-scrollbar-thumb]:bg-gray-300 absolute p-2 bg-white rounded-lg shadow-lg border-2 border-opacity-60">
+                              <ul class="text-lg text-gray-700 font-semibold">
+                                  <li
+                                          class="pl-2 hover:bg-zinc-200 rounded-lg hover:cursor-pointer duration-300 ease-in-out">
+                                      Cotton</li>
+                                  <li
+                                          class="pl-2 hover:bg-zinc-200 rounded-lg hover:cursor-pointer duration-300 ease-in-out">
+                                      Denim</li>
+                                  <li
+                                          class="pl-2 hover:bg-zinc-200 rounded-lg hover:cursor-pointer duration-300 ease-in-out">
+                                      Polyester</li>
+                                  <li
+                                          class="pl-2 hover:bg-zinc-200 rounded-lg hover:cursor-pointer duration-300 ease-in-out">
+                                      Silk</li>
+                              </ul>
+                          </div>
+                      </div>
+
+                      <div class="color-box relative space-y-3">
+                          <div id="color-btn"
+                               class="inline-block font-bold p-2 px-4 rounded-full border-2 border-opacity-60 hover:bg-zinc-700 hover:text-white duration-300 ease-in-out hover:cursor-pointer hover:border-zinc-700">Color</div>
+
+                          <div id="color-dropdown"
+                               class="z-50 opacity-0 transition-opacity ease-in duration-300 pointer-events-none left-[50%] translate-x-[-50%] min-w-48 h-[15vh] overflow-y-auto [&::-webkit-scrollbar]:w-2
+                [&::-webkit-scrollbar-track]:rounded-full
+              [&::-webkit-scrollbar-track]:bg-gray-100
+                [&::-webkit-scrollbar-thumb]:rounded-full
+              [&::-webkit-scrollbar-thumb]:bg-gray-300 absolute p-2 bg-white rounded-lg shadow-lg border-2 border-opacity-60">
+                              <ul class="text-lg text-gray-700 font-semibold">
+                                  <li
+                                          class="pl-2 hover:bg-zinc-200 rounded-lg hover:cursor-pointer duration-300 ease-in-out">
+                                      Black</li>
+                                  <li
+                                          class="pl-2 hover:bg-zinc-200 rounded-lg hover:cursor-pointer duration-300 ease-in-out">
+                                      Pink</li>
+                                  <li
+                                          class="pl-2 hover:bg-zinc-200 rounded-lg hover:cursor-pointer duration-300 ease-in-out">
+                                      White</li>
+                                  <li
+                                          class="pl-2 hover:bg-zinc-200 rounded-lg hover:cursor-pointer duration-300 ease-in-out">
+                                      Yellow</li>
+                              </ul>
+                          </div>
+                      </div>
+
+                      <div class="brand-box relative space-y-3">
+                          <div id="brand-btn"
+                               class="inline-block font-bold p-2 px-4 rounded-full border-2 border-opacity-60 hover:bg-zinc-700 hover:text-white duration-300 ease-in-out hover:cursor-pointer hover:border-zinc-700">Brand</div>
+
+                          <div id="brand-dropdown"
+                               class="z-50 opacity-0 transition-opacity ease-in duration-300 pointer-events-none left-[50%] translate-x-[-50%] min-w-48 h-[15vh] overflow-y-auto [&::-webkit-scrollbar]:w-2
+                [&::-webkit-scrollbar-track]:rounded-full
+              [&::-webkit-scrollbar-track]:bg-gray-100
+                [&::-webkit-scrollbar-thumb]:rounded-full
+              [&::-webkit-scrollbar-thumb]:bg-gray-300 absolute p-2 bg-white rounded-lg shadow-lg border-2 border-opacity-60">
+                              <ul class="text-lg text-gray-700 font-semibold">
+                                  <li
+                                          class="pl-2 hover:bg-zinc-200 rounded-lg hover:cursor-pointer duration-300 ease-in-out">
+                                      Zara</li>
+                                  <li
+                                          class="pl-2 hover:bg-zinc-200 rounded-lg hover:cursor-pointer duration-300 ease-in-out">
+                                      Bershka</li>
+                                  <li
+                                          class="pl-2 hover:bg-zinc-200 rounded-lg hover:cursor-pointer duration-300 ease-in-out">
+                                      Balenciaga</li>
+                                  <li
+                                          class="pl-2 hover:bg-zinc-200 rounded-lg hover:cursor-pointer duration-300 ease-in-out">
+                                      Pull&Bear</li>
+                                  <li
+                                          class="pl-2 hover:bg-zinc-200 rounded-lg hover:cursor-pointer duration-300 ease-in-out">
+                                      Pull&Bear</li>
+                                  <li
+                                          class="pl-2 hover:bg-zinc-200 rounded-lg hover:cursor-pointer duration-300 ease-in-out">
+                                      Pull&Bear</li>
+                              </ul>
+                          </div>
+                      </div>
+
+                      <div class="size-box relative space-y-3">
+                          <div id="size-btn"
+                               class="inline-block font-bold p-2 px-4 rounded-full border-2 border-opacity-60 hover:bg-zinc-700 hover:text-white duration-300 ease-in-out hover:cursor-pointer hover:border-zinc-700">Size</div>
+
+                          <div id="size-dropdown" class="z-50 opacity-0 transition-opacity ease-in duration-300 pointer-events-none left-[50%] translate-x-[-50%] min-w-48 w-auto max-w-[80%] max-h-[15vh] overflow-y-auto
+                  absolute p-2 bg-white rounded-lg shadow-lg border-2 border-opacity-60">
+                              <ul class="grid grid-cols-3 gap-2 text-sm text-gray-700 font-semibold">
+                                  <li>
+                                      <label class="flex items-center space-x-2 cursor-pointer">
+                                          <input type="checkbox" class="checkbox" value="XS" />
+                                          <span>XS</span>
+                                      </label>
+                                  </li>
+                                  <li>
+                                      <label class="flex items-center space-x-2 cursor-pointer">
+                                          <input type="checkbox" class="checkbox" value="S" />
+                                          <span>S</span>
+                                      </label>
+                                  </li>
+                                  <li>
+                                      <label class="flex items-center space-x-2 cursor-pointer">
+                                          <input type="checkbox" class="checkbox" value="M" />
+                                          <span>M</span>
+                                      </label>
+                                  </li>
+                                  <li>
+                                      <label class="flex items-center space-x-2 cursor-pointer">
+                                          <input type="checkbox" class="checkbox" value="L" />
+                                          <span>L</span>
+                                      </label>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
               </div>
+
 
               <div th:if="${productPage.getContent().size() > 0}" class="mt-6 grid gap-x-6 gap-y-10 grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                   <a th:each="product: ${productPage.getContent()}" th:href="@{/products/{id}(id=${product.id})}">

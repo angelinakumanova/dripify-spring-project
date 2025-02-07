@@ -28,7 +28,7 @@ public class ProductController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping({"/{gender}/{category}", "/{gender}", "", "/{category}"})
+    @GetMapping({"/{gender}/{category}", "/{gender}/all", "", "/{category}"})
     public ModelAndView getFilteredProducts(@PathVariable(required = false) String gender,
                                             @PathVariable(required = false) String category,
                                             @RequestParam(defaultValue = "0") int page,
@@ -36,10 +36,9 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView("/products/products");
 
         List<Gender> genderFilter = (gender != null) ? List.of(Gender.valueOf(gender.toUpperCase())) : null;
-        
+
         Page<Product> productPage = productService.getFilteredProducts(category, genderFilter, page, size);
 
-        // Dynamic category title
         String currentCategory;
         if (gender != null && category != null) {
             currentCategory = String.format("%s's %s", gender, category);
@@ -57,23 +56,6 @@ public class ProductController {
 
         return modelAndView;
     }
-
-//    @GetMapping("/{gender}/{category}")
-//    public ModelAndView getProductsByGenderAndCategory(@PathVariable String category,
-//                                    @PathVariable String gender,
-//                                    @RequestParam(defaultValue = "0") int page,
-//                                    @RequestParam(defaultValue = "20") int size) {
-//        ModelAndView modelAndView = new ModelAndView("/products/products");
-//
-//        Page<Product> productPage = productService.getFilteredProducts(category,
-//                List.of(Gender.valueOf(gender.toUpperCase())), page, size);
-//
-//        modelAndView.addObject("productPage", productPage);
-//        modelAndView.addObject("currentPage", productPage.getNumber());
-//        modelAndView.addObject("currentCategory", (String.format("%s's %s", gender, category)));
-//
-//        return modelAndView;
-//    }
 
 
     @GetMapping("/{id}")
