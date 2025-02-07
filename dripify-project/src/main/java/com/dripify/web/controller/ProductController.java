@@ -4,6 +4,7 @@ import com.dripify.category.service.CategoryService;
 import com.dripify.product.model.Product;
 import com.dripify.product.service.ProductService;
 import com.dripify.shared.enums.Gender;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,18 +22,17 @@ import java.util.UUID;
 public class ProductController {
 
     private final ProductService productService;
-    private final CategoryService categoryService;
 
-    public ProductController(ProductService productService, CategoryService categoryService) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
-        this.categoryService = categoryService;
     }
 
     @GetMapping({"/{gender}/{category}", "/{gender}/all", "", "/{category}"})
     public ModelAndView getFilteredProducts(@PathVariable(required = false) String gender,
                                             @PathVariable(required = false) String category,
                                             @RequestParam(defaultValue = "0") int page,
-                                            @RequestParam(defaultValue = "20") int size) {
+                                            @RequestParam(defaultValue = "10") int size,
+                                            HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("/products/products");
 
         List<Gender> genderFilter = (gender != null) ? List.of(Gender.valueOf(gender.toUpperCase())) : null;
@@ -53,6 +53,7 @@ public class ProductController {
         modelAndView.addObject("productPage", productPage);
         modelAndView.addObject("currentPage", productPage.getNumber());
         modelAndView.addObject("currentCategory", currentCategory);
+        modelAndView.addObject("currentPath", request.getContextPath());
 
         return modelAndView;
     }
