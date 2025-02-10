@@ -2,7 +2,6 @@ package com.dripify.category.service;
 
 import com.dripify.category.model.Category;
 import com.dripify.category.repository.CategoryRepository;
-import com.dripify.shared.enums.Gender;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +16,7 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    @Cacheable("categoriesByGender")
-    public List<Category> getCategoriesByGenders(List<Gender> genders) {
-        return categoryRepository.findByGenderInAndParentCategoryIsNull(genders);
-    }
-
+    @Cacheable("categories")
     public List<Category> getCategories() {
         return categoryRepository.findAll();
     }

@@ -197,7 +197,9 @@
 
 
                             <div id="women-categories" class="grid grid-rows-5 grid-flow-col text-base">
-                                <a th:each="category: ${categoriesForWomen}"
+                                <a th:each="category: ${categories}"
+                                   th:if="${category.gender.equals(T(com.dripify.shared.enums.Gender).WOMEN)
+                                   || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}"
                                    th:href="@{/products/{gender}/{category}(gender='women',
                                     category=${category.name})}">
                                     <div class="rounded-lg p-4 hover:bg-gray-50">
@@ -209,7 +211,9 @@
 
 
                             <div id="men-categories" class="hidden grid grid-rows-5 grid-flow-col text-base">
-                                <a th:each="category: ${categoriesForMen}"
+                                <a th:each="category: ${categories}"
+                                   th:if="${category.gender.equals(T(com.dripify.shared.enums.Gender).MEN)
+                                   || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}"
                                    th:href="@{/products/{gender}/{category}(gender='men',
                                     category=${category.name})}">
                                     <div class="rounded-lg p-4 hover:bg-gray-50">

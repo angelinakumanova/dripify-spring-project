@@ -10,7 +10,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,9 +17,9 @@ import java.util.UUID;
 public interface ProductRepository extends JpaRepository<Product, UUID> {
     @Query("SELECT p FROM Product p" +
            " WHERE (:category IS NULL OR p.category.name = :category OR p.category.parentCategory.name = :category)" +
-           " AND (:genders IS NULL OR p.gender IN (:genders))")
+           " AND (:gender IS NULL OR p.gender = :gender)")
     Page<Product> findProductsByCategoryAndGender(
-            @Param("category") String categoryName, List<Gender> genders, Pageable pageable);
+            @Param("category") String categoryName, Gender gender, Pageable pageable);
 
     Optional<Product> getProductById(UUID id);
 }

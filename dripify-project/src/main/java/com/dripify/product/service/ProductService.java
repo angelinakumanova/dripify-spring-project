@@ -9,7 +9,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -22,9 +21,11 @@ public class ProductService {
     }
 
 
-    public Page<Product> getFilteredProducts(String category, List<Gender> genders, int page, int size) {
+    public Page<Product> getFilteredProducts(String category, String gender, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return productRepository.findProductsByCategoryAndGender(category, genders, pageable);
+        Gender genderEnum = gender == null ? null : Gender.valueOf(gender.toUpperCase());
+
+        return productRepository.findProductsByCategoryAndGender(category, genderEnum, pageable);
     }
 
 

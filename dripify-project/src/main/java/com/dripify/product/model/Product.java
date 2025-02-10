@@ -23,6 +23,7 @@ public class Product {
     private UUID id;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private User seller;
 
     @Column(nullable = false)
