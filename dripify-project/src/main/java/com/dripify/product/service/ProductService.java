@@ -37,7 +37,7 @@ public class ProductService {
 
 
     public Product getProductById(UUID id) {
-        return productRepository.getProductById(id).orElseThrow(() -> new DomainException("Product not found"));
+        return productRepository.getProductById(id).orElseThrow(() -> new DomainException("Product does not exist"));
     }
 }
 

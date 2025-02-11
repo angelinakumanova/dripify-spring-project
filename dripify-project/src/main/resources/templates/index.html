@@ -212,7 +212,7 @@
         <div
           class="mt-6 space-y-12 md:grid md:grid-cols-2 md:grid-rows-2 lg:grid-cols-4 lg:grid-rows-none md:gap-x-6 md:space-y-0">
 
-          <a th:href="@{/products/category/{category}(category='coats & jackets')}">
+          <a th:href="@{/products/{gender}/{category}(gender='unisex', category='coats & jackets')}">
             <div class="group relative text-center">
               <img src="/images/categories/coats-and-jackets-category.jpg"
                 alt="coats and jackets category visual"
@@ -221,7 +221,7 @@
             </div>
           </a>
 
-          <a th:href="@{/products/category/{category}(category='jeans')}">
+          <a th:href="@{/products/{gender}/{category}(gender='unisex', category='jeans')}">
             <div class="group relative text-center">
               <img src="/images/categories/jeans-and-pants-category.jpg" alt="jeans category visual"
                 class="lg:h-full md:h-[300px] object-bottom w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
@@ -230,7 +230,7 @@
           </a>
 
 
-          <a th:href="@{/products/category/{category}(category='sneakers')}">
+          <a th:href="@{/products/{gender}/{category}(gender='unisex', category='sneakers')}">
             <div class="group relative text-center">
               <img src="/images/categories/sneakers-category.jpg" alt="sneakers category visual"
                 class="lg:h-full md:h-[300px] w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
@@ -238,7 +238,7 @@
             </div>
           </a>
 
-          <a th:href="@{/products/category/{category}(category='accessories')}">
+          <a th:href="@{/products/{gender}/{category}(gender='unisex', category='accessories')}">
             <div class="group relative text-center">
               <img src="/images/categories/accessories-category.jpg" alt="accessories category visual"
                 class="lg:h-full md:h-[300px] w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">

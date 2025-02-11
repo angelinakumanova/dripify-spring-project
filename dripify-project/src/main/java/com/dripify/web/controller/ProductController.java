@@ -23,19 +23,6 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("")
-    public ModelAndView getAllProducts(@RequestParam(defaultValue = "0") int page,
-                                       @RequestParam(defaultValue = "10") int size,
-                                       HttpServletRequest request) {
-
-        Page<Product> productPage = productService.getFilteredProducts(null, null, page, size);
-
-        ModelAndView modelAndView = new ModelAndView("/products/products");
-        addModelAttributes(request, "All Products", modelAndView, productPage);
-
-        return modelAndView;
-    }
-
     @GetMapping("/{gender}/{category}")
     public ModelAndView getProductsByGenderAndCategory(@PathVariable String gender,
                                                        @PathVariable String category,
