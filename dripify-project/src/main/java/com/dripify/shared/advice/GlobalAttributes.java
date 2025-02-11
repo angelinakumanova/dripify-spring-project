@@ -17,8 +17,9 @@ public class GlobalAttributes {
     }
 
     @ModelAttribute("categories")
-    public List<Category> getCategories() {
-        return categoryService.getCategories();
+    public List<Category> getMainCategories() {
+
+        return categoryService.getMainCategories();
     }
 
 }

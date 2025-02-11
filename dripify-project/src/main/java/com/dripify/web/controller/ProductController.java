@@ -46,37 +46,10 @@ public class ProductController {
         Page<Product> productPage = productService.getFilteredProducts(category, gender, page, size);
 
         ModelAndView modelAndView = new ModelAndView("/products/products");
-        addModelAttributes(request,  (gender + "'s " + category), modelAndView, productPage);
+        addModelAttributes(request,  (gender + " | " + category), modelAndView, productPage);
 
         return modelAndView;
     }
-
-    @GetMapping("/category/{category}")
-    public ModelAndView getProductsByCategory(@PathVariable String category,
-                                              @RequestParam(defaultValue = "0") int page,
-                                              @RequestParam(defaultValue = "10") int size,
-                                              HttpServletRequest request) {
-        Page<Product> productPage = productService.getFilteredProducts(category, null, page, size);
-
-        ModelAndView modelAndView = new ModelAndView("/products/products");
-        addModelAttributes(request, category, modelAndView, productPage);
-
-        return modelAndView;
-    }
-
-    @GetMapping("/{gender}/all")
-    public ModelAndView getAllProductsByGender(@PathVariable String gender,
-                                               @RequestParam(defaultValue = "0") int page,
-                                               @RequestParam(defaultValue = "10") int size,
-                                               HttpServletRequest request) {
-        Page<Product> productPage = productService.getFilteredProducts(null, gender, page, size);
-
-        ModelAndView modelAndView = new ModelAndView("/products/products");
-        addModelAttributes(request, (gender + "'s products") ,modelAndView, productPage);
-
-        return modelAndView;
-    }
-
 
 
     @GetMapping("/{id}")
@@ -88,14 +61,14 @@ public class ProductController {
     }
 
 
-
-    private static void addModelAttributes(HttpServletRequest request,
+    private void addModelAttributes(HttpServletRequest request,
                                            String currentCategory,
                                            ModelAndView modelAndView,
                                            Page<Product> productPage) {
         modelAndView.addObject("productPage", productPage);
         modelAndView.addObject("currentPage", productPage.getNumber());
         modelAndView.addObject("currentCategory", currentCategory);
-        modelAndView.addObject("currentPath", request.getContextPath());
+        modelAndView.addObject("currentPath", request.getRequestURI());
+
     }
 }

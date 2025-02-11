@@ -17,7 +17,7 @@ public class CategoryService {
     }
 
     @Cacheable("categories")
-    public List<Category> getCategories() {
-        return categoryRepository.findAll();
+    public List<Category> getMainCategories() {
+        return categoryRepository.findAllByParentCategoryIsNull();
     }
 }
