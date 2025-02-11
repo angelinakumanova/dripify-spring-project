@@ -155,7 +155,7 @@
             </div>
 
             <div class="hidden xl:flex xl:gap-x-12 xl:items-center ">
-                <a href="/templates/products/products.html" class="hover:font-bold text-sm font-semibold text-gray-900">NEW
+                <a th:href="@{/products/new-arrivals}" class="hover:font-bold text-sm font-semibold text-gray-900">NEW
                     ARRIVALS</a>
 
                 <div class="relative">
@@ -455,7 +455,7 @@
                 <div id="mobile-nav" class="mt-6 flow-root">
                     <div class="-my-6 divide-y divide-gray-500/10">
                         <div class="space-y-2 py-6">
-                            <a href="/templates/products/products.html"
+                            <a th:href="@{/products/new-arrivals}"
                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">NEW
                                 ARRIVALS</a>
                             <button id="shop-mobile-button"

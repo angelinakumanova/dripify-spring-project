@@ -22,4 +22,6 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
             @Param("category") String categoryName, Gender gender, Pageable pageable);
 
     Optional<Product> getProductById(UUID id);
+
+    Page<Product> findAllByOrderByCreatedOnDesc(Pageable pageable);
 }
