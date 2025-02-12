@@ -12,69 +12,126 @@
               <div class="w-48 whitespace-nowrap p-3 border-2 border-opacity-50 rounded-3xl">
 
                   <!-- Women Categories -->
-                  <div class="p-2">
+                  <div class="p-2" th:with="isWomenPath=${currentPath.contains('/products/women/')}">
                       <button type="button"
-                              th:classappend="${currentPath.contains('/products/women/')} ?
+                              th:classappend="${isWomenPath} ?
                                'font-bold text-gray-800' : 'font-medium text-gray-600'"
                               class="categories-toggle-btn mb-2 text-2xl hover:text-gray-800">Women</button>
-                      <ul th:classappend="${!currentPath.contains('/products/women/')} ? 'hidden' : ''"
+                      <ul th:classappend="${!isWomenPath} ? 'hidden' : ''"
                           class="space-y-2 text-base font-semibold uppercase">
                           <hr>
 
                           <li th:each="category: ${categories}"
+                              th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/women/' + category.name)}"
                               th:if="${category.gender.equals(T(com.dripify.shared.enums.Gender).WOMEN)
                                    || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}">
 
                               <a th:href="@{'/products/women/' + ${category.name}}"
-                                 th:classappend="${#uris.unescapePath(currentPath).equals('/products/women/' + category.name)} ?
-                                 'font-bold text-gray-800' : 'text-gray-600'"
+                                 th:classappend="${isActivePath} ?'font-bold text-zinc-800' : 'text-zinc-600'"
+                                 th:text="${category.name}"
                                  class="uppercase transition duration-200 ease-in hover:text-white
-                                  hover:bg-zinc-400 p-1 px-2 rounded-2xl" th:text="${category.name}"></a>
+                                 hover:bg-zinc-400 p-1 px-2 rounded-2xl"></a>
+
+
+                              <ul th:if="${not #lists.isEmpty(category.subcategories) and isActivePath}"
+                                  class="mt-2">
+
+                                  <li th:each="subcategory: ${category.subcategories}"
+                                      th:with="subcategoryPath=${'/products/women/' + category.name + '/' + subcategory.name}"
+                                      class="indent-3">
+
+                                      <a th:href="@{${subcategoryPath}}"
+                                         th:classappend="${#uris.unescapePath(currentPath).equals(subcategoryPath)} ?
+                                             'font-bold text-gray-800' : 'text-gray-600'"
+                                         th:text="${subcategory.name}"
+                                         class="uppercase transition duration-200 ease-in hover:text-white
+                                             hover:bg-zinc-400 p-1 px-2 rounded-2xl"></a>
+                                  </li>
+
+                              </ul>
                           </li>
                       </ul>
                   </div>
 
                   <!-- Men Categories -->
-                  <div class="p-2">
+                  <div class="p-2" th:with="isMenPath=${currentPath.contains('/products/men/')}">
                       <button type="button"
-                              th:classappend="${currentPath.contains('/products/men/')} ?
+                              th:classappend="${isMenPath} ?
                                'font-bold text-gray-800' : 'font-medium text-gray-600'"
-                              class="categories-toggle-btn
-                               mb-2 text-2xl hover:text-gray-800">Men</button>
-                      <ul th:classappend="${!currentPath.contains('/products/men/')} ? 'hidden' : ''"
+                              class="categories-toggle-btn mb-2 text-2xl hover:text-gray-800">Men</button>
+                      <ul th:classappend="${!isMenPath} ? 'hidden' : ''"
                           class="space-y-2 text-base font-semibold uppercase">
                           <hr>
+
                           <li th:each="category: ${categories}"
+                              th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/men/' + category.name)}"
                               th:if="${category.gender.equals(T(com.dripify.shared.enums.Gender).MEN)
                                    || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}">
 
-
                               <a th:href="@{'/products/men/' + ${category.name}}"
-                                 th:classappend="${#uris.unescapePath(currentPath).equals('/products/men/' + category.name)} ?
-                                 'font-bold text-gray-800' : 'text-gray-600'"
+                                 th:classappend="${isActivePath} ?'font-bold text-zinc-800' : 'text-zinc-600'"
+                                 th:text="${category.name}"
                                  class="uppercase transition duration-200 ease-in hover:text-white
-                                 hover:bg-zinc-400 p-1 px-2 rounded-2xl" th:text="${category.name}"></a>
+                                 hover:bg-zinc-400 p-1 px-2 rounded-2xl"></a>
+
+
+                              <ul th:if="${not #lists.isEmpty(category.subcategories) and isActivePath}"
+                                  class="mt-2">
+
+                                  <li th:each="subcategory: ${category.subcategories}"
+                                      th:with="subcategoryPath=${'/products/men/' + category.name + '/' + subcategory.name}"
+                                      class="indent-3">
+
+                                      <a th:href="@{${subcategoryPath}}"
+                                         th:classappend="${#uris.unescapePath(currentPath).equals(subcategoryPath)} ?
+                                             'font-bold text-gray-800' : 'text-gray-600'"
+                                         th:text="${subcategory.name}"
+                                         class="uppercase transition duration-200 ease-in hover:text-white
+                                             hover:bg-zinc-400 p-1 px-2 rounded-2xl"></a>
+                                  </li>
+
+                              </ul>
                           </li>
                       </ul>
                   </div>
 
-                  <div class="p-2">
+                  <!--  Unisex Categories-->
+                  <div class="p-2" th:with="isUnisexPath=${currentPath.contains('/products/unisex/')}">
                       <button type="button"
-                              th:classappend="${currentPath.contains('/products/unisex/')} ?
+                              th:classappend="${isUnisexPath} ?
                                'font-bold text-gray-800' : 'font-medium text-gray-600'"
                               class="categories-toggle-btn mb-2 text-2xl hover:text-gray-800">Unisex</button>
-                      <ul th:classappend="${!currentPath.contains('/products/unisex/')} ? 'hidden' : ''"
+                      <ul th:classappend="${!isUnisexPath} ? 'hidden' : ''"
                           class="space-y-2 text-base font-semibold uppercase">
                           <hr>
 
                           <li th:each="category: ${categories}"
+                              th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/unisex/' + category.name)}"
                               th:if="${category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}">
 
                               <a th:href="@{'/products/unisex/' + ${category.name}}"
-                                 th:classappend="${#uris.unescapePath(currentPath).equals('/products/unisex/' + category.name)} ?
-                                 'font-bold text-gray-800' : 'text-gray-600'"
+                                 th:classappend="${isActivePath} ?'font-bold text-zinc-800' : 'text-zinc-600'"
+                                 th:text="${category.name}"
                                  class="uppercase transition duration-200 ease-in hover:text-white
-                                  hover:bg-zinc-400 p-1 px-2 rounded-2xl" th:text="${category.name}"></a>
+                                 hover:bg-zinc-400 p-1 px-2 rounded-2xl"></a>
+
+
+                                  <ul th:if="${not #lists.isEmpty(category.subcategories) and isActivePath}"
+                                      class="mt-2">
+
+                                      <li th:each="subcategory: ${category.subcategories}"
+                                          th:with="subcategoryPath=${'/products/unisex/' + category.name + '/' + subcategory.name}"
+                                          class="indent-3">
+
+                                          <a th:href="@{${subcategoryPath}}"
+                                             th:classappend="${#uris.unescapePath(currentPath).equals(subcategoryPath)} ?
+                                             'font-bold text-gray-800' : 'text-gray-600'"
+                                             th:text="${subcategory.name}"
+                                             class="uppercase transition duration-200 ease-in hover:text-white
+                                             hover:bg-zinc-400 p-1 px-2 rounded-2xl"></a>
+                                      </li>
+
+                                  </ul>
                           </li>
                       </ul>
                   </div>

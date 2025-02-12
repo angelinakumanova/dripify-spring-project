@@ -16,7 +16,7 @@ import java.util.UUID;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, UUID> {
     @Query("SELECT p FROM Product p" +
-           " WHERE (:category IS NULL OR p.category.name = :category)" +
+           " WHERE (:category IS NULL OR p.category.name = :category OR p.category.parentCategory.name = :category)" +
            " AND (:gender IS NULL OR p.gender = :gender)")
     Page<Product> findProductsByCategoryAndGender(
             @Param("category") String categoryName, @Param("gender") Gender gender, Pageable pageable);

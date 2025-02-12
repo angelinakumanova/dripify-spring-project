@@ -39,6 +39,23 @@ public class ProductController {
         return modelAndView;
     }
 
+    @GetMapping("/{gender}/{category}/{subcategory}")
+    public ModelAndView getProductsByGenderAndCategory(@PathVariable String gender,
+                                                       @PathVariable String category,
+                                                       @PathVariable String subcategory,
+                                                       @RequestParam(defaultValue = "0") int page,
+                                                       @RequestParam(defaultValue = "10") int size,
+                                                       HttpServletRequest request) {
+
+        Page<Product> productPage = productService.getFilteredProducts(subcategory, gender, page, size);
+
+        ModelAndView modelAndView = new ModelAndView("/products/products");
+        String currentCategory = gender.equals("unisex") ? "unisex " + subcategory : gender + "'s " + subcategory;
+        addModelAttributes(request,  currentCategory, modelAndView, productPage);
+
+        return modelAndView;
+    }
+
     @GetMapping("/new-arrivals")
     public ModelAndView getNewArrivals(@RequestParam(defaultValue = "0") int page,
                                        @RequestParam(defaultValue = "10") int size,

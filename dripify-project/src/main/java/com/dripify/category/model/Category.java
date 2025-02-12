@@ -31,6 +31,6 @@ public class Category {
     @ManyToOne
     private Category parentCategory;
 
-    @OneToMany(mappedBy = "category")
-    private List<Product> products = new ArrayList<>();
+    @OneToMany(mappedBy = "parentCategory", fetch = FetchType.EAGER)
+    private List<Category> subcategories;
 }
