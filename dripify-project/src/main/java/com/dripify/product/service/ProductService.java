@@ -24,6 +24,7 @@ public class ProductService {
     // TODO: Handle non-existent gender
     public Page<Product> getFilteredProducts(String category, String gender, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
+
         Gender genderEnum = gender == null ? null : Gender.valueOf(gender.toUpperCase());
 
         return productRepository.findProductsByCategoryAndGender(category, genderEnum, pageable);

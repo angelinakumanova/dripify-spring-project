@@ -11,32 +11,41 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-public class UserController {
+public class AuthController {
 
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    public AuthController(UserService userService) {
         this.userService = userService;
     }
 
+    @GetMapping("/register")
+    public ModelAndView getRegister() {
+        ModelAndView mav = new ModelAndView("register");
+        mav.addObject("registerRequest", new RegisterRequest());
 
-    @GetMapping("/register/validate-username")
-    @ResponseBody
-    public boolean checkUsernameExists(@RequestParam String username) {
-        return userService.existsByUsername(username);
+        return mav;
+    }
+
+    @GetMapping("/login")
+    public ModelAndView getLogin() {
+        ModelAndView mav = new ModelAndView("login");
+        mav.addObject("loginRequest", new LoginRequest());
+
+        return mav;
     }
 
     @PostMapping("/register")
-    public ModelAndView registerPost(@Valid RegisterRequest registerRequest,
+    public String registerPost(@Valid RegisterRequest registerRequest,
                                      BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("register");
+            return "register";
         }
 
         //TODO: REGISTER USER
 
-        return new ModelAndView("redirect:/");
+        return "redirect:/login";
     }
 
     @PostMapping("/login")
@@ -49,5 +58,13 @@ public class UserController {
         }
 
         return new ModelAndView("redirect:/");
+    }
+
+
+
+    @GetMapping("/register/validate-username")
+    @ResponseBody
+    public boolean checkUsernameExists(@RequestParam String username) {
+        return userService.existsByUsername(username);
     }
 }

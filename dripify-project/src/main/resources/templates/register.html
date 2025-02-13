@@ -35,7 +35,7 @@
 
 
                 <form th:action="@{/register}" th:method="POST" th:object="${registerRequest}"
-                      class="space-y-6" action="#" method="POST" novalidate>
+                      class="space-y-6" novalidate>
                     <div>
                         <label for="username"
                                class="block text-sm/6 font-medium text-gray-900 required">Username</label>
@@ -48,14 +48,13 @@
                                     -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline
                                     focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
 
-                            <span class="hidden mt-2 ml-1 text-sm text-red-500
-                             peer-[&:not(:placeholder-shown):invalid]:block">
-                                • Use only letters & numbers, 5–20 characters.
-                            </span>
+<!--                            <span class="hidden mt-2 ml-1 text-sm text-red-500-->
+<!--                             peer-[&:not(:placeholder-shown):invalid]:block">-->
+<!--                                • Use only letters & numbers, 5–20 characters.-->
+<!--                            </span>-->
 
-                            <div class="register-user-status hidden mt-2 ml-1 text-sm text-red-500">
-                                • Username already exists.
-                            </div>
+                            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                                 class="register-user-status mt-2 ml-1 text-sm text-red-500"></span>
 
                         </div>
                     </div>
@@ -71,12 +70,14 @@
                                    outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2
                                    focus:outline-pink-600 sm:text-sm/6">
 
-                            <span th:classappend="${#fields.hasErrors('firstName')} == true ? '' : 'hidden'"
-                                class="server mt-2 ml-1 text-sm text-red-500
-                                peer-[&:not(:placeholder-shown):invalid]:block">
-                                • Please enter a valid first name. Only alphabetic characters are allowed.
-                            </span>
+<!--                            <span th:classappend="${#fields.hasErrors('firstName')} == true ? '' : 'hidden'"-->
+<!--                                class="server mt-2 ml-1 text-sm text-red-500-->
+<!--                                peer-[&:not(:placeholder-shown):invalid]:block">-->
+<!--                                • Please enter a valid first name. Only alphabetic characters are allowed.-->
+<!--                            </span>-->
 
+                                <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                                      class="register-user-status mt-2 ml-1 text-sm text-red-500"></span>
                         </div>
                     </div>
 
@@ -92,10 +93,13 @@
                                     -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline
                                     focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
 
-                            <span th:classappend="${#fields.hasErrors('lastName')} == true ? '' : 'hidden'"
-                                  class="server mt-2 ml-1 text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block">
-                                • Please enter a valid last name. Only alphabetic characters are allowed.
-                            </span>
+<!--                            <span th:classappend="${#fields.hasErrors('lastName')} == true ? '' : 'hidden'"-->
+<!--                                  class="server mt-2 ml-1 text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block">-->
+<!--                                • Please enter a valid last name. Only alphabetic characters are allowed.-->
+<!--                            </span>-->
+
+                            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                                  class="register-user-status mt-2 ml-1 text-sm text-red-500"></span>
                         </div>
                     </div>
 
@@ -115,10 +119,13 @@
                                     -outline-offset-1 outline-gray-300 placeholder:text-gray-400
                                     focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
 
-                            <span th:classappend="${#fields.hasErrors('email')} == true ? '' : 'hidden'"
-                                  class="server mt-2 ml-1 text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block">
-                                • Please enter a valid email address.
-                            </span>
+<!--                            <span th:classappend="${#fields.hasErrors('email')} == true ? '' : 'hidden'"-->
+<!--                                  class="server mt-2 ml-1 text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block">-->
+<!--                                • Please enter a valid email address.-->
+<!--                            </span>-->
+
+                                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                                      class="register-user-status mt-2 ml-1 text-sm text-red-500"></span>
                         </div>
                     </div>
 
@@ -135,10 +142,13 @@
                                     outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2
                                      focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
 
-                            <span th:classappend="${#fields.hasErrors('password')} == true ? '' : 'hidden'"
-                                  class="server mt-2 ml-1 text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block">
-                                • 6 - 20 characters long, at least 1 uppercase letter.
-                            </span>
+<!--                            <span th:classappend="${#fields.hasErrors('password')} == true ? '' : 'hidden'"-->
+<!--                                  class="server mt-2 ml-1 text-sm text-red-500 peer-[&:not(:placeholder-shown):invalid]:block">-->
+<!--                                • 6 - 20 characters long, at least 1 uppercase letter.-->
+<!--                            </span>-->
+
+                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                                  class="register-user-status mt-2 ml-1 text-sm text-red-500"></span>
                         </div>
                     </div>
 
@@ -153,10 +163,13 @@
                                     text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400
                                      focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
 
-                            <span th:classappend="${#fields.hasGlobalErrors()} == true ? '' : 'hidden'"
-                                  class="server mt-2 ml-1 text-sm text-red-500 ">
-                                    Passwords do not match
-                            </span>
+<!--                            <span th:classappend="${#fields.hasGlobalErrors()} == true ? '' : 'hidden'"-->
+<!--                                  class="server mt-2 ml-1 text-sm text-red-500 ">-->
+<!--                                    Passwords do not match-->
+<!--                            </span>-->
+
+                            <span th:if="${#fields.hasErrors('passwordMatch')}" th:errors="*{passwordMatch}"
+                                  class="register-user-status mt-2 ml-1 text-sm text-red-500"></span>
                         </div>
                     </div>
 
