@@ -43,22 +43,22 @@ public class AuthController {
             return "register";
         }
 
-        //TODO: REGISTER USER
+        userService.registerUser(registerRequest);
 
         return "redirect:/login";
     }
 
-    @PostMapping("/login")
-    public ModelAndView loginPost(LoginRequest loginRequest, RedirectAttributes rAtt) {
-
-        if (!this.userService.existsByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword())) {
-            rAtt.addFlashAttribute("userExists", false);
-
-            return new ModelAndView("redirect:/login");
-        }
-
-        return new ModelAndView("redirect:/");
-    }
+//    @PostMapping("/login")
+//    public ModelAndView loginPost(LoginRequest loginRequest, RedirectAttributes rAtt) {
+//
+//        if (!this.userService.existsByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword())) {
+//            rAtt.addFlashAttribute("userExists", false);
+//
+//            return new ModelAndView("redirect:/login");
+//        }
+//
+//        return new ModelAndView("redirect:/");
+//    }
 
 
 

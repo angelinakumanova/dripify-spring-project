@@ -1,4 +1,4 @@
-package com.dripify.shared.advice;
+package com.dripify.web.controller;
 
 import com.dripify.category.model.Category;
 import com.dripify.category.service.CategoryService;
@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import java.util.List;
 
 @ControllerAdvice
-public class GlobalAttributes {
+public class GlobalAttributesHandler {
 
     private final CategoryService categoryService;
 
-    public GlobalAttributes(CategoryService categoryService) {
+    public GlobalAttributesHandler(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
