@@ -6,10 +6,10 @@
 <body class="flex flex-col min-h-screen">
 <div th:replace="~{/fragments/nav::nav}"></div>
 
-<div class="main-site-content mt-24">
-    <div class="flex gap-2 mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-screen-2xl lg:px-8">
-        <div class="hidden sm:block mt-2 flex flex-col space-y-4 sm:border-r p-3 border-opacity-50">
-            <div class="w-48 whitespace-nowrap p-3 border-2 border-opacity-50 rounded-3xl">
+<div class="main-site-content lg:mt-24">
+    <div class="flex flex-col lg:flex-row gap-2 mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-screen-2xl lg:px-8">
+        <div class="lg:border-r-2 lg:pr-3">
+            <div class="w-full lg:w-48 whitespace-nowrap p-3 border-2 border-opacity-50 rounded-3xl">
 
                 <!-- Women Categories -->
                 <div class="p-2" th:with="isWomenPath=${currentPath.contains('/products/women/')}">
@@ -149,7 +149,7 @@
                 <div class="flex xl:flex-row flex-col justify-between">
 
                     <div>
-                        <h2 class="text-lg sm:text-3xl font-bold
+                        <h2 class="text-3xl font-bold
                              tracking-tight uppercase
                              bg-zinc-900 text-white p-2 px-5 rounded-full inline-block"
                             th:text="${currentCategory}"></h2>
@@ -159,7 +159,7 @@
                     </div>
 
 
-                    <div class="lg:w-[55%]">
+                    <div class="w-full xl:w-[55%]">
                         <form class="lg:flex gap-2 grid grid-cols-2" id="form-filter" th:action="@{${currentPath}}" th:method="GET" th:object="${productFilter}">
 
                             <div class="material relative w-full">
@@ -249,7 +249,7 @@
 
 
                 <div th:if="${productPage.getContent().size() > 0}"
-                     class="mt-6 grid gap-x-6 gap-y-10 grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                     class="mt-6 grid gap-x-6 gap-y-10 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                     <a th:each="product: ${productPage.getContent()}" th:href="@{/products/{id}(id=${product.id})}">
 
                         <div class="group relative group-hover:cursor-pointer">

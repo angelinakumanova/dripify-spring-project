@@ -22,12 +22,13 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
     @Query("SELECT p FROM Product p " +
             "LEFT JOIN p.category c " +
             "LEFT JOIN c.parentCategory pc " +
-            "WHERE (:#{#productFilter.subcategory} IS NOT NULL AND c.name = :#{#productFilter.subcategory}) " +
-            "OR (:#{#productFilter.subcategory} IS NULL AND (c.name = :#{#productFilter.category} OR pc.name = :#{#productFilter.category})) " +
-            "AND (p.gender = :#{#productFilter.gender}) " +
+            "WHERE ((:#{#productFilter.subcategory} IS NOT NULL AND c.name = :#{#productFilter.subcategory}) " +
+            "   OR (:#{#productFilter.subcategory} IS NULL AND (c.name = :#{#productFilter.category} OR pc.name = :#{#productFilter.category}))) " +
+            "AND p.gender = :#{#productFilter.gender} " +
             "AND (:#{#productFilter.materials.size()} = 0 OR p.material IN :#{#productFilter.materials}) " +
             "AND (:#{#productFilter.brands.size()} = 0 OR p.brand IN :#{#productFilter.brands}) " +
             "AND (:#{#productFilter.colors.size()} = 0 OR p.color IN :#{#productFilter.colors}) " +
             "AND (:#{#productFilter.sizes.size()} = 0 OR p.size IN :#{#productFilter.sizes})")
+
     Page<Product> findProductsByFilters(@Param("productFilter") ProductFilter productFilter, Pageable pageable);
 }
