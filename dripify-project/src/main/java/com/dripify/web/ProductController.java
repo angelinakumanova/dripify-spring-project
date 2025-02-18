@@ -1,7 +1,8 @@
-package com.dripify.web.controller;
+package com.dripify.web;
 
 import com.dripify.product.model.Product;
 import com.dripify.product.service.ProductService;
+import com.dripify.web.dto.ProductFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -23,35 +24,16 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/{gender}/{category}")
-    public ModelAndView getProductsByGenderAndCategory(@PathVariable String gender,
-                                                       @PathVariable String category,
+    @GetMapping({"/{gender}/{category}", "/{gender}/{category}/{subcategory}"})
+    public ModelAndView getProductsByGenderAndCategory(ProductFilter productFilter,
                                                        @RequestParam(defaultValue = "0") int page,
                                                        @RequestParam(defaultValue = "10") int size,
                                                        HttpServletRequest request) {
 
-        Page<Product> productPage = productService.getFilteredProducts(category, gender, page, size);
-
         ModelAndView modelAndView = new ModelAndView("/products/products");
-        String currentCategory = gender.equals("unisex") ? "unisex " + category : gender + "'s " + category;
-        addModelAttributes(request,  currentCategory, modelAndView, productPage);
 
-        return modelAndView;
-    }
-
-    @GetMapping("/{gender}/{category}/{subcategory}")
-    public ModelAndView getProductsByGenderAndCategory(@PathVariable String gender,
-                                                       @PathVariable String category,
-                                                       @PathVariable String subcategory,
-                                                       @RequestParam(defaultValue = "0") int page,
-                                                       @RequestParam(defaultValue = "10") int size,
-                                                       HttpServletRequest request) {
-
-        Page<Product> productPage = productService.getFilteredProducts(subcategory, gender, page, size);
-
-        ModelAndView modelAndView = new ModelAndView("/products/products");
-        String currentCategory = gender.equals("unisex") ? "unisex " + subcategory : gender + "'s " + subcategory;
-        addModelAttributes(request,  currentCategory, modelAndView, productPage);
+        Page<Product> productPage = productService.getFilteredProducts(productFilter, page, size);
+        addModelAttributes(request, productFilter.getCategory(), modelAndView, productPage);
 
         return modelAndView;
     }
@@ -73,6 +55,13 @@ public class ProductController {
     public ModelAndView getProduct(@PathVariable UUID id) {
         ModelAndView modelAndView = new ModelAndView("/products/single-product");
         modelAndView.addObject("product", productService.getProductById(id));
+
+        return modelAndView;
+    }
+
+    @GetMapping("/sell-product")
+    public ModelAndView sellProduct() {
+        ModelAndView modelAndView = new ModelAndView("/products/sell-product");
 
         return modelAndView;
     }

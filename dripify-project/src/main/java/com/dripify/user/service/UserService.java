@@ -35,7 +35,7 @@ public class UserService {
 
     //TODO: implement check on uniqueness of user
 
-    public void registerUser(RegisterRequest registerRequest) {
+    public void register(RegisterRequest registerRequest) {
         if (userRepository.getUserByUsername(registerRequest.getUsername()).isPresent()) {
             throw new RuntimeException("Username is already in use");
         }
@@ -46,7 +46,8 @@ public class UserService {
 
         User user = createNewUser(registerRequest);
         userRepository.save(user);
-        log.info("User [%s] with id: %s  registered successfully".formatted(user.getUsername(), user.getId()));
+
+        log.info("User [%s] with id: %s registered successfully".formatted(user.getUsername(), user.getId()));
     }
 
     private User createNewUser(RegisterRequest registerRequest) {

@@ -1,4 +1,4 @@
-package com.dripify.web.controller;
+package com.dripify.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

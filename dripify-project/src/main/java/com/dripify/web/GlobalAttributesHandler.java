@@ -1,4 +1,4 @@
-package com.dripify.web.controller;
+package com.dripify.web;
 
 import com.dripify.category.model.Category;
 import com.dripify.category.service.CategoryService;

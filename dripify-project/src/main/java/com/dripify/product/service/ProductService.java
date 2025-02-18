@@ -4,6 +4,7 @@ import com.dripify.exception.DomainException;
 import com.dripify.product.model.Product;
 import com.dripify.product.repository.ProductRepository;
 import com.dripify.shared.enums.Gender;
+import com.dripify.web.dto.ProductFilter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,12 +23,10 @@ public class ProductService {
 
 
     // TODO: Handle non-existent gender
-    public Page<Product> getFilteredProducts(String category, String gender, int page, int size) {
+    public Page<Product> getFilteredProducts(ProductFilter productFilter, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
 
-        Gender genderEnum = gender == null ? null : Gender.valueOf(gender.toUpperCase());
-
-        return productRepository.findProductsByCategoryAndGender(category, genderEnum, pageable);
+        return productRepository.findProductsByFilters(productFilter, pageable);
     }
 
     public Page<Product> getNewArrivalsProducts(int page, int size) {

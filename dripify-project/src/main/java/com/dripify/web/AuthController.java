@@ -1,4 +1,4 @@
-package com.dripify.web.controller;
+package com.dripify.web;
 
 import com.dripify.user.service.UserService;
 import com.dripify.web.dto.LoginRequest;
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AuthController {
@@ -43,22 +42,20 @@ public class AuthController {
             return "register";
         }
 
-        userService.registerUser(registerRequest);
+        userService.register(registerRequest);
 
         return "redirect:/login";
     }
 
-//    @PostMapping("/login")
-//    public ModelAndView loginPost(LoginRequest loginRequest, RedirectAttributes rAtt) {
-//
-//        if (!this.userService.existsByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword())) {
-//            rAtt.addFlashAttribute("userExists", false);
-//
-//            return new ModelAndView("redirect:/login");
-//        }
-//
-//        return new ModelAndView("redirect:/");
-//    }
+    @PostMapping("/login")
+    public String loginPost(@Valid LoginRequest loginRequest, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "login";
+        }
+
+        return "redirect:/";
+    }
 
 
 
