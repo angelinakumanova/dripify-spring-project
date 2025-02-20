@@ -1,5 +1,6 @@
 package com.dripify.web;
 
+import com.dripify.category.service.CategoryService;
 import com.dripify.product.model.Product;
 import com.dripify.product.service.ProductService;
 import com.dripify.web.dto.ProductFilter;
@@ -19,21 +20,23 @@ import java.util.UUID;
 public class ProductController {
 
     private final ProductService productService;
+    private final CategoryService categoryService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, CategoryService categoryService) {
         this.productService = productService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping({"/{gender}/{category}", "/{gender}/{category}/{subcategory}"})
     public ModelAndView getProductsByGenderAndCategory(ProductFilter productFilter,
                                                        @RequestParam(defaultValue = "0") int page,
-                                                       @RequestParam(defaultValue = "10") int size,
                                                        HttpServletRequest request) {
 
         ModelAndView modelAndView = new ModelAndView("/products/products");
 
-        Page<Product> productPage = productService.getFilteredProducts(productFilter, page, size);
+        Page<Product> productPage = productService.getFilteredProducts(productFilter, page);
         addModelAttributes(request, productFilter.getCategory(), modelAndView, productPage);
+        modelAndView.addObject("categories", categoryService.getMainCategories());
 
         return modelAndView;
     }

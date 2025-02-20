@@ -20,6 +20,13 @@ public class User {
     private UUID id;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
+    @Column(nullable = false)
+    private boolean isActive;
+
+    @Column(nullable = false)
     private String firstName;
 
     @Column(nullable = false)

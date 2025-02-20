@@ -14,6 +14,7 @@ import java.util.UUID;
 
 @Service
 public class ProductService {
+    private static final int DEFAULT_PAGE_SIZE = 20;
 
     private final ProductRepository productRepository;
 
@@ -21,10 +22,9 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-
     // TODO: Handle non-existent gender
-    public Page<Product> getFilteredProducts(ProductFilter productFilter, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public Page<Product> getFilteredProducts(ProductFilter productFilter, int page) {
+        Pageable pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE);
 
         return productRepository.findProductsByFilters(productFilter, pageable);
     }

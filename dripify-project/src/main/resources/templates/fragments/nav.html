@@ -1,11 +1,17 @@
-<div class="bg-white" th:fragment="nav">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAV</title>
+</head>
+<body>
+    <div class="bg-white" th:fragment="nav">
     <header class="absolute inset-x-0 top-0 z-50">
         <nav class="flex items-center justify-between p-3 sm:p-6" aria-label="Global">
 
             <div class="flex flex-shrink-0 lg:flex-1">
                 <a th:href="@{/}" class="-m-1.5 p-1.5">
-                    <span class="sr-only">Your Company</span>
-
                     <img class="h-9" src="/images/logo.png" alt="">
                 </a>
             </div>
@@ -501,7 +507,9 @@
 
 
                         <div id="women-categories-mobile" class="flex flex-col text-xl">
-                            <a th:each="category: ${categoriesForWomen}"
+                            <a th:each="category: ${categories}"
+                               th:if="${category.gender.equals(T(com.dripify.shared.enums.Gender).WOMEN)
+                                   || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}"
                                th:href="@{/products/{gender}/{category}(gender='women',
                                     category=${category.name})}">
                                 <div class="rounded-lg p-4 hover:bg-gray-50">
@@ -511,7 +519,9 @@
                         </div>
 
                         <div id="men-categories-mobile" class="hidden flex flex-col text-xl">
-                            <a th:each="category: ${categoriesForMen}"
+                            <a th:each="category: ${categories}"
+                               th:if="${category.gender.equals(T(com.dripify.shared.enums.Gender).MEN)
+                                   || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}"
                                th:href="@{/products/{gender}/{category}(gender='men',
                                     category=${category.name})}">
                                 <div class="rounded-lg p-4 hover:bg-gray-50">
@@ -529,3 +539,6 @@
         </div>
     </header>
 </div>
+</body>
+</html>
+

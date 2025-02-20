@@ -29,6 +29,5 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
             "AND (:#{#productFilter.brands.size()} = 0 OR p.brand IN :#{#productFilter.brands}) " +
             "AND (:#{#productFilter.colors.size()} = 0 OR p.color IN :#{#productFilter.colors}) " +
             "AND (:#{#productFilter.sizes.size()} = 0 OR p.size IN :#{#productFilter.sizes})")
-
     Page<Product> findProductsByFilters(@Param("productFilter") ProductFilter productFilter, Pageable pageable);
 }

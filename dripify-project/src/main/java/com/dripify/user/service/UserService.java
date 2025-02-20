@@ -1,15 +1,21 @@
 package com.dripify.user.service;
 
+import com.dripify.exception.DomainException;
+import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
+import com.dripify.user.model.UserRole;
 import com.dripify.user.repository.UserRepository;
 import com.dripify.web.dto.RegisterRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -19,22 +25,17 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public boolean existsByUsername(String username) {
-        return this.userRepository.getUserByUsername(username).isPresent();
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        User user = userRepository.getUserByUsername(username).orElseThrow(() ->
+                new DomainException("User with username %s does not exist!".formatted(username)));
+
+
+        return new AuthenticationMetadata(user.getId(), user.getUsername(), user.getPassword(), user.getRole(), user.isActive());
     }
 
-//    public boolean existsByEmailAndPassword(String email, String password) {
-//        this.userRepository.getUserByEmail(email).orElse(null);
-//
-//        if (user == null) {
-//            return false;
-//        }
-//
-//        return passwordEncoder.matches(password, user.getPassword());
-//    }
-
     //TODO: implement check on uniqueness of user
-
     public void register(RegisterRequest registerRequest) {
         if (userRepository.getUserByUsername(registerRequest.getUsername()).isPresent()) {
             throw new RuntimeException("Username is already in use");
@@ -57,6 +58,8 @@ public class UserService {
                 username(registerRequest.getUsername()).
                 email(registerRequest.getEmail()).
                 password(passwordEncoder.encode(registerRequest.getPassword())).
+                role(UserRole.USER).
+                isActive(true).
                 build();
     }
 
