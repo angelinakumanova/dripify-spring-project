@@ -27,30 +27,24 @@ public class ProductController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping({"/{gender}/{category}", "/{gender}/{category}/{subcategory}"})
-    public ModelAndView getProductsByGenderAndCategory(ProductFilter productFilter,
-                                                       @RequestParam(defaultValue = "0") int page,
-                                                       HttpServletRequest request) {
+    @GetMapping("/{gender}/{category}")
+    public ModelAndView getProductsByGenderAndCategory(@PathVariable String gender, @PathVariable String category,
+            ProductFilter productFilter, @RequestParam(defaultValue = "0") int page, HttpServletRequest request) {
 
-        ModelAndView modelAndView = new ModelAndView("/products/products");
+        Page<Product> productsPage = productService.getProductsByGenderAndCategory(gender, category, productFilter, page);
 
-        Page<Product> productPage = productService.getFilteredProducts(productFilter, page);
-        addModelAttributes(request, productFilter.getCategory(), modelAndView, productPage);
-        modelAndView.addObject("categories", categoryService.getMainCategories());
-
-        return modelAndView;
+        return createProductsView(productsPage, category, request);
     }
 
-    @GetMapping("/new-arrivals")
-    public ModelAndView getNewArrivals(@RequestParam(defaultValue = "0") int page,
-                                       @RequestParam(defaultValue = "10") int size,
-                                       HttpServletRequest request) {
-        Page<Product> productPage = productService.getNewArrivalsProducts(page, size);
+    @GetMapping("/{gender}/{category}/{subcategory}")
+    public ModelAndView getProductsByGenderAndSubcategory(@PathVariable String gender, @PathVariable String category,
+             @PathVariable String subcategory, ProductFilter productFilter, @RequestParam(defaultValue = "0") int page,
+                                                          HttpServletRequest request) {
 
-        ModelAndView modelAndView = new ModelAndView("/products/new-arrivals");
-        addModelAttributes(request, "New Arrivals", modelAndView, productPage);
+        Page<Product> productsPage = productService.getProductsByGenderAndSubcategory(gender, category, subcategory,
+                                                                                    productFilter, page);
 
-        return modelAndView;
+        return createProductsView(productsPage, subcategory, request);
     }
 
 
@@ -69,15 +63,15 @@ public class ProductController {
         return modelAndView;
     }
 
+    private ModelAndView createProductsView(Page<Product> productsPage, String category, HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView("/products/products");
 
-    private void addModelAttributes(HttpServletRequest request,
-                                           String currentCategory,
-                                           ModelAndView modelAndView,
-                                           Page<Product> productPage) {
-        modelAndView.addObject("productPage", productPage);
-        modelAndView.addObject("currentPage", productPage.getNumber());
-        modelAndView.addObject("currentCategory", currentCategory);
+        modelAndView.addObject("categories", categoryService.getMainCategories());
+        modelAndView.addObject("productPage", productsPage);
+        modelAndView.addObject("currentCategory", category);
         modelAndView.addObject("currentPath", request.getRequestURI());
 
+        return modelAndView;
     }
+
 }

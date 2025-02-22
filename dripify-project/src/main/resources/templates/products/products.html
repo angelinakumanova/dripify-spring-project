@@ -143,10 +143,11 @@
         </div>
 
 
-        <div class="flex-grow">
+        <div th:with="currentPage=${productPage.getNumber()}" class="flex-grow" >
 
-            <div class="p-2 pl-3 ml-1">
-                <div class="flex xl:flex-row flex-col justify-between">
+            <div  class="p-2 pl-3 ml-1">
+                <div
+                        class="flex xl:flex-row flex-col justify-between">
 
                     <div>
                         <h2 class="text-3xl font-bold
@@ -274,7 +275,7 @@
 
             <div th:if="${productPage.getTotalPages() > 1}" class="flex items-baseline justify-center gap-2 mt-20">
                 <!-- Previous Page Button -->
-                <a th:href="@{${currentPath}(page=${currentPage - 1}, size=10)}"
+                <a th:href="@{${currentPath}(page=${currentPage - 1})}"
                    th:classappend="${currentPage == 0} ? 'pointer-events-none opacity-50' : ''"
                    class="mt-6 bg-black bg-opacity-50 text-white p-2 px-4 rounded-full">
                     ❮
@@ -285,7 +286,7 @@
                     th:text="${currentPage + 1} + '/' + ${productPage.getTotalPages()} + ' Pages'"></h2>
 
                 <!-- Next Page Button -->
-                <a th:href="@{${currentPath}(page=${currentPage + 1}, size=10)}"
+                <a th:href="@{${currentPath}(page=${currentPage + 1})}"
                    th:classappend="${currentPage + 1 >= productPage.getTotalPages()} ? 'pointer-events-none opacity-50' : ''"
                    class="mt-6 bg-black bg-opacity-50 text-white p-2 px-4 rounded-full">
                     ❯

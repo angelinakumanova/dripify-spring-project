@@ -221,7 +221,7 @@
 
             <div class="hidden ml-5 xl:flex xl:flex-1 xl:justify-end items-center gap-3">
                 <!-- LOGGED IN USER VISUALS -->
-                <div class="hidden logged-in flex gap-4 items-center flex-shrink-0">
+                <div class="logged-in flex gap-4 items-center flex-shrink-0" th:if="${user}">
                     <div class="cart">
                         <button id="shopping-cart-button">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="size-8 hover:cursor-pointer">
@@ -338,7 +338,7 @@
 
 
                     <span id="profile-name" class="flex items-center hover:cursor-pointer hover:underline">
-              <p class="font-semibold">angieusername</p>
+              <p class="font-semibold" th:text="${user.username}"></p>
               <svg class="size-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
                    data-slot="icon">
                 <path fill-rule="evenodd"
@@ -365,7 +365,7 @@
                             <a href="/templates/user/public-profile.html"
                                class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
                                role="menuitem" tabindex="-1" >settings</a>
-                            <a href="#"
+                            <a th:href="@{/logout}"
                                class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
                                role="menuitem" tabindex="-1" id="menu-item-0">log out</a>
                         </div>
@@ -373,7 +373,7 @@
 
                 </div>
 
-                <div class="flex gap-4 flex-shrink-0">
+                <div class="flex gap-4 flex-shrink-0" th:unless="${user}">
                     <a th:href="@{/login}" class="hover:font-bold text-sm font-semibold text-gray-900">
                         LOG IN
                     </a>
@@ -382,10 +382,6 @@
                     </a>
                 </div>
             </div>
-
-
-
-
         </nav>
 
 

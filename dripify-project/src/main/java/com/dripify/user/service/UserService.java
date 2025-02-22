@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Slf4j
 @Service
 public class UserService implements UserDetailsService {
@@ -64,4 +66,7 @@ public class UserService implements UserDetailsService {
     }
 
 
+    public User getById(UUID id) {
+        return userRepository.findById(id).orElseThrow(() -> new DomainException("User with id %s does not exist!".formatted(id)));
+    }
 }
