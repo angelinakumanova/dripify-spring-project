@@ -10,6 +10,7 @@ import com.dripify.web.dto.ProductFilter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -26,27 +27,31 @@ public class ProductService {
         this.categoryService = categoryService;
     }
 
-    public Page<Product> getProductsByGenderAndCategory(String gender, String categoryName,
-                                                        ProductFilter productFilter, int page) {
+    public Page<Product> getFilteredProducts(String gender, String categoryName, String subcategoryName,
+                                             ProductFilter productFilter, int page) {
         Gender genderEnum = Gender.valueOf(gender.toUpperCase());
-        Category category = categoryService.getByName(categoryName);
+
+        Category category = subcategoryName == null ?
+                categoryService.getByName(categoryName) :
+                categoryService.getByNameAndParentCategory(subcategoryName, categoryName);
 
         Pageable pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE);
-        return productRepository.findByCategoryAndGenderAndFilters(category,
-                        genderEnum,
-                        productFilter.getBrands(), productFilter.getBrands().size(),
-                        productFilter.getColors(), productFilter.getColors().size(),
-                        productFilter.getMaterials(), productFilter.getMaterials().size(),
-                        productFilter.getSizes(), productFilter.getSizes().size(),
-                        pageable);
-    }
 
-    public Page<Product> getProductsByGenderAndSubcategory(String gender, String parentCategoryName, String subcategoryName,
-                                                           ProductFilter productFilter, int page) {
-        Gender genderEnum = Gender.valueOf(gender.toUpperCase());
-        Category category = categoryService.getByNameAndParentCategory(subcategoryName, parentCategoryName);
+        if (productFilter.getSortBy() != null) {
+            String[] split = productFilter.getSortBy().split("-");
+            String field = split[0];
+            String order = split[1];
 
-        Pageable pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE);
+            Sort sort = Sort.by(field);
+
+            if (order.equals("asc")) {
+                sort = sort.ascending();
+            } else {
+                sort = sort.descending();
+            }
+
+            pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE, sort);
+        }
 
         return productRepository.findByCategoryAndGenderAndFilters(category,
                 genderEnum,
@@ -55,6 +60,7 @@ public class ProductService {
                 productFilter.getMaterials(), productFilter.getMaterials().size(),
                 productFilter.getSizes(), productFilter.getSizes().size(),
                 pageable);
+
     }
 
 

@@ -7,10 +7,7 @@ import com.dripify.web.dto.ProductFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.UUID;
@@ -29,19 +26,19 @@ public class ProductController {
 
     @GetMapping("/{gender}/{category}")
     public ModelAndView getProductsByGenderAndCategory(@PathVariable String gender, @PathVariable String category,
-            ProductFilter productFilter, @RequestParam(defaultValue = "0") int page, HttpServletRequest request) {
+          @ModelAttribute ProductFilter productFilter, @RequestParam(defaultValue = "0") int page, HttpServletRequest request) {
 
-        Page<Product> productsPage = productService.getProductsByGenderAndCategory(gender, category, productFilter, page);
+        Page<Product> productsPage = productService.getFilteredProducts(gender, category, null, productFilter, page);
 
         return createProductsView(productsPage, category, request);
     }
 
     @GetMapping("/{gender}/{category}/{subcategory}")
     public ModelAndView getProductsByGenderAndSubcategory(@PathVariable String gender, @PathVariable String category,
-             @PathVariable String subcategory, ProductFilter productFilter, @RequestParam(defaultValue = "0") int page,
-                                                          HttpServletRequest request) {
+             @PathVariable String subcategory, @ModelAttribute ProductFilter productFilter,
+             @RequestParam(defaultValue = "0") int page, HttpServletRequest request) {
 
-        Page<Product> productsPage = productService.getProductsByGenderAndSubcategory(gender, category, subcategory,
+        Page<Product> productsPage = productService.getFilteredProducts(gender, category, subcategory,
                                                                                     productFilter, page);
 
         return createProductsView(productsPage, subcategory, request);
@@ -70,6 +67,13 @@ public class ProductController {
         modelAndView.addObject("productPage", productsPage);
         modelAndView.addObject("currentCategory", category);
         modelAndView.addObject("currentPath", request.getRequestURI());
+
+        String filters = request.getQueryString();
+        if (filters != null) {
+            filters = filters.replaceAll("&?page=\\d+", "");
+        }
+
+        modelAndView.addObject("filters", "?" + filters);
 
         return modelAndView;
     }

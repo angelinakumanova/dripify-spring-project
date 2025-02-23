@@ -15,6 +15,7 @@ public class ProductFilter {
     private List<Material> materials;
     private List<Brand> brands;
     private List<Color> colors;
+    private String sortBy;
 
     public ProductFilter() {
         this.sizes = new ArrayList<>();
