@@ -13,7 +13,7 @@
 
                 <span class="flex items-center flex-col-reverse">
                     <span class="flex flex-col items-center  pl-3 mt-2 ">
-                        <p th:text="${profileUser.username}" class="mb-4 text-2xl font-semibold">angieusername</p>
+                        <p th:text="${profileUser.username}" class="mb-4 text-2xl font-semibold"></p>
                         <p class="font-semibold uppercase">340 items sold</p>
                     </span>
                     <img class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-gray-800"
@@ -21,11 +21,14 @@
                          alt="Profile Picture">
                 </span>
 
-                <p class="mt-4 text-center">Selling trends, sharing style—your next favorite fit is just a click away! 🛍️✨</p>
+                <p th:if="${user.description}" class="mt-4 text-center" th:text="${user.description}"></p>
+                <p th:unless="${user.description}" class="mt-4 text-center text-gray-500">Still figuring out what to say!</p>
+
                 <!-- ONLY IF IT IS USER'S ACCOUNT -->
                 <a th:if="${user != null and user.username == profileUser.username}" href="/templates/user/edit-profile.html"
-                    class="self-center text-center w-full mt-4 px-4 py-2 bg-zinc-900 text-white font-semibold rounded-full hover:bg-zinc-600 transition-all duration-300 focus:outline-none">Edit
-                    Profile</a>
+                    class="self-center text-center w-full mt-4 px-4 py-2 bg-zinc-900 text-white
+                     font-semibold rounded-full hover:bg-zinc-600 transition-all duration-300 focus:outline-none">
+                    Edit Profile</a>
 
 
                 <hr class="my-3">
@@ -40,10 +43,13 @@
                 </a>
             </div>
         </aside>
-        <section id="items-section"
+        <section
             class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-            <h1 class="text-2xl p-2 uppercase font-bold"
+            <h1 th:if="${productPage.getTotalElements() > 0}" class="text-2xl uppercase font-bold"
                 th:text="${productPage.getTotalElements() + ' listed products'}"></h1>
+
+            <h1 th:unless="${productPage.getTotalElements() > 0}" class="text-3xl uppercase font-bold"
+                >No products yet.</h1>
             <div class="mt-6 grid gap-x-6 gap-y-10 grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 xl:gap-x-3">
 
 
