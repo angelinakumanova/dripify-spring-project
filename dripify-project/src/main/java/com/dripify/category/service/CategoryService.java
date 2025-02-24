@@ -3,6 +3,7 @@ package com.dripify.category.service;
 import com.dripify.category.model.Category;
 import com.dripify.category.repository.CategoryRepository;
 import com.dripify.exception.DomainException;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
+
+    @Cacheable("categories")
     public List<Category> getMainCategories() {
         return categoryRepository.findAllByParentCategoryIsNull();
     }

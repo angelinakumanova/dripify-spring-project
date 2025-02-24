@@ -6,6 +6,8 @@ import com.dripify.exception.DomainException;
 import com.dripify.product.model.Product;
 import com.dripify.product.repository.ProductRepository;
 import com.dripify.shared.enums.Gender;
+import com.dripify.user.model.User;
+import com.dripify.user.service.UserService;
 import com.dripify.web.dto.ProductFilter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,10 +23,12 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final CategoryService categoryService;
+    private final UserService userService;
 
-    public ProductService(ProductRepository productRepository, CategoryService categoryService) {
+    public ProductService(ProductRepository productRepository, CategoryService categoryService, UserService userService) {
         this.productRepository = productRepository;
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     public Page<Product> getFilteredProducts(String gender, String categoryName, String subcategoryName,
@@ -37,6 +41,7 @@ public class ProductService {
 
         Pageable pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE);
 
+        //TODO: Implement Most Rated
         if (productFilter.getSortBy() != null) {
             String[] split = productFilter.getSortBy().split("-");
             String field = split[0];
@@ -61,6 +66,14 @@ public class ProductService {
                 productFilter.getSizes(), productFilter.getSizes().size(),
                 pageable);
 
+    }
+
+    public Page<Product> getProductsByUsername(String username, int page) {
+        User user = userService.getByUsername(username);
+
+        Pageable pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE);
+
+        return productRepository.getProductsBySeller(user, pageable);
     }
 
 

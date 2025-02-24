@@ -37,7 +37,6 @@ public class UserService implements UserDetailsService {
         return new AuthenticationMetadata(user.getId(), user.getUsername(), user.getPassword(), user.getRole(), user.isActive());
     }
 
-    //TODO: implement check on uniqueness of user
     public void register(RegisterRequest registerRequest) {
         if (userRepository.getUserByUsername(registerRequest.getUsername()).isPresent()) {
             throw new RuntimeException("Username is already in use");
@@ -53,6 +52,15 @@ public class UserService implements UserDetailsService {
         log.info("User [%s] with id: %s registered successfully".formatted(user.getUsername(), user.getId()));
     }
 
+
+    public User getById(UUID id) {
+        return userRepository.findById(id).orElseThrow(() -> new DomainException("User with id %s does not exist!".formatted(id)));
+    }
+
+    public User getByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new DomainException("User with username %s does not exist".formatted(username)));
+    }
+
     private User createNewUser(RegisterRequest registerRequest) {
         return User.builder().
                 firstName(registerRequest.getFirstName()).
@@ -63,10 +71,5 @@ public class UserService implements UserDetailsService {
                 role(UserRole.USER).
                 isActive(true).
                 build();
-    }
-
-
-    public User getById(UUID id) {
-        return userRepository.findById(id).orElseThrow(() -> new DomainException("User with id %s does not exist!".formatted(id)));
     }
 }

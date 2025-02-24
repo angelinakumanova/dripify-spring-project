@@ -1,6 +1,7 @@
 package com.dripify.user.model;
 
 import com.dripify.product.model.Product;
+import com.dripify.review.model.Review;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,14 +24,15 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @Column(nullable = false)
-    private boolean isActive;
+    private String imageUrl;
 
     @Column(nullable = false)
     private String firstName;
 
     @Column(nullable = false)
     private String lastName;
+
+    private String description;
 
     @Column(unique = true, nullable = false)
     private String username;
@@ -41,6 +43,12 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private boolean isActive;
+
     @OneToMany(mappedBy = "seller")
     private List<Product> products = new ArrayList<>();
+
+    @OneToMany(mappedBy = "reviewee")
+    private List<Review> reviews = new ArrayList<>();
 }

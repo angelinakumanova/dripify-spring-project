@@ -7,6 +7,7 @@ import com.dripify.product.model.enums.Color;
 import com.dripify.product.model.enums.Material;
 import com.dripify.product.model.enums.Size;
 import com.dripify.shared.enums.Gender;
+import com.dripify.user.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -40,6 +41,5 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
     Optional<Product> getProductById(UUID id);
 
 
-
-
+    Page<Product> getProductsBySeller(User user, Pageable pageable);
 }
