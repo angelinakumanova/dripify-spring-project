@@ -25,7 +25,8 @@
                 <p th:unless="${user.description}" class="mt-4 text-center text-gray-500">Still figuring out what to say!</p>
 
                 <!-- ONLY IF IT IS USER'S ACCOUNT -->
-                <a th:if="${user != null and user.username == profileUser.username}" href="/templates/user/edit-profile.html"
+                <a th:if="${user != null and user.username == profileUser.username}"
+                   th:href="@{/users/{username}/profile/edit(username=${user.username})}"
                     class="self-center text-center w-full mt-4 px-4 py-2 bg-zinc-900 text-white
                      font-semibold rounded-full hover:bg-zinc-600 transition-all duration-300 focus:outline-none">
                     Edit Profile</a>

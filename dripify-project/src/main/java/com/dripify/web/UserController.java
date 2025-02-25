@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/users")
@@ -37,6 +38,7 @@ public class UserController {
 
     @ModelAttribute("user")
     public User getUser(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+
         if (authenticationMetadata != null) {
             return userService.getById(authenticationMetadata.getUserId());
         }
@@ -70,6 +72,16 @@ public class UserController {
         modelAndView.addObject("totalProducts", productService.getProductsByUsername(username, 0).getTotalElements());
 
         return modelAndView;
+    }
+
+    @GetMapping("/{username}/profile/edit")
+    public String editUserProfilePage(@PathVariable String username, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+
+        if (!username.equalsIgnoreCase(authenticationMetadata.getUsername())) {
+            return "redirect:/";
+        }
+
+        return "user/edit-profile";
     }
 
 
