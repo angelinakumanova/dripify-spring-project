@@ -32,6 +32,13 @@ dependencies {
     implementation 'org.springframework.security:spring-security-crypto:6.4.2'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    // https://mvnrepository.com/artifact/com.cloudinary/cloudinary-http5
+    implementation 'com.cloudinary:cloudinary-http5:2.2.0'
+    // https://mvnrepository.com/artifact/com.cloudinary/cloudinary-taglib
+    implementation 'com.cloudinary:cloudinary-taglib:2.2.0'
+    // https://mvnrepository.com/artifact/io.github.cdimascio/java-dotenv
+    implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+
 
 
 }

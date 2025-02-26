@@ -8,45 +8,18 @@
 
   <div class="mt-24 sm:mt-28"></div>
   <div class="bg-white flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-[#161931]">
-    <aside class="py-4 md:w-1/3 lg:w-1/4">
-      <div class="sticky flex flex-col gap-2 p-4 text-sm sm:border-r border-indigo-100 top-12">
-
-        <a th:href="@{/users/{username}/profile/products(username=${user.username})}"
-           th:text="${user.username}"
-           class="pl-3 mb-4 text-2xl font-semibold hover:underline"></a>
-
-        <a href="/templates/user/orders.html"
-          class="flex items-center px-3 py-2.5 font-semibold hover:font-bold hover:border hover:rounded-full">
-          Orders
-        </a>
-        <a href="/templates/user/wishlist.html"
-          class="flex items-center px-3 py-2.5 font-semibold hover:font-bold hover:border hover:rounded-full">
-          Wishlist
-        </a>
-
-        <hr>
-        <h2 class="pl-3 mb-2 text-lg font-bold">Settings</h2>
-          <a th:href="@{/users/{username}/profile/edit(username=${user.username})}"
-            class="flex items-center px-3 py-2.5 font-bold bg-white border rounded-full">
-            Public Profile
-          </a>
-          <a href="/templates/user/account-settings.html"
-            class="flex items-center px-3 py-2.5 font-semibold hover:font-bold hover:border hover:rounded-full">
-            Account Settings
-          </a>
-
-      </div>
-    </aside>
+    <aside th:replace="~{fragments/profile-nav::profile-nav(current='edit')}"></aside>
     <section class="w-full min-h-screen py-8 md:w-2/3 lg:w-3/4">
       <div class="p-4">
         <div class="w-full px-8 py-6 ">
           <h2 class="text-2xl font-bold text-gray-800">Public Profile</h2>
           <p class="mt-2 text-sm text-gray-600">Update your public profile information and preferences.</p>
 
-          <form>
+          <form th:action="@{/profile/edit}"
+                th:method="PUT" th:object="${userEditRequest}" enctype="multipart/form-data">
             <!-- Save Button -->
             <div class="flex justify-end items-end gap-2">
-              <small class="text-green-600 font-semibold">Sucessfully changed!</small>
+              <small th:if="${successMessage}" th:text="${successMessage}" class="text-green-600 font-semibold"></small>
               <button type="submit"
                       class="px-6 py-3 bg-zinc-900 text-white rounded-lg shadow-md hover:bg-zinc-700
                        focus:ring focus:ring-zinc-900 focus:outline-none">
@@ -55,7 +28,7 @@
             </div>
             <div class="mt-6 flex flex-col items-center space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8">
               <!-- Profile Picture -->
-              <img id="profile-picture-preview" class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-gray-800"
+              <img id="profile-picture-preview" class="object-cover object-center w-40 h-40 p-1 rounded-full ring-2 ring-gray-800"
                 th:src="${#strings.isEmpty(user.imageUrl) ? '/images/anonymous-user.jpg' : user.imageUrl}"
                    alt="Profile Picture">
 
@@ -67,19 +40,22 @@
                      rounded-lg hover:bg-zinc-700 focus:ring-4 focus:ring-gray-200 text-center">
                     Change Picture
                   </label>
-                  <input type="file" id="profile-picture-input" name="profile-picture" accept="image/png, image/jpeg"
+                  <input th:field="*{profilePicture}" type="file" id="profile-picture-input" name="profile-picture" accept="image/png, image/jpeg"
                     class="hidden" />
 
+                  <input th:field="*{deletePicture}" type="hidden" name="deletePicture" id="deletePicture" value="false"/>
+
                   <!-- Delete Picture Button -->
-                  <button id="delete-picture-btn" type="button"
-                    class="py-3 px-6 text-sm font-medium text-gray-800 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-200">
+                  <button id="delete-picture-btn" type="button" value="false"
+                    class="py-3 px-6 text-sm font-medium text-gray-800 bg-white border
+                     border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-200">
                     Delete Picture
                   </button>
 
                   <div>
-                    <small class="text-red-600 font-semibold">File is too large!</small>
+                    <small id="large-file-msg" class="hidden text-red-600 font-semibold">File is too large!</small>
                     <!-- Size Limit Note -->
-                    <p class="text-sm text-gray-500">Maximum file size: 2MB. Accepted formats: PNG, JPEG.</p>
+                    <p class="text-sm text-gray-500">Maximum file size: 1MB. Accepted formats: PNG, JPEG.</p>
                   </div>
                 </div>
 
@@ -90,24 +66,28 @@
               <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
                 <div class="w-full">
                   <label for="first_name" class="block text-sm font-medium text-gray-700">First Name</label>
-                  <input type="text" id="first_name" name="first_name" placeholder="Your first name"
-                    class="w-full mt-2 p-3 border rounded-lg text-sm shadow-sm focus:ring focus:ring-zinc-900" required>
-                  <small class="text-red-600 font-semibold">Please enter a valid first name. Only alphabetic characters are allowed.</small>
+                  <input th:field="*{firstName}" type="text" id="first_name" name="first_name" placeholder="Your first name"
+                    class="w-full mt-2 p-3 border rounded-lg text-sm shadow-sm focus:ring focus:ring-zinc-900">
+                  <small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                         class="text-red-600 font-semibold"></small>
                 </div>
                 <div class="w-full">
                   <label for="last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
-                  <input type="text" id="last_name" name="last_name" placeholder="Your last name"
-                    class="w-full mt-2 p-3 border rounded-lg text-sm shadow-sm focus:ring focus:ring-zinc-900" required>
-                  <small class="text-red-600 font-semibold">Please enter a valid first name. Only alphabetic characters are allowed.</small>
+                  <input th:field="*{lastName}" type="text" id="last_name" name="last_name" placeholder="Your last name"
+                    class="w-full mt-2 p-3 border rounded-lg text-sm shadow-sm focus:ring focus:ring-zinc-900">
+                  <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                         class="text-red-600 font-semibold"></small>
                 </div>
               </div>
 
               <!-- Bio -->
               <div>
-                <label for="bio" class="block text-sm font-medium text-gray-700">Bio <span class="text-gray-500 opacity-60">(max 160 characters)</span></label>
-                <textarea id="bio" name="bio" rows="4" placeholder="Write your bio here..."
+                <label for="bio" class="block text-sm font-medium text-gray-700">
+                  Bio <span class="text-gray-500 opacity-60">(max 160 characters)</span></label>
+                <textarea th:field="*{description}" id="bio" name="bio" rows="4" placeholder="Write your bio here..."
                   class="w-full mt-2 p-3 border rounded-lg text-sm shadow-sm focus:ring focus:ring-zinc-900 "></textarea>
-                <small class="text-red-600 font-semibold">Description is too long!</small>
+                <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                       class="text-red-600 font-semibold"></small>
               </div>
 
 

@@ -22,8 +22,3 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
-dripify-project/src/main/resources/package-lock.json
-dripify-project/src/main/resources/package.json
-dripify-project/src/main/resources/src/input.css
-dripify-project/src/main/resources/tailwind.config.js
-dripify-project/src/main/resources/src/output.css

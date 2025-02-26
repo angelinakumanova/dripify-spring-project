@@ -7,8 +7,10 @@ import com.dripify.review.service.ReviewService;
 import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
 import com.dripify.user.service.UserService;
+import com.dripify.web.mapper.DtoMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,7 +51,7 @@ public class UserController {
     @GetMapping("/{username}/profile/products")
     public ModelAndView getUserProductsPage(@PathVariable String username,
                                        @RequestParam(defaultValue = "0") int page) {
-        ModelAndView modelAndView = new ModelAndView("/user/profile-items");
+        ModelAndView modelAndView = new ModelAndView("user/profile-items");
 
         User profileUser = userService.getByUsername(username);
         modelAndView.addObject("profileUser", profileUser);
@@ -63,7 +65,7 @@ public class UserController {
     @GetMapping("/{username}/profile/reviews")
     public ModelAndView getUserReviewsPage(@PathVariable String username,
                                            @RequestParam(defaultValue = "0") int page) {
-        ModelAndView modelAndView = new ModelAndView("/user/profile-reviews");
+        ModelAndView modelAndView = new ModelAndView("user/profile-reviews");
 
         User profileUser = userService.getByUsername(username);
         modelAndView.addObject("profileUser", profileUser);
@@ -74,15 +76,6 @@ public class UserController {
         return modelAndView;
     }
 
-    @GetMapping("/{username}/profile/edit")
-    public String editUserProfilePage(@PathVariable String username, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
-
-        if (!username.equalsIgnoreCase(authenticationMetadata.getUsername())) {
-            return "redirect:/";
-        }
-
-        return "user/edit-profile";
-    }
 
 
 }

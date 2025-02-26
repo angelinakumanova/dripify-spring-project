@@ -1,11 +1,14 @@
 package com.dripify.user.service;
 
+import com.dripify.cloudinary.service.CloudinaryService;
 import com.dripify.exception.DomainException;
 import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
 import com.dripify.user.model.UserRole;
 import com.dripify.user.repository.UserRepository;
 import com.dripify.web.dto.RegisterRequest;
+import com.dripify.web.dto.UserEditRequest;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,6 +16,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.security.PublicKey;
 import java.util.UUID;
 
 @Slf4j
@@ -21,10 +26,12 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final CloudinaryService cloudinaryService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, CloudinaryService cloudinaryService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.cloudinaryService = cloudinaryService;
     }
 
     @Override
@@ -50,6 +57,32 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
 
         log.info("User [%s] with id: %s registered successfully".formatted(user.getUsername(), user.getId()));
+    }
+
+
+    public void editUserProfile(UserEditRequest userEditRequest, User user) {
+
+        if (Boolean.TRUE.equals(userEditRequest.getDeletePicture())) {
+            if (user.getImageUrl() != null) {
+                cloudinaryService.deleteImage(user.getImageUrl());
+
+            }
+            user.setImageUrl(null);
+        } else if (userEditRequest.getProfilePicture() != null && !userEditRequest.getProfilePicture().isEmpty()) {
+            if (user.getImageUrl() != null) {
+                cloudinaryService.deleteImage(user.getImageUrl());
+
+            }
+
+            String imageUrl = cloudinaryService.uploadImage(userEditRequest.getProfilePicture());
+            user.setImageUrl(imageUrl);
+        }
+
+        user.setFirstName(userEditRequest.getFirstName());
+        user.setLastName(userEditRequest.getLastName());
+        user.setDescription(userEditRequest.getDescription());
+
+        userRepository.save(user);
     }
 
 

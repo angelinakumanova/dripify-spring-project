@@ -362,7 +362,7 @@
                                role="menuitem" tabindex="-1" >wishlist</a>
                         </div>
                         <div class="py-1" role="none">
-                            <a href="/templates/user/edit-profile.html"
+                            <a th:href="@{/users/{username}/profile/settings(username=${user.username})}"
                                class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
                                role="menuitem" tabindex="-1" >settings</a>
                             <a th:href="@{/logout}"
