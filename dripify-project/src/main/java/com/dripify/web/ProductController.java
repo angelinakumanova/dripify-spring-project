@@ -2,13 +2,9 @@ package com.dripify.web;
 
 import com.dripify.product.model.Product;
 import com.dripify.product.service.ProductService;
-import com.dripify.security.AuthenticationMetadata;
-import com.dripify.user.model.User;
-import com.dripify.user.service.UserService;
 import com.dripify.web.dto.ProductFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,34 +16,29 @@ import java.util.UUID;
 public class ProductController {
 
     private final ProductService productService;
-    private final UserService userService;
 
-    public ProductController(ProductService productService, UserService userService) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
-        this.userService = userService;
     }
-
-
 
     @GetMapping("/{gender}/{category}")
     public ModelAndView getProductsByGenderAndCategory(@PathVariable String gender, @PathVariable String category,
-                                                       @ModelAttribute ProductFilter productFilter, @RequestParam(defaultValue = "0") int page, HttpServletRequest request,
-                                                       @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+                                                       @ModelAttribute ProductFilter productFilter, @RequestParam(defaultValue = "0") int page, HttpServletRequest request) {
 
         Page<Product> productsPage = productService.getFilteredProducts(gender, category, null, productFilter, page);
 
-        return createProductsView(productsPage, category, request, authenticationMetadata);
+        return createProductsView(productsPage, category, request);
     }
 
     @GetMapping("/{gender}/{category}/{subcategory}")
     public ModelAndView getProductsByGenderAndSubcategory(@PathVariable String gender, @PathVariable String category,
                                                           @PathVariable String subcategory, @ModelAttribute ProductFilter productFilter,
-                                                          @RequestParam(defaultValue = "0") int page, HttpServletRequest request, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+                                                          @RequestParam(defaultValue = "0") int page, HttpServletRequest request) {
 
         Page<Product> productsPage = productService.getFilteredProducts(gender, category, subcategory,
                                                                                     productFilter, page);
 
-        return createProductsView(productsPage, subcategory, request, authenticationMetadata);
+        return createProductsView(productsPage, subcategory, request);
     }
 
 
@@ -67,13 +58,8 @@ public class ProductController {
     }
 
     private ModelAndView createProductsView(Page<Product> productsPage, String category,
-                                            HttpServletRequest request, AuthenticationMetadata authenticationMetadata) {
+                                            HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("/products/products");
-
-        if (authenticationMetadata != null) {
-            User user = userService.getById(authenticationMetadata.getUserId());
-            modelAndView.addObject("user", user);
-        }
 
         modelAndView.addObject("productPage", productsPage);
         modelAndView.addObject("currentCategory", category);

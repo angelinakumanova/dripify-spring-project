@@ -25,17 +25,6 @@ public class ProfileController {
     }
 
 
-    @ModelAttribute("user")
-    public User getUser(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
-
-        if (authenticationMetadata != null) {
-            return userService.getById(authenticationMetadata.getUserId());
-        }
-
-        return null;
-    }
-
-
     @GetMapping("/edit")
     public ModelAndView getEditProfilePage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
         ModelAndView modelAndView = new ModelAndView("user/edit-profile");
@@ -66,14 +55,5 @@ public class ProfileController {
 
 
         return "user/account-settings";
-    }
-
-    @GetMapping("/{username}/orders")
-    public String getOrdersPage(@PathVariable String username, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
-        if (!username.equalsIgnoreCase(authenticationMetadata.getUsername())) {
-            return "redirect:/";
-        }
-
-        return "user/orders";
     }
 }

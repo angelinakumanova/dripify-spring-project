@@ -28,16 +28,6 @@ public class UserController {
         this.orderService = orderService;
     }
 
-    @ModelAttribute("user")
-    public User getUser(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
-
-        if (authenticationMetadata != null) {
-            return userService.getById(authenticationMetadata.getUserId());
-        }
-
-        return null;
-    }
-
     @GetMapping("/{username}/profile/products")
     public ModelAndView getUserProductsPage(@PathVariable String username,
                                        @RequestParam(defaultValue = "0") int page) {
