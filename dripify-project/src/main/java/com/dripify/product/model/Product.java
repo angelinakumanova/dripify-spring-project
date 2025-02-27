@@ -1,6 +1,7 @@
 package com.dripify.product.model;
 
 import com.dripify.category.model.Category;
+import com.dripify.order.model.Order;
 import com.dripify.product.model.enums.*;
 import com.dripify.shared.enums.Gender;
 import com.dripify.user.model.User;
@@ -21,6 +22,9 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @ManyToOne
+    private Order order;
 
     @ManyToOne
     @JoinColumn(nullable = false)

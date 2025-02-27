@@ -1,27 +1,21 @@
 package com.dripify.web;
 
-import com.dripify.category.model.Category;
-import com.dripify.category.service.CategoryService;
 import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
 import com.dripify.user.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 
 @Controller
 public class IndexController {
 
     private final UserService userService;
-    private final CategoryService categoryService;
 
-    public IndexController(UserService userService, CategoryService categoryService) {
+    public IndexController(UserService userService) {
         this.userService = userService;
-        this.categoryService = categoryService;
     }
 
     @GetMapping
@@ -48,10 +42,4 @@ public class IndexController {
 
         return modelAndView;
     }
-
-    @ModelAttribute("categories")
-    public List<Category> getCategories() {
-        return categoryService.getMainCategories();
-    }
-
 }

@@ -12,17 +12,17 @@
             <div class="sticky flex flex-col gap-2 p-4 text-sm sm:border-r border-indigo-100 top-12">
 
                 <span class="flex items-center flex-col-reverse">
-                    <span class="flex flex-col items-center  pl-3 mt-2 ">
-                        <p th:text="${profileUser.username}" class="mb-4 text-2xl font-semibold"></p>
-                        <p class="font-semibold uppercase">340 items sold</p>
+                    <span class="flex flex-col items-center pl-3 mt-2 ">
+                        <p th:text="${profileUser.username}" class="mb-2 text-2xl font-bold"></p>
+                        <p class="font-semibold uppercase" th:text="${totalOrders + ' items sold'}"></p>
                     </span>
                     <img class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-gray-800"
                         th:src="${#strings.isEmpty(profileUser.imageUrl) ? '/images/anonymous-user.jpg' : profileUser.imageUrl}"
                          alt="Profile Picture">
                 </span>
 
-                <p th:if="${user.description}" class="mt-4 text-center" th:text="${user.description}"></p>
-                <p th:unless="${user.description}" class="mt-4 text-center text-gray-500">Still figuring out what to say!</p>
+                <p th:if="${profileUser.description}" class="mt-4 text-center" th:text="${profileUser.description}"></p>
+                <p th:unless="${profileUser.description}" class="mt-4 text-center text-gray-500">Still figuring out what to say!</p>
 
                 <!-- ONLY IF IT IS USER'S ACCOUNT -->
                 <a th:if="${user != null and user.username == profileUser.username}"

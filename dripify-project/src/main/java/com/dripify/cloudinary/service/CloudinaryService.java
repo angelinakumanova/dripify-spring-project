@@ -30,7 +30,7 @@ public class CloudinaryService {
         try {
             uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap(
                     "folder", "profile_pictures",
-                    "transformation", new Transformation().width(300).height(300).gravity("face:center").crop("fill").quality("auto")
+                    "transformation", new Transformation().width(300).height(300).crop("fill").quality("auto")
             ));
         } catch (IOException e) {
             throw new CloudinaryException("Error while uploading image to Cloudinary");

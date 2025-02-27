@@ -21,12 +21,12 @@
 
         <hr>
         <h2 class="pl-3 mb-2 text-lg font-bold">Settings</h2>
-            <a th:href="@{/users/{username}/profile/edit(username=${user.username})}"
+            <a th:href="@{/profile/edit}"
                th:classappend="${current == 'edit' ? 'font-bold border rounded-full' : 'font-semibold hover:font-bold hover:border hover:rounded-full'}"
                class="flex items-center px-3 py-2.5">
                 Public Profile
             </a>
-            <a th:href="@{/users/{username}/profile/settings(username=${user.username})}"
+            <a th:href="@{/profile/settings}"
                th:classappend="${current == 'settings' ? 'font-bold border rounded-full' : 'font-semibold hover:font-bold hover:border hover:rounded-full'}"
                class="flex items-center px-3 py-2.5">
                 Account Settings

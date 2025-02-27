@@ -1,7 +1,5 @@
 package com.dripify.web;
 
-import com.dripify.category.model.Category;
-import com.dripify.category.service.CategoryService;
 import com.dripify.product.model.Product;
 import com.dripify.product.service.ProductService;
 import com.dripify.security.AuthenticationMetadata;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -23,12 +20,10 @@ import java.util.UUID;
 public class ProductController {
 
     private final ProductService productService;
-    private final CategoryService categoryService;
     private final UserService userService;
 
-    public ProductController(ProductService productService, CategoryService categoryService, UserService userService) {
+    public ProductController(ProductService productService, UserService userService) {
         this.productService = productService;
-        this.categoryService = categoryService;
         this.userService = userService;
     }
 
@@ -69,11 +64,6 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView("/products/sell-product");
 
         return modelAndView;
-    }
-
-    @ModelAttribute("categories")
-    public List<Category> getCategories() {
-        return categoryService.getMainCategories();
     }
 
     private ModelAndView createProductsView(Page<Product> productsPage, String category,

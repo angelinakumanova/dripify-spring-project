@@ -1,7 +1,5 @@
 package com.dripify.web;
 
-import com.dripify.category.model.Category;
-import com.dripify.category.service.CategoryService;
 import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
 import com.dripify.user.service.UserService;
@@ -15,24 +13,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
 
 @Controller
 @RequestMapping("/profile")
 public class ProfileController {
 
     private final UserService userService;
-    private final CategoryService categoryService;
 
-    public ProfileController(UserService userService, CategoryService categoryService) {
+    public ProfileController(UserService userService) {
         this.userService = userService;
-        this.categoryService = categoryService;
     }
 
-    @ModelAttribute("categories")
-    public List<Category> getCategories() {
-        return categoryService.getMainCategories();
-    }
 
     @ModelAttribute("user")
     public User getUser(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
@@ -70,12 +61,9 @@ public class ProfileController {
     }
 
 
-    @GetMapping("/{username}/profile/settings")
-    public String getSettingsPage(@PathVariable String username, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+    @GetMapping("/settings")
+    public String getSettingsPage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
 
-        if (!username.equalsIgnoreCase(authenticationMetadata.getUsername())) {
-            return "redirect:/";
-        }
 
         return "user/account-settings";
     }
