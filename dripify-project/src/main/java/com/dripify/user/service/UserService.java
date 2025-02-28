@@ -63,7 +63,7 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public void editUserProfile(UserEditRequest userEditRequest, User user) {
+    public void editProfile(UserEditRequest userEditRequest, User user) {
 
         if (Boolean.TRUE.equals(userEditRequest.getDeletePicture())) {
             if (user.getImageUrl() != null) {
@@ -108,6 +108,8 @@ public class UserService implements UserDetailsService {
         user.setUsername(newUsername);
         user.setLastModifiedUsername(LocalDateTime.now());
         userRepository.save(user);
+
+        updateAuthentication(user);
     }
 
 
@@ -117,6 +119,14 @@ public class UserService implements UserDetailsService {
 
     public User getByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow(() -> new DomainException("User with username %s does not exist".formatted(username)));
+    }
+
+    private static void updateAuthentication(User user) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        AuthenticationMetadata authenticationMetadata = new AuthenticationMetadata(user.getId(), user.getUsername(), user.getPassword(), user.getRole(), user.isActive());
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(authenticationMetadata, authentication.getCredentials(), authenticationMetadata.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(newAuth);
     }
 
     private User createNewUser(RegisterRequest registerRequest) {

@@ -44,7 +44,7 @@ public class ProfileController {
             return "user/edit-profile";
         }
 
-        userService.editUserProfile(userEditRequest, userService.getById(authenticationMetadata.getUserId()));
+        userService.editProfile(userEditRequest, userService.getById(authenticationMetadata.getUserId()));
         redirectAttributes.addFlashAttribute("successMessage", "Successfully changed!");
 
         return "redirect:/profile/edit";
