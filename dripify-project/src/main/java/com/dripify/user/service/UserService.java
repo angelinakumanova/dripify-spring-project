@@ -2,22 +2,25 @@ package com.dripify.user.service;
 
 import com.dripify.cloudinary.service.CloudinaryService;
 import com.dripify.exception.DomainException;
+import com.dripify.exception.UsernameUpdateException;
 import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
 import com.dripify.user.model.UserRole;
 import com.dripify.user.repository.UserRepository;
 import com.dripify.web.dto.RegisterRequest;
 import com.dripify.web.dto.UserEditRequest;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.security.PublicKey;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 @Slf4j
@@ -80,8 +83,30 @@ public class UserService implements UserDetailsService {
 
         user.setFirstName(userEditRequest.getFirstName());
         user.setLastName(userEditRequest.getLastName());
-        user.setDescription(userEditRequest.getDescription());
+        user.setDescription(userEditRequest.getDescription().isEmpty() ? null : userEditRequest.getDescription());
 
+        userRepository.save(user);
+    }
+
+    public void updateUsername(User user, String newUsername) {
+        if (user.getUsername().equals(newUsername)) {
+            throw new UsernameUpdateException("This is already your username.");
+        }
+
+        LocalDateTime thirtyDaysAgo = LocalDateTime.now().minusDays(30);
+        if (user.getLastModifiedUsername() != null && user.getLastModifiedUsername().isAfter(thirtyDaysAgo)) {
+            long remainingDays = ChronoUnit.DAYS.between(thirtyDaysAgo, user.getLastModifiedUsername());
+
+            throw new UsernameUpdateException("You have recently changed your username. You can change it again in " + remainingDays + " days.");
+        }
+
+
+        if (userRepository.getUserByUsername(newUsername).isPresent()) {
+            throw new UsernameUpdateException("Username is already taken.");
+        }
+
+        user.setUsername(newUsername);
+        user.setLastModifiedUsername(LocalDateTime.now());
         userRepository.save(user);
     }
 

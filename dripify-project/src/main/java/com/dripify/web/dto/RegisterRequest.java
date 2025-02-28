@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class RegisterRequest {
+    @NotNull(message = "Username must NOT be null!")
     @Pattern(regexp = "^[a-zA-Z0-9]{5,20}$", message = "Use only letters & numbers, 5–20 characters.")
     private String username;
 
@@ -19,6 +20,7 @@ public class RegisterRequest {
     @Email(regexp = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Please enter a valid email.")
     private String email;
 
+    @NotNull(message = "Password must NOT be null!")
     @Pattern(regexp = "^[A-Za-z\\d]{6,20}$", message = "Password must be 6-20 characters long and contain only letters and digits.")
     private String password;
 

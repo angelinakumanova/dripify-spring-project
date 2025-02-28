@@ -18,38 +18,43 @@
 
           <div class="mt-6 space-y-6">
             <!-- Username -->
-            <form id="username-form">
+            <form id="username-form"
+                  th:action="@{/profile/settings/update-username}" th:method="PUT" th:object="${usernameUpdateRequest}">
               <div class="space-y-2">
                 <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
                 <div class="sm:flex gap-3">
-                  <input type="text" id="username" name="username" placeholder="Enter your username"
+                  <input th:field="*{username}" type="text" id="username" name="username" placeholder="Enter your username"
                     class="w-full mt-2 p-3 border rounded-lg text-sm shadow-sm focus:ring focus:ring-zinc-900">
                   <button type="submit"
                     class="px-5 py-2 lg:px-12 sm:py-0 text-nowrap mt-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-700 focus:ring focus:ring-zinc-900">
                     Update Username
                   </button>
                 </div>
-                <span class="hidden text-sm text-green-500" id="username-success">Username updated successfully!</span>
-                <span class="hidden text-sm text-red-500" id="username-error">Failed to update username. Please try
-                  again.</span>
+
+                <span th:if="${successMessage}" th:text="${successMessage}"
+                      class="text-sm text-green-500 font-semibold" id="username-success"></span>
+                <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                      class="text-sm text-red-500 font-semibold" id="username-error"></span>
+                <span th:if="${error}" th:text="${error}"
+                      class="text-sm text-red-500 font-semibold"></span>
                 <p class="text-xs text-gray-500">You can change your username every 30 days.</p>
               </div>
             </form>
 
             <!-- Email -->
-            <form id="email-form">
+            <form id="email-form" th:action="@{/profile/settings/update-email}" th:method="PUT" th:object="${emailUpdateRequest}">
               <div class="space-y-2">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                 <div class="sm:flex gap-3">
-                  <input type="email" id="email" name="email" placeholder="Enter your email"
+                  <input th:field="*{email}" type="email" id="email" name="email" placeholder="Enter your email"
                     class="w-full mt-2 p-3 border rounded-lg text-sm shadow-sm focus:ring focus:ring-zinc-900">
                   <button type="submit"
                     class="px-5 py-2 lg:px-12 sm:py-0 text-nowrap mt-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-700 focus:ring focus:ring-zinc-900">
                     Update Email
                   </button>
                 </div>
-                <span class="hidden text-sm text-green-500" id="email-success">Email updated successfully!</span>
-                <span class="hidden text-sm text-red-500" id="email-error">Failed to update email. Please try
+                <span class="hidden text-sm text-green-500 font-semibold" id="email-success">Email updated successfully!</span>
+                <span th:if="${#fields.hasErrors('email')}" class="text-sm text-red-500 font-semibold" id="email-error">Failed to update email. Please try
                   again.</span>
               </div>
             </form>

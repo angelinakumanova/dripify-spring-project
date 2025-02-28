@@ -5,6 +5,7 @@ import com.dripify.review.model.Review;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -45,6 +46,8 @@ public class User {
 
     @Column(nullable = false)
     private boolean isActive;
+
+    private LocalDateTime lastModifiedUsername;
 
     @OneToMany(mappedBy = "seller")
     private List<Product> products = new ArrayList<>();

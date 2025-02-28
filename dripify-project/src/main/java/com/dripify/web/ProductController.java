@@ -23,7 +23,8 @@ public class ProductController {
 
     @GetMapping("/{gender}/{category}")
     public ModelAndView getProductsByGenderAndCategory(@PathVariable String gender, @PathVariable String category,
-                                                       @ModelAttribute ProductFilter productFilter, @RequestParam(defaultValue = "0") int page, HttpServletRequest request) {
+                                                       @ModelAttribute ProductFilter productFilter,
+                                                       @RequestParam(defaultValue = "0") int page, HttpServletRequest request) {
 
         Page<Product> productsPage = productService.getFilteredProducts(gender, category, null, productFilter, page);
 

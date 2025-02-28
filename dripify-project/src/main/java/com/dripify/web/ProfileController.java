@@ -4,6 +4,7 @@ import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
 import com.dripify.user.service.UserService;
 import com.dripify.web.dto.UserEditRequest;
+import com.dripify.web.dto.UsernameUpdateRequest;
 import com.dripify.web.mapper.DtoMapper;
 import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -51,9 +52,28 @@ public class ProfileController {
 
 
     @GetMapping("/settings")
-    public String getSettingsPage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+    public ModelAndView getSettingsPage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+        ModelAndView modelAndView = new ModelAndView("user/account-settings");
 
+        User user = userService.getById(authenticationMetadata.getUserId());
+        modelAndView.addObject("usernameUpdateRequest", DtoMapper.mapToUsernameUpdateRequest(user));
+        modelAndView.addObject("emailUpdateRequest", DtoMapper.mapToEmailUpdateRequest(user));
 
-        return "user/account-settings";
+        return modelAndView;
+    }
+
+    @PutMapping("/settings/update-username")
+    public String updateUsername(@Valid UsernameUpdateRequest usernameUpdateRequest,
+                                       BindingResult bindingResult,
+                                 RedirectAttributes redirectAttributes, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+
+        if (bindingResult.hasErrors()) {
+            return "user/account-settings";
+        }
+
+        userService.updateUsername(userService.getById(authenticationMetadata.getUserId()), usernameUpdateRequest.getUsername());
+        redirectAttributes.addFlashAttribute("successMessage", "Username is successfully changed!");
+
+        return "redirect:/profile/settings";
     }
 }
