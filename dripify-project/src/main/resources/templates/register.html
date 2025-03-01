@@ -163,11 +163,6 @@
                                     text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400
                                      focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6">
 
-<!--                            <span th:classappend="${#fields.hasGlobalErrors()} == true ? '' : 'hidden'"-->
-<!--                                  class="server mt-2 ml-1 text-sm text-red-500 ">-->
-<!--                                    Passwords do not match-->
-<!--                            </span>-->
-
                             <span th:if="${#fields.hasErrors('passwordMatch')}" th:errors="*{passwordMatch}"
                                   class="register-user-status mt-2 ml-1 text-sm text-red-500"></span>
                         </div>

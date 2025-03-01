@@ -3,6 +3,7 @@ package com.dripify.user.service;
 import com.dripify.cloudinary.service.CloudinaryService;
 import com.dripify.exception.DomainException;
 import com.dripify.exception.EmailUpdateException;
+import com.dripify.exception.PasswordUpdateException;
 import com.dripify.exception.UsernameUpdateException;
 import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
@@ -137,6 +138,25 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    public void updatePassword(User user, String newPassword) {
+        if (passwordEncoder.matches(newPassword, user.getPassword())) {
+            throw new PasswordUpdateException("You cannot use your current password.");
+        }
+
+        LocalDate today = LocalDate.now();
+
+        if (user.getLastModifiedPassword() != null && user.getLastModifiedPassword().isEqual(today)) {
+            throw new PasswordUpdateException("You have already changed your password today. Try again tomorrow.");
+        }
+
+        String newEncodedPassword = passwordEncoder.encode(newPassword);
+        user.setPassword(newEncodedPassword);
+        user.setLastModifiedPassword(LocalDate.now());
+        userRepository.save(user);
+
+        updateAuthentication(user);
+    }
+
 
     public User getById(UUID id) {
         return userRepository.findById(id).orElseThrow(() -> new DomainException("User with id %s does not exist!".formatted(id)));
@@ -146,7 +166,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username).orElseThrow(() -> new DomainException("User with username %s does not exist".formatted(username)));
     }
 
-    private static void updateAuthentication(User user) {
+    private void updateAuthentication(User user) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         AuthenticationMetadata authenticationMetadata = new AuthenticationMetadata(user.getId(), user.getUsername(), user.getPassword(), user.getRole(), user.isActive());

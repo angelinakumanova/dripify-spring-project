@@ -65,20 +65,25 @@
             </form>
 
             <!-- Password -->
-            <form id="password-form">
+            <form id="password-form" th:action="@{/profile/settings/password}" th:method="PUT" th:object="${passwordUpdateRequest}">
               <div class="space-y-2">
                 <label class="block text-sm font-medium text-gray-700">Change Password</label>
-                <input type="password" id="new_password" name="new_password" placeholder="New Password"
+                <input th:field="*{password}" type="password" id="new_password" name="new_password" placeholder="New Password"
                   class="w-full p-3 border rounded-lg text-sm shadow-sm focus:ring focus:ring-zinc-900">
-                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password"
+
+                <input th:field="*{confirmPassword}" type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password"
                   class="w-full p-3 border rounded-lg text-sm shadow-sm focus:ring focus:ring-zinc-900">
+
+                <p th:if="${successPasswordMessage}" th:text="${successPasswordMessage}"
+                      class="text-sm text-green-500 font-semibold"></p>
+                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-sm text-red-500 font-semibold"></p>
+                <p th:if="${#fields.hasErrors('passwordMatch')}" th:errors="*{passwordMatch}" class="text-sm text-red-500 font-semibold"></p>
+                <p th:if="${passwordError}" th:text="${passwordError}" class="text-sm text-red-500 font-semibold"></p>
+
                 <button type="submit"
-                  class="px-4 py-2 mt-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-700 focus:ring focus:ring-zinc-900">
+                        class="px-4 py-2 mt-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-700 focus:ring focus:ring-zinc-900">
                   Change Password
                 </button>
-                <span class="hidden text-sm text-green-500" id="password-success">Password changed successfully!</span>
-                <span class="hidden text-sm text-red-500" id="password-error">Failed to change password. Please try
-                  again.</span>
               </div>
             </form>
 

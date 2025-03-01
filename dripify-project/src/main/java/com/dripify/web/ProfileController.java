@@ -4,6 +4,7 @@ import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
 import com.dripify.user.service.UserService;
 import com.dripify.web.dto.EmailUpdateRequest;
+import com.dripify.web.dto.PasswordUpdateRequest;
 import com.dripify.web.dto.UserEditRequest;
 import com.dripify.web.dto.UsernameUpdateRequest;
 import com.dripify.web.mapper.DtoMapper;
@@ -56,11 +57,12 @@ public class ProfileController {
     @GetMapping("/settings")
     public String getSettingsPage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata, Model model) {
 
-        if (!model.containsAttribute("usernameUpdateRequest") && !model.containsAttribute("emailUpdateRequest")) {
+        if (!model.containsAttribute("usernameUpdateRequest") && !model.containsAttribute("emailUpdateRequest") && !model.containsAttribute("passwordUpdateRequest")) {
             User user = userService.getById(authenticationMetadata.getUserId());
 
             model.addAttribute("usernameUpdateRequest", DtoMapper.mapToUsernameUpdateRequest(user));
             model.addAttribute("emailUpdateRequest", DtoMapper.mapToEmailUpdateRequest(user));
+            model.addAttribute("passwordUpdateRequest", new PasswordUpdateRequest());
         }
 
         return "user/account-settings";
@@ -103,6 +105,27 @@ public class ProfileController {
 
         userService.updateEmail(user, emailUpdateRequest.getEmail());
         redirectAttributes.addFlashAttribute("successEmailMessage", "Email successfully changed!");
+        return "redirect:/profile/settings";
+    }
+
+    @PutMapping("/settings/password")
+    public String updatePassword(@Valid PasswordUpdateRequest passwordUpdateRequest, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                                 @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+        User user = userService.getById(authenticationMetadata.getUserId());
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("passwordUpdateRequest", passwordUpdateRequest);
+            redirectAttributes.addFlashAttribute("usernameUpdateRequest", DtoMapper.mapToUsernameUpdateRequest(user));
+            redirectAttributes.addFlashAttribute("emailUpdateRequest", DtoMapper.mapToEmailUpdateRequest(user));
+
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.passwordUpdateRequest", bindingResult);
+
+            return "redirect:/profile/settings";
+        }
+
+        userService.updatePassword(user, passwordUpdateRequest.getPassword());
+        redirectAttributes.addFlashAttribute("successPasswordMessage", "Password successfully changed!");
+
         return "redirect:/profile/settings";
     }
 }
