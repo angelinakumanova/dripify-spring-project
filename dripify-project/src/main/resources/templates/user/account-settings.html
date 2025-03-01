@@ -19,7 +19,7 @@
           <div class="mt-6 space-y-6">
             <!-- Username -->
             <form id="username-form"
-                  th:action="@{/profile/settings/update-username}" th:method="PUT" th:object="${usernameUpdateRequest}">
+                  th:action="@{/profile/settings/username}" th:method="PUT" th:object="${usernameUpdateRequest}">
               <div class="space-y-2">
                 <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
                 <div class="sm:flex gap-3">
@@ -31,18 +31,19 @@
                   </button>
                 </div>
 
-                <span th:if="${successMessage}" th:text="${successMessage}"
-                      class="text-sm text-green-500 font-semibold" id="username-success"></span>
+                <span th:if="${successUsernameMessage}" th:text="${successUsernameMessage}"
+                      class="text-sm text-green-500 font-semibold"></span>
                 <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
-                      class="text-sm text-red-500 font-semibold" id="username-error"></span>
-                <span th:if="${error}" th:text="${error}"
                       class="text-sm text-red-500 font-semibold"></span>
+                <span th:if="${usernameError}" th:text="${usernameError}"
+                      class="text-sm text-red-500 font-semibold"></span>
+
                 <p class="text-xs text-gray-500">You can change your username every 30 days.</p>
               </div>
             </form>
 
             <!-- Email -->
-            <form id="email-form" th:action="@{/profile/settings/update-email}" th:method="PUT" th:object="${emailUpdateRequest}">
+            <form id="email-form" th:action="@{/profile/settings/email}" th:method="PUT" th:object="${emailUpdateRequest}">
               <div class="space-y-2">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                 <div class="sm:flex gap-3">
@@ -53,9 +54,13 @@
                     Update Email
                   </button>
                 </div>
-                <span class="hidden text-sm text-green-500 font-semibold" id="email-success">Email updated successfully!</span>
-                <span th:if="${#fields.hasErrors('email')}" class="text-sm text-red-500 font-semibold" id="email-error">Failed to update email. Please try
-                  again.</span>
+
+                <span th:if="${successEmailMessage}" th:text="${successEmailMessage}"
+                      class="text-sm text-green-500 font-semibold"></span>
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-sm text-red-500 font-semibold"></span>
+                <span th:if="${emailError}" th:text="${emailError}" class="text-sm text-red-500 font-semibold"></span>
+
+                <p class="text-xs text-gray-500">You can change your email every 30 days.</p>
               </div>
             </form>
 

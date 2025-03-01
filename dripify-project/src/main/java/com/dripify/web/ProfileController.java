@@ -3,12 +3,14 @@ package com.dripify.web;
 import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
 import com.dripify.user.service.UserService;
+import com.dripify.web.dto.EmailUpdateRequest;
 import com.dripify.web.dto.UserEditRequest;
 import com.dripify.web.dto.UsernameUpdateRequest;
 import com.dripify.web.mapper.DtoMapper;
 import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,7 +30,7 @@ public class ProfileController {
 
     @GetMapping("/edit")
     public ModelAndView getEditProfilePage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
-        ModelAndView modelAndView = new ModelAndView("user/edit-profile");
+        ModelAndView modelAndView = new ModelAndView("/user/edit-profile");
         modelAndView.addObject("userEditRequest", DtoMapper.mapUserToEditRequest(userService.getById(authenticationMetadata.getUserId())));
 
         return modelAndView;
@@ -52,28 +54,55 @@ public class ProfileController {
 
 
     @GetMapping("/settings")
-    public ModelAndView getSettingsPage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
-        ModelAndView modelAndView = new ModelAndView("user/account-settings");
+    public String getSettingsPage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata, Model model) {
 
-        User user = userService.getById(authenticationMetadata.getUserId());
-        modelAndView.addObject("usernameUpdateRequest", DtoMapper.mapToUsernameUpdateRequest(user));
-        modelAndView.addObject("emailUpdateRequest", DtoMapper.mapToEmailUpdateRequest(user));
+        if (!model.containsAttribute("usernameUpdateRequest") && !model.containsAttribute("emailUpdateRequest")) {
+            User user = userService.getById(authenticationMetadata.getUserId());
 
-        return modelAndView;
-    }
-
-    @PutMapping("/settings/update-username")
-    public String updateUsername(@Valid UsernameUpdateRequest usernameUpdateRequest,
-                                       BindingResult bindingResult,
-                                 RedirectAttributes redirectAttributes, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
-
-        if (bindingResult.hasErrors()) {
-            return "user/account-settings";
+            model.addAttribute("usernameUpdateRequest", DtoMapper.mapToUsernameUpdateRequest(user));
+            model.addAttribute("emailUpdateRequest", DtoMapper.mapToEmailUpdateRequest(user));
         }
 
-        userService.updateUsername(userService.getById(authenticationMetadata.getUserId()), usernameUpdateRequest.getUsername());
-        redirectAttributes.addFlashAttribute("successMessage", "Username is successfully changed!");
+        return "user/account-settings";
+    }
 
+    @PutMapping("/settings/username")
+    public String updateUsername(@Valid UsernameUpdateRequest usernameUpdateRequest,
+                                 BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                                 @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+
+        User user = userService.getById(authenticationMetadata.getUserId());
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("emailUpdateRequest", DtoMapper.mapToEmailUpdateRequest(user));
+            redirectAttributes.addFlashAttribute("usernameUpdateRequest", usernameUpdateRequest);
+
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.usernameUpdateRequest", bindingResult);
+            return "redirect:/profile/settings";
+        }
+
+        userService.updateUsername(user, usernameUpdateRequest.getUsername());
+        redirectAttributes.addFlashAttribute("successUsernameMessage", "Username successfully changed!");
+
+        return "redirect:/profile/settings";
+    }
+
+    @PutMapping("/settings/email")
+    public String updateEmail(@Valid EmailUpdateRequest emailUpdateRequest, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                              @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+
+        User user = userService.getById(authenticationMetadata.getUserId());
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("emailUpdateRequest", emailUpdateRequest);
+            redirectAttributes.addFlashAttribute("usernameUpdateRequest", DtoMapper.mapToUsernameUpdateRequest(user));
+
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.emailUpdateRequest", bindingResult);
+            return "redirect:/profile/settings";
+        }
+
+        userService.updateEmail(user, emailUpdateRequest.getEmail());
+        redirectAttributes.addFlashAttribute("successEmailMessage", "Email successfully changed!");
         return "redirect:/profile/settings";
     }
 }

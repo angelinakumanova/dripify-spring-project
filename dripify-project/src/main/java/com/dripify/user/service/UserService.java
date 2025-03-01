@@ -2,6 +2,7 @@ package com.dripify.user.service;
 
 import com.dripify.cloudinary.service.CloudinaryService;
 import com.dripify.exception.DomainException;
+import com.dripify.exception.EmailUpdateException;
 import com.dripify.exception.UsernameUpdateException;
 import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
@@ -19,6 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
@@ -93,11 +95,12 @@ public class UserService implements UserDetailsService {
             throw new UsernameUpdateException("This is already your username.");
         }
 
-        LocalDateTime thirtyDaysAgo = LocalDateTime.now().minusDays(30);
+        LocalDate thirtyDaysAgo = LocalDate.now().minusDays(30);
         if (user.getLastModifiedUsername() != null && user.getLastModifiedUsername().isAfter(thirtyDaysAgo)) {
             long remainingDays = ChronoUnit.DAYS.between(thirtyDaysAgo, user.getLastModifiedUsername());
 
-            throw new UsernameUpdateException("You have recently changed your username. You can change it again in " + remainingDays + " days.");
+            throw new UsernameUpdateException("You have recently changed your username." +
+                    " You can change it again in " + remainingDays + " days.");
         }
 
 
@@ -106,10 +109,32 @@ public class UserService implements UserDetailsService {
         }
 
         user.setUsername(newUsername);
-        user.setLastModifiedUsername(LocalDateTime.now());
+        user.setLastModifiedUsername(LocalDate.now());
         userRepository.save(user);
 
         updateAuthentication(user);
+    }
+
+    public void updateEmail(User user, String newEmail) {
+        if (user.getEmail().equals(newEmail)) {
+            throw new EmailUpdateException("You are already using this email.");
+        }
+
+        LocalDate thirtyDaysAgo = LocalDate.now().minusDays(30);
+        if (user.getLastModifiedEmail() != null && user.getLastModifiedEmail().isAfter(thirtyDaysAgo)) {
+            long remainingDays = ChronoUnit.DAYS.between(thirtyDaysAgo, user.getLastModifiedUsername());
+
+            throw new EmailUpdateException("You have recently changed your email." +
+                    " You can change it again in " + remainingDays + " days.");
+        }
+
+        if (userRepository.getUserByEmail(newEmail).isPresent()) {
+            throw new EmailUpdateException("Email is already in use.");
+        }
+
+        user.setEmail(newEmail);
+        user.setLastModifiedEmail(LocalDate.now());
+        userRepository.save(user);
     }
 
 
