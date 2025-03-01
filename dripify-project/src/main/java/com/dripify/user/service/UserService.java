@@ -1,10 +1,7 @@
 package com.dripify.user.service;
 
 import com.dripify.cloudinary.service.CloudinaryService;
-import com.dripify.exception.DomainException;
-import com.dripify.exception.EmailUpdateException;
-import com.dripify.exception.PasswordUpdateException;
-import com.dripify.exception.UsernameUpdateException;
+import com.dripify.exception.*;
 import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
 import com.dripify.user.model.UserRole;
@@ -93,20 +90,20 @@ public class UserService implements UserDetailsService {
 
     public void updateUsername(User user, String newUsername) {
         if (user.getUsername().equals(newUsername)) {
-            throw new UsernameUpdateException("This is already your username.");
+            throw new UserUpdateException("username", "This is already your username.");
         }
 
         LocalDate thirtyDaysAgo = LocalDate.now().minusDays(30);
         if (user.getLastModifiedUsername() != null && user.getLastModifiedUsername().isAfter(thirtyDaysAgo)) {
             long remainingDays = ChronoUnit.DAYS.between(thirtyDaysAgo, user.getLastModifiedUsername());
 
-            throw new UsernameUpdateException("You have recently changed your username." +
+            throw new UserUpdateException("username", "You have recently changed your username." +
                     " You can change it again in " + remainingDays + " days.");
         }
 
 
         if (userRepository.getUserByUsername(newUsername).isPresent()) {
-            throw new UsernameUpdateException("Username is already taken.");
+            throw new UserUpdateException("username", "Username is already taken.");
         }
 
         user.setUsername(newUsername);
@@ -118,19 +115,17 @@ public class UserService implements UserDetailsService {
 
     public void updateEmail(User user, String newEmail) {
         if (user.getEmail().equals(newEmail)) {
-            throw new EmailUpdateException("You are already using this email.");
+            throw new UserUpdateException("email", "You are already using this email.");
         }
 
-        LocalDate thirtyDaysAgo = LocalDate.now().minusDays(30);
-        if (user.getLastModifiedEmail() != null && user.getLastModifiedEmail().isAfter(thirtyDaysAgo)) {
-            long remainingDays = ChronoUnit.DAYS.between(thirtyDaysAgo, user.getLastModifiedUsername());
+        LocalDate today = LocalDate.now();
+        if (user.getLastModifiedEmail() != null && user.getLastModifiedEmail().isEqual(today)) {
 
-            throw new EmailUpdateException("You have recently changed your email." +
-                    " You can change it again in " + remainingDays + " days.");
+            throw new UserUpdateException("email", "You have already changed your email today. Try again tomorrow.");
         }
 
         if (userRepository.getUserByEmail(newEmail).isPresent()) {
-            throw new EmailUpdateException("Email is already in use.");
+            throw new UserUpdateException("email", "Email is already in use.");
         }
 
         user.setEmail(newEmail);
@@ -140,13 +135,13 @@ public class UserService implements UserDetailsService {
 
     public void updatePassword(User user, String newPassword) {
         if (passwordEncoder.matches(newPassword, user.getPassword())) {
-            throw new PasswordUpdateException("You cannot use your current password.");
+            throw new UserUpdateException("password", "You cannot use your current password.");
         }
 
         LocalDate today = LocalDate.now();
 
         if (user.getLastModifiedPassword() != null && user.getLastModifiedPassword().isEqual(today)) {
-            throw new PasswordUpdateException("You have already changed your password today. Try again tomorrow.");
+            throw new UserUpdateException("password", "You have already changed your password today. Try again tomorrow.");
         }
 
         String newEncodedPassword = passwordEncoder.encode(newPassword);
@@ -184,5 +179,13 @@ public class UserService implements UserDetailsService {
                 role(UserRole.USER).
                 isActive(true).
                 build();
+    }
+
+    public void deactivateUser(User user) {
+        user.setActive(false);
+        userRepository.save(user);
+
+        SecurityContextHolder.getContext().setAuthentication(null);
+
     }
 }

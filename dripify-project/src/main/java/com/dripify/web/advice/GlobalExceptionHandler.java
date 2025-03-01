@@ -1,8 +1,6 @@
 package com.dripify.web.advice;
 
-import com.dripify.exception.EmailUpdateException;
-import com.dripify.exception.PasswordUpdateException;
-import com.dripify.exception.UsernameUpdateException;
+import com.dripify.exception.UserUpdateException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -10,24 +8,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(UsernameUpdateException.class)
-    public String handleUsernameUpdateException(UsernameUpdateException e, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("usernameError", e.getMessage());
+    @ExceptionHandler(UserUpdateException.class)
+    public String handleUserUpdateException(UserUpdateException e, RedirectAttributes redirectAttributes) {
+        String field = e.getField();
+        redirectAttributes.addFlashAttribute(field + "Error", e.getMessage());
 
-        return "redirect:/profile/settings";
+        return "redirect:/settings/profile";
     }
 
-    @ExceptionHandler(EmailUpdateException.class)
-    public String handleEmailUpdateException(EmailUpdateException e, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("emailError", e.getMessage());
-
-        return "redirect:/profile/settings";
-    }
-
-    @ExceptionHandler(PasswordUpdateException.class)
-    public String handlePasswordUpdateException(PasswordUpdateException e, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("passwordError", e.getMessage());
-
-        return "redirect:/profile/settings";
-    }
 }

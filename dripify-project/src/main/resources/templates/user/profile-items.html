@@ -26,7 +26,7 @@
 
                 <!-- ONLY IF IT IS USER'S ACCOUNT -->
                 <a th:if="${user != null and user.username == profileUser.username}"
-                   th:href="@{/profile/edit}"
+                   th:href="@{/settings/profile/edit}"
                     class="self-center text-center w-full mt-4 px-4 py-2 bg-zinc-900 text-white
                      font-semibold rounded-full hover:bg-zinc-600 transition-all duration-300 focus:outline-none">
                     Edit Profile</a>
