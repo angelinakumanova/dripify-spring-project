@@ -3,20 +3,19 @@ package com.dripify.web;
 import com.dripify.category.service.CategoryService;
 import com.dripify.product.model.Product;
 import com.dripify.product.service.ProductService;
-import com.dripify.shared.enums.Gender;
+import com.dripify.security.AuthenticationMetadata;
+import com.dripify.user.service.UserService;
 import com.dripify.web.dto.CreateProductRequest;
 import com.dripify.web.dto.ProductFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -25,10 +24,12 @@ public class ProductController {
 
     private final ProductService productService;
     private final CategoryService categoryService;
+    private final UserService userService;
 
-    public ProductController(ProductService productService, CategoryService categoryService) {
+    public ProductController(ProductService productService, CategoryService categoryService, UserService userService) {
         this.productService = productService;
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     @GetMapping("/{gender}/{category}")
@@ -71,13 +72,19 @@ public class ProductController {
     }
 
     @PostMapping("/new")
-    public String addNewProduct(@Valid CreateProductRequest createProductRequest, BindingResult bindingResult) {
+    public ModelAndView addNewProduct(@Valid CreateProductRequest createProductRequest, BindingResult bindingResult,
+                                      @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
 
         if (bindingResult.hasErrors()) {
-            return "/products/sell-product";
+            ModelAndView modelAndView = new ModelAndView("/products/sell-product");
+            modelAndView.addObject("subcategories", categoryService.getSubcategories());
+
+            return modelAndView;
         }
-        System.out.println();
-        return "redirect:/products/new";
+
+        productService.addNewProduct(createProductRequest, userService.getById(authenticationMetadata.getUserId()));
+
+        return new ModelAndView("redirect:/products/new");
     }
 
 

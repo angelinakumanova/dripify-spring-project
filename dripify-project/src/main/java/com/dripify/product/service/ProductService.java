@@ -8,6 +8,7 @@ import com.dripify.product.repository.ProductRepository;
 import com.dripify.shared.enums.Gender;
 import com.dripify.user.model.User;
 import com.dripify.user.service.UserService;
+import com.dripify.web.dto.CreateProductRequest;
 import com.dripify.web.dto.ProductFilter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -66,6 +68,30 @@ public class ProductService {
                 productFilter.getSizes(), productFilter.getSizes().size(),
                 pageable);
 
+    }
+
+    public void addNewProduct(CreateProductRequest createProductRequest, User user) {
+        Product product = initializeProduct(createProductRequest, user);
+
+        productRepository.save(product);
+    }
+
+    private static Product initializeProduct(CreateProductRequest createProductRequest, User user) {
+        return Product.builder()
+                .name(createProductRequest.getTitle())
+                .description(createProductRequest.getDescription())
+                .gender(createProductRequest.getGender())
+                .category(createProductRequest.getCategory())
+                .brand(createProductRequest.getBrand())
+                .color(createProductRequest.getColor())
+                .material(createProductRequest.getMaterial())
+                .size(createProductRequest.getSize())
+                .condition(createProductRequest.getCondition())
+                .price(createProductRequest.getPrice())
+                .seller(user)
+                .createdOn(LocalDateTime.now())
+                .updatedOn(LocalDateTime.now())
+                .build();
     }
 
     public Page<Product> getProductsByUsername(String username, int page) {
