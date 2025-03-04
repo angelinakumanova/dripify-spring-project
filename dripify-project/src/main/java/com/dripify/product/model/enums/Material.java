@@ -17,7 +17,8 @@ public enum Material {
     SATIN("Satin"),
     CHIFFON("Chiffon"),
     LACE("Lace"),
-    FLEECE("Fleece");
+    FLEECE("Fleece"),
+    OTHER("Other");
 
     private final String name;
 

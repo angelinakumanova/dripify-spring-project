@@ -10,8 +10,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UserUpdateException.class)
     public String handleUserUpdateException(UserUpdateException e, RedirectAttributes redirectAttributes) {
-        String field = e.getField();
-        redirectAttributes.addFlashAttribute(field + "Error", e.getMessage());
+        redirectAttributes.addFlashAttribute(e.getField() + "Error", e.getMessage());
 
         return "redirect:/settings/profile";
     }

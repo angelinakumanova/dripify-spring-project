@@ -354,7 +354,7 @@
                             <a th:href="@{/users/{username}/profile/products(username=${user.username})}"
                                class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
                                role="menuitem" tabindex="-1">my profile</a>
-                            <a href="/templates/user/orders.html"
+                            <a href="/templates/user/orders-purchases.html"
                                class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
                                role="menuitem" tabindex="-1" >orders</a>
                             <a href="/templates/user/wishlist.html"
@@ -362,7 +362,7 @@
                                role="menuitem" tabindex="-1" >wishlist</a>
                         </div>
                         <div class="py-1" role="none">
-                            <a th:href="@{/users/{username}/profile/settings(username=${user.username})}"
+                            <a th:href="@{/settings/profile}"
                                class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
                                role="menuitem" tabindex="-1" >settings</a>
                             <a th:href="@{/logout}"
@@ -462,7 +462,7 @@
                                                class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">my
                                                 profile</a>
 
-                                            <a href="/templates/user/orders.html"
+                                            <a href="/templates/user/orders-purchases.html"
                                                class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">orders</a>
 
                                             <a href="/templates/user/wishlist.html"

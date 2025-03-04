@@ -22,10 +22,10 @@ public class Order {
     private UUID id;
 
     @ManyToOne
-    private User sender;
+    private User seller;
 
     @ManyToOne
-    private User recipient;
+    private User purchaser;
 
     @OneToMany(mappedBy = "order")
     private List<Product> products;

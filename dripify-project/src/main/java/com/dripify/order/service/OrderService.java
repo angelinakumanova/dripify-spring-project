@@ -18,6 +18,10 @@ public class OrderService {
     }
 
     public List<Order> getAllDeliveredOrdersByUser(User user) {
-        return orderRepository.findBySenderAndStatus(user, OrderStatus.DELIVERED);
+        return orderRepository.findBySellerAndStatus(user, OrderStatus.DELIVERED);
+    }
+
+    public List<Order> getPurchasedByUser(User user) {
+        return orderRepository.findByPurchaser(user);
     }
 }

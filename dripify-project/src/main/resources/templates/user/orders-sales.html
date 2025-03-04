@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 16px;">
+
+<head th:replace="~{fragments/head::head(pageName='Orders')}"></head>
+
+<body class="flex flex-col min-h-screen">
+
+<div th:replace="~{fragments/nav::nav}"></div>
+
+<div class="mt-24 sm:mt-28"></div>
+<div class="bg-white flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-[#161931]">
+    <aside th:replace="~{fragments/profile-nav::profile-nav(current='orders')}"></aside>
+    <section class="w-full min-h-screen py-8 md:w-2/3 lg:w-3/4">
+        <div class="p-4">
+            <div class="w-full px-8 py-6 ">
+                <h3 class="text-xl font-bold text-gray-800">Your Orders</h3>
+                <p class="mt-2 text-sm text-gray-600">Review and manage your previous orders.</p>
+
+                <div class="mt-10 text-base sm:text-xl flex  justify-evenly">
+                    <a th:href="@{/orders/purchases}" class="font-semibold text-gray-800 rounded-full p-4 px-6 cursor-pointer hover:border hover:font-bold">
+                        Purchases</a>
+                    <a th:href="@{/orders/sales}"
+                        class="text-gray-800 border font-bold rounded-full p-4 px-6 cursor-pointer hover:border hover:font-bold">
+                        Sales</a>
+                </div>
+
+                <div id="shipped-orders" class="mt-6">
+                    <div class="mt-4 space-y-6">
+                        <div class="order relative p-4 border border-gray-200 rounded-lg shadow-md">
+                            <h5 class="text-lg font-semibold text-zinc-800">Order
+                                #001</h5>
+
+                            <p class="mt-2 text-sm text-zinc-600 upper">Sent on: 2025-01-07</p>
+                            <p class="mt-2 text-sm text-zinc-600">Items: 3 | Buyer: <span class="font-semibold text-zinc-800">John's
+                    Store</span></p>
+                            <p class="mt-2 text-lg text-zinc-800 font-bold uppercase">Total: 150 BGN</p>
+                            <p class="mt-2 text-sm text-zinc-900">Status: <span
+                                    class="status text-yellow-600 font-semibold">Pending</span></p>
+
+
+                            <button
+                                    class="details-btn mt-4 px-4 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-600 transition-all duration-300 focus:outline-none view-details">
+                                View Details
+                            </button>
+                            <button
+                                    class="status-btn mt-4 px-4 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-600 transition-all duration-300 focus:outline-none">
+                                Mark as Shipped
+                            </button>
+
+                            <div class="order-details hidden">
+                                <hr class="my-5">
+                                <div class="relative p-4 flex flex-col gap-y-5">
+                                    <p class="text-2xl font-semibold text-gray-800 p-1 uppercase">Items</p>
+
+                                    <div class="item-details flex lg:flex-row flex-col gap-3">
+                                        <img
+                                                src="https://media-photos.depop.com/b1/6406248/2026089428_ef0319f8890a4042907e698563b270d7/P0.jpg"
+                                                class="aspect-square xl:w-[10%] lg:w-[30%] w-[70%] rounded-md bg-gray-200 object-cover">
+
+                                        <span>
+                        <h4 class="text-base text-left sm:text-lg font-semibold text-gray-800">Summer Crop Top</h4>
+                        <p class="mt-2 text-xs sm:text-sm text-gray-600">Seller: <span class="font-medium">Emilia
+                            Dimitrova</span></p>
+                        <p class="mt-1 text-sm text-gray-800 font-medium">25.00 BGN</p>
+                      </span>
+                                    </div>
+
+
+                                    <div class="item-details flex lg:flex-row flex-col gap-3">
+                                        <img
+                                                src="https://media-photos.depop.com/b1/6406248/2026089428_ef0319f8890a4042907e698563b270d7/P0.jpg"
+                                                class="aspect-square xl:w-[10%] lg:w-[30%] w-[70%] rounded-md bg-gray-200 object-cover">
+
+                                        <span>
+                        <h4 class="text-base text-left sm:text-lg font-semibold text-gray-800">Summer Crop Top</h4>
+                        <p class="mt-2 text-xs sm:text-sm text-gray-600">Seller: <span class="font-medium">Emilia
+                            Dimitrova</span></p>
+                        <p class="mt-1 text-sm text-gray-800 font-medium">25.00 BGN</p>
+                      </span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+
+</body>
+</html>

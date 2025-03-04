@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" style="font-size: 16px;">
 
-<head th:replace="~{fragments/head::head(pageName='Home Page')}"></head>
+<head th:replace="~{fragments/head::head(pageName='Sell Your Drip')}"></head>
 
 <body>
 
@@ -10,97 +10,389 @@
   <div class="mt-24 sm:mt-28"></div>
 
   <div class="max-w-4xl mx-auto mt-10 p-6 ">
-    <h1 class="text-3xl font-bold text-gray-800 mb-6 uppercase">List Your Drip for Sale</h1>
+    <h1 class="text-3xl font-bold text-white bg-zinc-900 rounded-xl p-2 text-center mb-6 uppercase">Your Style, Your
+      Price - Add It Now!</h1>
 
-    <form action="#" method="POST" enctype="multipart/form-data">
+    <form id="upload-product-form" th:action="@{/products/new}" th:method="POST" enctype="multipart/form-data" th:object="${createProductRequest}">
       <!-- Product Images -->
       <div class="mb-6">
-        <label class="block text-gray-700 font-medium mb-2" for="images">Upload Images</label>
-        <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center">
-          <input type="file" id="images" name="images[]" multiple accept="image/jpeg,image/png" class="hidden" />
-          <label for="images" class="cursor-pointer text-blue-500 hover:underline">
-            Click to upload or drag and drop images here
+        <h1 class="text-xl font-bold text-gray-800 mb-6 uppercase">Upload product images <span class="opacity-50">(min. 2 photos)</span></h1>
+        <div class="flex items-center justify-center w-full mb-6">
+          <label for="dropzone-file"
+                 class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-200 transition ease-in-out duration-300">
+            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+              <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                   xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+              </svg>
+              <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to
+                  upload</span> or drag and drop</p>
+              <p class="text-xs text-gray-500 dark:text-gray-400">PNG or JPG</p>
+            </div>
+            <input id="dropzone-file" type="file" accept="image/jpeg,image/png" class="hidden" />
           </label>
-          <p class="text-gray-500 text-sm mt-2">Supports JPEG, PNG formats</p>
         </div>
-        <div id="preview" class="grid grid-cols-3 gap-1 mt-4">
-          <!-- Image previews will appear here -->
+
+        <div id="preview" class="flex flex-wrap justify-center gap-2">
+          <div class="image relative rounded-xl border-4 border-dotted p-1 h-40 w-40">
+            <div class="hidden delete-img-btn">
+              <svg
+                      class="absolute -top-3 -left-3 fill-white bg-zinc-900 p-2 rounded-full hover:bg-zinc-500 duration-300 ease-in-out hover:cursor-pointer"
+                      height="30px" width="30px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.775 460.775" xml:space="preserve">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                          d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55 c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55 c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505 c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55 l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719 c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z">
+                  </path>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="image relative rounded-xl border-4 border-dotted p-1 h-40 w-40">
+            <div class="hidden delete-img-btn">
+              <svg
+                      class="absolute -top-3 -left-3 fill-white bg-zinc-900 p-2 rounded-full hover:bg-zinc-500 duration-300 ease-in-out hover:cursor-pointer"
+                      height="30px" width="30px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.775 460.775" xml:space="preserve">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                          d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55 c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55 c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505 c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55 l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719 c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z">
+                  </path>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="image relative rounded-xl border-4 border-dotted p-1 h-40 w-40">
+            <div class="hidden delete-img-btn">
+              <svg
+                      class="absolute -top-3 -left-3 fill-white bg-zinc-900 p-2 rounded-full hover:bg-zinc-500 duration-300 ease-in-out hover:cursor-pointer"
+                      height="30px" width="30px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.775 460.775" xml:space="preserve">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                          d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55 c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55 c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505 c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55 l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719 c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z">
+                  </path>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="image relative rounded-xl border-4 border-dotted p-1 h-40 w-40">
+            <div class="hidden delete-img-btn">
+              <svg
+                      class="absolute -top-3 -left-3 fill-white bg-zinc-900 p-2 rounded-full hover:bg-zinc-500 duration-300 ease-in-out hover:cursor-pointer"
+                      height="30px" width="30px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.775 460.775" xml:space="preserve">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                          d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55 c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55 c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505 c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55 l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719 c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z">
+                  </path>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="image relative rounded-xl border-4 border-dotted p-1 h-40 w-40">
+            <div class="hidden delete-img-btn">
+              <svg
+                      class="absolute -top-3 -left-3 fill-white bg-zinc-900 p-2 rounded-full hover:bg-zinc-500 duration-300 ease-in-out hover:cursor-pointer"
+                      height="30px" width="30px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.775 460.775" xml:space="preserve">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                          d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55 c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55 c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505 c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55 l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719 c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z">
+                  </path>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <small id="max-photos-msg" class="hidden text-sm font-semibold text-red-500  mb-6 uppercase">📸 Max photos uploaded. Need to swap one?
+          Delete an image to add a new one.</small>
+        <small class="hidden text-sm font-semibold text-red-500  mb-6 uppercase">Show us more! At least two photos are needed to upload.</small>
+      </div>
+
+      <!-- TITLE -->
+      <div class="mb-7">
+        <div class="flex justify-between items-center">
+          <label for="title-input"
+                 class="block uppercase mb-2 text-lg font-bold text-gray-800">title</label>
+          <span class="block mb-2 text-sm text-gray-500">20 - 40 characters</span>
+        </div>
+        <input type="text" id="title-input" placeholder="Enter the title for your product"
+               class="bg-white border-2 border-gray-200 text-gray-900 text-sm rounded-lg  block w-full p-3 ">
+        <small class="text-sm font-semibold text-red-500  mb-6 uppercase">Title must be 20-40 characters. Keep it clear and catchy!</small>
+      </div>
+
+<!--   DESCRIPTION-->
+      <div class="mb-7">
+        <div class="w-full">
+          <div class="flex justify-between items-center">
+            <label for="description-input"
+                   class="block uppercase mb-2 text-lg font-bold text-gray-800">description</label>
+            <span class="block mb-2 text-sm text-gray-500">200 characters</span>
+          </div>
+          <textarea id="description-input" class="py-3 px-4 block w-full border-2 border-gray-200 rounded-lg text-sm
+           disabled:opacity-50 disabled:pointer-events-none" rows="3"
+                    placeholder="Describe the look, feel, and flex!"></textarea>
+        </div>
+        <small class="text-sm font-semibold text-red-500  mb-6 uppercase">Oops! Your description is empty. Add something under 200 characters to show off your item!</small>
+      </div>
+
+
+      <div class="sm:grid grid-cols-2 gap-5">
+
+        <div class="mb-7">
+          <label class="block uppercase mb-2 text-lg font-bold text-gray-800">Category</label>
+          <div class="hs-dropdown relative">
+            <button id="hs-dropdown-default" type="button" class="hs-dropdown-toggle py-3 px-4 inline-flex justify-between
+            items-center gap-x-2 w-full text-sm font-medium rounded-lg border-2 border-gray-200 bg-white text-gray-800
+            focus:outline-none focus:ring-2 focus:ring-zinc-500 disabled:opacity-50 disabled:pointer-events-none"
+                    aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+              - SELECT CATEGORY -
+              <svg class="hs-dropdown-open:rotate-180 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+
+            <div class="hs-dropdown-menu min-w-80 max-h-52 z-50 transition-[opacity,margin] duration hs-dropdown-open:opacity-100 overflow-y-scroll [&::-webkit-scrollbar]:w-2
+            [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 opacity-0 hidden bg-white border border-gray-200 drop-shadow-md
+             rounded-lg mt-2 after:h-4 after:absolute after:-bottom-4
+              after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full"
+                 role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-default">
+              <div class="p-1 space-y-0.5">
+                <input id="gender-input" type="hidden" name="gender" th:field="*{gender}">
+                <input id="category-input" type="hidden" name="category" th:field="*{category}">
+                <div class="relative" th:each="gender: ${T(com.dripify.shared.enums.Gender).values()}">
+                  <button class="gender-btn flex items-center gap-x-3.5 py-2 px-3 w-full rounded-lg
+                   text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                          th:data-value="${gender}">
+                    <span th:text="${gender}"></span>
+                    <span class="font-semibold text-zinc-500">❯</span>
+                  </button>
+                  <div class="hidden product-categories flex flex-col min-w-60 py-2 px-3 rounded-lg ml-2">
+                    <span th:each="category: ${subcategories}"
+                          th:if="${category.gender.equals(gender) || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}"
+                          th:text="${category.name != null ? #strings.capitalize(category.name) : ''}"
+                          th:name-value="${category.name != null ? #strings.capitalize(category.name) : ''}"
+                          th:data-value="${category.id}"
+                          class="category py-2 px-4 text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg"></span>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="mb-7">
+          <label for="brand-input" class="block uppercase mb-2 text-lg font-bold text-gray-800">brand</label>
+          <select data-hs-select='{
+            "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+            "toggleClasses": "font-semibold text-gray-700 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border-2 border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500",
+            "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300",
+            "dropdownVerticalFixedPlacement": "bottom",
+            "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50",
+            "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-blue-600 dark:text-blue-500 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
+            "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+          }' class="hidden" id="brand-input">
+            <option value="">Choose</option>
+            <option disabled="" selected class="text-gray-500">- SELECT BRAND -</option>
+            <option th:each="brand: ${T(com.dripify.product.model.enums.Brand).values()}"
+                    th:value="${brand}"
+                    th:text="${brand.toString() == 'Other' ? 'Other (specify in description)' : brand.toString()}"></option>
+          </select>
+          <small class="text-sm font-semibold text-red-500 uppercase">Brand is required!</small>
+        </div>
+
+        <div class="mb-7">
+          <label for="material-input" class="block uppercase mb-2 text-lg font-bold text-gray-800">material</label>
+          <select data-hs-select='{
+            "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+            "toggleClasses": "font-semibold text-gray-700 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border-2 border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500",
+            "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300",
+            "dropdownVerticalFixedPlacement": "bottom",
+            "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50",
+            "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-blue-600 dark:text-blue-500 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
+            "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+          }' class="hidden" id="material-input">
+            <option value="">Choose</option>
+            <option disabled="" selected class="text-gray-500">- SELECT MATERIAL -</option>
+            <option th:each="material: ${T(com.dripify.product.model.enums.Material).values()}"
+                    th:value="${material}"
+                    th:text="${material.toString() == 'Other' ? 'Other (specify in description)' : material.toString()}"></option>
+          </select>
+          <small class="text-sm font-semibold text-red-500 uppercase">Material is required!</small>
+        </div>
+
+        <div class="mb-7">
+          <label for="color-input" class="block uppercase mb-2 text-lg font-bold text-gray-800">color</label>
+          <select data-hs-select='{
+            "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+            "toggleClasses": "font-semibold text-gray-700 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border-2 border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500",
+            "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300",
+            "dropdownVerticalFixedPlacement": "bottom",
+            "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50",
+            "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-blue-600 dark:text-blue-500 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
+            "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+          }' class="hidden" id="color-input">
+            <option value="">Choose</option>
+            <option disabled="" selected class="text-gray-500">- SELECT COLOR -</option>
+            <option th:each="color: ${T(com.dripify.product.model.enums.Color).values()}"
+                    th:value="${color}"
+                    th:text="${color.toString() == 'Other' ? 'Other (specify in description)' : color.toString()}"></option>
+          </select>
+          <small class="text-sm font-semibold text-red-500 uppercase">Color is required!</small>
+        </div>
+
+        <div class="mb-7">
+          <label for="size-input" class="block uppercase mb-2 text-lg font-bold text-gray-800">size</label>
+          <select data-hs-select='{
+            "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+            "toggleClasses": "font-semibold text-gray-700 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border-2 border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500",
+            "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300",
+            "dropdownVerticalFixedPlacement": "bottom",
+            "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50",
+            "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-blue-600 dark:text-blue-500 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
+            "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+          }' class="hidden" id="size-input">
+            <option value="">Choose</option>
+            <option disabled="" selected class="text-gray-500">- SELECT SIZE -</option>
+            <option th:each="size: ${T(com.dripify.product.model.enums.Size).values()}" th:value="${size}" th:text="${size.name()}"></option>
+          </select>
+          <small class="text-sm font-semibold text-red-500 uppercase">Size is required!</small>
+        </div>
+
+        <div class="mb-7">
+          <label for="condition-input" class="block uppercase mb-2 text-lg font-bold text-gray-800">condition</label>
+          <select data-hs-select='{
+            "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+            "toggleClasses": "font-semibold text-gray-700 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border-2 border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500",
+            "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300",
+            "dropdownVerticalFixedPlacement": "bottom",
+            "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50",
+            "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-blue-600 dark:text-blue-500 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
+            "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+          }' class="hidden" id="condition-input">
+            <option value="">Choose</option>
+            <option disabled="" selected class="text-gray-500">- SELECT CONDITION -</option>
+            <option th:each="condition: ${T(com.dripify.product.model.enums.Condition).values()}" th:value="${condition}" th:text="${condition.toString()}"></option>
+          </select>
+          <small class="text-sm font-semibold text-red-500 uppercase">Condition is required!</small>
+        </div>
+
+        <div class="mb-7">
+          <div class="space-y-3">
+            <div>
+              <label for="price-input" class="block uppercase mb-2 text-lg font-bold text-gray-800">price</label>
+              <div class="flex rounded-lg shadow-sm">
+                <div class="px-4 inline-flex items-center min-w-fit rounded-s-md bg-zinc-800">
+                  <span class="text-sm text-white font-bold">BGN</span>
+                </div>
+                <input type="number" name="price-input" id="price-input" class="py-3 px-4 pe-11 block w-full border-2 border-l-0 border-gray-200 shadow-sm rounded-e-lg text-sm
+                  focus:z-10 disabled:opacity-50
+                   disabled:pointer-events-none" placeholder="20.00">
+              </div>
+              <small class="text-sm font-semibold text-red-500 uppercase">Missing price. Please enter a valid amount.</small>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Product Description -->
-      <div class="mb-6">
-        <label class="block text-gray-700 font-medium mb-2" for="description">Description</label>
-        <textarea id="description" name="description" rows="2" placeholder="Enter a brief product description"
-          class="p-3 w-full border border-zinc-500 rounded-lg shadow-md focus:border-zinc-900"></textarea>
-      </div>
 
-      <!-- Size -->
-      <div class="mb-6">
-        <label class="block text-gray-700 font-medium mb-2" for="size">Size</label>
-        <input type="text" id="size" name="size" placeholder="Enter size (e.g., Medium)"
-          class="p-3 w-full border border-zinc-500 rounded-lg shadow-md focus:border-zinc-900">
-      </div>
 
-      <!-- Brand -->
-      <div class="mb-6">
-        <label class="block text-gray-700 font-medium mb-2" for="brand">Brand</label>
-        <input type="text" id="brand" name="brand" placeholder="Enter brand (e.g., Zara)"
-          class="p-3 w-full border border-zinc-500 rounded-lg shadow-md focus:border-zinc-900">
-      </div>
 
-      <!-- Material -->
-      <div class="mb-6">
-        <label class="block text-gray-700 font-medium mb-2" for="material">Material</label>
-        <input type="text" id="material" name="material" placeholder="Enter material (e.g., 100% Cotton)"
-          class="p-3 w-full border border-zinc-500 rounded-lg shadow-md focus:border-zinc-900">
-      </div>
 
-      <!-- Color -->
-      <div class="mb-6">
-        <label class="block text-gray-700 font-medium mb-2" for="color">Color</label>
-        <input type="text" id="color" name="color" placeholder="Enter color (e.g., Pastel Yellow)"
-          class="p-3 w-full border border-zinc-500 rounded-lg shadow-md focus:border-zinc-900">
-      </div>
 
-      <!-- Condition -->
-      <div class="mb-6">
-        <label class="block text-gray-700 font-medium mb-2" for="condition">Condition</label>
-        <select id="condition" name="condition"
-          class="p-3 w-full border border-zinc-500 rounded-lg shadow-md focus:border-zinc-900">
-          <option value="" selected disabled>- Select condition -</option>
-          <option value="brand-new">Brand New</option>
-          <option value="good">Good</option>
-          <option value="modest">Modest</option>
-        </select>
-      </div>
-
-      <!-- Additional Details -->
-      <div class="mb-6">
-        <label class="block text-gray-700 font-medium mb-2" for="additional-details">Additional Details</label>
-        <textarea id="additional-details" name="additional_details" rows="4"
-          placeholder="Add any extra information about your product"
-          class="p-3 w-full border border-zinc-500 rounded-lg shadow-md focus:border-zinc-900"></textarea>
-      </div>
-
-      <!-- Price -->
-      <div class="mb-6">
-        <label class="block text-gray-700 font-medium mb-2" for="price">Price (in BGN)</label>
-        <input type="number" id="price" name="price" placeholder="Enter price"
-          class="p-3 w-full border border-zinc-500 rounded-lg shadow-md focus:border-zinc-900">
-      </div>
 
       <!-- Submit Button -->
-      <div class="text-right">
-        <button type="submit"
-          class="bg-zinc-900 text-white px-6 py-2 rounded-full shadow hover:bg-zinc-600 transition ease-in duration-300">List
-          Product</button>
+      <div class="text-center my-5">
+        <button type="submit" class="bg-zinc-900 text-white px-6 py-2 rounded-full text-2xl
+           font-bold uppercase shadow hover:bg-zinc-600 transition ease-in duration-300">List Product</button>
       </div>
     </form>
   </div>
 
-  <script src="/static/js/nav-functionality.js"></script>
-  <script src="/static/js/sell-product.js"></script>
-</body>
+  <script>
+    const genderButtons = document.querySelectorAll('.gender-btn');
+    let lastOpened = null;
 
+    if (genderButtons) {
+      genderButtons.forEach(btn => btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+
+        const dropdown = btn.parentElement.querySelector('.product-categories');
+        if (lastOpened && dropdown !== lastOpened) {
+          lastOpened.classList.add('hidden');
+          lastOpened.parentElement.querySelector('button').classList.remove('font-bold');
+        }
+        lastOpened = dropdown;
+        dropdown.classList.toggle('hidden');
+        btn.classList.toggle('font-bold');
+      }));
+    }
+
+
+
+    const categoriesNamesElements = document.querySelectorAll('.gender-btn + .product-categories');
+    const buttonText = document.querySelector('div .hs-dropdown.relative button');
+    let previousGender = null;
+    let previousCategory = null;
+
+    if (categoriesNamesElements) {
+      categoriesNamesElements.forEach(category => category.querySelectorAll("span").forEach(c => c.addEventListener('click', () => {
+        const categoryValue = c.getAttribute('data-value');
+        const categoryNameValue = c.getAttribute('name-value');
+        const genderValue = c.closest('div .relative').querySelector('.gender-btn').getAttribute('data-value');
+        buttonText.textContent=`${genderValue} | ${categoryNameValue}`;
+
+
+        document.getElementById('category-input').value = categoryValue;
+        document.getElementById('category-input').setAttribute('name-value', categoryNameValue);
+        document.getElementById('gender-input').value = genderValue;
+
+        updateGenderCategoryVisual();
+      })));
+    }
+
+    function updateGenderCategoryVisual() {
+      const genderValue = document.getElementById('gender-input').value;
+      const genderButton = document.querySelector(`.gender-btn[data-value=${genderValue}]`);
+
+      const categoryValue = document.getElementById('category-input').getAttribute('name-value');
+      const categoryButton = genderButton.parentElement.querySelector(`.product-categories span[name-value=${categoryValue}]`);
+
+      if (previousGender || previousCategory) {
+        previousGender.classList.remove('font-bold');
+        previousCategory.classList.remove('font-bold');
+      }
+
+      genderButton.classList.add('font-bold');
+      categoryButton.classList.add('font-bold');
+
+      previousGender = genderButton;
+      previousCategory = categoryButton;
+
+    }
+  </script>
+</body>
 </html>

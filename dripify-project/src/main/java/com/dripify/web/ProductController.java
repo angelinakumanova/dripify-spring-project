@@ -1,14 +1,22 @@
 package com.dripify.web;
 
+import com.dripify.category.service.CategoryService;
 import com.dripify.product.model.Product;
 import com.dripify.product.service.ProductService;
+import com.dripify.shared.enums.Gender;
+import com.dripify.web.dto.CreateProductRequest;
 import com.dripify.web.dto.ProductFilter;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -16,9 +24,11 @@ import java.util.UUID;
 public class ProductController {
 
     private final ProductService productService;
+    private final CategoryService categoryService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, CategoryService categoryService) {
         this.productService = productService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/{gender}/{category}")
@@ -51,12 +61,25 @@ public class ProductController {
         return modelAndView;
     }
 
-    @GetMapping("/sell-product")
+    @GetMapping("/new")
     public ModelAndView sellProduct() {
         ModelAndView modelAndView = new ModelAndView("/products/sell-product");
+        modelAndView.addObject("createProductRequest", new CreateProductRequest());
+        modelAndView.addObject("subcategories", categoryService.getSubcategories());
 
         return modelAndView;
     }
+
+    @PostMapping("/new")
+    public String addNewProduct(@Valid CreateProductRequest createProductRequest, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "/products/sell-product";
+        }
+        System.out.println();
+        return "redirect:/products/new";
+    }
+
 
     private ModelAndView createProductsView(Page<Product> productsPage, String category,
                                             HttpServletRequest request) {

@@ -19,7 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
@@ -49,11 +48,11 @@ public class UserService implements UserDetailsService {
 
     public void register(RegisterRequest registerRequest) {
         if (userRepository.getUserByUsername(registerRequest.getUsername()).isPresent()) {
-            throw new RuntimeException("Username is already in use");
+            throw new UserRegistrationException("username", "Username is already in use");
         }
 
         if (userRepository.getUserByEmail(registerRequest.getEmail()).isPresent()) {
-            throw new RuntimeException("Email is already in use");
+            throw new UserRegistrationException("email", "Email is already in use");
         }
 
         User user = createNewUser(registerRequest);
@@ -120,7 +119,6 @@ public class UserService implements UserDetailsService {
 
         LocalDate today = LocalDate.now();
         if (user.getLastModifiedEmail() != null && user.getLastModifiedEmail().isEqual(today)) {
-
             throw new UserUpdateException("email", "You have already changed your email today. Try again tomorrow.");
         }
 

@@ -50,7 +50,7 @@ public class ProfileSettingsController {
         userService.editProfile(userEditRequest, userService.getById(authenticationMetadata.getUserId()));
         redirectAttributes.addFlashAttribute("successMessage", "Successfully changed!");
 
-        return "redirect:/profile/edit";
+        return "redirect:/settings/profile/edit";
     }
 
 
@@ -60,7 +60,7 @@ public class ProfileSettingsController {
         if (!model.containsAttribute("passwordUpdateRequest")) {
             model.addAttribute("passwordUpdateRequest", new PasswordUpdateRequest());
         }
-        
+
         if (!model.containsAttribute("usernameUpdateRequest") && !model.containsAttribute("emailUpdateRequest")) {
             User user = userService.getById(authenticationMetadata.getUserId());
 
