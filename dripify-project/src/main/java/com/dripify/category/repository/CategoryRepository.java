@@ -21,4 +21,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     @Query("SELECT c.name FROM Category c WHERE c.gender = :gender AND c.subcategories IS EMPTY")
     List<String> getNamesByGenderAndSubcategoriesIsNull(Gender gender);
+
+    @Query("SELECT c FROM Category c WHERE c.gender IN (:gender, 'UNISEX') AND c.parentCategory.name = :categoryName")
+    List<Category> findByGenderAndMainCategory(Gender gender, String categoryName);
 }

@@ -10,6 +10,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Builder
@@ -26,6 +27,10 @@ public class Product {
     @ManyToOne
     private Order order;
 
+    @OneToMany(mappedBy = "product")
+    @OrderBy(value = "imageUrl")
+    private List<ProductImage> images;
+
     @ManyToOne
     @JoinColumn(nullable = false)
     private User seller;
@@ -40,7 +45,6 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private Brand brand;
 
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Size size;
 
@@ -71,4 +75,5 @@ public class Product {
 
     @Column(nullable = false)
     private LocalDateTime updatedOn;
+
 }

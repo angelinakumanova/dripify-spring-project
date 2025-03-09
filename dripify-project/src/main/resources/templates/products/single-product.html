@@ -16,7 +16,7 @@
             <!-- Main Image -->
             <div class="relative">
               <img id="main-image"
-                src="https://media-photos.depop.com/b1/5913802/1997839635_8240334744bf42e191e6c596467700fd/P0.jpg"
+                th:src="${product.images.get(0).imageUrl}"
                 alt="Main Product" class="aspect-square max-w-[512px] max-h-[512px] object-center object-cover rounded-lg">
               <!-- Navigation Arrows -->
               <button id="prev"
@@ -31,14 +31,12 @@
 
             <!-- Thumbnails -->
             <div class="thumbnails flex gap-2 mt-4">
-              <img src="https://media-photos.depop.com/b1/5913802/1997839635_8240334744bf42e191e6c596467700fd/P0.jpg"
-                alt="Thumbnail 1"
+              <img th:each="image: ${product.images}"
+                   th:src="${image.imageUrl}"
+                th:alt="${'Product Image ' + product.images.indexOf(image)}"
                 class="thumbnail w-16 h-16 object-cover rounded-md border-2 border-transparent cursor-pointer active:border-gray-700"
-                data-index="0">
-              <img src="https://media-photos.depop.com/b1/5913802/1997839689_85b18f0eb9a04b0c947d2ab72acc5d10/P0.jpg"
-                alt="Thumbnail 2"
-                class="thumbnail w-16 h-16 object-cover rounded-md border-2 border-transparent cursor-pointer"
-                data-index="1">
+                th:data-index="${product.images.indexOf(image)}">
+
             </div>
           </div>
         </div>

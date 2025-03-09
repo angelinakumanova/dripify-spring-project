@@ -13,13 +13,13 @@
     <h1 class="text-3xl font-bold text-white bg-zinc-900 rounded-xl p-2 text-center mb-6 uppercase">Your Style, Your
       Price - Add It Now!</h1>
 
-    <form id="upload-product-form" th:action="@{/products/new}" th:method="POST" enctype="multipart/form-data" th:object="${createProductRequest}">
+    <form id="upload-product-form" method="POST" enctype="multipart/form-data">
       <!-- Product Images -->
       <div class="mb-6">
-        <h1 class="text-xl font-bold text-gray-800 mb-6 uppercase">Upload product images <span class="opacity-50">(min. 2 photos)</span></h1>
+        <h1 class="text-xl font-bold text-gray-800 mb-6 uppercase">Upload product images <span class="opacity-50">(min.
+            2 photos)</span></h1>
         <div class="flex items-center justify-center w-full mb-6">
-          <label for="dropzone-file"
-                 class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed
+          <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed
                   rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-200 transition ease-in-out duration-300">
 
             <div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -29,14 +29,15 @@
                       d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
               </svg>
               <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to
-                  upload</span> max (1 MB)</p>
+                  upload</span> (max 1 MB)</p>
               <p class="text-xs text-gray-500 dark:text-gray-400">PNG or JPG</p>
             </div>
 
-            <input id="dropzone-file" type="file" accept="image/jpeg,image/png" class="hidden" th:field="*{images}" multiple/>
+            <input id="dropzone-file" type="file" accept="image/jpeg,image/png" class="hidden" multiple />
           </label>
         </div>
 
+        <p class="uppercase mb-2 text-lg font-bold text-gray-800 ml-4">Main Image</p>
         <div id="preview" class="flex flex-wrap justify-center gap-2">
           <div class="image relative rounded-xl border-4 border-dotted p-1 h-40 w-40">
             <div class="hidden delete-img-btn">
@@ -124,25 +125,25 @@
           </div>
         </div>
 
-        <small id="max-photos-msg" class="hidden text-sm font-semibold text-red-500  mb-6 uppercase">📸 Max photos uploaded. Need to swap one?
+        <small id="max-photos-msg" class="hidden text-sm font-semibold text-red-500  mb-6 uppercase">📸 Max photos
+          uploaded. Need to swap one?
           Delete an image to add a new one.</small>
-        <small id="large-file-msg" class="hidden text-sm font-semibold text-red-500  mb-6 uppercase">File is too large!</small>
+        <small id="large-file-msg" class="hidden text-sm font-semibold text-red-500  mb-6 uppercase">File is too
+          large!</small>
 
-        <small th:if="${#fields.hasErrors('images')}" th:errors="*{images}"
-               class="text-sm font-semibold text-red-500  mb-6 uppercase"></small>
+        <span class="error-message text-sm font-semibold text-red-500 uppercase" id="images-error"></span>
       </div>
 
       <!-- TITLE -->
       <div class="mb-7">
         <div class="flex justify-between items-center">
-          <label for="title-input"
-                 class="block uppercase mb-2 text-lg font-bold text-gray-800">title</label>
+          <label for="title-input" class="block uppercase mb-2 text-lg font-bold text-gray-800">title</label>
           <span class="block mb-2 text-sm text-gray-500">20 - 40 characters</span>
         </div>
-        <input th:field="*{title}" type="text" id="title-input" placeholder="Enter the title for your product"
+        <input type="text" id="title-input" placeholder="Enter the title for your product"
                class="bg-white border-2 border-gray-200 text-gray-900 text-sm rounded-lg  block w-full p-3 ">
-        <small th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
-               class="text-sm font-semibold text-red-500  mb-6 uppercase"></small>
+
+        <span class="error-message text-sm font-semibold text-red-500 uppercase" id="title-error"></span>
       </div>
 
       <!--DESCRIPTION-->
@@ -153,77 +154,136 @@
                    class="block uppercase mb-2 text-lg font-bold text-gray-800">description</label>
             <span class="block mb-2 text-sm text-gray-500">100 - 400 characters</span>
           </div>
-          <textarea th:field="*{description}" id="description-input" class="py-3 px-4 block w-full
+          <textarea id="description-input" class="py-3 px-4 block w-full
            border-2 border-gray-200 rounded-lg text-sm
            disabled:opacity-50 disabled:pointer-events-none" rows="3"
                     placeholder="Describe the look, feel, and flex!"></textarea>
         </div>
-        <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
-               class="text-sm font-semibold text-red-500  mb-6 uppercase"></small>
+
+
+        <span class="error-message text-sm font-semibold text-red-500 uppercase" id="description-error"></span>
       </div>
 
 
-      <div class="sm:grid grid-cols-2 gap-5">
+      <div class="gender-section mb-7">
+        <p class="bg-zinc-900 p-2 rounded-lg uppercase text-3xl text-center font-extrabold text-white">Who is this
+          product for?</p>
 
-        <div class="mb-7">
-          <label class="block uppercase mb-2 text-lg font-bold text-gray-800">Category</label>
-          <div class="hs-dropdown relative">
-            <button id="hs-dropdown-default" type="button" class="hs-dropdown-toggle py-3 px-4 inline-flex justify-between
-            items-center gap-x-2 w-full text-sm font-medium rounded-lg border-2 border-gray-200 bg-white text-gray-800
-            focus:outline-none focus:ring-2 focus:ring-zinc-500 disabled:opacity-50 disabled:pointer-events-none"
-                    aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown" >
-              <span th:if="*{gender != null and category != null}"
-                    th:text="*{gender + ' | ' + #strings.capitalize(category.name)}"></span>
-              <span th:unless="*{gender != null and category != null}">- SELECT CATEGORY -</span>
-              <svg class="hs-dropdown-open:rotate-180 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                   stroke-linejoin="round">
-                <path d="m6 9 6 6 6-6" />
+        <div class="flex flex-wrap justify-center items-center gap-3 mt-5">
+          <div
+                  class="gender-btn px-5 py-2 border-2 border-zinc-800 rounded-lg text-2xl hover:bg-pink-600 hover:border-pink-600 hover:text-white hover:cursor-pointer transition duration-200 ease-in-out"
+                  data-gender="WOMEN">
+            <p class="font-bold">WOMEN</p>
+          </div>
+
+          <div
+                  class="gender-btn px-5 py-2 border-2 border-zinc-800 rounded-lg text-2xl hover:bg-pink-600 hover:border-pink-600 hover:text-white hover:cursor-pointer transition duration-200 ease-in-out"
+                  data-gender="MEN">
+            <p class="font-bold">MEN</p>
+          </div>
+
+          <div
+                  class="gender-btn px-5 py-2 border-2 border-zinc-800 rounded-lg text-2xl hover:bg-pink-600 hover:border-pink-600 hover:text-white hover:cursor-pointer transition duration-200 ease-in-out"
+                  data-gender="UNISEX">
+            <p class="font-bold">UNISEX</p>
+          </div>
+        </div>
+
+        <span class="error-message text-sm font-semibold text-red-500 uppercase" id="gender-error"></span>
+      </div>
+
+      <div id="category-section" class="mb-7 hidden">
+        <p class="mb-5 bg-zinc-900 p-2 rounded-lg uppercase text-3xl text-center font-extrabold text-white">Select
+          Category</p>
+
+        <div class="flex flex-wrap gap-2 justify-center">
+          <div data-category="clothing"
+               class="category-btn group px-5 py-2 border-2 border-zinc-800 rounded-lg text-2xl hover:bg-pink-600 hover:border-pink-600 hover:text-white hover:cursor-pointer transition duration-200 ease-in-out">
+            <div class="flex flex-col-reverse items-center gap-2">
+              <p class="font-bold">CLOTHING</p>
+              <svg class="size-8 group-hover:fill-white transition duration-200 ease-in-out" fill="#000000"
+                   viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <title></title>
+                  <g data-name="Layer 2" id="Layer_2">
+                    <path
+                            d="M12,5.59,8.16,1.74,2,5.43V12H5V22H19V12h3V5.43L15.84,1.74Zm8,1V10H17V20H7V10H4V6.57L7.84,4.26,12,8.41l4.16-4.16Z">
+                    </path>
+                    <rect height="2" width="3" x="13" y="10"></rect>
+                  </g>
+                </g>
               </svg>
-            </button>
-
-            <div class="hs-dropdown-menu min-w-80 max-h-52 z-50 transition-[opacity,margin] duration hs-dropdown-open:opacity-100 overflow-y-scroll [&::-webkit-scrollbar]:w-2
-            [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 opacity-0 hidden bg-white border border-gray-200 drop-shadow-md
-             rounded-lg mt-2 after:h-4 after:absolute after:-bottom-4
-              after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full"
-                 role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-default">
-              <div class="p-1 space-y-0.5">
-                <input id="gender-input" type="hidden" name="gender" th:field="*{gender}">
-                <input id="category-input" type="hidden" name="category" th:field="*{category}">
-                <div class="relative" th:each="gender: ${T(com.dripify.shared.enums.Gender).values()}">
-                  <button class="gender-btn flex items-center gap-x-3.5 py-2 px-3 w-full rounded-lg
-                   text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                          th:data-value="${gender}">
-                    <span th:text="${gender}"></span>
-                    <span class="font-semibold text-zinc-500">❯</span>
-                  </button>
-
-                  <div class="hidden product-categories flex flex-col min-w-60 py-2 px-3 rounded-lg ml-2">
-                    <span th:each="category: ${subcategories}"
-                          th:if="${category.gender.equals(gender) || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}"
-                          th:text="${category.name != null ? #strings.capitalize(category.name) : ''}"
-                          th:name-value="${category.name != null ? #strings.capitalize(category.name) : ''}"
-                          th:data-value="${category.id}"
-                          class="category py-2 px-4 text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg"></span>
-
-                  </div>
-                </div>
-
-              </div>
             </div>
           </div>
 
-          <small th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"
-                 class="text-sm font-semibold text-red-500  mb-6 uppercase"></small>
-          <small th:if="${#fields.hasErrors('category')}" th:errors="*{category}"
-                 class="text-sm font-semibold text-red-500  mb-6 uppercase"></small>
+          <div data-category="shoes"
+               class="category-btn group px-5 py-2 border-2 border-zinc-800 rounded-lg text-2xl hover:bg-pink-600 hover:border-pink-600 hover:text-white hover:cursor-pointer transition duration-200 ease-in-out">
+            <div class="flex flex-col-reverse items-center gap-2">
+              <p class="font-bold">SHOES</p>
+              <svg class="size-8 group-hover:fill-white transition duration-200 ease-in-out" height="200px"
+                   width="200px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <g>
+                    <path class="st0"
+                          d="M428.587,239.276c-46.594-11.246-119.026-57.862-163.523-96.006c-6.126-5.255-11.048-10.412-15.804-15.402 c-9.026-9.466-17.553-18.409-30.29-23.187c-5.256-1.969-10.799-2.969-16.486-2.969h-0.008c-18.901,0-33.698,11.086-40.816,16.417 c-18.916,14.161-24.641,29.7-25.747,41.422c-1.817,0.144-3.65,0.227-5.505,0.227c-18.637,0-25.436-7.724-29.632-15.274 c-10.95-19.719-30.359-31.971-50.646-31.971c-24.914,0-50.13,19.264-50.13,56.09v210.647v31.017h31.018h448.457h31.018v-31.017 c0-1.416,0.265-4.764,0.499-7.716C513.15,344.278,519.715,261.267,428.587,239.276z M385.446,275.321 c5.422-4.195,12.162-7.777,20.423-10.473c5.293,1.78,10.481,3.386,15.441,4.582c44.11,10.647,56.438,39.627,59.119,65.896H347.818 l9.398-0.447l2.06-0.076v-0.022l-0.015-1.038c-0.038-4.339,0.734-21.021,8.602-36.674 C371.785,289.217,377.351,281.607,385.446,275.321z M376.79,253.149c-1.9,1.242-3.877,2.446-5.611,3.794 c-8.61,6.686-15.092,14.433-19.999,22.354c-8.943-4.324-17.486-8.595-25.808-12.836l18.766-30.26 C355.11,242.411,366.082,248.181,376.79,253.149z M330.771,228.341l-19.212,30.987c-8.398-4.384-16.561-8.724-24.27-12.957 l23.672-30.434C317.489,220.193,324.1,224.32,330.771,228.341z M298.058,207.274l-24.452,31.442 c-8.012-4.536-15.713-8.973-22.9-13.244l27.55-32.266C284.647,197.922,291.257,202.617,298.058,207.274z M244.55,166.519 c0.113,0.106,0.212,0.197,0.326,0.296c6.414,5.497,13.554,11.222,20.999,17l-28.624,33.532 c-9.542-5.854-18.175-11.36-26.004-16.501L244.55,166.519z M180.228,142.975c5.195-3.884,13.661-10.246,22.256-10.246 c1.87,0,3.741,0.303,5.588,0.992c7.792,2.923,14.653,11.578,25.164,22.188l-35.099,36.174 c-12.418-8.473-22.157-15.569-29.041-20.794l-1.318-1.015C165.325,163.187,166.256,153.433,180.228,142.975z M31.018,168.624 c0-16.994,8.92-25.073,19.113-25.073c8.414,0,17.69,5.497,23.536,16.016c13.646,24.573,36.258,31.229,56.742,31.229 c8.148,0,15.933-1.06,22.71-2.453c24.49,18.78,86.919,63.05,188.361,112.098l-0.507,1.492c-4.521,14.668-4.96,26.988-4.975,31.812 c0,0.72,0.015,1.211,0.022,1.583H152.694c-4.218-16.758-14.032-33.334-28.867-47.079c-20.203-18.682-49.994-31.828-87.327-31.79 c-1.802,0-3.65,0.091-5.482,0.151C31.018,214.634,31.018,176.226,31.018,168.624z M31.018,279.873 c1.84-0.068,3.688-0.151,5.482-0.151c31.912,0.038,55.598,10.95,71.554,25.626c9.897,9.08,16.66,19.712,20.378,29.98H31.018 C31.018,318.97,31.018,299.584,31.018,279.873z M479.475,379.271H31.018c0,0,0-7.959,0-20.681H480.8 C480.338,367.268,479.475,374.576,479.475,379.271z">
+                    </path>
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <div data-category="accessories"
+               class="category-btn group px-5 py-2 border-2 border-zinc-800 rounded-lg text-2xl hover:bg-pink-600 hover:border-pink-600 hover:text-white hover:cursor-pointer transition duration-200 ease-in-out">
+            <div class="flex flex-col-reverse items-center gap-2">
+              <p class="font-bold">ACCESSORIES</p>
+              <svg class="size-8 group-hover:fill-white transition duration-200 ease-in-out" fill="#000000"
+                   height="200px" width="200px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <g>
+                    <g>
+                      <path
+                              d="M458.114,215.131c-7.585-25.777-31.446-44.654-59.645-44.654c-12.174,0-23.975,3.587-33.995,10.131 c-10.018-6.542-21.819-10.131-33.995-10.131c-19.73,0-37.329,9.248-48.728,23.625c-7.338-5.025-16.207-7.973-25.754-7.973 c-9.547,0-18.415,2.947-25.754,7.973c-11.399-14.377-28.998-23.625-48.728-23.625c-12.174,0-23.975,3.587-33.995,10.131 c-10.018-6.542-21.819-10.131-33.995-10.131c-28.2,0-52.059,18.877-59.645,44.654H0v33.391h53.679 c7.692,26.569,33.213,49.326,55.93,66.897c11.882,9.189,28.139,19.759,28.825,20.204l9.09,5.899l9.09-5.899 c0.686-0.445,16.944-11.015,28.824-20.204c27.123-20.978,58.256-49.343,58.256-82.767c0-0.277-0.018-0.55-0.021-0.826h0.021 c0-6.785,5.521-12.306,12.306-12.306c6.785,0,12.306,5.521,12.306,12.306h0.02c-0.003,0.276-0.021,0.549-0.021,0.826 c0,33.424,31.133,61.789,58.256,82.767c11.882,9.189,28.138,19.758,28.824,20.204l9.09,5.9l9.09-5.9 c0.686-0.445,16.943-11.015,28.826-20.204c22.718-17.572,48.237-40.329,55.93-66.897H512v-33.391H458.114z M165.01,289.006 c-5.462,4.225-12.173,8.921-17.485,12.538c-5.311-3.617-12.023-8.313-17.486-12.538c-30.053-23.245-45.292-42.206-45.292-56.354 c0-15.872,12.912-28.784,28.784-28.784c8.206,0,16.049,3.527,21.517,9.677l12.477,14.033l12.477-14.033 c5.468-6.15,13.31-9.677,21.517-9.677c15.872,0,28.784,12.912,28.784,28.784C210.303,246.8,195.064,265.762,165.01,289.006z M381.961,289.006c-5.463,4.224-12.174,8.921-17.486,12.538c-5.311-3.617-12.023-8.313-17.485-12.538 c-30.054-23.246-45.293-42.206-45.293-56.354c0-15.872,12.912-28.784,28.784-28.784c8.206,0,16.049,3.527,21.517,9.677 l12.477,14.033l12.477-14.033c5.468-6.15,13.31-9.677,21.517-9.677c15.872,0,28.784,12.912,28.784,28.784 C427.253,246.8,412.014,265.761,381.961,289.006z">
+                      </path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
         </div>
 
+        <span class="error-message text-sm font-semibold text-red-500 uppercase" id="category-error"></span>
+      </div>
 
-        <div class="mb-7">
-          <label for="brand-input" class="block uppercase mb-2 text-lg font-bold text-gray-800">brand</label>
-          <select data-hs-select='{
-            "placeholder": "- SELECT BRAND -",
+      <div id="subcategory-section" class="mb-7 hidden">
+        <p class="mb-5 bg-zinc-900 p-2 rounded-lg uppercase text-3xl text-center font-extrabold text-white">Select
+          Subcategory</p>
+
+        <div class="flex gap-2 flex-wrap justify-center">
+
+        </div>
+
+      </div>
+
+
+      <div id="product-details-section" class="hidden grid grid-cols-2 gap-5">
+
+
+        <div class="size-box mb-7 hidden">
+          <label class="block uppercase mb-2 text-lg font-bold text-gray-800">size</label>
+
+          <div class="clothing-size-box hidden">
+            <select data-hs-select='{
+            "placeholder": "- SELECT SIZE -",
             "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
             "toggleClasses": "font-semibold text-gray-700 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border-2 border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500",
             "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300",
@@ -231,18 +291,37 @@
             "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50",
             "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-blue-600 dark:text-blue-500 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
             "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
-          }' class="hidden" id="brand-input" th:field="*{brand}">
-            <option value="">Choose</option>
-            <option th:each="brand: ${T(com.dripify.product.model.enums.Brand).values()}"
-                    th:value="${brand.name()}"
-                    th:text="${brand.toString() == 'Other' ? 'Other (specify in description)' : brand.toString()}"></option>
-          </select>
-          <small th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"
-                 class="text-sm font-semibold text-red-500 uppercase"></small>
+          }' class="hidden" id="clothing-size-select">
+              <option value="">Choose</option>
+              <option th:each="size: ${T(com.dripify.product.model.enums.Size).values()}" th:value="${size.name()}"
+                      th:if="${size.getCategory().name() == 'CLOTHING'}" th:text="${size}"></option>
+            </select>
+
+          </div>
+
+          <div class="shoe-size-box hidden">
+            <select data-hs-select='{
+            "placeholder": "- SELECT SIZE -",
+            "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+            "toggleClasses": "font-semibold text-gray-700 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border-2 border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500",
+            "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300",
+            "dropdownVerticalFixedPlacement": "bottom",
+            "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50",
+            "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-blue-600 dark:text-blue-500 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
+            "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+          }' class="hidden" id="shoe-size-select">
+              <option value="">Choose</option>
+              <option th:each="size: ${T(com.dripify.product.model.enums.Size).values()}" th:value="${size.name()}"
+                      th:if="${size.getCategory().name() == 'SHOE'}" th:text="${size}"></option>
+            </select>
+          </div>
+
+
+          <span class="error-message text-sm font-semibold text-red-500 uppercase" id="size-error"></span>
         </div>
 
         <div class="mb-7">
-          <label for="material-input" class="block uppercase mb-2 text-lg font-bold text-gray-800">material</label>
+          <label class="block uppercase mb-2 text-lg font-bold text-gray-800">material</label>
           <select data-hs-select='{
             "placeholder": "- SELECT MATERIAL -",
             "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
@@ -252,17 +331,41 @@
             "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50",
             "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-blue-600 dark:text-blue-500 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
             "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
-          }' class="hidden" id="material-input" th:field="*{material}">
+          }' class="hidden" id="material-select">
             <option value="">Choose</option>
             <option th:each="material: ${T(com.dripify.product.model.enums.Material).values()}"
                     th:value="${material.name()}"
-                    th:text="${material.toString() == 'Other' ? 'Other (specify in description)' : material.toString()}"></option>
+                    th:text="${material.toString() == 'Other' ? 'Other (specify in description)' : material.toString()}">
+            </option>
           </select>
-          <small th:if="${#fields.hasErrors('material')}" th:errors="*{material}" class="text-sm font-semibold text-red-500 uppercase"></small>
+
+          <span class="error-message text-sm font-semibold text-red-500 uppercase" id="material-error"></span>
+        </div>
+
+
+
+        <div class="mb-7">
+          <label class="block uppercase mb-2 text-lg font-bold text-gray-800">brand</label>
+          <select data-hs-select='{
+            "placeholder": "- SELECT BRAND -",
+            "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+            "toggleClasses": "font-semibold text-gray-700 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border-2 border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500",
+            "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300",
+            "dropdownVerticalFixedPlacement": "bottom",
+            "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50",
+            "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-blue-600 dark:text-blue-500 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
+            "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+          }' class="hidden" id="brand-select">
+            <option value="">Choose</option>
+            <option th:each="brand: ${T(com.dripify.product.model.enums.Brand).values()}" th:value="${brand.name()}"
+                    th:text="${brand.toString() == 'Other' ? 'Other (specify in description)' : brand.toString()}"></option>
+          </select>
+
+          <span class="error-message text-sm font-semibold text-red-500 uppercase" id="brand-error"></span>
         </div>
 
         <div class="mb-7">
-          <label for="color-input" class="block uppercase mb-2 text-lg font-bold text-gray-800">color</label>
+          <label class="block uppercase mb-2 text-lg font-bold text-gray-800">color</label>
           <select data-hs-select='{
             "placeholder": "- SELECT COLOR -",
             "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
@@ -272,38 +375,17 @@
             "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50",
             "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-blue-600 dark:text-blue-500 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
             "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
-          }' class="hidden" id="color-input" th:field="*{color}">
+          }' class="hidden" id="color-select">
             <option value="">Choose</option>
-            <option th:each="color: ${T(com.dripify.product.model.enums.Color).values()}"
-                    th:value="${color.name()}"
+            <option th:each="color: ${T(com.dripify.product.model.enums.Color).values()}" th:value="${color.name()}"
                     th:text="${color.toString() == 'Other' ? 'Other (specify in description)' : color.toString()}"></option>
           </select>
-          <small th:if="${#fields.hasErrors('color')}" th:errors="*{color}" class="text-sm font-semibold text-red-500 uppercase"></small>
+
+          <span class="error-message text-sm font-semibold text-red-500 uppercase" id="color-error"></span>
         </div>
 
         <div class="mb-7">
-          <label for="size-input" class="block uppercase mb-2 text-lg font-bold text-gray-800">size</label>
-          <select data-hs-select='{
-            "placeholder": "- SELECT SIZE -",
-            "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
-            "toggleClasses": "font-semibold text-gray-700 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border-2 border-gray-200 rounded-lg text-start text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500",
-            "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300",
-            "dropdownVerticalFixedPlacement": "bottom",
-            "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50",
-            "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-blue-600 dark:text-blue-500 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
-            "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
-          }' class="hidden" id="size-input" th:field="*{size}">
-            <option value="">Choose</option>
-            <option th:each="size: ${T(com.dripify.product.model.enums.Size).values()}"
-                    th:value="${size.name()}"
-                    th:text="${size}"></option>
-          </select>
-          <small th:if="${#fields.hasErrors('size')}" th:errors="*{size}"
-                 class="text-sm font-semibold text-red-500 uppercase"></small>
-        </div>
-
-        <div class="mb-7">
-          <label for="condition-input" class="block uppercase mb-2 text-lg font-bold text-gray-800">condition</label>
+          <label class="block uppercase mb-2 text-lg font-bold text-gray-800">condition</label>
           <select data-hs-select='{
             "placeholder": "- SELECT CONDITION -",
             "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
@@ -313,43 +395,432 @@
             "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50",
             "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-blue-600 dark:text-blue-500 \" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
             "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
-          }' class="hidden" id="condition-input" th:field="*{condition}">
+          }' class="hidden" id="condition-select">
             <option value="">Choose</option>
             <option th:each="condition: ${T(com.dripify.product.model.enums.Condition).values()}"
-                    th:value="${condition.name()}"
-                    th:text="${condition.toString()}"></option>
+                    th:value="${condition.name()}" th:text="${condition.toString()}"></option>
           </select>
-          <small th:if="${#fields.hasErrors('condition')}" th:errors="*{condition}"
-                 class="text-sm font-semibold text-red-500 uppercase"></small>
+
+          <span class="error-message text-sm font-semibold text-red-500 uppercase" id="condition-error"></span>
         </div>
 
-        <div class="mb-7">
-          <div class="space-y-3">
-            <div>
-              <label for="price-input" class="block uppercase mb-2 text-lg font-bold text-gray-800">price</label>
-              <div class="flex rounded-lg shadow-sm">
-                <div class="px-4 inline-flex items-center min-w-fit rounded-s-md bg-zinc-800">
-                  <span class="text-sm text-white font-bold">BGN</span>
-                </div>
-                <input th:field="*{price}" type="number" name="price-input" id="price-input"
-                       class="py-3 px-4 pe-11 block w-full border-2 border-l-0 border-gray-200
-                        shadow-sm rounded-e-lg text-sm focus:z-10 disabled:opacity-50 disabled:pointer-events-none"
-                       placeholder="20.00">
+
+      </div>
+
+      <div class="mb-7">
+        <div class="space-y-3">
+          <div>
+            <label for="price-input" class="block uppercase mb-2 text-lg font-bold text-gray-800">price</label>
+            <div class="flex rounded-lg shadow-sm">
+              <div class="px-4 inline-flex items-center min-w-fit rounded-s-md bg-zinc-800">
+                <span class="text-sm text-white font-bold">BGN</span>
               </div>
-              <small th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
-                     class="text-sm font-semibold text-red-500 uppercase"></small>
+              <input type="number" name="price-input" id="price-input" class="py-3 px-4 pe-11 block w-full border-2 border-l-0 border-gray-200
+                      shadow-sm rounded-e-lg text-sm focus:z-10 disabled:opacity-50 disabled:pointer-events-none"
+                     placeholder="20.00">
             </div>
+
+            <span class="error-message text-sm font-semibold text-red-500 uppercase" id="price-error"></span>
           </div>
         </div>
       </div>
 
       <!-- Submit Button -->
-      <div class="text-center my-5">
-        <button type="submit" class="bg-zinc-900 text-white px-6 py-2 rounded-full text-2xl
-           font-bold uppercase shadow hover:bg-zinc-600 transition ease-in duration-300">List Product</button>
+      <div id="submit-button" class="hidden text-center my-5">
+        <button type="submit" class="bg-zinc-700 hover:bg-zinc-500 text-white px-6 py-2 rounded-full text-2xl
+           font-bold uppercase shadow transition ease-in duration-300">List Product</button>
       </div>
     </form>
   </div>
 
+  <div id="loading-box"
+       class="hidden size-full bg-zinc-400 bg-opacity-50 fixed top-0 start-0 z-50 overflow-x-hidden overflow-y-auto">
+    <div
+            class="scale-95 ease-in-out transition-all duration-200 sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-56px)] flex items-center">
+      <div
+              class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl shadow-md pointer-events-auto items-center">
+        <div class="flex justify-between items-center py-6 px-4 ">
+          <h3 class="font-bold text-gray-800 text-2xl text-center">
+            Hang tight! Your product is being uploaded.. 🚀
+          </h3>
+
+        </div>
+        <div class="p-4 overflow-y-auto">
+          <div
+                  class="animate-spin inline-block size-10 border-4 border-current border-t-transparent text-pink-600 rounded-full"
+                  role="status" aria-label="loading">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="successful-upload-box"
+       class="opacity-0 transition-opacity ease-in-out pointer-events-none duration-200 size-full bg-zinc-400 bg-opacity-50
+        fixed top-0 start-0 z-50 overflow-x-hidden overflow-y-auto">
+    <div
+            class="scale-95 sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-56px)] flex items-center">
+      <div
+              class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl shadow-md items-center">
+        <div class="flex justify-between items-center py-6 px-4 ">
+          <h3 class="font-bold text-gray-800 text-2xl text-center">
+            Your product has been successfully uploaded!
+          </h3>
+
+        </div>
+        <div class="pb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0,0,256,256">
+            <g fill="#27b635" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M25,2c-12.683,0 -23,10.317 -23,23c0,12.683 10.317,23 23,23c12.683,0 23,-10.317 23,-23c0,-4.56 -1.33972,-8.81067 -3.63672,-12.38867l-1.36914,1.61719c1.895,3.154 3.00586,6.83148 3.00586,10.77148c0,11.579 -9.421,21 -21,21c-11.579,0 -21,-9.421 -21,-21c0,-11.579 9.421,-21 21,-21c5.443,0 10.39391,2.09977 14.12891,5.50977l1.30859,-1.54492c-4.085,-3.705 -9.5025,-5.96484 -15.4375,-5.96484zM43.23633,7.75391l-19.32227,22.80078l-8.13281,-7.58594l-1.36328,1.46289l9.66602,9.01563l20.67969,-24.40039z"></path></g></g>
+          </svg>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="error-upload-box"
+       class="opacity-0 transition-opacity ease-in-out pointer-events-none duration-200 size-full bg-zinc-400 bg-opacity-50
+        fixed top-0 start-0 z-50 overflow-x-hidden overflow-y-auto">
+    <div
+            class="scale-95 sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-56px)] flex items-center">
+      <div
+              class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl shadow-md items-center">
+        <div class="flex justify-between items-center py-6 px-4 ">
+          <h3 class="font-bold text-gray-800 text-2xl text-center">
+            There was an error uploading your product! Please try again.
+          </h3>
+
+        </div>
+        <div class="pb-4">
+          <svg class="size-12" fill="#da1616" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" stroke="#da1616"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>cancel</title> <path d="M10.771 8.518c-1.144 0.215-2.83 2.171-2.086 2.915l4.573 4.571-4.573 4.571c-0.915 0.915 1.829 3.656 2.744 2.742l4.573-4.571 4.573 4.571c0.915 0.915 3.658-1.829 2.744-2.742l-4.573-4.571 4.573-4.571c0.915-0.915-1.829-3.656-2.744-2.742l-4.573 4.571-4.573-4.571c-0.173-0.171-0.394-0.223-0.657-0.173v0zM16 1c-8.285 0-15 6.716-15 15s6.715 15 15 15 15-6.716 15-15-6.715-15-15-15zM16 4.75c6.213 0 11.25 5.037 11.25 11.25s-5.037 11.25-11.25 11.25-11.25-5.037-11.25-11.25c0.001-6.213 5.037-11.25 11.25-11.25z"></path> </g></svg>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const genderButtons = document.querySelectorAll(".gender-btn");
+    const categoryButtons = document.querySelectorAll(".category-btn");
+    const subcategoryContainer = document.querySelector("#subcategory-section div");
+
+    if (!genderButtons.length || !categoryButtons.length || !subcategoryContainer) {
+      return; // Exit early if required elements are missing
+    }
+
+    let selectedGender = null;
+    let selectedCategory = null;
+
+    const categorySection = document.getElementById("category-section");
+    const subcategorySection = document.getElementById("subcategory-section");
+    const productDetailsSection = document.getElementById('product-details-section');
+
+    genderButtons.forEach(button => {
+      button.addEventListener("click", function () {
+        resetChosenElementsStyle(genderButtons, categoryButtons);
+        resetSelected(genderButtons);
+        resetSelected(categoryButtons);
+        resetSelects();
+
+        selectedGender = this.dataset.gender;
+        this.classList.add("bg-pink-600", "border-pink-600", "text-white", "selected");
+
+        categorySection.classList.remove("hidden");
+        categorySection.classList.add("animate__animated", "animate__slideInUp");
+
+        subcategorySection.classList.add("hidden");
+        productDetailsSection.classList.add('hidden');
+
+        document.getElementById('submit-button').classList.add('hidden');
+
+      });
+    });
+
+    categoryButtons.forEach(button => {
+      button.addEventListener("click", function () {
+        resetChosenElementsStyle(categoryButtons);
+        resetSelected(categoryButtons);
+        resetSelects();
+
+        categorySection.querySelectorAll('svg').forEach(svg => svg.classList.replace('fill-white', 'fill-black'));
+        this.classList.add("bg-pink-600", "border-pink-600", "text-white");
+        this.querySelector('svg').classList.add('fill-white');
+
+
+
+        selectedCategory = this.dataset.category;
+        this.classList.add('selected');
+        fetchSubcategories(selectedGender, selectedCategory);
+
+        toggleSizeBox();
+
+      });
+    });
+
+    subcategoryContainer.addEventListener('click', function (event) {
+      const button = event.target.closest('.subcategory-btn');
+      if (!button) return;
+
+      resetChosenElementsStyle(subcategoryContainer.querySelectorAll('.subcategory-btn'));
+      resetSelected(subcategoryContainer.querySelectorAll('.subcategory-btn'));
+      resetSelects();
+      button.classList.add("bg-pink-600", "border-pink-600", "text-white");
+      button.classList.add('selected');
+
+      productDetailsSection.classList.remove('hidden');
+      productDetailsSection.classList.add("animate__animated", "animate__slideInUp");
+
+      document.getElementById('submit-button').classList.remove('hidden');
+    });
+
+
+
+    function fetchSubcategories(gender, category) {
+      subcategoryContainer.innerHTML = ""; // Clear previous subcategories
+
+      subcategorySection.classList.remove("hidden");
+      subcategorySection.classList.add("animate__animated", "animate__slideInUp");
+
+      fetch(`http://localhost:8080/api/v1/categories?gender=${gender}&categoryName=${category}`)
+              .then(response => {
+                if (!response.ok) throw new Error("Failed to fetch categories");
+                return response.json();
+              })
+              .then(categories => {
+                categories.forEach(category => {
+                  subcategoryContainer.appendChild(createSubcategoryButton(category.name, category.id));
+                });
+              })
+              .catch(error => console.error("Error fetching categories:", error));
+    }
+
+    function createSubcategoryButton(name, id) {
+      const btn = document.createElement("div");
+      btn.className = "subcategory-btn px-5 py-2 border-2 border-zinc-800 rounded-lg text-2xl hover:bg-pink-600 hover:border-pink-600 hover:text-white hover:cursor-pointer transition duration-200 ease-in-out";
+      btn.innerHTML = `<p class="font-bold">${name}</p>`;
+      btn.dataset.subcategory = name;
+      btn.setAttribute('value', id);
+
+      return btn;
+    }
+
+    function resetChosenElementsStyle(...elements) {
+      elements.forEach(nodeList => {
+        if (nodeList && nodeList.length > 0) {
+          nodeList.forEach(btn => {
+            if (btn) { // Ensure the button is valid before modifying it
+              btn.classList.remove("bg-pink-600", "border-pink-600", "text-white");
+            }
+
+            const svg = btn.querySelector('svg');
+            if (svg) {
+              svg.classList.replace('fill-white', 'fill-black');
+            }
+          });
+        }
+      });
+    }
+
+    function toggleSizeBox() {
+      const sizeBox = document.querySelector('.size-box');
+
+      sizeBox.classList.remove('hidden');
+      const clothingSizeElement = sizeBox.querySelector('.clothing-size-box');
+      const shoeSizeElement = sizeBox.querySelector('.shoe-size-box');
+
+      if (selectedCategory === 'clothing') {
+        clothingSizeElement.classList.remove('hidden');
+        shoeSizeElement.classList.add('hidden');
+      } else if (selectedCategory === 'shoes') {
+        shoeSizeElement.classList.remove('hidden');
+        clothingSizeElement.classList.add('hidden');
+      } else {
+        sizeBox.classList.add('hidden');
+      }
+    }
+
+    function resetSelected(elements) {
+
+
+      elements.forEach(btn => btn.classList.remove('selected'));
+    }
+
+    function resetSelects() {
+      const selects = productDetailsSection.querySelectorAll('select');
+      selects.forEach(select => {
+        const selectDOM = document.getElementById(select.id);
+
+        const prelineSelect = HSSelect.getInstance(document.getElementById(select.id));
+
+        const config = JSON.parse(selectDOM.dataset.hsSelect || "{}");
+
+
+
+        prelineSelect.setValue('');
+        if (config.placeholder) {
+          selectDOM.parentElement.querySelector('button span').textContent = config.placeholder;
+        }
+      });
+
+    }
+  });
+
+
+  document.getElementById("upload-product-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+
+
+    const imageInput = document.getElementById('dropzone-file');
+    const title = document.getElementById("title-input").value;
+    const description = document.getElementById("description-input").value;
+    const selectedGender = document.querySelector(".gender-btn.selected")?.dataset.gender;
+    const selectedCategory = document.querySelector(".subcategory-btn.selected")?.getAttribute('value');
+    const selectedMaterial = document.getElementById("material-select")?.value;
+    const selectedBrand = document.getElementById("brand-select")?.value;
+    const selectedCondition = document.getElementById("condition-select")?.value;
+    const selectedColor = document.getElementById("color-select")?.value;
+
+    const category = document.querySelector(".category-btn.selected")?.dataset.category;
+    const selectedSize = category === "clothing"
+            ? document.getElementById("clothing-size-select").value
+            : document.getElementById("shoe-size-select").value;
+
+    const price = document.getElementById("price-input").value;
+    // Clear previous error messages
+    document.querySelectorAll(".error-message").forEach(el => el.textContent = "");
+
+    let isValid = true;
+
+
+    if (!imageInput || imageInput.files.length < 2) {
+      document.getElementById('images-error').textContent = "Show us more! At least two photos are needed to upload your product."
+      isValid = false;
+    }
+    if (!title) {
+      document.getElementById('title-error').textContent = "Title is required!"
+      isValid = false;
+    }
+
+    if (title.length < 10) {
+      document.getElementById('title-error').textContent = "Title should be longer!"
+      isValid = false;
+    }
+
+    if (title.length > 30) {
+      document.getElementById('title-error').textContent = "Title is too long!"
+      isValid = false;
+    }
+
+
+    if (!selectedGender) {
+      document.getElementById("gender-error").textContent = "Please select a gender.";
+      isValid = false;
+    }
+    if (!selectedCategory) {
+      document.getElementById("category-error").textContent = "Please select a category.";
+      isValid = false;
+    }
+    if (!selectedMaterial) {
+      document.getElementById("material-error").textContent = "Please select a material.";
+      isValid = false;
+    }
+    if (!selectedBrand) {
+      document.getElementById("brand-error").textContent = "Please select a brand.";
+      isValid = false;
+    }
+    if (!selectedCondition) {
+      document.getElementById("condition-error").textContent = "Please select a condition.";
+      isValid = false;
+    }
+    if (!selectedColor) {
+      document.getElementById("color-error").textContent = "Please select a color.";
+      isValid = false;
+    }
+
+    if (!selectedSize && category !== 'accessories') {
+      document.getElementById("size-error").textContent = "Please select a size.";
+      isValid = false;
+    }
+
+    if (!price || price < 1) {
+      document.getElementById('price-error').textContent = "Please enter a valid size.";
+      isValid = false;
+    }
+
+    // If validation fails, stop
+    if (!isValid) return;
+
+
+    const createProductRequest = new FormData();
+    for (let i = 0; i < imageInput.files.length; i++) {
+      createProductRequest.append("images", imageInput.files[i]);
+    }
+
+    createProductRequest.append("title", title);
+    createProductRequest.append("description", description);
+    createProductRequest.append("gender", selectedGender);
+    createProductRequest.append("category", selectedCategory);
+    createProductRequest.append("size", selectedSize);
+    createProductRequest.append("material", selectedMaterial);
+    createProductRequest.append("color", selectedColor);
+    createProductRequest.append("condition", selectedCondition);
+    createProductRequest.append("brand", selectedBrand);
+    createProductRequest.append("price", price);
+
+    document.getElementById('loading-box').classList.remove('hidden');
+      fetch("http://localhost:8080/api/v1/products/new", {
+        method: "POST",
+        body: createProductRequest,
+        credentials: "include"
+      })
+              .then(response => {
+                if (!response.ok) {
+                  return response.json().then(errors => { throw errors; });
+                }
+
+                return response.json();
+              })
+              .then(data => {
+                document.getElementById('successful-upload-box').classList.remove('opacity-0');
+                document.getElementById('successful-upload-box').classList.add('opacity-100', 'pointer-events-auto');
+
+                setTimeout(() => location.reload(), 3000);
+              })
+              .catch(errors => {
+                document.getElementById('loading-box').classList.add('hidden');
+                document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+
+                if (typeof errors === "object") {
+
+                  for (const [key, message] of Object.entries(errors)) {
+
+                    if (key === 'timestamp') {
+                      document.getElementById('error-upload-box').classList.remove('opacity-0');
+                      document.getElementById("error-upload-box").classList.add('opacity-100', 'pointer-events-auto');
+
+                      setTimeout(() => {
+                          document.getElementById('error-upload-box').classList.remove('opacity-100', 'pointer-events-auto');
+                          document.getElementById('error-upload-box').classList.add('opacity-0');
+                      }, 3000);
+                    }
+
+                    const errorElement = document.getElementById(key);
+                    if (errorElement) {
+                      errorElement.textContent = message;
+                    }
+                  }
+                }
+              });
+
+
+
+  });
+
+</script>
 </body>
 </html>

@@ -76,7 +76,7 @@ public class UserService implements UserDetailsService {
 
             }
 
-            String imageUrl = cloudinaryService.uploadImage(userEditRequest.getProfilePicture());
+            String imageUrl = cloudinaryService.uploadProfileImage(userEditRequest.getProfilePicture());
             user.setImageUrl(imageUrl);
         }
 

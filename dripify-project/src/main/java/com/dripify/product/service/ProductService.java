@@ -2,8 +2,11 @@ package com.dripify.product.service;
 
 import com.dripify.category.model.Category;
 import com.dripify.category.service.CategoryService;
+import com.dripify.cloudinary.service.CloudinaryService;
 import com.dripify.exception.DomainException;
 import com.dripify.product.model.Product;
+import com.dripify.product.model.ProductImage;
+import com.dripify.product.repository.ProductImageRepository;
 import com.dripify.product.repository.ProductRepository;
 import com.dripify.shared.enums.Gender;
 import com.dripify.user.model.User;
@@ -17,6 +20,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -26,11 +31,15 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryService categoryService;
     private final UserService userService;
+    private final CloudinaryService cloudinaryService;
+    private final ProductImageRepository productImageRepository;
 
-    public ProductService(ProductRepository productRepository, CategoryService categoryService, UserService userService) {
+    public ProductService(ProductRepository productRepository, CategoryService categoryService, UserService userService, CloudinaryService cloudinaryService, ProductImageRepository productImageRepository) {
         this.productRepository = productRepository;
         this.categoryService = categoryService;
         this.userService = userService;
+        this.cloudinaryService = cloudinaryService;
+        this.productImageRepository = productImageRepository;
     }
 
     public Page<Product> getFilteredProducts(String gender, String categoryName, String subcategoryName,
@@ -72,20 +81,33 @@ public class ProductService {
 
     public void addNewProduct(CreateProductRequest createProductRequest, User user) {
         Product product = initializeProduct(createProductRequest, user);
-
         productRepository.save(product);
+
+
+        createProductRequest.getImages().forEach(image -> {
+            String imageUrl = cloudinaryService.uploadProductImage(image, product.getId().toString(), createProductRequest.getImages().indexOf(image));
+
+            ProductImage productImage = ProductImage.builder()
+                    .imageUrl(imageUrl)
+                    .product(product)
+                    .build();
+
+            productImageRepository.save(productImage);
+        });
     }
 
     private static Product initializeProduct(CreateProductRequest createProductRequest, User user) {
+
+
         return Product.builder()
                 .name(createProductRequest.getTitle())
                 .description(createProductRequest.getDescription())
                 .gender(createProductRequest.getGender())
                 .category(createProductRequest.getCategory())
+                .size(createProductRequest.getSize())
                 .brand(createProductRequest.getBrand())
                 .color(createProductRequest.getColor())
                 .material(createProductRequest.getMaterial())
-                .size(createProductRequest.getSize())
                 .condition(createProductRequest.getCondition())
                 .price(createProductRequest.getPrice())
                 .seller(user)

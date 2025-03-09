@@ -57,7 +57,7 @@
                 <a th:each="product: ${productPage.getContent()}" th:href="@{/products/{id}/product(id=${product.id})}">
 
                     <div class="group relative group-hover:cursor-pointer">
-                        <img src="https://media-photos.depop.com/b1/5913802/1997839635_8240334744bf42e191e6c596467700fd/P0.jpg"
+                        <img th:src="${product.images.get(0).imageUrl}"
                              th:alt="${product.name}"
                              class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
                         <div class="mt-4 flex justify-between">
@@ -65,9 +65,9 @@
                                 <h3 class="text-sm text-gray-700" th:text="${product.name}">
                                     <span aria-hidden="true" class="absolute inset-0"></span>
                                 </h3>
-                                <p class="mt-1 text-sm text-gray-500" th:text="${product.gender}"></p>
+                                <p class="mt-1 text-sm text-gray-500 " th:text="${product.gender}"></p>
                             </div>
-                            <p class="text-sm font-medium text-gray-900" th:text="${product.price + ' BGN'}"></p>
+                            <p class="text-sm font-medium text-gray-900 flex-shrink-0" th:text="${product.price + ' BGN'}"></p>
                         </div>
                     </div>
 

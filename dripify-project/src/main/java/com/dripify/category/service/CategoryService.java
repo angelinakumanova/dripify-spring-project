@@ -4,6 +4,7 @@ import com.dripify.category.model.Category;
 import com.dripify.category.repository.CategoryRepository;
 import com.dripify.exception.DomainException;
 import com.dripify.shared.enums.Gender;
+import com.dripify.web.dto.CategoryResponse;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +38,12 @@ public class CategoryService {
         return categoryRepository.findAllBySubcategoriesIsNull();
     }
 
-    public List<String> getCategoriesByGender(String gender) {
-        return categoryRepository.getNamesByGenderAndSubcategoriesIsNull(Gender.valueOf(gender));
+
+
+    public List<CategoryResponse> getCategoriesByGenderAndMainCategory(Gender gender, String categoryName) {
+        return categoryRepository.findByGenderAndMainCategory(gender, categoryName)
+                .stream()
+                .map(category -> new CategoryResponse(category.getId(), category.getName()))
+                .toList();
     }
 }

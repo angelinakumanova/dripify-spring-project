@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class CloudinaryService {
@@ -20,10 +20,10 @@ public class CloudinaryService {
         this.cloudinary = cloudinary;
     }
 
-    public String uploadImage(MultipartFile file)  {
+    public String uploadProfileImage(MultipartFile file)  {
 
         if (file.getSize() > 1024 * 1024 ) {
-            throw new IllegalArgumentException("File is too large. Maximum allowed size is 1MB.");
+            throw new CloudinaryException("File is too large. Maximum allowed size is 1MB.");
         }
 
         Map uploadResult;
@@ -31,6 +31,26 @@ public class CloudinaryService {
             uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap(
                     "folder", "profile_pictures",
                     "transformation", new Transformation().width(300).height(300).crop("fill").quality("auto")
+            ));
+        } catch (IOException e) {
+            throw new CloudinaryException("Error while uploading image to Cloudinary");
+        }
+
+        return uploadResult.get("url").toString();
+    }
+
+    public String uploadProductImage(MultipartFile file, String productId, int imageIdx) {
+
+        if (file.getSize() > 1024 * 1024 ) {
+            throw new CloudinaryException("File is too large. Maximum allowed size is 1MB.");
+        }
+
+        Map uploadResult;
+        try {
+            uploadResult = cloudinary.uploader().upload(file.getBytes(),ObjectUtils.asMap(
+                    "public_id", imageIdx + "-" + productId,
+                    "folder", "products/" + productId,
+                    "transformation", new Transformation().width(600).height(600).crop("fill").quality("auto")
             ));
         } catch (IOException e) {
             throw new CloudinaryException("Error while uploading image to Cloudinary");

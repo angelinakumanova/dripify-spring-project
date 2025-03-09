@@ -3,6 +3,7 @@ package com.dripify.web.dto;
 import com.dripify.category.model.Category;
 import com.dripify.product.model.enums.*;
 import com.dripify.shared.enums.Gender;
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -41,7 +42,6 @@ public class CreateProductRequest {
     @NotNull(message = "Color is required!")
     private Color color;
 
-    @NotNull(message = "Size is required!")
     private Size size;
 
     @NotNull(message = "Condition is required!")
@@ -50,4 +50,21 @@ public class CreateProductRequest {
     @NotNull(message = "Missing price. Please enter a valid amount.")
     @Min(value = 1, message = "Missing price. Please enter a valid amount.")
     private BigDecimal price;
+
+
+    @AssertTrue(message = "Size is required!")
+    public boolean isValid() {
+
+        if (category == null) {
+            return true;
+        }
+
+        if ("accessories".equalsIgnoreCase(category.getName()) ||
+                (category.getParentCategory() != null && "accessories".equalsIgnoreCase(category.getParentCategory().getName()))) {
+            return true;
+        }
+
+
+        return size != null;
+    }
 }

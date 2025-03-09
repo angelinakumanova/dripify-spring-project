@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.UUID;
 
@@ -63,7 +64,7 @@ public class ProductController {
     }
 
     @GetMapping("/new")
-    public ModelAndView sellProduct() {
+    public ModelAndView getAddNewProductPage() {
         ModelAndView modelAndView = new ModelAndView("/products/sell-product");
         modelAndView.addObject("createProductRequest", new CreateProductRequest());
         modelAndView.addObject("subcategories", categoryService.getSubcategories());
@@ -73,7 +74,8 @@ public class ProductController {
 
     @PostMapping("/new")
     public ModelAndView addNewProduct(@Valid CreateProductRequest createProductRequest, BindingResult bindingResult,
-                                      @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+                                      @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata,
+                                      RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             ModelAndView modelAndView = new ModelAndView("/products/sell-product");
@@ -83,6 +85,7 @@ public class ProductController {
         }
 
         productService.addNewProduct(createProductRequest, userService.getById(authenticationMetadata.getUserId()));
+        redirectAttributes.addFlashAttribute("successfulUpload", true);
 
         return new ModelAndView("redirect:/products/new");
     }
