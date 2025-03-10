@@ -716,6 +716,10 @@
       isValid = false;
     }
 
+    if (!description) {
+      document.getElementById('description-error').textContent = 'Description is required!';
+      isValid = false;
+    }
 
     if (!selectedGender) {
       document.getElementById("gender-error").textContent = "Please select a gender.";
@@ -748,7 +752,7 @@
     }
 
     if (!price || price < 1) {
-      document.getElementById('price-error').textContent = "Please enter a valid size.";
+      document.getElementById('price-error').textContent = "Please enter a valid price.";
       isValid = false;
     }
 

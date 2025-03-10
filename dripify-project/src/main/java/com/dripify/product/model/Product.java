@@ -76,4 +76,16 @@ public class Product {
     @Column(nullable = false)
     private LocalDateTime updatedOn;
 
+    @PrePersist
+    @PreUpdate
+    public void validateSize() {
+        if ("clothing".equalsIgnoreCase(category.getParentCategory().getName()) && SizeCategory.SHOE.equals(size.getCategory())) {
+            throw new IllegalArgumentException("Invalid clothing size: " + size);
+        } else if ("shoes".equalsIgnoreCase(category.getParentCategory().getName()) && SizeCategory.CLOTHING.equals(size.getCategory())) {
+            throw new IllegalArgumentException("Invalid shoe size: " + size);
+        } else if ("accessories".equalsIgnoreCase(category.getParentCategory().getName()) && size != null) {
+            throw new IllegalArgumentException("Product of type accessories must NOT have size.");
+        }
+    }
+
 }

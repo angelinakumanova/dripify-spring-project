@@ -63,7 +63,7 @@ public class CloudinaryService {
         String publicId = extractPublicIdFromUrl(imageUrl);
 
         if (publicId == null) {
-            throw new IllegalArgumentException("Invalid image url!");
+            throw new CloudinaryException("Invalid image url!");
         }
 
         String folder = "profile_pictures";
