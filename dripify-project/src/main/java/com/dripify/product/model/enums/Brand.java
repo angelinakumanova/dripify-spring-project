@@ -19,7 +19,8 @@ public enum Brand {
     PRADA("Prada"),
     LOUIS_VUITTON("Louis Vuitton"),
     BALENCIAGA("Balenciaga"),
-    OTHER("Other");
+    OTHER("Other"),
+    NO_LABEL("No Label");
 
     private final String name;
 

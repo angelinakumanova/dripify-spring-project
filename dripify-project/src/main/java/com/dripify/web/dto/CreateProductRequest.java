@@ -20,11 +20,11 @@ public class CreateProductRequest {
     private List<MultipartFile> images;
 
     @NotNull(message = "Title cannot be null!")
-    @jakarta.validation.constraints.Size(min = 20, max = 40, message = "Title must be 20-40 characters. Keep it clear and catchy!")
+    @jakarta.validation.constraints.Size(min = 10, max = 30, message = "Title must be 10-30 characters. Keep it clear and catchy!")
     private String title;
 
     @NotNull(message = "Description cannot be null!")
-    @jakarta.validation.constraints.Size(min = 100, max = 400, message = "Your description should be between 100 to 400 characters to make it impactful and to the point.")
+    @jakarta.validation.constraints.Size(min = 50, max = 200, message = "Your description should be between 50 to 200 characters to make it impactful and to the point.")
     private String description;
 
     @NotNull(message = "Gender is required!")
@@ -53,18 +53,24 @@ public class CreateProductRequest {
 
 
     @AssertTrue(message = "Size is required!")
-    public boolean isValid() {
+    public boolean size() {
 
         if (category == null) {
             return true;
         }
 
-        if ("accessories".equalsIgnoreCase(category.getName()) ||
-                (category.getParentCategory() != null && "accessories".equalsIgnoreCase(category.getParentCategory().getName()))) {
+        if ("accessories".equalsIgnoreCase(category.getParentCategory().getName()) && size == null) {
             return true;
         }
 
+        if ("clothing".equalsIgnoreCase(category.getParentCategory().getName()) && SizeCategory.CLOTHING.equals(size.getCategory())) {
+            return true;
+        }
 
-        return size != null;
+        if ("shoes".equalsIgnoreCase(category.getParentCategory().getName()) && SizeCategory.SHOE.equals(size.getCategory())) {
+            return true;
+        }
+
+        return false;
     }
 }

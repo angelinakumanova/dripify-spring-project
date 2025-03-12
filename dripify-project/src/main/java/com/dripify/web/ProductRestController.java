@@ -32,12 +32,12 @@ public class ProductRestController {
                                            BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            Map<String, String> errors = bindingResult.getFieldErrors().stream()
+            Map<String, Map<String, String>> errors = Map.of("errors", bindingResult.getFieldErrors().stream()
                     .collect(Collectors.toMap(
-                            error -> error.getField() + "-error",  // Key: fieldname-error
-                            FieldError::getDefaultMessage,        // Value: error message
-                            (existing, replacement) -> existing   // Handle duplicate keys
-                    ));
+                            error -> error.getField() + "-error",
+                            FieldError::getDefaultMessage,
+                            (existing, replacement) -> existing
+                    )));
 
 
             return ResponseEntity.badRequest().body(errors);

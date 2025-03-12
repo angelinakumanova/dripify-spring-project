@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" style="font-size: 16px;">
 
-<head th:replace="/fragments/head::head(pageName=${product.name})"></head>
+<head th:replace="~{/fragments/head::head(pageName=${product.name})}"></head>
 
 <body>
-  <div th:replace="/fragments/nav::nav"></div>
+  <div th:replace="~{/fragments/nav::nav}"></div>
 
   <div class="mt-32"></div>
   <div class="py-8 md:py-16 ">
@@ -44,65 +44,208 @@
 
 
 
-        <div class="mt-6 sm:mt-8 lg:mt-0">
-          <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl uppercase" th:text="${product.name}">
-          </h1>
-          <div class="mt-4 items-center gap-4 flex justify-between">
-            <p class="text-2xl font-extrabold text-gray-900 sm:text-3xl" th:text="${product.price + 'BGN'}">
-            </p>
-            <span id="heart" class="hover:cursor-pointer">
-              <!-- Outlined Heart -->
-              <svg id="outlined-heart" width="32" height="32" viewBox="0 0 32 32" fill="none"
-                xmlns="http://www.w3.org/2000/svg" class="w-8 h-8">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M15.1294 5.99275C12.2065 3.27396 7.6325 3.33719 4.78644 6.18243C1.87569 9.09317 2.04563 13.2328 4.78644 16.7221C5.08873 17.1069 5.46075 17.5433 5.88344 18.0151L6.41377 18.5973C6.50581 18.6968 6.59957 18.7975 6.69489 18.8992L7.28447 19.521L7.90439 20.1613L8.54733 20.8142L9.53892 21.8034L10.0124 22.2696L11.0539 23.2833L12.2627 24.443L14.3606 26.4202L16 27.9356L18.4446 25.6661L20.946 23.2833L22.461 21.8034L23.4526 20.8142L24.0955 20.1613L24.7155 19.521L25.305 18.8992C25.4004 18.7975 25.4941 18.6968 25.5861 18.5973L26.1165 18.0151C26.5392 17.5433 26.9112 17.1069 27.2135 16.7221C29.9543 13.2328 30.1242 9.09317 27.2135 6.18243C24.3027 3.27252 19.5846 3.27252 16.6739 6.18243L16 6.85633L15.3261 6.18243L15.1294 5.99275ZM18.2685 7.42416C20.4084 5.46936 23.7289 5.52686 25.7995 7.59685C27.887 9.68439 27.8524 12.6709 25.6407 15.4866C25.5974 15.5417 25.5523 15.5982 25.5054 15.6563L25.2024 16.0219L24.8571 16.4216L24.4709 16.8541L24.045 17.3182L23.581 17.8127L23.08 18.3364L22.2622 19.1739L21.6747 19.765L20.5844 20.8444L19.7953 21.6138C18.7299 22.6468 17.6159 23.7046 16.5028 24.7451L16 25.213L14.6629 23.9621C13.5523 22.9155 12.4529 21.8618 11.4128 20.8417L10.9421 20.3782L10.0256 19.4645L9.42081 18.8516L8.85462 18.2687L8.32866 17.7173L7.84457 17.1991L7.40396 16.7154L7.00845 16.2677L6.65966 15.8576C6.55137 15.7274 6.45114 15.6036 6.35923 15.4866C4.14747 12.6709 4.1129 9.68439 6.20045 7.59685C8.33019 5.46772 11.7823 5.46772 13.9121 7.59685L16 9.68476L18.0881 7.59664L18.2685 7.42416Z"
-                  fill="currentColor"></path>
-              </svg>
+        <div  class="mt-6 sm:mt-8 lg:mt-0">
+          <div id="product-info" th:classappend="${bindingResult == null ? '' : 'opacity-0 absolute pointer-events-none'}">
+            <div class="flex justify-between items-center">
+              <h1 class="text-xl font-semibold text-gray-900 sm:text-3xl uppercase" th:text="${product.name}">
+              </h1>
 
-              <!-- Filled Heart -->
-              <svg id="filled-heart" width="32" height="32" viewBox="0 0 32 32" fill="none"
-                xmlns="http://www.w3.org/2000/svg" class="hidden w-8 h-8">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M4.78644 6.18243C7.6325 3.33719 12.2065 3.27396 15.1294 5.99275L15.3261 6.18243L16 6.85633L16.6739 6.18243C19.5846 3.27252 24.3027 3.27252 27.2135 6.18243C30.1242 9.09317 29.9543 13.2328 27.2135 16.7221C26.9112 17.1069 26.5392 17.5433 26.1165 18.0151L25.5861 18.5973C25.4941 18.6968 25.4004 18.7975 25.305 18.8992L24.7155 19.521L24.0955 20.1613L23.4526 20.8142L22.461 21.8034L20.946 23.2833L18.4446 25.6661L16 27.9356L13.5554 25.6661L11.054 23.2833L9.53898 21.8034L8.54733 20.8142L7.90439 20.1613L7.28447 19.521L6.69489 18.8992C6.59957 18.7975 6.50581 18.6968 6.41377 18.5973L5.88344 18.0151C5.46075 17.5433 5.08873 17.1069 4.78644 16.7221C2.04563 13.2328 1.87569 9.09317 4.78644 6.18243Z"
-                  fill="currentColor"></path>
-              </svg>
-            </span>
+              <div th:if="${product.seller == user}" class="hs-dropdown [--placement:bottom-right] relative inline-flex">
+                <button id="hs-dropdown-custom-icon-trigger" type="button"
+                        class="hs-dropdown-toggle flex justify-center items-center size-9 text-sm font-semibold rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                        aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                  <svg class="flex-none size-6 text-gray-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                       stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="1" />
+                    <circle cx="12" cy="5" r="1" />
+                    <circle cx="12" cy="19" r="1" />
+                  </svg>
+                </button>
 
+                <div
+                        class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-32 bg-white shadow-md rounded-lg mt-2"
+                        role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-custom-icon-trigger">
+                  <div class="p-1 space-y-0.5">
+                    <a id="edit-product-btn" class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
+                       href="#">
+                      Edit
+                    </a>
+                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
+                       href="#">
+                      Delete
+                    </a>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 items-center gap-4 flex justify-between">
+              <p class="text-2xl font-extrabold text-gray-900 sm:text-3xl" th:text="${product.price + 'BGN'}">
+              </p>
+              <span th:if="${product.seller != user}" id="heart" class="hover:cursor-pointer">
+                <!-- Outlined Heart -->
+                <svg id="outlined-heart" width="32" height="32" viewBox="0 0 32 32" fill="none"
+                     xmlns="http://www.w3.org/2000/svg" class="w-8 h-8">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M15.1294 5.99275C12.2065 3.27396 7.6325 3.33719 4.78644 6.18243C1.87569 9.09317 2.04563 13.2328 4.78644 16.7221C5.08873 17.1069 5.46075 17.5433 5.88344 18.0151L6.41377 18.5973C6.50581 18.6968 6.59957 18.7975 6.69489 18.8992L7.28447 19.521L7.90439 20.1613L8.54733 20.8142L9.53892 21.8034L10.0124 22.2696L11.0539 23.2833L12.2627 24.443L14.3606 26.4202L16 27.9356L18.4446 25.6661L20.946 23.2833L22.461 21.8034L23.4526 20.8142L24.0955 20.1613L24.7155 19.521L25.305 18.8992C25.4004 18.7975 25.4941 18.6968 25.5861 18.5973L26.1165 18.0151C26.5392 17.5433 26.9112 17.1069 27.2135 16.7221C29.9543 13.2328 30.1242 9.09317 27.2135 6.18243C24.3027 3.27252 19.5846 3.27252 16.6739 6.18243L16 6.85633L15.3261 6.18243L15.1294 5.99275ZM18.2685 7.42416C20.4084 5.46936 23.7289 5.52686 25.7995 7.59685C27.887 9.68439 27.8524 12.6709 25.6407 15.4866C25.5974 15.5417 25.5523 15.5982 25.5054 15.6563L25.2024 16.0219L24.8571 16.4216L24.4709 16.8541L24.045 17.3182L23.581 17.8127L23.08 18.3364L22.2622 19.1739L21.6747 19.765L20.5844 20.8444L19.7953 21.6138C18.7299 22.6468 17.6159 23.7046 16.5028 24.7451L16 25.213L14.6629 23.9621C13.5523 22.9155 12.4529 21.8618 11.4128 20.8417L10.9421 20.3782L10.0256 19.4645L9.42081 18.8516L8.85462 18.2687L8.32866 17.7173L7.84457 17.1991L7.40396 16.7154L7.00845 16.2677L6.65966 15.8576C6.55137 15.7274 6.45114 15.6036 6.35923 15.4866C4.14747 12.6709 4.1129 9.68439 6.20045 7.59685C8.33019 5.46772 11.7823 5.46772 13.9121 7.59685L16 9.68476L18.0881 7.59664L18.2685 7.42416Z"
+                        fill="currentColor"></path>
+                </svg>
+
+                <!-- Filled Heart -->
+                <svg id="filled-heart" width="32" height="32" viewBox="0 0 32 32" fill="none"
+                     xmlns="http://www.w3.org/2000/svg" class="hidden w-8 h-8">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M4.78644 6.18243C7.6325 3.33719 12.2065 3.27396 15.1294 5.99275L15.3261 6.18243L16 6.85633L16.6739 6.18243C19.5846 3.27252 24.3027 3.27252 27.2135 6.18243C30.1242 9.09317 29.9543 13.2328 27.2135 16.7221C26.9112 17.1069 26.5392 17.5433 26.1165 18.0151L25.5861 18.5973C25.4941 18.6968 25.4004 18.7975 25.305 18.8992L24.7155 19.521L24.0955 20.1613L23.4526 20.8142L22.461 21.8034L20.946 23.2833L18.4446 25.6661L16 27.9356L13.5554 25.6661L11.054 23.2833L9.53898 21.8034L8.54733 20.8142L7.90439 20.1613L7.28447 19.521L6.69489 18.8992C6.59957 18.7975 6.50581 18.6968 6.41377 18.5973L5.88344 18.0151C5.46075 17.5433 5.08873 17.1069 4.78644 16.7221C2.04563 13.2328 1.87569 9.09317 4.78644 6.18243Z"
+                        fill="currentColor"></path>
+                </svg>
+              </span>
+
+            </div>
+
+
+
+
+            <div th:if="${product.seller != user}" class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
+              <button
+                      class="add-to-cart-btn transition-colors w-full bg-zinc-900 mt-4 sm:mt-0 text-white
+                 hover:bg-zinc-700 ease-in duration-300 font-medium rounded-full text-sm px-5 py-2.5 flex items-center justify-center"
+                      role="button">
+                <svg class="w-5 h-5 -ms-2 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                     height="24" fill="none" viewBox="0 0 24 24">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
+                </svg>
+
+                Add to cart
+              </button>
+            </div>
+
+            <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
+
+            <p class="font-bold text-2xl">Description</p>
+            <p th:text="${product.description}" class="text-xl"></p>
+
+
+            <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
+
+            <ul class="list-none space-y-2">
+              <li><span class="font-bold text-xl">Condition:</span> <span class="text-xl"
+                                                                     th:text="${product.condition.toString()}"></span></li>
+              <li><span class="font-bold text-xl">Size:</span> <span class="text-xl"
+                                                                     th:text="${product.size.toString()}"></span></li>
+              <li><span class="font-bold text-xl">Brand:</span> <span class="text-xl"
+                                                                      th:text="${product.brand.toString()}"></span></li>
+              <li><span class="font-bold text-xl">Material:</span> <span class="text-xl"
+                                                                         th:text="${product.material.toString()}"></span></li>
+              <li><span class="font-bold text-xl">Color:</span> <span class="text-xl"
+                                                                      th:text="${product.color.toString()}"></span></li>
+            </ul>
           </div>
 
+          <form th:if="${product.seller == user}" th:action="@{'/products/' + ${product.id} + '/edit'}" th:method="PUT"
+                th:object="${productEditRequest}"
+                id="edit-product-form" th:classappend="${#fields.hasErrors() ? '' : 'hidden'}">
+            <div class="flex justify-between items-center">
+              <input type="text" minlength="10" maxlength="30"
+                     class="text-xl font-semibold text-gray-900 sm:text-3xl uppercase rounded-lg pl-3 border-2 border-zinc-900"
+                     th:field="*{title}">
 
-          <a href="#" th:text="${product.seller.username}" class="text-sm font-medium text-gray-900"></a>
 
-<!--          TODO: TOGGLE-->
-          <button class="hover:underline text-sm font-bold text-gray-900">
-            (345 Reviews)
-          </button>
+              <div class="flex gap-2">
+                <button type="submit" class="text-white font-bold bg-zinc-900 p-2 rounded-lg hover:bg-zinc-700 transition duration-200 ease-in-out">Save Changes</button>
+                <button id="cancel-edit-btn" class="text-white font-bold bg-zinc-900 p-2 rounded-lg hover:bg-zinc-700 transition duration-200 ease-in-out">Cancel</button>
+              </div>
 
-          <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
-            <button
-              class="add-to-cart-btn transition-colors w-full bg-zinc-900 mt-4 sm:mt-0 text-white hover:bg-zinc-700 ease-in duration-300 font-medium rounded-full text-sm px-5 py-2.5 flex items-center justify-center"
-              role="button">
-              <svg class="w-5 h-5 -ms-2 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
-              </svg>
+            </div>
+            <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-red-600 font-semibold" ></p>
+            <p th:if="${successfulMessage}" class="justify-self-end text-green-600 font-semibold">Your product was updated.</p>
 
-              Add to cart
-            </button>
-          </div>
+            <input type="number" th:field="*{price}" class="mt-6 text-2xl font-extrabold text-gray-900 sm:text-3xl w-32
+             rounded-lg pl-3 border-2 border-zinc-900"><span class="text-2xl font-extrabold text-gray-900 sm:text-3xl"> BGN</span>
+            <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-red-600 font-semibold"></p>
+
+
+            <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
+
+            <p class="font-bold text-2xl mb-2">Description</p>
+            <textarea minlength="50" maxlength="200" th:field="*{description}"
+                      class="rounded-lg pl-3 border-2 border-zinc-900 text-xl py-3 px-4 block w-full
+              disabled:opacity-50 disabled:pointer-events-none" rows="3"
+                      placeholder="Describe the look, feel, and flex!"></textarea>
+            <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-red-600 font-semibold"></p>
+
+
+            <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
+
+            <ul class="list-none space-y-2">
+              <li><span class="font-bold text-xl">Condition:</span>
+                <select class="text-xl border-2 border-zinc-900 rounded-lg" th:field="*{condition}">
+                  <option th:each="condition: ${T(com.dripify.product.model.enums.Condition).values()}"
+                          th:text="${condition}" th:value="${condition.name()}" ></option>
+                </select>
+              </li>
+              <li><span class="font-bold text-xl">Size:</span>
+                <select class="text-xl border-2 border-zinc-900 rounded-lg" th:field="*{size}">
+                  <option th:each="size: ${T(com.dripify.product.model.enums.Size).values()}"
+                          th:if="${size.getCategory().name().equals(product.size.getCategory().name())}"
+                          th:text="${size}" th:value="${size}" ></option>
+                </select>
+              </li>
+              <li><span class="font-bold text-xl">Brand:</span>
+                <select class="text-xl border-2 border-zinc-900 rounded-lg" th:field="*{brand}">
+                <option th:each="brand: ${T(com.dripify.product.model.enums.Brand).values()}"
+                        th:text="${brand}" th:value="${brand.name()}" ></option>
+                </select>
+              </li>
+              <li><span class="font-bold text-xl">Material:</span>
+                <select class="text-xl border-2 border-zinc-900 rounded-lg" th:field="*{material}">
+                  <option th:each="material: ${T(com.dripify.product.model.enums.Material).values()}"
+                          th:text="${material}" th:value="${material.name()}" ></option>
+                </select>
+              </li>
+              <li><span class="font-bold text-xl">Color:</span>
+                <select class="text-xl border-2 border-zinc-900 rounded-lg" th:field="*{color}">
+                  <option th:each="color: ${T(com.dripify.product.model.enums.Color).values()}"
+                          th:text="${color}" th:value="${color.name()}" ></option>
+                </select>
+              </li>
+            </ul>
+          </form>
+
+
 
           <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
 
-          <ul class="list-none space-y-2">
-            <li><span class="font-bold">Description:</span> <span th:text="${product.description}"></span></li>
-            <li><span class="font-bold">Size:</span> <span th:text="${product.size.toString()}"></span></li>
-            <li><span class="font-bold">Brand:</span> <span th:text="${product.brand.toString()}"></span></li>
-            <li><span class="font-bold">Material:</span> <span th:text="${product.material.toString()}"></span></li>
-            <li><span class="font-bold">Color:</span> <span th:text="${product.color.toString()}"></span></li>
-            <li><span class="font-bold">Condition:</span> <span th:text="${product.condition.toString()}"></span></li>
-          </ul>
+          <div class="flex gap-5">
+            <img class="object-cover w-32 aspect-square p-1 rounded-full ring-2 ring-gray-800"
+                 th:src="${#strings.isEmpty(product.seller.imageUrl) ? '/images/anonymous-user.jpg' : product.seller.imageUrl}"
+                 alt="Profile Picture">
+
+            <div class="flex flex-col justify-evenly">
+              <div class="ml-1">
+                <a th:href="@{'/users/' + ${product.seller.username} + '/profile/products'}" th:text="${product.seller.username}"
+                   class="font-bold text-2xl text-zinc-900 hover:underline"></a>
+
+
+                <a th:href="@{'/users/' + ${product.seller.username} + '/profile/reviews'}"
+                   class="hover:underline text-sm font-bold text-gray-900"
+                   th:text="${'(' + product.seller.reviews.size() + ' Reviews)'}">
+                </a >
+              </div>
+
+
+              <a th:href="@{'/users/' + ${product.seller.username} + '/profile/products'}"
+                 class="text-base bg-zinc-800 font-bold text-white p-2 px-4
+                 hover:bg-zinc-500 transition duration-200 ease-in-out rounded-xl
+                 uppercase">
+                See More Products
+              </a>
+            </div>
+          </div>
         </div>
+
 
 
       </div>
@@ -112,185 +255,72 @@
   </div>
 
   <div id="seller-reviews" class="mt-32">
-    <h1 class="text-xl font-semibold text-center text-gray-900 sm:text-2xl uppercase">
-      seller reviews <button class="hover:underline font-bold" onclick="toggleModal()">(374 reviews)</button>
+    <h1 class="text-xl font-bold text-center text-zinc-900 p-4 sm:text-2xl uppercase">
+      more from this seller
     </h1>
 
-    <!-- TODO: REMOVE ONCLICK -->
-    <!-- Modal -->
-    <div id="modal"
-      class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex justify-center items-center hidden z-50">
-      <div class="bg-white w-11/12 max-w-4xl rounded-lg shadow-lg overflow-y-auto max-h-[90vh] p-6 relative">
-        <!-- Close Button -->
-        <button onclick="toggleModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+    <h1 th:if="${sellerMoreProducts.isEmpty()}"
+        class="text-xl font-bold text-center text-gray-900 uppercase mt-12 mb-14">
+      This seller has no other products available.</h1>
+    <div th:unless="${sellerMoreProducts.isEmpty()}"
+         class="mx-auto max-w-2xl px-4 py-14 sm:px-6 lg:max-w-7xl lg:px-8">
+      <div class="flex overflow-x-auto space-x-6 sm:grid sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8 sm:space-x-0">
 
-        <!-- Modal Header -->
-        <h2 class="text-2xl font-bold mb-4">Customer Reviews</h2>
+        <div th:each="extraProduct: ${sellerMoreProducts.stream().limit(4)}"
+             th:if="${extraProduct.id != product.id}"
+             class="group relative flex-shrink-0 w-48 sm:w-auto sm:pr-8">
+          <img th:src="${extraProduct.images.get(0).imageUrl}"
+               th:alt="${extraProduct.name}"
+               class="aspect-square w-full rounded-md bg-gray-200 object-center object-cover
+                group-hover:opacity-75 lg:aspect-auto lg:h-80">
+          <div class="mt-4 flex justify-between">
 
-        <!-- Reviews Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <!-- Review 1 (Matching Upper One) -->
-          <div class="bg-zinc-100 p-4 rounded-lg shadow">
-            <p class="text-gray-800">"Absolutely fantastic experience! The seller was so kind and
-              professional."</p>
-            <span class="block mt-2 text-gray-500 text-sm">- Emilia Dimitrova</span>
+            <div>
+              <h3 class="text-sm text-gray-700">
+                <a th:href="@{/products/{id}/product(id = ${extraProduct.id})}">
+                  <span aria-hidden="true" class="absolute inset-0"></span>
+                  <span th:text="${extraProduct.name}"></span>
+                </a>
+              </h3>
+              <p class="text-sm font-medium text-gray-900" th:text="${extraProduct.price + ' BGN'}"></p>
+
+            </div>
+
           </div>
-
-          <!-- Review 2 (Matching Upper One) -->
-          <div class="bg-zinc-100 p-4 rounded-lg shadow">
-            <p class="text-gray-800">"Fast shipping and excellent packaging. Highly recommended seller!"</p>
-            <span class="block mt-2 text-gray-500 text-sm">- Sofia Ivanova</span>
-          </div>
-
-          <!-- Review 3 (Matching Upper One) -->
-          <div class="bg-zinc-100 p-4 rounded-lg shadow">
-            <p class="text-gray-800">"Great communication and high-quality products. Will buy again!"</p>
-            <span class="block mt-2 text-gray-500 text-sm">- Nikol Petrov</span>
-          </div>
-
-          <!-- Additional Reviews -->
-          <div class="bg-zinc-100 p-4 rounded-lg shadow">
-            <p class="text-gray-800">"Love my purchase! The item was exactly as described."</p>
-            <span class="block mt-2 text-gray-500 text-sm">- Maria K.</span>
-          </div>
-
-          <div class="bg-zinc-100 p-4 rounded-lg shadow">
-            <p class="text-gray-800">"Very reliable seller. Thank you for the amazing service!"</p>
-            <span class="block mt-2 text-gray-500 text-sm">- Ivan Dimitrov</span>
-          </div>
-
-          <div class="bg-zinc-100 p-4 rounded-lg shadow">
-            <p class="text-gray-800">"Perfect transaction from start to finish. Highly recommend!"</p>
-            <span class="block mt-2 text-gray-500 text-sm">- Anna G.</span>
-          </div>
-
-          <!-- Add 14 More Reviews Following the Same Pattern -->
-          <!-- Feel free to repeat or adjust the content -->
-          <!-- Example -->
-          <div class="bg-zinc-100 p-4 rounded-lg shadow">
-            <p class="text-gray-800">"I am beyond satisfied with my purchase. The seller is amazing!"</p>
-            <span class="block mt-2 text-gray-500 text-sm">- Vesela Yaneva</span>
-          </div>
-
-          <div class="bg-zinc-100 p-4 rounded-lg shadow">
-            <p class="text-gray-800">"Top-notch service. Couldn't ask for better!"</p>
-            <span class="block mt-2 text-gray-500 text-sm">- Kaloyan T.</span>
-          </div>
-
-          <!-- Repeat until 20 reviews are filled -->
         </div>
-      </div>
-    </div>
-
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-4 p-4">
-      <div class="p-4 bg-gray-50 rounded-lg shadow-md">
-        <h3 class="text-lg font-semibold text-gray-900">Amazing Seller!</h3>
-        <p class="mt-2 text-sm text-gray-700">
-          The seller was very responsive and shipped my order quickly. The product was exactly as described.
-          Would definitely recommend!
-        </p>
-        <p class="mt-4 text-sm font-medium text-gray-500">- Emily R.</p>
-      </div>
-      <div class="p-4 bg-gray-50 rounded-lg shadow-md">
-        <h3 class="text-lg font-semibold text-gray-900">Great Experience</h3>
-        <p class="mt-2 text-sm text-gray-700">
-          Excellent customer service! The seller answered all my questions and ensured I got my order on time.
-          Will shop again soon.
-        </p>
-        <p class="mt-4 text-sm font-medium text-gray-500">- Jason P.</p>
-      </div>
-      <div class="p-4 bg-gray-50 rounded-lg shadow-md">
-        <h3 class="text-lg font-semibold text-gray-900">Highly Recommend</h3>
-        <p class="mt-2 text-sm text-gray-700">
-          Very reliable seller with top-notch quality products. Packaging was great, and delivery was faster
-          than expected. Five stars!
-        </p>
-        <p class="mt-4 text-sm font-medium text-gray-500">- Sarah L.</p>
       </div>
     </div>
   </div>
 
-  <div id="popular-items" class="mt-32">
-    <h1 class="text-xl px-4 font-semibold text-center text-gray-900 sm:text-2xl uppercase">
-      customers are also looking at
+  <hr>
+
+  <div id="popular-items">
+    <h1 class="text-xl font-bold text-center text-zinc-900 p-4 sm:text-2xl uppercase mt-12">
+      similar products
     </h1>
 
     <div class="mx-auto max-w-2xl px-4 py-14 sm:px-6 lg:max-w-7xl lg:px-8">
-      <!-- Scrollable container for small screens -->
       <div class="flex overflow-x-auto space-x-6 sm:grid sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8 sm:space-x-0">
-        <div class="group relative flex-shrink-0 w-48 sm:w-auto">
-          <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
-            alt="Front of men&#039;s Basic Tee in black."
-            class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
+        <div th:each="similarProduct: ${similarProducts}"
+             class="group relative flex-shrink-0 w-48 sm:w-auto sm:pr-8">
+          <img th:src="${similarProduct.images.get(0).imageUrl}"
+               th:alt="${similarProduct.name}"
+               class="aspect-square w-full rounded-md bg-gray-200 object-center object-cover
+                group-hover:opacity-75 lg:aspect-auto lg:h-80">
           <div class="mt-4 flex justify-between">
-            <div>
-              <h3 class="text-sm text-gray-700">
-                <a href="#">
-                  <span aria-hidden="true" class="absolute inset-0"></span>
-                  Basic Tee
-                </a>
-              </h3>
-              <p class="mt-1 text-sm text-gray-500">Black</p>
-            </div>
-            <p class="text-sm font-medium text-gray-900">$35</p>
-          </div>
-        </div>
 
-        <div class="group relative flex-shrink-0 w-48 sm:w-auto">
-          <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
-            alt="Front of men&#039;s Basic Tee in black."
-            class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
-          <div class="mt-4 flex justify-between">
             <div>
               <h3 class="text-sm text-gray-700">
-                <a href="#">
+                <a th:href="@{/products/{id}/product(id = ${similarProduct.id})}">
                   <span aria-hidden="true" class="absolute inset-0"></span>
-                  Basic Tee
+                  <span th:text="${similarProduct.name}"></span>
                 </a>
               </h3>
-              <p class="mt-1 text-sm text-gray-500">Black</p>
-            </div>
-            <p class="text-sm font-medium text-gray-900">$35</p>
-          </div>
-        </div>
 
-        <div class="group relative flex-shrink-0 w-48 sm:w-auto">
-          <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
-            alt="Front of men&#039;s Basic Tee in black."
-            class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
-          <div class="mt-4 flex justify-between">
-            <div>
-              <h3 class="text-sm text-gray-700">
-                <a href="#">
-                  <span aria-hidden="true" class="absolute inset-0"></span>
-                  Basic Tee
-                </a>
-              </h3>
-              <p class="mt-1 text-sm text-gray-500">Black</p>
+              <p class="text-sm font-medium text-gray-900" th:text="${similarProduct.seller.username}"></p>
             </div>
-            <p class="text-sm font-medium text-gray-900">$35</p>
-          </div>
-        </div>
+            <p class="text-sm font-medium text-gray-900" th:text="${similarProduct.price + ' BGN'}"></p>
 
-        <div class="group relative flex-shrink-0 w-48 sm:w-auto">
-          <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg"
-            alt="Front of men&#039;s Basic Tee in black."
-            class="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80">
-          <div class="mt-4 flex justify-between">
-            <div>
-              <h3 class="text-sm text-gray-700">
-                <a href="#">
-                  <span aria-hidden="true" class="absolute inset-0"></span>
-                  Basic Tee
-                </a>
-              </h3>
-              <p class="mt-1 text-sm text-gray-500">Black</p>
-            </div>
-            <p class="text-sm font-medium text-gray-900">$35</p>
           </div>
         </div>
       </div>

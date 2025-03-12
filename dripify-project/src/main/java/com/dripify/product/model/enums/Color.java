@@ -18,8 +18,7 @@ public enum Color {
     TEAL("Teal"),
     OLIVE("Olive"),
     MAROON("Maroon"),
-    CYAN("Cyan"),
-    OTHER("Other");
+    CYAN("Cyan");
 
     private final String name;
 

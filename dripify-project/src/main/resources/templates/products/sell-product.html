@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" style="font-size: 16px;">
 
-<head th:replace="~{fragments/head::head(pageName='Sell Your Drip')}"></head>
+<head th:replace="~{fragments/head::head(pageName='Sell Your Drip', csrfRequired=true)}"></head>
 
 <body>
 
@@ -138,10 +138,11 @@
       <div class="mb-7">
         <div class="flex justify-between items-center">
           <label for="title-input" class="block uppercase mb-2 text-lg font-bold text-gray-800">title</label>
-          <span class="block mb-2 text-sm text-gray-500">20 - 40 characters</span>
+          <span class="block mb-2 text-sm text-gray-500">10 - 30 characters</span>
         </div>
-        <input type="text" id="title-input" placeholder="Enter the title for your product"
-               class="bg-white border-2 border-gray-200 text-gray-900 text-sm rounded-lg  block w-full p-3 ">
+        <input type="text" id="title-input" minlength="10" maxlength="30" placeholder="Enter the title for your product"
+               class="bg-white border-2 border-gray-200 text-gray-900 text-sm rounded-lg  block w-full p-3
+                focus:outline-none focus:border-zinc-600">
 
         <span class="error-message text-sm font-semibold text-red-500 uppercase" id="title-error"></span>
       </div>
@@ -152,10 +153,10 @@
           <div class="flex justify-between items-center">
             <label for="description-input"
                    class="block uppercase mb-2 text-lg font-bold text-gray-800">description</label>
-            <span class="block mb-2 text-sm text-gray-500">100 - 400 characters</span>
+            <span class="block mb-2 text-sm text-gray-500">50 - 200 characters</span>
           </div>
-          <textarea id="description-input" class="py-3 px-4 block w-full
-           border-2 border-gray-200 rounded-lg text-sm
+          <textarea id="description-input" minlength="50" maxlength="200" class="py-3 px-4 block w-full
+           border-2 border-gray-200 rounded-lg text-sm focus:outline-none focus:border-zinc-600
            disabled:opacity-50 disabled:pointer-events-none" rows="3"
                     placeholder="Describe the look, feel, and flex!"></textarea>
         </div>
@@ -673,8 +674,6 @@
   document.getElementById("upload-product-form").addEventListener("submit", function (event) {
     event.preventDefault();
 
-
-
     const imageInput = document.getElementById('dropzone-file');
     const title = document.getElementById("title-input").value;
     const description = document.getElementById("description-input").value;
@@ -691,7 +690,7 @@
             : document.getElementById("shoe-size-select").value;
 
     const price = document.getElementById("price-input").value;
-    // Clear previous error messages
+
     document.querySelectorAll(".error-message").forEach(el => el.textContent = "");
 
     let isValid = true;
@@ -701,6 +700,7 @@
       document.getElementById('images-error').textContent = "Show us more! At least two photos are needed to upload your product."
       isValid = false;
     }
+
     if (!title) {
       document.getElementById('title-error').textContent = "Title is required!"
       isValid = false;
@@ -718,6 +718,16 @@
 
     if (!description) {
       document.getElementById('description-error').textContent = 'Description is required!';
+      isValid = false;
+    }
+
+    if (description.length < 50) {
+      document.getElementById('description-error').textContent = 'Description should be longer!';
+      isValid = false;
+    }
+
+    if (description.length > 200) {
+      document.getElementById('description-error').textContent = 'Description should be shorter!';
       isValid = false;
     }
 
@@ -756,30 +766,36 @@
       isValid = false;
     }
 
-    // If validation fails, stop
+
     if (!isValid) return;
 
 
-    const createProductRequest = new FormData();
+    const formData = new FormData();
     for (let i = 0; i < imageInput.files.length; i++) {
-      createProductRequest.append("images", imageInput.files[i]);
+      formData.append("images", imageInput.files[i]);
     }
 
-    createProductRequest.append("title", title);
-    createProductRequest.append("description", description);
-    createProductRequest.append("gender", selectedGender);
-    createProductRequest.append("category", selectedCategory);
-    createProductRequest.append("size", selectedSize);
-    createProductRequest.append("material", selectedMaterial);
-    createProductRequest.append("color", selectedColor);
-    createProductRequest.append("condition", selectedCondition);
-    createProductRequest.append("brand", selectedBrand);
-    createProductRequest.append("price", price);
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("gender", selectedGender);
+    formData.append("category", selectedCategory);
+    formData.append("size", selectedSize);
+    formData.append("material", selectedMaterial);
+    formData.append("color", selectedColor);
+    formData.append("condition", selectedCondition);
+    formData.append("brand", selectedBrand);
+    formData.append("price", price);
+
+    const csrfToken = document.querySelector('meta[name="_csrf"]').content;
+    const csrfHeader = document.querySelector('meta[name="_csrf_header"]').content;
 
     document.getElementById('loading-box').classList.remove('hidden');
       fetch("http://localhost:8080/api/v1/products/new", {
+        headers: {
+          [csrfHeader]: csrfToken,
+        },
         method: "POST",
-        body: createProductRequest,
+        body: formData,
         credentials: "include"
       })
               .then(response => {
@@ -790,6 +806,7 @@
                 return response.json();
               })
               .then(data => {
+                document.getElementById('loading-box').classList.add('hidden');
                 document.getElementById('successful-upload-box').classList.remove('opacity-0');
                 document.getElementById('successful-upload-box').classList.add('opacity-100', 'pointer-events-auto');
 
@@ -803,7 +820,7 @@
 
                   for (const [key, message] of Object.entries(errors)) {
 
-                    if (key === 'timestamp') {
+                    if (key === 'errors') {
                       document.getElementById('error-upload-box').classList.remove('opacity-0');
                       document.getElementById("error-upload-box").classList.add('opacity-100', 'pointer-events-auto');
 
@@ -811,6 +828,7 @@
                           document.getElementById('error-upload-box').classList.remove('opacity-100', 'pointer-events-auto');
                           document.getElementById('error-upload-box').classList.add('opacity-0');
                       }, 3000);
+                      return;
                     }
 
                     const errorElement = document.getElementById(key);
@@ -824,6 +842,30 @@
 
 
   });
+
+
+  validateInputLength(document.getElementById('title-input'));
+  validateInputLength(document.getElementById('description-input'));
+
+
+  function validateInputLength(inputElement) {
+    const maxLength = inputElement.maxLength;
+    const minLength = inputElement.minLength;
+
+    inputElement.addEventListener("input", () => {
+      const length = inputElement.value.length;
+
+      if (length > maxLength || length < minLength) {
+        inputElement.classList.add("border-red-500", "focus:border-red-500");
+        inputElement.classList.remove("focus:border-zinc-600");
+      } else {
+        inputElement.classList.remove("border-red-500", "focus:border-red-500");
+        inputElement.classList.add("focus:border-zinc-600");
+
+      }
+    });
+  }
+
 
 </script>
 </body>

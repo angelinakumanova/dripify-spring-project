@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="shortcut icon" href="/images/favicon.ico" />
     <script src="/js/main.js" defer></script>
+
+    <th:block th:if="${csrfRequired}">
+        <meta name="_csrf" th:content="${_csrf.token}"/>
+        <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    </th:block>
 </head>
 <body>
 </body>

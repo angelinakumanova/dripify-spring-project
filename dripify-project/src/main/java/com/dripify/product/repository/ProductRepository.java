@@ -42,4 +42,11 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 
 
     Page<Product> getProductsBySeller(User user, Pageable pageable);
+
+    @Query("SELECT p FROM Product p WHERE p.category = :category AND p.gender = :gender AND " +
+            "NOT p.id = :currentProductId ORDER BY p.createdOn DESC LIMIT :limit")
+    List<Product> getProductsByCategoryOrderByCreatedOnDesc(Category category, Gender gender, UUID currentProductId, int limit);
+
+
+    List<Product> getProductsBySellerAndIdNotOrderByCreatedOnDesc(User seller, UUID id);
 }

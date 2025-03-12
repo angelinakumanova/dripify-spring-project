@@ -12,6 +12,7 @@ import com.dripify.shared.enums.Gender;
 import com.dripify.user.model.User;
 import com.dripify.user.service.UserService;
 import com.dripify.web.dto.CreateProductRequest;
+import com.dripify.web.dto.ProductEditRequest;
 import com.dripify.web.dto.ProductFilter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +21,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -79,6 +79,17 @@ public class ProductService {
 
     }
 
+    public List<Product> getSimilarProducts(int limit, Product currentProduct) {
+
+        return productRepository.getProductsByCategoryOrderByCreatedOnDesc(currentProduct.getCategory(), currentProduct.getGender(), currentProduct.getId(), limit)
+                .stream()
+                .toList();
+    }
+
+    public List<Product> getUserLatestProducts(User user, UUID currentProductId) {
+        return productRepository.getProductsBySellerAndIdNotOrderByCreatedOnDesc(user, currentProductId);
+    }
+
     public void addNewProduct(CreateProductRequest createProductRequest, User user) {
         Product product = initializeProduct(createProductRequest, user);
         productRepository.save(product);
@@ -96,7 +107,45 @@ public class ProductService {
         });
     }
 
-    private static Product initializeProduct(CreateProductRequest createProductRequest, User user) {
+    public void editProduct(Product product, ProductEditRequest productEditRequest, User user) {
+        if (product.getSeller() != user) {
+            throw new IllegalArgumentException("You are not allowed to edit this product.");
+        }
+
+        Product editedProduct = editProductData(product, productEditRequest);
+        productRepository.save(editedProduct);
+    }
+
+
+
+    public Page<Product> getProductsByUsername(String username, int page) {
+        User user = userService.getByUsername(username);
+
+        Pageable pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE);
+
+        return productRepository.getProductsBySeller(user, pageable);
+    }
+
+
+    public Product getProductById(UUID id) {
+        return productRepository.getProductById(id).orElseThrow(() -> new DomainException("Product does not exist"));
+    }
+
+    private Product editProductData(Product product, ProductEditRequest productEditRequest) {
+        product.setName(productEditRequest.getTitle());
+        product.setDescription(productEditRequest.getDescription());
+        product.setPrice(productEditRequest.getPrice());
+        product.setBrand(productEditRequest.getBrand());
+        product.setColor(productEditRequest.getColor());
+        product.setMaterial(productEditRequest.getMaterial());
+        product.setSize(productEditRequest.getSize());
+        product.setCondition(productEditRequest.getCondition());
+
+        return product;
+    }
+
+
+    private Product initializeProduct(CreateProductRequest createProductRequest, User user) {
 
 
         return Product.builder()
@@ -114,19 +163,6 @@ public class ProductService {
                 .createdOn(LocalDateTime.now())
                 .updatedOn(LocalDateTime.now())
                 .build();
-    }
-
-    public Page<Product> getProductsByUsername(String username, int page) {
-        User user = userService.getByUsername(username);
-
-        Pageable pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE);
-
-        return productRepository.getProductsBySeller(user, pageable);
-    }
-
-
-    public Product getProductById(UUID id) {
-        return productRepository.getProductById(id).orElseThrow(() -> new DomainException("Product does not exist"));
     }
 
 

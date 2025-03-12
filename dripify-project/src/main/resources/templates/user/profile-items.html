@@ -54,7 +54,7 @@
             <div class="mt-6 grid gap-x-6 gap-y-10 grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 xl:gap-x-3">
 
 
-                <a th:each="product: ${productPage.getContent()}" th:href="@{/products/{id}/product(id=${product.id})}">
+                <a th:each="product: ${productPage.getContent()}" th:href="@{/products/{id}(id=${product.id})}">
 
                     <div class="group relative group-hover:cursor-pointer">
                         <img th:src="${product.images.get(0).imageUrl}"

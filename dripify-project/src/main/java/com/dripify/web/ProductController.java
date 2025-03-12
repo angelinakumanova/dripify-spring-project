@@ -6,12 +6,15 @@ import com.dripify.product.service.ProductService;
 import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.service.UserService;
 import com.dripify.web.dto.CreateProductRequest;
+import com.dripify.web.dto.ProductEditRequest;
 import com.dripify.web.dto.ProductFilter;
+import com.dripify.web.mapper.DtoMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -55,12 +58,46 @@ public class ProductController {
     }
 
 
-    @GetMapping("/{id}/product")
-    public ModelAndView getProduct(@PathVariable UUID id) {
-        ModelAndView modelAndView = new ModelAndView("/products/single-product");
-        modelAndView.addObject("product", productService.getProductById(id));
+    @GetMapping("/{id}")
+    public String getProduct(@PathVariable UUID id, Model model) {
 
-        return modelAndView;
+        Product product = productService.getProductById(id);
+        model.addAttribute("product", product);
+
+        if (!model.containsAttribute("productEditRequest")) {
+            model.addAttribute("productEditRequest", DtoMapper.mapToProductEditRequest(product));
+        }
+
+        if (model.containsAttribute("org.springframework.validation.BindingResult.productEditRequest")) {
+            BindingResult bindingResult = (BindingResult) model.getAttribute("org.springframework.validation.BindingResult.productEditRequest");
+            model.addAttribute("bindingResult", bindingResult);
+        }
+
+
+        int productsFetchLimit = 4;
+        model.addAttribute("similarProducts", productService.getSimilarProducts(productsFetchLimit, product));
+        model.addAttribute("sellerMoreProducts", productService.getUserLatestProducts(product.getSeller(), product.getId()));
+
+        return "/products/single-product";
+    }
+
+    @PutMapping("/{id}/edit")
+    public String editProduct(@PathVariable UUID id, @Valid ProductEditRequest productEditRequest, BindingResult bindingResult,
+                              RedirectAttributes redirectAttributes, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("productEditRequest", productEditRequest);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.productEditRequest", bindingResult);
+
+
+            return "redirect:/products/" + id;
+        }
+
+        Product product = productService.getProductById(id);
+        productService.editProduct(product, productEditRequest, userService.getById(authenticationMetadata.getUserId()));
+
+        return "redirect:/products/" + id;
     }
 
     @GetMapping("/new")

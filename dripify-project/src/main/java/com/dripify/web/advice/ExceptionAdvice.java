@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class ExceptionAdvice {
 
     @ExceptionHandler(UserUpdateException.class)
     public String handleUserUpdateException(UserUpdateException e, RedirectAttributes redirectAttributes) {
