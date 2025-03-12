@@ -87,7 +87,7 @@ public class ProductService {
     }
 
     public List<Product> getUserLatestProducts(User user, UUID currentProductId) {
-        return productRepository.getProductsBySellerAndIdNotOrderByCreatedOnDesc(user, currentProductId);
+        return productRepository.getProductsBySellerAndIdNotAndIsActiveOrderByCreatedOnDesc(user, currentProductId, true);
     }
 
     public void addNewProduct(CreateProductRequest createProductRequest, User user) {
@@ -116,19 +116,26 @@ public class ProductService {
         productRepository.save(editedProduct);
     }
 
+    public void deactivateProduct(Product product, User user) {
+        if (product.getSeller() != user) {
+            throw new IllegalArgumentException("You are not allowed to deactivate this product.");
+        }
 
+        product.setActive(false);
+        productRepository.save(product);
+    }
 
     public Page<Product> getProductsByUsername(String username, int page) {
         User user = userService.getByUsername(username);
 
         Pageable pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE);
 
-        return productRepository.getProductsBySeller(user, pageable);
+        return productRepository.getProductsBySellerAndIsActive(user, pageable, true);
     }
 
 
     public Product getProductById(UUID id) {
-        return productRepository.getProductById(id).orElseThrow(() -> new DomainException("Product does not exist"));
+        return productRepository.getProductByIdAndIsActive(id, true).orElseThrow(() -> new DomainException("Product does not exist"));
     }
 
     private Product editProductData(Product product, ProductEditRequest productEditRequest) {
@@ -149,6 +156,7 @@ public class ProductService {
 
 
         return Product.builder()
+                .isActive(true)
                 .name(createProductRequest.getTitle())
                 .description(createProductRequest.getDescription())
                 .gender(createProductRequest.getGender())

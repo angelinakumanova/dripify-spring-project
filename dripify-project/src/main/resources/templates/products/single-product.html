@@ -71,10 +71,12 @@
                        href="#">
                       Edit
                     </a>
-                    <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
-                       href="#">
-                      Delete
-                    </a>
+                    <form th:method="PUT"
+                          th:action="@{/products/{id}/status(id=${product.id})}"
+                          class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800
+                          hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100">
+                      <button type="submit">Delete</button>
+                    </form>
 
                   </div>
                 </div>
@@ -160,7 +162,6 @@
 
             </div>
             <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-red-600 font-semibold" ></p>
-            <p th:if="${successfulMessage}" class="justify-self-end text-green-600 font-semibold">Your product was updated.</p>
 
             <input type="number" th:field="*{price}" class="mt-6 text-2xl font-extrabold text-gray-900 sm:text-3xl w-32
              rounded-lg pl-3 border-2 border-zinc-900"><span class="text-2xl font-extrabold text-gray-900 sm:text-3xl"> BGN</span>
@@ -185,6 +186,7 @@
                   <option th:each="condition: ${T(com.dripify.product.model.enums.Condition).values()}"
                           th:text="${condition}" th:value="${condition.name()}" ></option>
                 </select>
+                <p th:if="${#fields.hasErrors('condition')}" th:errors="*{condition}" class="text-red-600 font-semibold"></p>
               </li>
               <li><span class="font-bold text-xl">Size:</span>
                 <select class="text-xl border-2 border-zinc-900 rounded-lg" th:field="*{size}">

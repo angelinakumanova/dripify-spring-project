@@ -100,6 +100,15 @@ public class ProductController {
         return "redirect:/products/" + id;
     }
 
+    @PutMapping("/{id}/status")
+    public String updateProductStatus(@PathVariable UUID id, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+        Product product = productService.getProductById(id);
+
+        productService.deactivateProduct(product, userService.getById(authenticationMetadata.getUserId()));
+
+        return "redirect:/users/" + authenticationMetadata.getUsername() + "/profile/products";
+    }
+
     @GetMapping("/new")
     public ModelAndView getAddNewProductPage() {
         ModelAndView modelAndView = new ModelAndView("/products/sell-product");

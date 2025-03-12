@@ -29,6 +29,7 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
       AND (:colorsSize = 0 OR p.color IN :colors)
       AND (:materialsSize = 0 OR p.material IN :materials)
       AND (:sizesSize = 0 OR p.size IN :sizes)
+      AND p.isActive = true
     """)
     Page<Product> findByCategoryAndGenderAndFilters(Category category,
                                                     Gender gender,
@@ -38,15 +39,15 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
                                                     List<Size> sizes, int sizesSize,
                                                     Pageable pageable);
 
-    Optional<Product> getProductById(UUID id);
+    Optional<Product> getProductByIdAndIsActive(UUID id, boolean active);
 
 
-    Page<Product> getProductsBySeller(User user, Pageable pageable);
+    Page<Product> getProductsBySellerAndIsActive(User seller, Pageable pageable, boolean active);
 
-    @Query("SELECT p FROM Product p WHERE p.category = :category AND p.gender = :gender AND " +
+    @Query("SELECT p FROM Product p WHERE p.isActive = true AND p.category = :category AND p.gender = :gender AND " +
             "NOT p.id = :currentProductId ORDER BY p.createdOn DESC LIMIT :limit")
     List<Product> getProductsByCategoryOrderByCreatedOnDesc(Category category, Gender gender, UUID currentProductId, int limit);
 
 
-    List<Product> getProductsBySellerAndIdNotOrderByCreatedOnDesc(User seller, UUID id);
+    List<Product> getProductsBySellerAndIdNotAndIsActiveOrderByCreatedOnDesc(User seller, UUID id, boolean active);
 }
