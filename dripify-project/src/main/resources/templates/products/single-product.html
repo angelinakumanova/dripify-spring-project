@@ -369,24 +369,5 @@
     </div>
   </div>
 
-<script>
-  const deleteProductBtn = document.getElementById('delete-product-btn');
-
-  if (deleteProductBtn) {
-    deleteProductBtn.addEventListener('click', () => {
-      document.getElementById('delete-confirmation-box').classList.remove('opacity-0');
-      document.getElementById('delete-confirmation-box').classList.add('opacity-100', 'pointer-events-auto');
-    });
-
-    document.getElementById('cancel-delete-btn').addEventListener('click', () => {
-      document.getElementById('delete-confirmation-box').classList.add('opacity-0');
-      document.getElementById('delete-confirmation-box').classList.remove('opacity-100', 'pointer-events-auto');
-    });
-  }
-
-
-
-
-</script>
 </body>
 </html>
