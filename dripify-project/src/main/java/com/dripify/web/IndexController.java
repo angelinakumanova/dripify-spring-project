@@ -19,4 +19,9 @@ public class IndexController {
 
         return "about-us";
     }
+
+    @GetMapping("/wishlist")
+    public String getWishlistPage() {
+        return "/user/wishlist";
+    }
 }

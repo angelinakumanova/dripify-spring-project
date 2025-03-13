@@ -849,21 +849,25 @@
 
 
   function validateInputLength(inputElement) {
-    const maxLength = inputElement.maxLength;
-    const minLength = inputElement.minLength;
 
-    inputElement.addEventListener("input", () => {
-      const length = inputElement.value.length;
+    if (inputElement) {
+      const maxLength = inputElement.maxLength;
+      const minLength = inputElement.minLength;
 
-      if (length > maxLength || length < minLength) {
-        inputElement.classList.add("border-red-500", "focus:border-red-500");
-        inputElement.classList.remove("focus:border-zinc-600");
-      } else {
-        inputElement.classList.remove("border-red-500", "focus:border-red-500");
-        inputElement.classList.add("focus:border-zinc-600");
+      inputElement.addEventListener("input", () => {
+        const length = inputElement.value.length;
 
-      }
-    });
+        if (length > maxLength || length < minLength) {
+          inputElement.classList.add("border-red-500", "focus:border-red-500");
+          inputElement.classList.remove("focus:border-zinc-600");
+        } else {
+          inputElement.classList.remove("border-red-500", "focus:border-red-500");
+          inputElement.classList.add("focus:border-zinc-600");
+
+        }
+      });
+    }
+
   }
 
 

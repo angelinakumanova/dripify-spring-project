@@ -148,13 +148,15 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}/favourite")
-    public String removeFavourite(@PathVariable UUID id, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+    public String removeFavourite(@PathVariable UUID id,
+                                  @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata,
+                                  @RequestHeader(value = "Referer", required = false) String referer) {
         Product product = productService.getProductById(id);
         User user = userService.getById(authenticationMetadata.getUserId());
 
         userService.removeFavoriteProduct(product, user);
 
-        return "redirect:/products/" + id;
+        return "redirect:" + referer;
     }
 
 

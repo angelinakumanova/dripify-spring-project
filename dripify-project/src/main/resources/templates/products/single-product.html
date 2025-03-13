@@ -63,21 +63,16 @@
                   </svg>
                 </button>
 
-                <div
-                        class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-32 bg-white shadow-md rounded-lg mt-2"
-                        role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-custom-icon-trigger">
+                <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100
+                 opacity-0 hidden min-w-32 bg-white shadow-md rounded-lg mt-2"
+                 role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-custom-icon-trigger">
                   <div class="p-1 space-y-0.5">
-                    <a id="edit-product-btn" class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
-                       href="#">
+                    <button id="edit-product-btn" class="flex items-center w-full py-2 px-3
+                     rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100">
                       Edit
-                    </a>
-                    <form th:method="PUT"
-                          th:action="@{/products/{id}/status(id=${product.id})}"
-                          class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800
-                          hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100">
-                      <button type="submit">Delete</button>
-                    </form>
-
+                    </button>
+                    <button id="delete-product-btn" class="flex items-center w-full py-2 px-3 rounded-lg text-sm text-gray-800
+                    hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 " type="submit">Delete</button>
                   </div>
                 </div>
               </div>
@@ -88,7 +83,7 @@
               </p>
               <span th:if="${product.seller != user}" id="heart" class="hover:cursor-pointer">
                 <!-- Outlined Heart -->
-                <form th:if="${!#lists.contains(user.favoriteProducts, product)}" th:method="POST" th:action="@{/products/{id}/favourite(id=${product.id})}">
+                <form th:if="${user == null or !#lists.contains(user.favoriteProducts, product)}" th:method="POST" th:action="@{/products/{id}/favourite(id=${product.id})}">
                   <button type="submit">
                     <svg id="outlined-heart" width="32" height="32" viewBox="0 0 32 32" fill="none"
                          xmlns="http://www.w3.org/2000/svg" class="w-8 h-8">
@@ -101,7 +96,7 @@
 
 
                 <!-- Filled Heart -->
-                <form th:if="${#lists.contains(user.favoriteProducts, product)}" th:method="DELETE" th:action="@{/products/{id}/favourite(id=${product.id})}">
+                <form th:if="${user != null and #lists.contains(user.favoriteProducts, product)}" th:method="DELETE" th:action="@{/products/{id}/favourite(id=${product.id})}">
                   <button type="submit">
                     <svg  id="filled-heart" width="32" height="32" viewBox="0 0 32 32" fill="none"
                          xmlns="http://www.w3.org/2000/svg" class="w-8 h-8">
@@ -345,5 +340,53 @@
   <button id="scrollToTop"
     class="hidden sm:block fixed bottom-5 right-5 bg-black text-white text-4xl rounded-full p-5 px-8 shadow-lg opacity-0 transition-opacity duration-300">↑</button>
 
+  <div th:if="${product.seller == user}" id="delete-confirmation-box"
+       class="opacity-0 transition-opacity pointer-events-none ease-in-out duration-200 size-full bg-zinc-400 bg-opacity-50
+        fixed top-0 start-0 z-50 overflow-x-hidden overflow-y-auto">
+    <div
+            class="scale-95 sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-56px)] flex items-center">
+      <div
+              class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl shadow-md items-center">
+        <div class="flex justify-between items-center py-6 px-4 ">
+          <h3 class="font-bold text-gray-800 text-2xl text-center">
+            Are you sure you want to delete this product? <span class="text-xl text-red-600">(This action is irreversible)</span>
+          </h3>
+
+        </div>
+        <div class="pb-4 flex gap-2">
+          <form th:method="PUT"
+                th:action="@{/products/{id}/status(id=${product.id})}"
+                class="py-2 px-3 rounded-lg text-xl text-gray-800 border-2 border-red-600
+                hover:bg-red-600 text-red-600 hover:text-white duration-300 transition ease-in-out
+                focus:outline-hidden focus:bg-gray-100">
+            <button class="font-bold" type="submit">Delete</button>
+          </form>
+          <button id="cancel-delete-btn" class="text-xl bg-zinc-900 text-white font-bold py-2 px-3 rounded-lg
+          hover:bg-zinc-500 duration-300 transition ease-in-out">Cancel</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<script>
+  const deleteProductBtn = document.getElementById('delete-product-btn');
+
+  if (deleteProductBtn) {
+    deleteProductBtn.addEventListener('click', () => {
+      document.getElementById('delete-confirmation-box').classList.remove('opacity-0');
+      document.getElementById('delete-confirmation-box').classList.add('opacity-100', 'pointer-events-auto');
+    });
+
+    document.getElementById('cancel-delete-btn').addEventListener('click', () => {
+      document.getElementById('delete-confirmation-box').classList.add('opacity-0');
+      document.getElementById('delete-confirmation-box').classList.remove('opacity-100', 'pointer-events-auto');
+    });
+  }
+
+
+
+
+</script>
 </body>
 </html>

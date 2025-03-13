@@ -354,10 +354,10 @@
                             <a th:href="@{/users/{username}/profile/products(username=${user.username})}"
                                class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
                                role="menuitem" tabindex="-1">my profile</a>
-                            <a href="/templates/user/orders-purchases.html"
+                            <a th:href="@{/orders/purchases}"
                                class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
                                role="menuitem" tabindex="-1" >orders</a>
-                            <a href="/templates/user/wishlist.html"
+                            <a th:href="@{/wishlist}"
                                class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
                                role="menuitem" tabindex="-1" >wishlist</a>
                         </div>
@@ -437,38 +437,41 @@
 
 
 
-                        <div class="py-6">
-                            <a th:href="@{/login}"
-                               class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">LOG
-                                IN</a>
-                            <a th:href="@{/register}"
-                               class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">REGISTER</a>
-                            <div>
-                  <span id="profile-name-mobile" class="flex items-center">
-                    <button
-                            class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">angieusername</button>
-                    <svg class="size-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor"
-                         aria-hidden="true" data-slot="icon">
-                      <path fill-rule="evenodd"
-                            d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                            clip-rule="evenodd" />
-                    </svg>
-                  </span>
+                        <div class="py-6" >
+                            <div th:unless="${user}">
+                                <a th:href="@{/login}" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7
+                            font-semibold text-gray-900 hover:bg-gray-50">LOG
+                                    IN</a>
+                                <a th:href="@{/register}"
+                                   class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">REGISTER</a>
+                            </div>
+
+                        <div th:if="${user}">
+                          <span id="profile-name-mobile" class="flex items-center">
+                            <button
+                                    class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">angieusername</button>
+                            <svg class="size-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor"
+                                 aria-hidden="true" data-slot="icon">
+                              <path fill-rule="evenodd"
+                                    d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                          </span>
 
                                 <div id="mobile-profile-dropdown" class="hidden indent-3 my-6 flow-root">
                                     <div class="-my-6 divide-y divide-gray-500/10">
                                         <div class="flex flex-col text-xl">
-                                            <a href="/templates/user/profile-items.html"
+                                            <a th:href="@{/users/{username}/profile/products(username=${user.username})}"
                                                class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">my
                                                 profile</a>
 
-                                            <a href="/templates/user/orders-purchases.html"
+                                            <a th:href="@{/orders/purchases}"
                                                class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">orders</a>
 
-                                            <a href="/templates/user/wishlist.html"
+                                            <a th:href="@{/wishlist}"
                                                class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">wishlist</a>
 
-                                            <a href="/templates/user/edit-profile.html"
+                                            <a th:href="@{/settings/profile}"
                                                class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">settings</a>
 
                                         </div>
@@ -476,7 +479,7 @@
                                 </div>
                             </div>
 
-                            <a href="#"
+                            <a th:if="${user}" th:href="@{/logout}"
                                class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">log
                                 out</a>
 
