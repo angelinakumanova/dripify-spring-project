@@ -6,9 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Builder
 @Getter
@@ -56,6 +54,15 @@ public class User {
     @OneToMany(mappedBy = "seller")
     private List<Product> products = new ArrayList<>();
 
+    @ManyToMany
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private Set<Product> favoriteProducts = new HashSet<>();
+
     @OneToMany(mappedBy = "reviewee")
     private List<Review> reviews = new ArrayList<>();
+
+
 }

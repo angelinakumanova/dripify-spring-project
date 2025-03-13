@@ -2,6 +2,7 @@ package com.dripify.user.service;
 
 import com.dripify.cloudinary.service.CloudinaryService;
 import com.dripify.exception.*;
+import com.dripify.product.model.Product;
 import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
 import com.dripify.user.model.UserRole;
@@ -159,6 +160,32 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username).orElseThrow(() -> new DomainException("User with username %s does not exist".formatted(username)));
     }
 
+    public void favoriteProduct(Product product, User user) {
+        if (user.getFavoriteProducts().contains(product)) {
+            throw new IllegalArgumentException("You are already have this product as favourite.");
+        }
+
+        user.getFavoriteProducts().add(product);
+        userRepository.save(user);
+    }
+
+    public void removeFavoriteProduct(Product product, User user) {
+        if (!user.getFavoriteProducts().contains(product)) {
+            throw new IllegalArgumentException("You are not have this product as favourite.");
+        }
+
+        user.getFavoriteProducts().remove(product);
+        userRepository.save(user);
+    }
+
+    public void deactivateUser(User user) {
+        user.setActive(false);
+        userRepository.save(user);
+
+        SecurityContextHolder.getContext().setAuthentication(null);
+
+    }
+
     private void updateAuthentication(User user) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -179,11 +206,5 @@ public class UserService implements UserDetailsService {
                 build();
     }
 
-    public void deactivateUser(User user) {
-        user.setActive(false);
-        userRepository.save(user);
 
-        SecurityContextHolder.getContext().setAuthentication(null);
-
-    }
 }

@@ -14,6 +14,7 @@ import com.dripify.user.service.UserService;
 import com.dripify.web.dto.CreateProductRequest;
 import com.dripify.web.dto.ProductEditRequest;
 import com.dripify.web.dto.ProductFilter;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -90,6 +91,7 @@ public class ProductService {
         return productRepository.getProductsBySellerAndIdNotAndIsActiveOrderByCreatedOnDesc(user, currentProductId, true);
     }
 
+    @Transactional
     public void addNewProduct(CreateProductRequest createProductRequest, User user) {
         Product product = initializeProduct(createProductRequest, user);
         productRepository.save(product);

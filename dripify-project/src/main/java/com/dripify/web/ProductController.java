@@ -4,6 +4,7 @@ import com.dripify.category.service.CategoryService;
 import com.dripify.product.model.Product;
 import com.dripify.product.service.ProductService;
 import com.dripify.security.AuthenticationMetadata;
+import com.dripify.user.model.User;
 import com.dripify.user.service.UserService;
 import com.dripify.web.dto.CreateProductRequest;
 import com.dripify.web.dto.ProductEditRequest;
@@ -134,6 +135,26 @@ public class ProductController {
         redirectAttributes.addFlashAttribute("successfulUpload", true);
 
         return new ModelAndView("redirect:/products/new");
+    }
+
+    @PostMapping("/{id}/favourite")
+    public String favouriteProduct(@PathVariable UUID id, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+        Product product = productService.getProductById(id);
+        User user = userService.getById(authenticationMetadata.getUserId());
+
+        userService.favoriteProduct(product, user);
+
+        return "redirect:/products/" + id;
+    }
+
+    @DeleteMapping("/{id}/favourite")
+    public String removeFavourite(@PathVariable UUID id, @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+        Product product = productService.getProductById(id);
+        User user = userService.getById(authenticationMetadata.getUserId());
+
+        userService.removeFavoriteProduct(product, user);
+
+        return "redirect:/products/" + id;
     }
 
 
