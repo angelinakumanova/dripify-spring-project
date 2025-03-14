@@ -306,6 +306,9 @@
       similar products
     </h1>
 
+    <h1 th:if="${similarProducts.isEmpty()}"
+        class="text-xl font-bold text-center text-gray-900 uppercase mt-12">
+      Oops! We couldn't find anything..</h1>
     <div class="mx-auto max-w-2xl px-4 py-14 sm:px-6 lg:max-w-7xl lg:px-8">
       <div class="flex overflow-x-auto space-x-6 sm:grid sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8 sm:space-x-0">
         <div th:each="similarProduct: ${similarProducts}"

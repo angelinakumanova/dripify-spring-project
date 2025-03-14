@@ -47,9 +47,15 @@ public class ProductService {
                                              ProductFilter productFilter, int page) {
         Gender genderEnum = Gender.valueOf(gender.toUpperCase());
 
+
+
         Category category = subcategoryName == null ?
                 categoryService.getByName(categoryName) :
                 categoryService.getByNameAndParentCategory(subcategoryName, categoryName);
+
+        if (category.getParentCategory() != null && category.getGender() != genderEnum) {
+            throw new IllegalArgumentException("This category doesn't belong to this gender.");
+        }
 
         Pageable pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE);
 

@@ -23,9 +23,7 @@
                         <hr>
 
                         <li th:each="category: ${categories}"
-                            th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/women/' + category.name)}"
-                            th:if="${category.gender.equals(T(com.dripify.shared.enums.Gender).WOMEN)
-                                   || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}">
+                            th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/women/' + category.name)}">
 
                             <a th:href="@{'/products/women/' + ${category.name}}"
                                th:classappend="${isActivePath} ?'font-bold text-zinc-800' : 'text-zinc-600'"
@@ -38,6 +36,8 @@
                                 class="mt-1">
 
                                 <li th:each="subcategory: ${category.subcategories}"
+                                    th:if="${subcategory.gender.equals(T(com.dripify.shared.enums.Gender).WOMEN)
+                                   || subcategory.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}"
                                     th:with="subcategoryPath=${'/products/women/' + category.name + '/' + subcategory.name}"
                                     class="indent-3 mt-2">
 
@@ -66,9 +66,7 @@
                         <hr>
 
                         <li th:each="category: ${categories}"
-                            th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/men/' + category.name)}"
-                            th:if="${category.gender.equals(T(com.dripify.shared.enums.Gender).MEN)
-                                   || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}">
+                            th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/men/' + category.name)}">
 
                             <a th:href="@{'/products/men/' + ${category.name}}"
                                th:classappend="${isActivePath} ?'font-bold text-zinc-800' : 'text-zinc-600'"
@@ -81,6 +79,8 @@
                                 class="mt-1">
 
                                 <li th:each="subcategory: ${category.subcategories}"
+                                    th:if="${subcategory.gender.equals(T(com.dripify.shared.enums.Gender).MEN)
+                                   || subcategory.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}"
                                     th:with="subcategoryPath=${'/products/men/' + category.name + '/' + subcategory.name}"
                                     class="indent-3 mt-2">
 
@@ -109,8 +109,7 @@
                         <hr>
 
                         <li th:each="category: ${categories}"
-                            th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/unisex/' + category.name)}"
-                            th:if="${category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}">
+                            th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/unisex/' + category.name)}">
 
                             <a th:href="@{'/products/unisex/' + ${category.name}}"
                                th:classappend="${isActivePath} ?'font-bold text-zinc-800' : 'text-zinc-600'"
@@ -124,6 +123,7 @@
 
                                 <li th:each="subcategory: ${category.subcategories}"
                                     th:with="subcategoryPath=${'/products/unisex/' + category.name + '/' + subcategory.name}"
+                                    th:if="${subcategory.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}"
                                     class="indent-3 mt-2">
 
                                     <a th:href="@{${subcategoryPath}}"

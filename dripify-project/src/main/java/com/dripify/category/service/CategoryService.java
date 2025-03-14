@@ -26,12 +26,12 @@ public class CategoryService {
     }
 
     public Category getByName(String category) {
-        return categoryRepository.findByName(category).orElseThrow(() -> new DomainException("Category [%s] not found".formatted(category)));
+        return categoryRepository.findByName(category).orElseThrow(() -> new IllegalArgumentException("Category [%s] not found".formatted(category)));
     }
 
     public Category getByNameAndParentCategory(String categoryName, String parentCategoryName) {
         return categoryRepository.findByNameAndParentCategoryName(categoryName, parentCategoryName)
-                .orElseThrow(() -> new DomainException("Category [%s] in [%s] not found".formatted(categoryName, parentCategoryName)));
+                .orElseThrow(() -> new IllegalArgumentException("Category [%s] in [%s] not found".formatted(categoryName, parentCategoryName)));
     }
 
     public List<Category> getSubcategories() {
