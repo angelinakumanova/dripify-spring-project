@@ -1,5 +1,5 @@
 package com.dripify.product.model.enums;
 
 public enum SizeCategory {
-    CLOTHING, SHOE
+    CLOTHING, SHOES
 }

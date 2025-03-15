@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -56,6 +57,15 @@ public class ProductController {
                                                                                     productFilter, page);
 
         return createProductsView(productsPage, subcategory, request);
+    }
+
+    @GetMapping("/new-arrivals")
+    public ModelAndView getNewArrivalsPage(@RequestParam(defaultValue = "0") int page) {
+        ModelAndView modelAndView = new ModelAndView("/products/new-arrivals");
+        Page<Product> products = productService.getNewProducts(page);
+        modelAndView.addObject("productPage", products);
+
+        return modelAndView;
     }
 
 

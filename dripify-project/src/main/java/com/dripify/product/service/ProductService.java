@@ -20,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -44,36 +45,40 @@ public class ProductService {
     }
 
     public Page<Product> getFilteredProducts(String gender, String categoryName, String subcategoryName,
-                                             ProductFilter productFilter, int page) {
+                                               ProductFilter productFilter, int page) {
         Gender genderEnum = Gender.valueOf(gender.toUpperCase());
-
-
-
         Category category = subcategoryName == null ?
                 categoryService.getByName(categoryName) :
                 categoryService.getByNameAndParentCategory(subcategoryName, categoryName);
 
-        if (category.getParentCategory() != null && category.getGender() != genderEnum) {
-            throw new IllegalArgumentException("This category doesn't belong to this gender.");
+
+        if (category.getParentCategory() != null) {
+            validateGenderToCategory(category, genderEnum);
         }
 
         Pageable pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE);
 
-        //TODO: Implement Most Rated
-        if (productFilter.getSortBy() != null) {
+        String fieldSort = "";
+        if (productFilter.getSortBy() != null && !productFilter.getSortBy().isEmpty()) {
             String[] split = productFilter.getSortBy().split("-");
             String field = split[0];
-            String order = split[1];
 
-            Sort sort = Sort.by(field);
+            if (field.equals("mostRated")) {
+                fieldSort = field;
 
-            if (order.equals("asc")) {
-                sort = sort.ascending();
             } else {
-                sort = sort.descending();
-            }
+                String order = split[1];
 
-            pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE, sort);
+                Sort sort = Sort.by(field);
+
+                if (order.equals("asc")) {
+                    sort = sort.ascending();
+                } else {
+                    sort = sort.descending();
+                }
+
+                pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE, sort);
+            }
         }
 
         return productRepository.findByCategoryAndGenderAndFilters(category,
@@ -82,9 +87,17 @@ public class ProductService {
                 productFilter.getColors(), productFilter.getColors().size(),
                 productFilter.getMaterials(), productFilter.getMaterials().size(),
                 productFilter.getSizes(), productFilter.getSizes().size(),
+                fieldSort,
                 pageable);
 
     }
+
+    public Page<Product> getNewProducts(int page) {
+        Pageable pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE);
+        return productRepository.getAllByIsActiveTrueOrderByCreatedOnDesc(pageable);
+    }
+
+
 
     public List<Product> getSimilarProducts(int limit, Product currentProduct) {
 
@@ -143,7 +156,14 @@ public class ProductService {
 
 
     public Product getProductById(UUID id) {
-        return productRepository.getProductByIdAndIsActive(id, true).orElseThrow(() -> new DomainException("Product does not exist"));
+        return productRepository.getProductByIdAndIsActive(id, true).orElseThrow(() -> new IllegalArgumentException("Product does not exist"));
+    }
+
+    private void validateGenderToCategory(Category category, Gender gender) {
+        if ((category.getGender().equals(Gender.WOMEN) && (gender.equals(Gender.MEN) || gender.equals(Gender.UNISEX))) ||
+                (category.getGender().equals(Gender.MEN) && (gender.equals(Gender.WOMEN) || gender.equals(Gender.UNISEX)))) {
+            throw new IllegalArgumentException("This gender doesn't belong to the category");
+        }
     }
 
     private Product editProductData(Product product, ProductEditRequest productEditRequest) {

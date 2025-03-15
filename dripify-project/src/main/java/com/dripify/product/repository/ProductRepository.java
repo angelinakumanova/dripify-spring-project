@@ -30,6 +30,9 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
       AND (:materialsSize = 0 OR p.material IN :materials)
       AND (:sizesSize = 0 OR p.size IN :sizes)
       AND p.isActive = true
+      ORDER BY
+            CASE WHEN :fieldSort = 'mostRated' THEN SIZE(p.seller.reviews) END DESC
+              
     """)
     Page<Product> findByCategoryAndGenderAndFilters(Category category,
                                                     Gender gender,
@@ -37,6 +40,7 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
                                                     List<Color> colors, int colorsSize,
                                                     List<Material> materials, int materialsSize,
                                                     List<Size> sizes, int sizesSize,
+                                                    String fieldSort,
                                                     Pageable pageable);
 
     Optional<Product> getProductByIdAndIsActive(UUID id, boolean active);
@@ -50,4 +54,6 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 
 
     List<Product> getProductsBySellerAndIdNotAndIsActiveOrderByCreatedOnDesc(User seller, UUID id, boolean active);
+
+    Page<Product> getAllByIsActiveTrueOrderByCreatedOnDesc(Pageable pageable);
 }

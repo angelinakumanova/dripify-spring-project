@@ -67,7 +67,7 @@ public class CreateProductRequest {
             return true;
         }
 
-        if ("shoes".equalsIgnoreCase(category.getParentCategory().getName()) && SizeCategory.SHOE.equals(size.getCategory())) {
+        if ("shoes".equalsIgnoreCase(category.getParentCategory().getName()) && SizeCategory.SHOES.equals(size.getCategory())) {
             return true;
         }
 

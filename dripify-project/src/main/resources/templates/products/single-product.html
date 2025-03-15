@@ -83,7 +83,9 @@
               </p>
               <span th:if="${product.seller != user}" id="heart" class="hover:cursor-pointer">
                 <!-- Outlined Heart -->
-                <form th:if="${user == null or !#lists.contains(user.favoriteProducts, product)}" th:method="POST" th:action="@{/products/{id}/favourite(id=${product.id})}">
+                <form th:if="${user == null or (user !=null and user.favoriteProducts != null and
+                 !#lists.contains(user.favoriteProducts, product))}"
+                      th:method="POST" th:action="@{/products/{id}/favourite(id=${product.id})}">
                   <button type="submit">
                     <svg id="outlined-heart" width="32" height="32" viewBox="0 0 32 32" fill="none"
                          xmlns="http://www.w3.org/2000/svg" class="w-8 h-8">

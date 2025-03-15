@@ -12,15 +12,15 @@ public enum Size {
     XXXL(SizeCategory.CLOTHING),
 
     // Shoe Sizes
-    EU36(SizeCategory.SHOE),
-    EU37(SizeCategory.SHOE),
-    EU38(SizeCategory.SHOE),
-    EU39(SizeCategory.SHOE),
-    EU40(SizeCategory.SHOE),
-    EU41(SizeCategory.SHOE),
-    EU42(SizeCategory.SHOE),
-    EU43(SizeCategory.SHOE),
-    EU44(SizeCategory.SHOE);
+    EU36(SizeCategory.SHOES),
+    EU37(SizeCategory.SHOES),
+    EU38(SizeCategory.SHOES),
+    EU39(SizeCategory.SHOES),
+    EU40(SizeCategory.SHOES),
+    EU41(SizeCategory.SHOES),
+    EU42(SizeCategory.SHOES),
+    EU43(SizeCategory.SHOES),
+    EU44(SizeCategory.SHOES);
 
     private final SizeCategory category;
 

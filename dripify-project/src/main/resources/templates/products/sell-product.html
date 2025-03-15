@@ -313,7 +313,7 @@
           }' class="hidden" id="shoe-size-select">
               <option value="">Choose</option>
               <option th:each="size: ${T(com.dripify.product.model.enums.Size).values()}" th:value="${size.name()}"
-                      th:if="${size.getCategory().name() == 'SHOE'}" th:text="${size}"></option>
+                      th:if="${size.getCategory().name() == 'SHOES'}" th:text="${size}"></option>
             </select>
           </div>
 

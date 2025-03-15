@@ -16,7 +16,9 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(matchers -> matchers
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/register", "/products/**", "/about-us", "/users/{username}/profile/**", "/api/v1/**").permitAll()
+                        .requestMatchers("/","/register", "/about-us", "/users/{username}/profile/**", "/api/v1/**").permitAll()
+                        .requestMatchers("/products/new", "/products/{id}/favourite", "/products/{id}/status", "/products/{id}/edit").authenticated()
+                        .requestMatchers("/products/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")

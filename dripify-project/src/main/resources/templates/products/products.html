@@ -11,6 +11,15 @@
         <div class="lg:border-r-2 lg:pr-3">
             <div class="w-full lg:w-48 whitespace-nowrap p-3 border-2 border-opacity-50 rounded-3xl">
 
+                <!-- New Arrivals-->
+                <div class="p-2">
+                    <a th:href="@{/products/new-arrivals}"
+                       th:classappend="${currentPath.contains('/products/new-arrivals')} ?
+                               'font-bold text-gray-800' : 'font-medium text-gray-600'"
+                       class="mb-2 text-2xl hover:text-gray-800">New Arrivals
+                    </a>
+                </div>
+
                 <!-- Women Categories -->
                 <div class="p-2" th:with="isWomenPath=${currentPath.contains('/products/women/')}">
                     <button type="button"
@@ -161,7 +170,8 @@
 
 
                     <div class="w-full xl:w-[70%]">
-                        <form class="lg:flex gap-2 grid grid-cols-2" id="form-filter" th:action="@{${currentPath}}" th:method="GET" th:object="${productFilter}">
+                        <form class="lg:flex gap-2 grid grid-cols-2" id="form-filter" th:action="@{${currentPath}}"
+                              th:method="GET" th:object="${productFilter}">
 
                             <div class="material relative w-full">
                                 <select th:field="*{materials}" name="materials" data-hs-select='{
@@ -222,7 +232,7 @@
                             </div>
 
 
-                            <div class="size relative w-full">
+                            <div th:if="${category.equals('clothing') or category.equals('shoes')}" class="size relative w-full">
                                 <select th:field="*{sizes}" name="sizes" data-hs-select='{
                                   "toggleTag": "<button type=\"button\" aria-expanded=\"false\" class=\"flex justify-between items-center w-full\"> <span class=\"truncate\" data-title></span> <svg class=\"shrink-0 size-4 text-gray-600 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"6 9 12 15 18 9\"/></svg> </button>",
                                   "toggleClasses": "duration-300 ease-in-out hover:cursor-pointer hover:border-zinc-700 hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 p-2 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border-2 border-opacity-60 font-bold rounded-full focus:outline-none",
@@ -233,6 +243,7 @@
                                   "fixedWidth": true
                               }' class="hidden w-full" multiple>
                                     <option th:each="size: ${T(com.dripify.product.model.enums.Size).values()}"
+                                            th:if="${size.getCategory().name().equals(category.toUpperCase())}"
                                             th:value="${size.name()}"
                                             th:text="${size}"></option>
 
@@ -250,10 +261,10 @@
                             "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span class=\"truncate\" data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-3.5 text-blue-600 dark:text-blue-500\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
                             "fixedWidth": true
                           }' class="opacity-0 w-full">
-                                    <option value="most-rated" selected>Most Rated</option>
+                                    <option value="mostRated">Most Rated</option>
                                     <option value="price-asc">Price: low to high</option>
                                     <option value="price-desc">Price: high to low</option>
-                                    <option value="createdOn-asc">Newly listed</option>
+                                    <option value="createdOn-desc">Newly listed</option>
                                 </select>
 
                                 <div class="pointer-events-none pl-2 font-bold uppercase absolute bottom-10 left-2 top-1.5">

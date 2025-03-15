@@ -82,7 +82,7 @@ public class Product {
     @PrePersist
     @PreUpdate
     public void validateSize() {
-        if ("clothing".equalsIgnoreCase(category.getParentCategory().getName()) && SizeCategory.SHOE.equals(size.getCategory())) {
+        if ("clothing".equalsIgnoreCase(category.getParentCategory().getName()) && SizeCategory.SHOES.equals(size.getCategory())) {
             throw new IllegalArgumentException("Invalid clothing size: " + size);
         } else if ("shoes".equalsIgnoreCase(category.getParentCategory().getName()) && SizeCategory.CLOTHING.equals(size.getCategory())) {
             throw new IllegalArgumentException("Invalid shoe size: " + size);
