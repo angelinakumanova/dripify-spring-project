@@ -1,5 +1,6 @@
 package com.dripify.web.advice;
 
+import com.dripify.exception.UserRegistrationException;
 import com.dripify.exception.UserUpdateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,6 +19,13 @@ public class ExceptionAdvice {
         redirectAttributes.addFlashAttribute(e.getField() + "Error", e.getMessage());
 
         return "redirect:/settings/profile";
+    }
+
+    @ExceptionHandler(UserRegistrationException.class)
+    public String handleUserRegistrationException(UserRegistrationException e, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute(e.getField() + "Error", e.getMessage());
+
+        return "redirect:/register";
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)

@@ -212,36 +212,38 @@
         <div
           class="mt-6 space-y-12 md:grid md:grid-cols-2 md:grid-rows-2 lg:grid-cols-4 lg:grid-rows-none md:gap-x-6 md:space-y-0">
 
-          <a th:href="@{/products/{gender}/{category}(gender='unisex', category='coats & jackets')}">
+          <a th:href="@{/products/unisex/clothing/jackets}">
             <div class="group relative text-center">
-              <img src="/images/categories/coats-and-jackets-category.jpg"
-                alt="coats and jackets category visual"
-                class="object-top w-full lg:h-full md:h-[300px]  rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
-              <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">COATS & JACKETS</p>
+              <img src="/images/categories/jackets-category.jpg"
+                alt="jackets category visual"
+                class="object-top w-full lg:h-full md:h-[300px]  rounded-lg bg-white object-cover object-bottom
+                 group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
+              <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">JACKETS</p>
             </div>
           </a>
 
-          <a th:href="@{/products/{gender}/{category}(gender='unisex', category='jeans')}">
+          <a th:href="@{/products/unisex/clothing/jeans}">
             <div class="group relative text-center">
-              <img src="/images/categories/jeans-and-pants-category.jpg" alt="jeans category visual"
-                class="lg:h-full md:h-[300px] object-bottom w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
+              <img src="/images/categories/jeans.jpg" alt="jeans category visual"
+                   class="lg:h-full md:h-[300px] object-bottom w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
               <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">JEANS</p>
             </div>
           </a>
 
 
-          <a th:href="@{/products/{gender}/{category}(gender='unisex', category='sneakers')}">
+          <a th:href="@{/products/unisex/shoes/sneakers}">
             <div class="group relative text-center">
               <img src="/images/categories/sneakers-category.jpg" alt="sneakers category visual"
-                class="lg:h-full md:h-[300px] w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
+                   class="lg:h-full md:h-[300px] w-full rounded-lg bg-white object-cover object-center
+                 group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
               <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">SNEAKERS</p>
             </div>
           </a>
 
-          <a th:href="@{/products/{gender}/{category}(gender='unisex', category='accessories')}">
+          <a th:href="@{/products/unisex/accessories}">
             <div class="group relative text-center">
               <img src="/images/categories/accessories-category.jpg" alt="accessories category visual"
-                class="lg:h-full md:h-[300px] w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
+                   class="lg:h-full md:h-[300px] w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square">
               <p class="text-lg font-semibold p-2 text-gray-900 group-hover:font-bold">ACCESSORIES</p>
             </div>
           </a>

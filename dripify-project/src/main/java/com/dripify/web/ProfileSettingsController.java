@@ -136,7 +136,6 @@ public class ProfileSettingsController {
     public String deactivateProfile(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
         userService.deactivateUser(userService.getById(authenticationMetadata.getUserId()));
 
-        //TODO: Redirect to thank you page
-        return "redirect:/";
+        return "leave-page";
     }
 }

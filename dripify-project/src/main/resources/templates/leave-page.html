@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 16px;">
+
+<head th:replace="~{fragments/head::head(pageName='Oops..')}"></head>
+
+<body class="flex flex-col min-h-screen">
+<div th:replace="~{fragments/nav::nav}"></div>
+
+    <section class="flex flex-col justify-center items-center flex-grow text-center">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+            <div class="mx-auto max-w-screen-sm text-center">
+                <h1 class="mb-4 text-7xl tracking-tight font-extrabold lg:text-4xl text-pink-600">Sad to See You Go! 😢</h1>
+                <p class="mb-4 text-lg font-semibold text-gray-500">We're sorry to see you leave. Your account has been deactivated, but if you ever decide to return, we’ll be here. Thank you for being a part of our community!</p>
+
+            </div>
+        </div>
+    </section>
+
+<footer th:replace="~{fragments/footer::footer}"></footer>
+
+<script>
+    setTimeout(function() {
+        window.location.href = "/";
+    }, 6000);
+</script>
+</body>
+</html>

@@ -55,6 +55,8 @@
 
                             <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
                                  class="register-user-status mt-2 ml-1 text-sm text-red-500"></span>
+                            <span th:if="${usernameError}" th:text="${usernameError}"
+                                  class="register-user-status mt-2 ml-1 text-sm text-red-500"></span>
 
                         </div>
                     </div>
@@ -125,6 +127,8 @@
 <!--                            </span>-->
 
                                 <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                                      class="register-user-status mt-2 ml-1 text-sm text-red-500"></span>
+                                <span th:if="${emailError}" th:text="${emailError}"
                                       class="register-user-status mt-2 ml-1 text-sm text-red-500"></span>
                         </div>
                     </div>

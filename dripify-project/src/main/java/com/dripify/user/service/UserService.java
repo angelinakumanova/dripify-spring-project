@@ -2,6 +2,7 @@ package com.dripify.user.service;
 
 import com.dripify.cloudinary.service.CloudinaryService;
 import com.dripify.exception.*;
+import com.dripify.notification.service.NotificationService;
 import com.dripify.product.model.Product;
 import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
@@ -30,11 +31,13 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final CloudinaryService cloudinaryService;
+    private final NotificationService notificationService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, CloudinaryService cloudinaryService) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, CloudinaryService cloudinaryService, NotificationService notificationService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.cloudinaryService = cloudinaryService;
+        this.notificationService = notificationService;
     }
 
     @Override
@@ -58,6 +61,9 @@ public class UserService implements UserDetailsService {
 
         User user = createNewUser(registerRequest);
         userRepository.save(user);
+
+        notificationService.upsertNotificationPreference(user.getId(), true, user.getEmail());
+        notificationService.sendWelcomeEmail(user.getId(), user.getFirstName());
 
         log.info("User [%s] with id: %s registered successfully".formatted(user.getUsername(), user.getId()));
     }
@@ -180,10 +186,11 @@ public class UserService implements UserDetailsService {
 
     public void deactivateUser(User user) {
         user.setActive(false);
+        user.setUsername("inactive_" + user.getUsername());
+        user.setEmail("inactive_" + user.getEmail());
         userRepository.save(user);
 
         SecurityContextHolder.getContext().setAuthentication(null);
-
     }
 
     private void updateAuthentication(User user) {

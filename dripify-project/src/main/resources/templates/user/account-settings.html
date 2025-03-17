@@ -60,7 +60,6 @@
                 <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-sm text-red-500 font-semibold"></span>
                 <span th:if="${emailError}" th:text="${emailError}" class="text-sm text-red-500 font-semibold"></span>
 
-                <p class="text-xs text-gray-500">You can change your email every 30 days.</p>
               </div>
             </form>
 
@@ -89,10 +88,10 @@
 
             <!-- Email Notifications with sliding toggle -->
             <form id="notifications-form">
-              <div class="flex items-center justify-between">
+              <div class="flex items-center justify-between mt-12">
                 <div>
                   <h3 class="text-sm font-medium text-gray-800">Email Notifications</h3>
-                  <p class="text-sm text-gray-600">Receive updates and newsletters via email.</p>
+                  <p class="text-sm text-gray-600">Receive newsletters via email.</p>
                 </div>
                 <label class="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" value="" class="sr-only peer" id="notifications-toggle" checked>
@@ -105,8 +104,10 @@
               </div>
             </form>
 
-            <!-- Deactivate Account Section -->
 
+
+
+            <!-- Deactivate Account Section -->
               <div class="border-t border-gray-200 mt-8 pt-6">
                 <h3 class="text-lg font-semibold text-red-600">Deactivate Account</h3>
                 <p class="mt-1 text-sm text-gray-600">Once you deactivate your account, there is no going back. Please
