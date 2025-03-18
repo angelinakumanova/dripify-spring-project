@@ -35,6 +35,8 @@ public class NotificationService {
 
     public void sendWelcomeEmail(UUID userId, String userFirstName) {
         WelcomeEmailRequest dto = WelcomeEmailRequest.builder()
+                .subject("Welcome To Dripify!!")
+                .bodyTemplate("welcome-email")
                 .userId(userId)
                 .userFirstName(userFirstName)
                 .build();

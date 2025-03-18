@@ -1,5 +1,7 @@
 package com.dripify.user.service;
 
+import com.dripify.cart.model.ShoppingCart;
+import com.dripify.cart.service.ShoppingCartService;
 import com.dripify.cloudinary.service.CloudinaryService;
 import com.dripify.exception.*;
 import com.dripify.notification.service.NotificationService;
@@ -19,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -32,12 +35,14 @@ public class UserService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final CloudinaryService cloudinaryService;
     private final NotificationService notificationService;
+    private final ShoppingCartService shoppingCartService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, CloudinaryService cloudinaryService, NotificationService notificationService) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, CloudinaryService cloudinaryService, NotificationService notificationService, ShoppingCartService shoppingCartService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.cloudinaryService = cloudinaryService;
         this.notificationService = notificationService;
+        this.shoppingCartService = shoppingCartService;
     }
 
     @Override
@@ -50,6 +55,7 @@ public class UserService implements UserDetailsService {
         return new AuthenticationMetadata(user.getId(), user.getUsername(), user.getPassword(), user.getRole(), user.isActive());
     }
 
+    @Transactional
     public void register(RegisterRequest registerRequest) {
         if (userRepository.getUserByUsername(registerRequest.getUsername()).isPresent()) {
             throw new UserRegistrationException("username", "Username is already in use");
@@ -61,6 +67,9 @@ public class UserService implements UserDetailsService {
 
         User user = createNewUser(registerRequest);
         userRepository.save(user);
+
+        ShoppingCart shoppingCart = shoppingCartService.createNewCart(user);
+        user.setShoppingCart(shoppingCart);
 
         notificationService.upsertNotificationPreference(user.getId(), true, user.getEmail());
         notificationService.sendWelcomeEmail(user.getId(), user.getFirstName());

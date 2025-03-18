@@ -8,6 +8,10 @@ import java.util.UUID;
 @Data
 @Builder
 public class WelcomeEmailRequest {
+    private String subject;
+
+    private String bodyTemplate;
+
     private UUID userId;
 
     private String userFirstName;
