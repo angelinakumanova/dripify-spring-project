@@ -116,7 +116,7 @@
 
 
             <div th:if="${product.seller != user}" class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8 justify-center">
-              <form class="w-full" th:method="POST" th:action="@{/cart/{productId}/add(productId=${product.id})}">
+              <form class="w-full" th:method="POST" th:action="@{/cart/{productId}(productId=${product.id})}">
                 <button
                         class="add-to-cart-btn transition-colors w-full bg-zinc-900 mt-4 sm:mt-0 text-white
                  hover:bg-zinc-700 ease-in duration-300 font-medium rounded-full text-sm px-5 py-2.5 flex items-center justify-center"

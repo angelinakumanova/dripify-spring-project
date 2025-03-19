@@ -1,8 +1,10 @@
 package com.dripify.web.advice;
 
+import com.dripify.exception.ShoppingCartException;
 import com.dripify.exception.UserRegistrationException;
 import com.dripify.exception.UserUpdateException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -33,6 +35,12 @@ public class ExceptionAdvice {
     public ModelAndView handleNotFoundException(Exception e) {
 
         return new ModelAndView("404-error-page");
+    }
+
+    @ExceptionHandler(ShoppingCartException.class)
+    public ResponseEntity<String> handleShoppingCartException(ShoppingCartException e) {
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

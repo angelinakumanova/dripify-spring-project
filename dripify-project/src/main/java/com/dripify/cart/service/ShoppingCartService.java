@@ -51,4 +51,15 @@ public class ShoppingCartService {
         currentProducts.add(product);
         shoppingCartRepository.save(userCart);
     }
+
+    public boolean removeProduct(User user, Product product) {
+        ShoppingCart userCart = getCart(user);
+
+        List<Product> currentProducts = userCart.getProducts();
+
+        boolean isRemoved = currentProducts.remove(product);
+        shoppingCartRepository.save(userCart);
+
+        return isRemoved;
+    }
 }
