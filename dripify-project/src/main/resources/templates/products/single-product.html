@@ -83,7 +83,7 @@
               </p>
               <span th:if="${product.seller != user}" id="heart" class="hover:cursor-pointer">
                 <!-- Outlined Heart -->
-                <form th:if="${user == null or (user !=null and user.favoriteProducts != null and
+                <form th:if="${user == null or (user != null and user.favoriteProducts != null and
                  !#lists.contains(user.favoriteProducts, product))}"
                       th:method="POST" th:action="@{/products/{id}/favourite(id=${product.id})}">
                   <button type="submit">
@@ -117,18 +117,21 @@
 
 
             <div th:if="${product.seller != user}" class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
-              <button
-                      class="add-to-cart-btn transition-colors w-full bg-zinc-900 mt-4 sm:mt-0 text-white
+              <form class="block" th:method="POST" th:action="@{/cart/{productId}/add(productId=${product.id})}">
+                <button
+                        class="add-to-cart-btn transition-colors w-full bg-zinc-900 mt-4 sm:mt-0 text-white
                  hover:bg-zinc-700 ease-in duration-300 font-medium rounded-full text-sm px-5 py-2.5 flex items-center justify-center"
-                      role="button">
-                <svg class="w-5 h-5 -ms-2 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                     height="24" fill="none" viewBox="0 0 24 24">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
-                </svg>
+                        role="button">
+                  <svg class="w-5 h-5 -ms-2 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                       height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
+                  </svg>
 
-                Add to cart
-              </button>
+                  Add to cart
+                </button>
+              </form>
+
             </div>
 
             <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />

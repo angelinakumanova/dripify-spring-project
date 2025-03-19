@@ -26,10 +26,14 @@ public class NotificationService {
                 .contactData(contactData)
                 .build();
 
-        ResponseEntity<Void> response = notificationClient.upsertNotificationPreference(dto);
 
-        if (!response.getStatusCode().is2xxSuccessful()) {
-            log.error("[Feign call to notification-svc] Failed to upsert notification preference for user with id: {%s}".formatted(userId));
+        try {
+            ResponseEntity<Void> httpResponse = notificationClient.upsertNotificationPreference(dto);
+            if (!httpResponse.getStatusCode().is2xxSuccessful()) {
+                log.error("[Feign call to notification-svc failed] Can't save user preference for user with id [%s]".formatted(userId));
+            }
+        } catch (Exception e) {
+            log.warn("Unable to call notification-svc.");
         }
     }
 
@@ -41,10 +45,17 @@ public class NotificationService {
                 .userFirstName(userFirstName)
                 .build();
 
-        ResponseEntity<Void> response = notificationClient.sendWelcomeEmail(dto);
 
-        if (!response.getStatusCode().is2xxSuccessful()) {
-            log.error("[Feign call to notification-svc] Could not send Welcome email to user with id: {%s}".formatted(userId));
+        try {
+            ResponseEntity<Void> response = notificationClient.sendWelcomeEmail(dto);
+
+            if (!response.getStatusCode().is2xxSuccessful()) {
+                log.error("[Feign call to notification-svc] Could not send Welcome email to user with id: {%s}".formatted(userId));
+            }
+
+        } catch (Exception e) {
+            log.warn("Can't send welcome email to user with id [%s] due to 500 Internal Server Error.".formatted(userId));
         }
+
     }
 }

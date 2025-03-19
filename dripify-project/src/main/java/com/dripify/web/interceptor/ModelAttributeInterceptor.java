@@ -6,6 +6,7 @@ import com.dripify.user.model.User;
 import com.dripify.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,7 @@ public class ModelAttributeInterceptor implements HandlerInterceptor {
     private final UserService userService;
     private final CategoryService categoryService;
 
-    public ModelAttributeInterceptor(UserService userService, CategoryService categoryService) {
+    public ModelAttributeInterceptor(@Lazy UserService userService, CategoryService categoryService) {
         this.userService = userService;
         this.categoryService = categoryService;
     }
