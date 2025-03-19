@@ -33,4 +33,21 @@ public class Order {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    @Column(nullable = false)
+    private String purchaserFullName;
+
+    @Column(nullable = false)
+    private String purchaserAddress;
+
+    @Column(nullable = false)
+    private String purchaserPhoneNumber;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private OrderPayment orderPayment;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private OrderDeliveryCourier orderDeliveryCourier;
 }

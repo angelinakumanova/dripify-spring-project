@@ -37,4 +37,10 @@ public class OrderController {
 
         return modelAndView;
     }
+
+    @GetMapping("/checkout")
+    public String getCheckoutPage() {
+
+        return "checkout";
+    }
 }
