@@ -26,7 +26,7 @@ public class OrderItem {
     private User seller;
 
     @Column(nullable = false)
-    private String productName;
+    private String name;
 
     @Column(nullable = false)
     private String size;

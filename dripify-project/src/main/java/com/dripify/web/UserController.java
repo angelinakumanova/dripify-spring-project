@@ -36,7 +36,7 @@ public class UserController {
 
         modelAndView.addObject("productPage", productService.getProductsByUsername(username, page));
         modelAndView.addObject("totalReviews", reviewService.getUserReviews(profileUser, 0).getTotalElements());
-        modelAndView.addObject("totalOrders", orderService.getAllDeliveredOrdersByUser(profileUser).size());
+        modelAndView.addObject("totalOrders", orderService.getAllDeliveredOrdersByUserSeller(profileUser).size());
 
         return modelAndView;
     }
@@ -51,7 +51,7 @@ public class UserController {
 
         modelAndView.addObject("reviewsPage", reviewService.getUserReviews(profileUser, page));
         modelAndView.addObject("totalProducts", productService.getProductsByUsername(username, 0).getTotalElements());
-        modelAndView.addObject("totalOrders", orderService.getAllDeliveredOrdersByUser(profileUser).size());
+        modelAndView.addObject("totalOrders", orderService.getAllDeliveredOrdersByUserSeller(profileUser).size());
 
 
         return modelAndView;

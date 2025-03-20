@@ -17,7 +17,7 @@
             </div>
 
             <div class="mobile-menu flex items-center gap-5 xl:hidden">
-                <div class="cart">
+                <div th:if="${user}" class="cart">
                     <button id="shopping-cart-button-mobile">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="size-8 hover:cursor-pointer">
                             <defs>
@@ -315,7 +315,7 @@
                                                     </div>
                                                     <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                                     <div class="mt-6">
-                                                        <a th:href="@{/orders/checkout}"
+                                                        <a th:href="@{/cart/checkout}"
                                                            class="flex items-center justify-center rounded-md border border-transparent bg-zinc-900 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-zinc-600">Checkout</a>
                                                     </div>
                                                     <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
