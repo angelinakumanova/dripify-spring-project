@@ -1,10 +1,10 @@
 package com.dripify.order.model;
 
-import com.dripify.product.model.Product;
 import com.dripify.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,14 +21,11 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne
-    private User seller;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User purchaser;
 
-    @OneToMany(mappedBy = "order")
-    private List<Product> products;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> products;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -50,4 +47,7 @@ public class Order {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private OrderDeliveryCourier orderDeliveryCourier;
+
+    @Column(nullable = false)
+    private LocalDateTime createdOn;
 }

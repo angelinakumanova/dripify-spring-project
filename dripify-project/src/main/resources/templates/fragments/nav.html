@@ -37,16 +37,19 @@
                     </button>
 
                     <div id="shopping-cart-menu-mobile"
-                         class="absolute transition ease-in duration-300 opacity-0 pointer-events-none"
+                         th:classappend="${isRemoved} ? 'opacity-100' : 'opacity-0'"
+                         class="absolute transition ease-in duration-300 pointer-events-none"
                          aria-labelledby="slide-over-title-mobile" role="dialog" aria-modal="true">
-                        <div id="sc-backdrop-mobile" class="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true">
+                        <div th:classappend="${isRemoved} ? 'pointer-events-auto' : 'pointer-events-none'"
+                             id="sc-backdrop-mobile" class="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true">
                         </div>
 
                         <div class="fixed inset-0 overflow-hidden">
                             <div class="absolute inset-0 overflow-hidden">
                                 <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
                                     <div id="sc-panel-mobile"
-                                         class="transform translate-x-full transition ease-in-out duration-500 sm:duration-700 pointer-events-auto w-screen max-w-md">
+                                         th:classappend="${isRemoved} ? 'translate-x-0' : 'translate-x-full'"
+                                         class="transform transition ease-in-out duration-500 sm:duration-700 pointer-events-auto w-screen max-w-md">
                                         <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                                             <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                                                 <div class="flex items-start justify-between">
@@ -66,38 +69,36 @@
 
                                                 <div class="mt-8">
                                                     <div class="flow-root">
+
                                                         <ul role="list" class="-my-6 divide-y divide-gray-200">
-                                                            <li class="flex py-6">
-                                                                <div class="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                                                    <img
-                                                                            src="https://tailwindui.com/plus/img/ecommerce-images/shopping-cart-page-04-product-02.jpg"
-                                                                            alt="Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch."
-                                                                            class="size-full object-cover">
+                                                            <li th:each="product: ${user.shoppingCart.products}" class="item flex py-6">
+                                                                <div  class="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                                                    <img th:src="${product.images.get(0).imageUrl}"
+                                                                         th:alt="${product.name}"
+                                                                         class="size-full object-cover">
                                                                 </div>
 
                                                                 <div class="ml-4 flex flex-1 flex-col">
                                                                     <div>
-                                                                        <div class="flex justify-between text-base font-medium text-gray-900">
-                                                                            <h3>
-                                                                                <a href="#">Medium Stuff Satchel</a>
-                                                                            </h3>
-                                                                            <p class="price ml-4">$32.00</p>
-                                                                        </div>
-                                                                        <p class="mt-1 text-sm text-gray-500">Blue</p>
-                                                                    </div>
-                                                                    <div class="flex flex-1 items-end justify-between text-sm">
-                                                                        <p class="text-gray-500">Qty 1</p>
+                                                                        <h3 class="text-base font-medium text-gray-900 hover:underline">
+                                                                            <a th:href="@{/products/{id}(id=${product.id})}"
+                                                                               th:text="${product.name}"></a>
+                                                                        </h3>
+                                                                        <p class="text-base font-medium text-gray-900
+                                                                             price" th:text="${product.price + ' BGN'}"></p>
 
-                                                                        <div class="flex">
-                                                                            <button type="button"
-                                                                                    class="font-medium text-zinc-900 hover:text-zinc-600">Remove</button>
-                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="flex flex-1 items-end justify-between text-sm">
+                                                                        <form th:method="DELETE" th:action="@{/cart/{productId}(productId=${product.id})}">
+                                                                            <button class="remove-btn font-medium text-zinc-900
+                                                                                    hover:text-zinc-600">Remove</button>
+                                                                        </form>
                                                                     </div>
                                                                 </div>
                                                             </li>
-
-                                                            <!-- More products... -->
                                                         </ul>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -105,11 +106,11 @@
                                             <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
                                                 <div class="flex justify-between text-base font-medium text-gray-900">
                                                     <p>Subtotal</p>
-                                                    <p class="sc-subtotal">$32.00</p>
+                                                    <p class="sc-subtotal">0.00 BGN</p>
                                                 </div>
                                                 <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                                 <div class="mt-6">
-                                                    <a href="/templates/checkout.html"
+                                                    <a th:href="@{/cart/checkout}"
                                                        class="flex items-center justify-center rounded-md border border-transparent bg-zinc-900 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-zinc-600">Checkout</a>
                                                 </div>
                                                 <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
@@ -245,7 +246,8 @@
                              th:classappend="${isRemoved} ? 'opacity-100' : 'opacity-0'"
                              class="absolute transition ease-in duration-300 pointer-events-none"
                              aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
-                            <div id="sc-backdrop" class="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true"></div>
+                            <div th:classappend="${isRemoved} ? 'pointer-events-auto' : 'pointer-events-none'"
+                                 id="sc-backdrop" class="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true"></div>
 
                             <div class="fixed inset-0 overflow-hidden">
                                 <div class="absolute inset-0 overflow-hidden">
@@ -294,7 +296,7 @@
 
                                                                         <div class="flex flex-1 items-end justify-between text-sm">
                                                                             <form th:method="DELETE" th:action="@{/cart/{productId}(productId=${product.id})}">
-                                                                                <button class="font-medium text-zinc-900
+                                                                                <button class="remove-btn font-medium text-zinc-900
                                                                                     hover:text-zinc-600">Remove</button>
                                                                             </form>
                                                                         </div>

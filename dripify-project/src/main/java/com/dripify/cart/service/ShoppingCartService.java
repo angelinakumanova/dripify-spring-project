@@ -4,13 +4,11 @@ import com.dripify.cart.model.ShoppingCart;
 import com.dripify.cart.repository.ShoppingCartRepository;
 import com.dripify.exception.ShoppingCartException;
 import com.dripify.product.model.Product;
-import com.dripify.product.service.ProductService;
 import com.dripify.user.model.User;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class ShoppingCartService {
