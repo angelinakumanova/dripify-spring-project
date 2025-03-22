@@ -60,4 +60,9 @@ public class ShoppingCartService {
 
         return isRemoved;
     }
+
+    public void clearCart(ShoppingCart shoppingCart) {
+        shoppingCart.getProducts().clear();
+        shoppingCartRepository.save(shoppingCart);
+    }
 }

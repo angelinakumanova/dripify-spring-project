@@ -68,6 +68,15 @@
                                                 </div>
 
                                                 <div class="mt-8">
+                                                    <div th:if="${user.shoppingCart.products.isEmpty()}"
+                                                         class="flex justify-self-start justify-center items-center flex-col">
+                                                        <h1 class="font-bold text-2xl text-center">
+                                                            Start adding your favorites to the cart and check out whenever you're ready!</h1>
+                                                        <a th:href="@{/products/new-arrivals}"
+                                                           class="inline-flex text-white bg-zinc-900
+                                                                    hover:bg-zinc-600 transition duration-200 ease-in-out font-medium
+                                                                    rounded-lg text-2xl px-5 py-2.5 text-center my-4">Browse now!</a>
+                                                    </div>
                                                     <div class="flow-root">
 
                                                         <ul role="list" class="-my-6 divide-y divide-gray-200">
@@ -103,14 +112,14 @@
                                                 </div>
                                             </div>
 
-                                            <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
+                                            <div th:if="${!user.shoppingCart.products.isEmpty()}" class="border-t border-gray-200 px-4 py-6 sm:px-6">
                                                 <div class="flex justify-between text-base font-medium text-gray-900">
                                                     <p>Subtotal</p>
                                                     <p class="sc-subtotal">0.00 BGN</p>
                                                 </div>
                                                 <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                                 <div class="mt-6">
-                                                    <a th:href="@{/cart/checkout}"
+                                                    <a th:href="@{/orders/checkout}"
                                                        class="flex items-center justify-center rounded-md border border-transparent bg-zinc-900 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-zinc-600">Checkout</a>
                                                 </div>
                                                 <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
@@ -249,7 +258,11 @@
                             <div th:classappend="${isRemoved} ? 'pointer-events-auto' : 'pointer-events-none'"
                                  id="sc-backdrop" class="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true"></div>
 
+
+
                             <div class="fixed inset-0 overflow-hidden">
+
+
                                 <div class="absolute inset-0 overflow-hidden">
                                     <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
                                         <div id="sc-panel"
@@ -273,7 +286,17 @@
                                                         </div>
                                                     </div>
                                                     <div class="mt-8">
+                                                        <div th:if="${user.shoppingCart.products.isEmpty()}"
+                                                             class="flex justify-self-start justify-center items-center flex-col">
+                                                            <h1 class="font-bold text-2xl text-center">
+                                                                Start adding your favorites to the cart and check out whenever you're ready!</h1>
+                                                            <a th:href="@{/products/new-arrivals}"
+                                                               class="inline-flex text-white bg-zinc-900
+                                                                    hover:bg-zinc-600 transition duration-200 ease-in-out font-medium
+                                                                    rounded-lg text-2xl px-5 py-2.5 text-center my-4">Browse now!</a>
+                                                        </div>
                                                         <div class="flow-root">
+
 
                                                             <ul role="list" class="-my-6 divide-y divide-gray-200">
                                                                 <li th:each="product: ${user.shoppingCart.products}" class="item flex py-6">
@@ -308,14 +331,16 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
+
+
+                                                <div th:unless="${user.shoppingCart.products.isEmpty()}" class="border-t border-gray-200 px-4 py-6 sm:px-6">
                                                     <div class="flex justify-between text-base font-medium text-gray-900">
                                                         <p>Subtotal</p>
                                                         <p class="sc-subtotal">0.00 BGN</p>
                                                     </div>
                                                     <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                                     <div class="mt-6">
-                                                        <a th:href="@{/cart/checkout}"
+                                                        <a th:href="@{/orders/checkout}"
                                                            class="flex items-center justify-center rounded-md border border-transparent bg-zinc-900 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-zinc-600">Checkout</a>
                                                     </div>
                                                     <div class="mt-6 flex justify-center text-center text-sm text-gray-500">

@@ -25,38 +25,57 @@
               Sales</a>
           </div>
 
+          <div th:if="${ordersByDate.isEmpty()}"
+               class="flex justify-center items-center flex-col mt-24">
+            <h1 class="font-bold text-2xl text-center">
+              You have no purchases yet. Start browsing and make your first purchase today!</h1>
+            <a th:href="@{/products/new-arrivals}"
+               class="inline-flex text-white bg-zinc-900 hover:bg-zinc-600 transition duration-200 ease-in-out font-medium
+                 rounded-lg text-2xl px-5 py-2.5 text-center my-4">Browse now!</a>
+          </div>
+
           <!-- Bought Orders Section -->
           <div id="purchased-orders" class="mt-6">
+
             <div class="mt-4 space-y-6">
 
-              <div th:each="order: ${purchasedOrders}" class="order relative p-4 border border-gray-200 rounded-lg shadow-md">
-                <h5 class="text-lg font-semibold text-zinc-800" th:text="${'Order #' + order.id}"></h5>
+              <div th:each="entry: ${ordersByDate}">
+                <h1 class="text-2xl font-bold text-gray-800 ml-3 mb-4" th:text="${#temporals.format(entry.key, 'dd MMM yyyy')}"></h1>
 
-                <p class="mt-2 text-sm text-zinc-600 upper">Purchased on: 2025-01-07</p>
-                <p class="mt-2 text-sm text-zinc-600" th:text="${'Items: ' + order.products.size()}"></p>
-                <p class="mt-2 text-lg text-zinc-800 font-bold uppercase">Total: <span>150 BGN</span>
-                </p>
-                <p class="mt-2 text-sm text-zinc-900">Status: <span
-                    class="status text-orange-600 font-semibold" th:text="${order.status}">Shipped</span></p>
+                <div th:each="order: ${entry.value}"
+                     class="order relative p-4 border border-gray-200 rounded-lg shadow-md mb-4">
+                  <h5 class="text-lg font-semibold text-zinc-800" th:text="${'Order #' + order.id + ' | Seller: ' + order.seller.username}"></h5>
+
+                  <p class="mt-2 text-sm text-zinc-600 upper font-semibold">Full Name: <span class="font-normal" th:text="${order.purchaserFullName}"> </span> </p>
+                  <p class="mt-2 text-sm text-zinc-600 upper font-semibold">Phone Number:
+                    <span class="font-normal" th:text="${'+359 ' + order.purchaserPhoneNumber}"></span>
+                  </p>
+                  <p class="mt-2 text-sm text-zinc-600 upper font-semibold">Address: <span class="font-normal" th:text="${order.purchaserAddress + ', ' + order.city + ', ' + order.country}"></span></p>
+                  <p class="mt-2 text-sm text-zinc-600 upper font-semibold">Delivery Courier: <span class="font-normal" th:text="${order.orderDeliveryCourier.name()}"></span></p>
+                  <p class="mt-2 text-lg text-zinc-800 font-bold uppercase">Total: <span th:text="${order.totalPrice + ' BGN'}"></span>
+                  </p>
+
+                  <p class="mt-2 text-sm text-zinc-900 text-lg">Status: <span
+                          class="status text-orange-600 font-semibold" th:text="${order.status}">Shipped</span></p>
 
 
-                <button
-                  class="details-btn mt-4 px-4 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-600 transition-all duration-300 focus:outline-none view-details">
-                  View Details
-                </button>
+                  <button
+                          class="details-btn mt-4 px-4 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-600 transition-all duration-300 focus:outline-none view-details">
+                    View Details
+                  </button>
 
-                <span>
+                  <span>
                   <button th:if="${order.status.name() == 'SHIPPED'}"
-                    class="status-btn mt-4 px-4 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-600 transition-all duration-300 focus:outline-none">
+                          class="status-btn mt-4 px-4 py-2 bg-zinc-900 text-white rounded-lg hover:bg-zinc-600 transition-all duration-300 focus:outline-none">
                     Mark as Received
                   </button>
 
                   <form class="form-rating">
                     <div class="review-modal relative z-50 pointer-events-none" aria-labelledby="modal-title"
-                      role="dialog" aria-modal="true">
+                         role="dialog" aria-modal="true">
                       <!--
                     Background backdrop, show/hide based on modal state.
-                
+
                     Entering: "ease-out duration-300"
                       From: "opacity-0"
                       To: "opacity-100"
@@ -65,14 +84,14 @@
                       To: "opacity-0"
                   -->
                       <div
-                        class="review-backdrop opacity-0 ease-in-out duration-300 fixed inset-0 bg-gray-500/75 transition-opacity"
-                        aria-hidden="true"></div>
+                              class="review-backdrop opacity-0 ease-in-out duration-300 fixed inset-0 bg-gray-500/75 transition-opacity"
+                              aria-hidden="true"></div>
 
                       <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
                         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                           <!--
                         Modal panel, show/hide based on modal state.
-                
+
                         Entering: "ease-out duration-300"
                           From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                           To: "opacity-100 translate-y-0 sm:scale-100"
@@ -81,35 +100,35 @@
                           To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                       -->
                           <div
-                            class="review-panel opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95 ease-in-out duration-300 relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                                  class="review-panel opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95 ease-in-out duration-300 relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                             <div class="bg-white px-6 py-5 sm:p-6">
                               <div class="sm:flex sm:items-start">
                                 <div
-                                  class="mx-auto flex size-12 shrink-0 items-center justify-center sm:mx-0 sm:size-10">
+                                        class="mx-auto flex size-12 shrink-0 items-center justify-center sm:mx-0 sm:size-10">
                                   <svg fill="#000000" height="200px" width="200px" version="1.1" id="Layer_1"
-                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                    viewBox="0 0 512 512" xml:space="preserve">
+                                       xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                       viewBox="0 0 512 512" xml:space="preserve">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                                     <g id="SVGRepo_iconCarrier">
                                       <g>
                                         <g>
                                           <path
-                                            d="M368.08,90.944l-67.065-9.744l-29.992-60.771c-6.116-12.393-23.836-12.386-29.949,0l-29.992,60.771l-67.065,9.744 c-13.676,1.987-19.145,18.842-9.254,28.483l48.529,47.304l-11.457,66.794c-2.337,13.618,12.003,24.034,24.229,17.604 l59.984-31.535l59.984,31.535c12.127,6.377,26.583-3.879,24.229-17.604l-11.456-66.794l48.529-47.304 C387.231,109.78,381.748,92.931,368.08,90.944z">
+                                                  d="M368.08,90.944l-67.065-9.744l-29.992-60.771c-6.116-12.393-23.836-12.386-29.949,0l-29.992,60.771l-67.065,9.744 c-13.676,1.987-19.145,18.842-9.254,28.483l48.529,47.304l-11.457,66.794c-2.337,13.618,12.003,24.034,24.229,17.604 l59.984-31.535l59.984,31.535c12.127,6.377,26.583-3.879,24.229-17.604l-11.456-66.794l48.529-47.304 C387.231,109.78,381.748,92.931,368.08,90.944z">
                                           </path>
                                         </g>
                                       </g>
                                       <g>
                                         <g>
                                           <path
-                                            d="M120.435,253.713H16.699C7.477,253.713,0,261.189,0,270.411v213.754c0,9.222,7.477,16.699,16.699,16.699h103.736 c9.222,0,16.699-7.476,16.699-16.699V270.411C137.134,261.189,129.657,253.713,120.435,253.713z">
+                                                  d="M120.435,253.713H16.699C7.477,253.713,0,261.189,0,270.411v213.754c0,9.222,7.477,16.699,16.699,16.699h103.736 c9.222,0,16.699-7.476,16.699-16.699V270.411C137.134,261.189,129.657,253.713,120.435,253.713z">
                                           </path>
                                         </g>
                                       </g>
                                       <g>
                                         <g>
                                           <path
-                                            d="M501.108,326.303c-18.077-22.784-51.249-26.096-73.456-7.46l-79.113,66.383c-24.799,0-44.492,0-67.177,0l35.938-30.155 c27.34-22.941,12.375-68.954-24.879-68.954H170.532v198.715c8.896,7.193,20.04,11.154,31.496,11.154h156.498 c11.757,0,23.192-4.161,32.201-11.719l102.571-86.061C514.766,380.19,518.272,347.935,501.108,326.303z">
+                                                  d="M501.108,326.303c-18.077-22.784-51.249-26.096-73.456-7.46l-79.113,66.383c-24.799,0-44.492,0-67.177,0l35.938-30.155 c27.34-22.941,12.375-68.954-24.879-68.954H170.532v198.715c8.896,7.193,20.04,11.154,31.496,11.154h156.498 c11.757,0,23.192-4.161,32.201-11.719l102.571-86.061C514.766,380.19,518.272,347.935,501.108,326.303z">
                                           </path>
                                         </g>
                                       </g>
@@ -148,8 +167,8 @@
                                       <label for="rating-comment" class="text-2xl font-semibold text-gray-700">Add a
                                         comment:</label>
                                       <textarea id="rating-comment" rows="3"
-                                        class="mt-2 w-full rounded-md border border-gray-300 p-2 text-sm text-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                                        placeholder="Write your feedback here..."></textarea>
+                                                class="mt-2 w-full rounded-md border border-gray-300 p-2 text-sm text-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                                placeholder="Write your feedback here..."></textarea>
                                     </div>
                                   </div>
                                 </div>
@@ -157,10 +176,10 @@
                             </div>
                             <div class="bg-gray-50 px-6 py-4 sm:flex sm:flex-row-reverse sm:px-6">
                               <button type="submit"
-                                class="submit-rating inline-flex w-full justify-center rounded-md bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">Submit
+                                      class="submit-rating inline-flex w-full justify-center rounded-md bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">Submit
                                 Rating</button>
                               <button type="button"
-                                class="cancel-rating mt-3 inline-flex w-full justify-center rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+                                      class="cancel-rating mt-3 inline-flex w-full justify-center rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
                             </div>
                           </div>
                         </div>
@@ -170,43 +189,29 @@
 
                 </span>
 
-                <div class="order-details hidden">
-                  <hr class="my-5">
-                  <div class="relative p-4 flex flex-col gap-y-5">
-                    <p class="text-2xl font-semibold text-gray-800 p-1 uppercase">Items</p>
+                  <div class="order-details hidden">
+                    <hr class="my-5">
+                    <div class="relative p-4 flex flex-col gap-y-5">
+                      <p class="text-2xl font-semibold text-gray-800 p-1 uppercase">Items</p>
 
-                    <div class="item-details flex lg:flex-row flex-col gap-3">
-                      <img
-                        src="https://media-photos.depop.com/b1/6406248/2026089428_ef0319f8890a4042907e698563b270d7/P0.jpg"
-                        class="aspect-square xl:w-[10%] lg:w-[30%] w-[70%] rounded-md bg-gray-200 object-cover">
+                      <div th:each="product: ${order.products}" class="item-details flex lg:flex-row flex-col gap-3">
+                        <img th:src="${product.mainImageUrl}"
+                             th:alt="${product.name}"
+                                class="aspect-square xl:w-[10%] lg:w-[30%] w-[70%] rounded-md bg-gray-200 object-cover">
 
-                      <span>
-                        <h4 class="text-base text-left sm:text-lg font-semibold text-gray-800">Summer Crop Top</h4>
-                        <p class="mt-2 text-xs sm:text-sm text-gray-600">Seller: <span class="font-medium">Emilia
-                            Dimitrova</span></p>
-                        <p class="mt-1 text-sm text-gray-800 font-medium">25.00 BGN</p>
+                        <span>
+                        <h4 class="text-base text-left sm:text-lg font-semibold text-gray-800" th:text="${product.name}"></h4>
+                        <p class="mt-1 text-sm text-gray-800 font-medium" th:text="${product.price + ' BGN'}"></p>
                       </span>
+                      </div>
+
+
                     </div>
-
-
-                    <div class="item-details flex lg:flex-row flex-col gap-3">
-                      <img
-                        src="https://media-photos.depop.com/b1/6406248/2026089428_ef0319f8890a4042907e698563b270d7/P0.jpg"
-                        class="aspect-square xl:w-[10%] lg:w-[30%] w-[70%] rounded-md bg-gray-200 object-cover">
-
-                      <span>
-                        <h4 class="text-base text-left sm:text-lg font-semibold text-gray-800">Summer Crop Top</h4>
-                        <p class="mt-2 text-xs sm:text-sm text-gray-600">Seller: <span class="font-medium">Emilia
-                            Dimitrova</span></p>
-                        <p class="mt-1 text-sm text-gray-800 font-medium">25.00 BGN</p>
-                      </span>
-                    </div>
-
-
                   </div>
-                </div>
 
+                </div>
               </div>
+
 
 
             </div>

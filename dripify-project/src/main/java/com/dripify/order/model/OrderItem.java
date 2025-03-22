@@ -22,8 +22,8 @@ public class OrderItem {
     @ManyToOne
     private Order order;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User seller;
+    @Column(nullable = false)
+    private String mainImageUrl;
 
     @Column(nullable = false)
     private String name;

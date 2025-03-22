@@ -1,5 +1,6 @@
 package com.dripify.notification.client;
 
+import com.dripify.notification.client.dto.OrderConfirmationEmailRequest;
 import com.dripify.notification.client.dto.UpsertNotificationPreference;
 import com.dripify.notification.client.dto.WelcomeEmailRequest;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -15,4 +16,7 @@ public interface NotificationClient {
 
     @PostMapping("/emails/welcome")
     ResponseEntity<Void> sendWelcomeEmail(@RequestBody WelcomeEmailRequest welcomeEmailRequest);
+
+    @PostMapping("/emails/order/confirmation")
+    ResponseEntity<Void> sendOrderConfirmationEmail(@RequestBody OrderConfirmationEmailRequest orderConfirmationEmailRequest);
 }

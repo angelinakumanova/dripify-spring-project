@@ -6,11 +6,8 @@ import com.dripify.product.service.ProductService;
 import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
 import com.dripify.user.service.UserService;
-import com.dripify.web.dto.OrderCreateRequest;
-import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -56,14 +53,5 @@ public class ShoppingCartController {
         return "redirect:" + referer;
     }
 
-    @GetMapping("/checkout")
-    public String getCheckoutPage() {
 
-        return "checkout";
-    }
-
-    @PostMapping
-    public String postCheckout(@Valid OrderCreateRequest orderCreateRequest, BindingResult bindingResult) {
-
-    }
 }

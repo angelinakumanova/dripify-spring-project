@@ -4,9 +4,9 @@ import com.dripify.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @Builder
 @Getter
@@ -18,14 +18,20 @@ import java.util.UUID;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User purchaser;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User seller;
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> products;
+
+    @Column(nullable = false)
+    private BigDecimal totalPrice;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -35,7 +41,18 @@ public class Order {
     private String purchaserFullName;
 
     @Column(nullable = false)
+    private String purchaserEmail;
+
+    @Column(nullable = false)
     private String purchaserAddress;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Country country;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private City city;
 
     @Column(nullable = false)
     private String purchaserPhoneNumber;
@@ -49,5 +66,5 @@ public class Order {
     private OrderDeliveryCourier orderDeliveryCourier;
 
     @Column(nullable = false)
-    private LocalDateTime createdOn;
+    private LocalDate createdOn;
 }

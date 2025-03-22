@@ -1,6 +1,7 @@
 package com.dripify.notification.service;
 
 import com.dripify.notification.client.NotificationClient;
+import com.dripify.notification.client.dto.OrderConfirmationEmailRequest;
 import com.dripify.notification.client.dto.UpsertNotificationPreference;
 import com.dripify.notification.client.dto.WelcomeEmailRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -55,6 +56,33 @@ public class NotificationService {
 
         } catch (Exception e) {
             log.warn("Can't send welcome email to user with id [%s] due to 500 Internal Server Error.".formatted(userId));
+        }
+
+    }
+
+    public void sendOrderConfirmationEmail(UUID userId, String fullName, String address,
+                                           String phoneNumber, String courier, String paymentMethod) {
+        OrderConfirmationEmailRequest dto = OrderConfirmationEmailRequest.builder()
+                .subject("Order Confirmation")
+                .bodyTemplate("order-confirmation-email")
+                .userId(userId)
+                .fullName(fullName)
+                .address(address)
+                .phoneNumber(phoneNumber)
+                .courier(courier)
+                .paymentMethod(paymentMethod)
+                .build();
+
+
+        try {
+            ResponseEntity<Void> response = notificationClient.sendOrderConfirmationEmail(dto);
+
+            if (!response.getStatusCode().is2xxSuccessful()) {
+                log.error("[Feign call to notification-svc] Could not send Order Confirmation email to user with id: {%s}".formatted(userId));
+            }
+
+        } catch (Exception e) {
+            log.warn("Can't send Order Confirmation email to user with id [%s] due to 500 Internal Server Error.".formatted(userId));
         }
 
     }
