@@ -3,7 +3,6 @@ package com.dripify.product.service;
 import com.dripify.category.model.Category;
 import com.dripify.category.service.CategoryService;
 import com.dripify.cloudinary.service.CloudinaryService;
-import com.dripify.exception.DomainException;
 import com.dripify.product.model.Product;
 import com.dripify.product.model.ProductImage;
 import com.dripify.product.repository.ProductImageRepository;
@@ -20,7 +19,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -160,8 +158,7 @@ public class ProductService {
     }
 
     private void validateGenderToCategory(Category category, Gender gender) {
-        if ((category.getGender().equals(Gender.WOMEN) && (gender.equals(Gender.MEN) || gender.equals(Gender.UNISEX))) ||
-                (category.getGender().equals(Gender.MEN) && (gender.equals(Gender.WOMEN) || gender.equals(Gender.UNISEX)))) {
+        if ((category.getGender() != gender) && !category.getGender().equals(Gender.UNISEX) && !gender.equals(Gender.UNISEX)) {
             throw new IllegalArgumentException("This gender doesn't belong to the category");
         }
     }

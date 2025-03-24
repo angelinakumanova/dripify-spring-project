@@ -11,17 +11,15 @@ import java.util.Optional;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-    List<Category> findAllByParentCategoryIsNull();
+    List<Category> findAllByParentCategoryName(String name);
 
-    Optional<Category> findByName(String category);
+    Optional<Category> findByName(String categoryName);
 
     Optional<Category> findByNameAndParentCategoryName(String category, String parentCategoryName);
 
-    List<Category> findAllBySubcategoriesIsNull();
-
-    @Query("SELECT c.name FROM Category c WHERE c.gender = :gender AND c.subcategories IS EMPTY")
-    List<String> getNamesByGenderAndSubcategoriesIsNull(Gender gender);
 
     @Query("SELECT c FROM Category c WHERE c.gender IN (:gender, 'UNISEX') AND c.parentCategory.name = :categoryName")
     List<Category> findByGenderAndMainCategory(Gender gender, String categoryName);
+
+    List<Category> findAllByParentCategoryIsNull();
 }

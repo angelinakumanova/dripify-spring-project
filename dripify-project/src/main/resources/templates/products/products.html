@@ -31,7 +31,7 @@
                         class="space-y-2 text-base font-semibold uppercase">
                         <hr>
 
-                        <li th:each="category: ${categories}"
+                        <li th:each="category: ${mainCategories}"
                             th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/women/' + category.name)}">
 
                             <a th:href="@{'/products/women/' + ${category.name}}"
@@ -74,7 +74,7 @@
                         class="space-y-2 text-base font-semibold uppercase">
                         <hr>
 
-                        <li th:each="category: ${categories}"
+                        <li th:each="category: ${mainCategories}"
                             th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/men/' + category.name)}">
 
                             <a th:href="@{'/products/men/' + ${category.name}}"
@@ -117,7 +117,7 @@
                         class="space-y-2 text-base font-semibold uppercase">
                         <hr>
 
-                        <li th:each="category: ${categories}"
+                        <li th:each="category: ${mainCategories}"
                             th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/unisex/' + category.name)}">
 
                             <a th:href="@{'/products/unisex/' + ${category.name}}"

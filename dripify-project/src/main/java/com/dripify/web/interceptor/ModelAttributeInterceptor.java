@@ -49,7 +49,7 @@ public class ModelAttributeInterceptor implements HandlerInterceptor {
 
 
         if (modelAndView != null) {
-            modelAndView.addObject("categories", categoryService.getMainCategories());
+            modelAndView.addObject("categories", categoryService.getAllSubcategories());
         }
     }
 }

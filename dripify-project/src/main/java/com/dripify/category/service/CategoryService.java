@@ -19,7 +19,15 @@ public class CategoryService {
     }
 
 
-    @Cacheable("categories")
+    @Cacheable("subcategories")
+    public List<Category> getAllSubcategories() {
+        List<Category> categories = categoryRepository.findAllByParentCategoryName("Clothing");
+        categories.add(categoryRepository.findByName("Shoes").get());
+        categories.add(categoryRepository.findByName("Accessories").get());
+
+        return categories;
+    }
+
     public List<Category> getMainCategories() {
         return categoryRepository.findAllByParentCategoryIsNull();
     }
@@ -32,12 +40,6 @@ public class CategoryService {
         return categoryRepository.findByNameAndParentCategoryName(categoryName, parentCategoryName)
                 .orElseThrow(() -> new IllegalArgumentException("Category [%s] in [%s] not found".formatted(categoryName, parentCategoryName)));
     }
-
-    public List<Category> getSubcategories() {
-        return categoryRepository.findAllBySubcategoriesIsNull();
-    }
-
-
 
     public List<CategoryResponse> getCategoriesByGenderAndMainCategory(Gender gender, String categoryName) {
         return categoryRepository.findByGenderAndMainCategory(gender, categoryName)

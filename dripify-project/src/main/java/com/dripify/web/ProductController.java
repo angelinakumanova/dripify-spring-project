@@ -1,5 +1,6 @@
 package com.dripify.web;
 
+import com.dripify.category.model.Category;
 import com.dripify.category.service.CategoryService;
 import com.dripify.product.model.Product;
 import com.dripify.product.service.ProductService;
@@ -36,6 +37,11 @@ public class ProductController {
         this.productService = productService;
         this.categoryService = categoryService;
         this.userService = userService;
+    }
+
+    @ModelAttribute("mainCategories")
+    public List<Category> mainCategories() {
+        return categoryService.getMainCategories();
     }
 
     @GetMapping("/{gender}/{category}")
@@ -122,29 +128,8 @@ public class ProductController {
 
     @GetMapping("/new")
     public ModelAndView getAddNewProductPage() {
-        ModelAndView modelAndView = new ModelAndView("/products/sell-product");
-        modelAndView.addObject("createProductRequest", new CreateProductRequest());
-        modelAndView.addObject("subcategories", categoryService.getSubcategories());
 
-        return modelAndView;
-    }
-
-    @PostMapping("/new")
-    public ModelAndView addNewProduct(@Valid CreateProductRequest createProductRequest, BindingResult bindingResult,
-                                      @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata,
-                                      RedirectAttributes redirectAttributes) {
-
-        if (bindingResult.hasErrors()) {
-            ModelAndView modelAndView = new ModelAndView("/products/sell-product");
-            modelAndView.addObject("subcategories", categoryService.getSubcategories());
-
-            return modelAndView;
-        }
-
-        productService.addNewProduct(createProductRequest, userService.getById(authenticationMetadata.getUserId()));
-        redirectAttributes.addFlashAttribute("successfulUpload", true);
-
-        return new ModelAndView("redirect:/products/new");
+        return new ModelAndView("/products/sell-product");
     }
 
     @PostMapping("/{id}/favourite")
