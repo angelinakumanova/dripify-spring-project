@@ -1,5 +1,6 @@
 package com.dripify.order.model;
 
+import com.dripify.review.model.Review;
 import com.dripify.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,6 +21,9 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToOne(mappedBy = "order")
+    private Review review;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User purchaser;

@@ -16,12 +16,19 @@
                 <h3 class="text-2xl font-bold text-gray-800">Your Orders</h3>
                 <p class="mt-2 text-sm text-gray-600">Review and manage your previous orders.</p>
 
-                <div class="mt-10 text-base sm:text-xl flex  justify-evenly">
-                    <a th:href="@{/orders/purchases}" class="font-semibold text-gray-800 rounded-full p-4 px-6 cursor-pointer hover:border hover:font-bold">
+                <div class="mt-10 text-base sm:text-xl flex justify-evenly">
+                    <a th:href="@{/orders/purchases}"
+                       class=" text-gray-800 text-center border rounded-full p-4 px-6 cursor-pointer hover:font-bold">
                         Purchases</a>
+
+
                     <a th:href="@{/orders/sales}"
-                        class="text-gray-800 border font-bold rounded-full p-4 px-6 cursor-pointer hover:border hover:font-bold">
-                        Sales</a>
+                       class="flex items-center gap-2 font-semibold border-2 font-bold text-gray-800 rounded-full p-4 px-6 cursor-pointer">
+                        Sales
+                        <div th:if="${!pendingOrders.isEmpty()}" th:text="${pendingOrders.size()}"
+                             class="w-8 h-8 flex items-center justify-center bg-red-600 rounded-full text-center text-white font-bold"></div>
+                    </a>
+
                 </div>
 
                 <div th:if="${ordersByDate.isEmpty()}"
@@ -39,7 +46,7 @@
                         <div th:each="entry: ${ordersByDate}">
                             <h1 class="text-2xl font-bold text-gray-800 ml-3 mb-4" th:text="${#temporals.format(entry.key, 'dd MMM yyyy')}"></h1>
 
-                            <div th:each="order: ${entry.value}"
+                            <div th:id="${'order-' + order.id}" th:each="order: ${entry.value}"
                                  class="order relative p-4 border border-gray-200 rounded-lg shadow-md mb-4">
                                 <h5 class="text-lg font-semibold text-zinc-800" th:text="${'Order #' + order.id + ' | Purchaser: ' + order.purchaser.username}"></h5>
 
@@ -53,7 +60,9 @@
                                 </p>
 
                                 <p class="mt-2 text-sm text-zinc-900 text-lg">Status: <span
-                                        class="status text-orange-600 font-semibold" th:text="${order.status}">Shipped</span></p>
+                                        th:classappend="${order.status.name() == 'DELIVERED' ? 'text-green-600' :
+                                         (order.status.name() == 'SHIPPED' ? 'text-orange-600' : 'text-red-600')}"
+                                        class="status  font-semibold" th:text="${order.status}"></span></p>
 
 
                                 <button
@@ -61,11 +70,38 @@
                                          hover:bg-zinc-600 transition-all duration-300 focus:outline-none view-details">
                                     View Details
                                 </button>
-                                <a class="mt-4 px-4 py-2.5 bg-pink-600 text-white rounded-lg
+                                <button th:if="${order.status.name() == 'PENDING'}"
+                                        class="confirm-status-btn mt-4 px-4 py-2 bg-pink-600 text-white rounded-lg
                                  hover:bg-pink-700 transition-all duration-300 focus:outline-none
-                                 hover:cursor-pointer">
-                                    Mark as Shipped
-                                </a>
+                                 hover:cursor-pointer">Mark as Shipped
+                                </button>
+
+                                <div class="confirmation-status-box opacity-0 transition-opacity pointer-events-none
+                                 ease-in-out duration-200 size-full bg-zinc-400 bg-opacity-50
+                                     fixed top-0 start-0 z-50 overflow-x-hidden overflow-y-auto">
+                                    <div class="scale-95 sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-56px)] flex items-center">
+                                        <div class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl shadow-md items-center">
+                                            <div class="flex justify-between items-center py-6 px-4 ">
+                                                <h3 class="font-bold text-gray-800 text-3xl text-center">
+                                                    Are you sure every product has been shipped out?
+                                                </h3>
+
+                                            </div>
+                                            <div class="pb-4 flex gap-2">
+                                                <form th:method="PUT"
+                                                      th:action="@{/orders/sales/status/{id}(id=${order.id})}"
+                                                      class="py-2 px-3 rounded-lg text-xl text-gray-800 border-2 border-pink-600
+                hover:bg-pink-600 text-pink-600 hover:text-white duration-300 transition ease-in-out
+                focus:outline-hidden focus:bg-gray-100">
+                                                    <button class="font-bold" type="submit">Yes, Mark As Shipped</button>
+                                                </form>
+                                                <button class="cancel-confirm-btn text-xl bg-zinc-900 text-white font-bold py-2 px-3 rounded-lg
+          hover:bg-zinc-500 duration-300 transition ease-in-out">Cancel</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
 
 
                                 <div class="order-details hidden">
@@ -95,8 +131,6 @@
     </section>
 
 </div>
-
-
 
 </body>
 </html>

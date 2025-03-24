@@ -9,6 +9,7 @@ import com.dripify.order.repository.OrderItemRepository;
 import com.dripify.order.repository.OrderRepository;
 import com.dripify.product.model.Product;
 import com.dripify.product.service.ProductService;
+import com.dripify.review.model.Review;
 import com.dripify.user.model.User;
 import com.dripify.web.dto.OrderCreateRequest;
 import org.springframework.stereotype.Service;
@@ -69,6 +70,20 @@ public class OrderService {
         return orders;
     }
 
+    public void addReviewToOrder(Order order, Review review) {
+
+        if (order.getReview() != null) {
+            throw new IllegalArgumentException("This order already has a review");
+        }
+
+        order.setReview(review);
+        orderRepository.save(order);
+    }
+
+    public List<Order> getPendingOrdersBySeller(User seller) {
+        return orderRepository.getByStatusAndSeller(OrderStatus.PENDING, seller);
+    }
+
 
 
     private List<Order> initializeOrdersPerUser(OrderCreateRequest dto, User purchaser) {
@@ -91,9 +106,9 @@ public class OrderService {
                         .mainImageUrl(p.getImages().getFirst().getImageUrl())
                         .name(p.getName())
                         .price(p.getPrice())
-                        .gender(p.getGender().name())
-                        .category(p.getCategory().getName())
-                        .size(p.getSize().name())
+                        .gender(p.getGender())
+                        .category(p.getCategory())
+                        .size(p.getSize())
                         .build();
 
                 return orderItemRepository.save(orderItem);
@@ -121,6 +136,40 @@ public class OrderService {
                 .status(OrderStatus.PENDING)
                 .createdOn(LocalDate.now())
                 .build();
+    }
+
+
+    public void changeOrderStatus(User user, Long orderId, OrderStatus orderStatus) {
+        Order order = getById(orderId);
+
+        if (order.getSeller() != user && order.getPurchaser() != user) {
+            throw new IllegalArgumentException("You can't change the order status of this order.");
+        }
+
+        order.setStatus(orderStatus);
+        orderRepository.save(order);
+    }
+
+    public Order validateOrderAccess(User seller, User purchaser, Long orderId) {
+        Order order = getById(orderId);
+
+        if (!order.getPurchaser().equals(purchaser)) {
+            throw new IllegalArgumentException("You can't leave a review for this order.");
+        }
+
+        if (!order.getSeller().equals(seller)) {
+            throw new IllegalArgumentException("This order does not belong to this seller");
+        }
+
+        if (order.getReview() != null) {
+            throw new IllegalArgumentException("This order already has a review");
+        }
+
+        return order;
+    }
+
+    public Order getById(Long orderId) {
+        return orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("Order not found"));
     }
 
 

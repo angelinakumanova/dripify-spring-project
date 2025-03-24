@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -18,4 +19,8 @@ public interface OrderRepository extends JpaRepository<Order, UUID> {
     List<Order> findByPurchaserOrderByCreatedOnDescIdDesc(User purchaser);
 
     List<Order> findBySellerOrderByCreatedOnDescIdDesc(User seller);
+
+    Optional<Order> findById(Long id);
+
+    List<Order> getByStatusAndSeller(OrderStatus status, User seller);
 }

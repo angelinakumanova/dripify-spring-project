@@ -1,5 +1,6 @@
 package com.dripify.review.model;
 
+import com.dripify.order.model.Order;
 import com.dripify.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,6 +26,9 @@ public class Review {
     @ManyToOne
     private User reviewee;
 
+    @OneToOne
+    private Order order;
+
     @Column(nullable = false)
     private String title;
 
@@ -32,7 +36,7 @@ public class Review {
     private String comment;
 
     @Column(nullable = false)
-    private double rating;
+    private int rating;
 
     @Column(nullable = false)
     private LocalDate createdOn;

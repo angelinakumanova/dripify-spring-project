@@ -168,11 +168,11 @@ public class UserService implements UserDetailsService {
 
 
     public User getById(UUID id) {
-        return userRepository.findById(id).orElseThrow(() -> new DomainException("User with id %s does not exist!".formatted(id)));
+        return userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User with id %s does not exist!".formatted(id)));
     }
 
     public User getByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(() -> new DomainException("User with username %s does not exist".formatted(username)));
+        return userRepository.findByUsername(username).orElseThrow(() -> new IllegalArgumentException("User with username %s does not exist".formatted(username)));
     }
 
     public void favoriteProduct(Product product, User user) {
@@ -185,10 +185,6 @@ public class UserService implements UserDetailsService {
     }
 
     public void removeFavoriteProduct(Product product, User user) {
-        if (!user.getFavoriteProducts().contains(product)) {
-            throw new IllegalArgumentException("You are not have this product as favourite.");
-        }
-
         user.getFavoriteProducts().remove(product);
         userRepository.save(user);
     }

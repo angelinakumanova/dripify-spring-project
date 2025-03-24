@@ -1,5 +1,8 @@
 package com.dripify.order.model;
 
+import com.dripify.category.model.Category;
+import com.dripify.product.model.enums.Size;
+import com.dripify.shared.enums.Gender;
 import com.dripify.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,13 +32,15 @@ public class OrderItem {
     private String name;
 
     @Column(nullable = false)
-    private String size;
+    @Enumerated(EnumType.STRING)
+    private Size size;
 
     @Column(nullable = false)
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
-    @Column(nullable = false)
-    private String category;
+    @ManyToOne
+    private Category category;
 
     @Column(nullable = false)
     private BigDecimal price;

@@ -31,4 +31,15 @@ public class Category {
 
     @OneToMany(mappedBy = "parentCategory", fetch = FetchType.EAGER)
     private List<Category> subcategories;
+
+    public Category(String name, Gender gender) {
+        this.name = name;
+        this.gender = gender;
+    }
+
+    public Category(String name, Gender gender, Category parentCategory) {
+        this.name = name;
+        this.gender = gender;
+        this.parentCategory = parentCategory;
+    }
 }

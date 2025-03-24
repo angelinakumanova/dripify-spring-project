@@ -1,5 +1,5 @@
 package com.dripify.order.model;
 
 public enum OrderStatus {
-    PENDING, SHIPPED, DELIVERED, RETURNED
+    PENDING, SHIPPED, DELIVERED
 }

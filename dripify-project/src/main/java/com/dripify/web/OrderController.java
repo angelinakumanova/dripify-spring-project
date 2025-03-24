@@ -1,6 +1,7 @@
 package com.dripify.web;
 
 import com.dripify.order.model.Order;
+import com.dripify.order.model.OrderStatus;
 import com.dripify.order.service.OrderService;
 import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -82,6 +84,7 @@ public class OrderController {
         User user = userService.getById(authenticationMetadata.getUserId());
 
         List<Order> orders = orderService.createNewOrder(orderCreateRequest, user);
+
         redirectAttributes.addFlashAttribute("orders", orders);
 
         return "redirect:/orders/completed";
@@ -96,5 +99,25 @@ public class OrderController {
         }
 
         return "order-completed";
+    }
+
+    @PutMapping("/sales/status/{id}")
+    public String modifyOrderStatusForSeller (@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata,
+                                     @PathVariable(value = "id") Long orderId) {
+        User user = userService.getById(authenticationMetadata.getUserId());
+
+        orderService.changeOrderStatus(user, orderId, OrderStatus.SHIPPED);
+
+        return "redirect:/orders/sales" + "#order-" + orderId;
+    }
+
+    @PutMapping("/purchases/status/{id}")
+    public String modifyOrderStatusForPurchaser (@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata,
+                                     @PathVariable(value = "id") Long orderId) {
+        User user = userService.getById(authenticationMetadata.getUserId());
+
+        orderService.changeOrderStatus(user, orderId, OrderStatus.DELIVERED);
+
+        return "redirect:/orders/purchases" + "#order-" + orderId;
     }
 }

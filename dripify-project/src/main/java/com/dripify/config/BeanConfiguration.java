@@ -1,7 +1,7 @@
 package com.dripify.config;
 
 import com.cloudinary.Cloudinary;
-import io.github.cdimascio.dotenv.Dotenv;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,10 +16,7 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public Cloudinary cloudinary() {
-        Dotenv dotenv = Dotenv.load();
-        String cloudinaryUrl = dotenv.get("CLOUDINARY_URL");
-
+    public Cloudinary cloudinary(@Value("${cloudinary.link}") String cloudinaryUrl) {
         return new Cloudinary(cloudinaryUrl);
     }
 }

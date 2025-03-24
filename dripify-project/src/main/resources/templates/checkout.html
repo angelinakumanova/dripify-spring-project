@@ -99,7 +99,7 @@
                                     class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 ">
                                     <option value="" selected disabled>-Select City-</option>
                                     <option th:each="city: ${T(com.dripify.order.model.City).values()}"
-                                            th:value="${city}" th:text="${city}"
+                                            th:value="${city.name()}" th:text="${city}"
                                     ></option>
                                 </select>
                                 <span th:if="${#fields.hasErrors('city')}"
@@ -206,7 +206,7 @@
                         <div class="-my-3 divide-y divide-gray-200">
                             <div class="space-y-4 my-4">
 
-                                <div th:each="product: ${user.shoppingCart.products}" class="flex items-start gap-4">
+                                <div th:each="product: ${user.shoppingCart.products}" class="product-box flex items-start gap-4">
                                     <div
                                         class="w-32 aspect-square max-lg:w-24 max-lg:h-24 flex shrink-0 rounded-lg overflow-hidden">
                                         <img th:src="${product.images.get(0).imageUrl}"
@@ -224,7 +224,7 @@
                                             <li class="flex flex-wrap gap-4 font-semibold">Size <span
                                                     class="ml-auto font-normal" th:text="${product.size}"></span></li>
 
-                                            <li class="flex flex-wrap gap-4 font-semibold">Price <span
+                                            <li class="price flex flex-wrap gap-4 font-semibold">Price <span
                                                     class="ml-auto font-normal" th:text="${product.price + ' BGN'}"></span></li>
                                         </ul>
                                     </div>
@@ -238,7 +238,7 @@
 
                             <dl class="flex items-center justify-between gap-4 py-3">
                                 <dt class="text-base font-bold text-gray-900 ">Total</dt>
-                                <dd class="text-base font-bold text-gray-900 ">27 BGN</dd>
+                                <dd class="total-price text-base font-bold text-gray-900 ">27 BGN</dd>
                             </dl>
                         </div>
                     </div>
@@ -255,5 +255,23 @@
     </section>
 
 
+<script>
+    const productsPriceElements = document.querySelectorAll('.product-box .price');
+
+    if (productsPriceElements) {
+        let totalPrice = 0;
+
+        productsPriceElements.forEach(element => {
+            const priceText = element.textContent.trim().replace(/[^\d.]/g, '');
+            const price = parseFloat(priceText);
+
+            if (!isNaN(price)) {
+                totalPrice += price;
+            }
+        });
+
+        document.querySelector('.total-price').textContent = `${totalPrice + 7} BGN`;
+    }
+</script>
 </body>
 </html>

@@ -79,6 +79,7 @@ public class Product {
     @Column(nullable = false)
     private LocalDateTime updatedOn;
 
+    //TODO: IN SERVICE FOR CHECK
     @PrePersist
     @PreUpdate
     public void validateSize() {
