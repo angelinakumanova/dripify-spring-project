@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -43,11 +44,11 @@ public class OrderService {
     }
 
     public Map<LocalDate, List<Order>> getPurchasedByUser(User user) {
-        return orderRepository.findByPurchaserOrderByCreatedOnDescIdDesc(user).stream().collect(Collectors.groupingBy(Order::getCreatedOn));
+        return orderRepository.findByPurchaserOrderByCreatedOnDesc(user).stream().collect(Collectors.groupingBy(o -> o.getCreatedOn().toLocalDate()));
     }
 
-    public Map<LocalDate, List<Order>> getProductsBySeller(User user) {
-        return orderRepository.findBySellerOrderByCreatedOnDescIdDesc(user).stream().collect(Collectors.groupingBy(Order::getCreatedOn));
+    public Map<LocalDate, List<Order>> getSoldByUser(User user) {
+        return orderRepository.findBySellerOrderByCreatedOnDesc(user).stream().collect(Collectors.groupingBy(o -> o.getCreatedOn().toLocalDate()));
     }
 
 
@@ -59,16 +60,21 @@ public class OrderService {
         }
 
         List<Order> orders = initializeOrdersPerUser(dto, user);
-        shoppingCartService.clearCart(user.getShoppingCart());
+
 
         String fullAddress = String.format("%s, %s, %s", dto.getPurchaserAddress(), dto.getCity().name(), dto.getCountry().name());
         String fullPhoneNumber = String.format("+359 %s", dto.getPurchaserPhoneNumber());
-        notificationService.sendOrderConfirmationEmail(user.getId(), dto.getPurchaserFullName(),
+        notificationService.sendConfirmationOrder(user.getId(), dto.getPurchaserFullName(),
                 fullAddress, fullPhoneNumber, dto.getOrderDeliveryCourier().name(), dto.getOrderPayment().name());
 
+        sendOrderEmailToSellers(dto, user, fullAddress, fullPhoneNumber);
+
+        shoppingCartService.clearCart(user.getShoppingCart());
 
         return orders;
     }
+
+
 
     public void addReviewToOrder(Order order, Review review) {
 
@@ -84,7 +90,55 @@ public class OrderService {
         return orderRepository.getByStatusAndSeller(OrderStatus.PENDING, seller);
     }
 
+    public void changeOrderStatus(User user, Long orderId, OrderStatus orderStatus) {
+        Order order = getById(orderId);
 
+        if (order.getSeller() != user && order.getPurchaser() != user) {
+            throw new IllegalArgumentException("You can't change the order status of this order.");
+        }
+
+        order.setStatus(orderStatus);
+        orderRepository.save(order);
+
+        if (OrderStatus.SHIPPED.equals(orderStatus)) {
+            String address = String.format("%s, %s, %s", order.getPurchaserAddress(), order.getCity().toString(), order.getCountry().toString());
+            notificationService.sendShippedOrderEmail(order.getPurchaser().getId(),
+                    order.getId(), order.getTotalPrice(), order.getOrderPayment().toString(),
+                    order.getOrderDeliveryCourier().toString(),address);
+        }
+    }
+
+    public Order validateOrderAccess(User seller, User purchaser, Long orderId) {
+        Order order = getById(orderId);
+
+        if (!order.getPurchaser().equals(purchaser)) {
+            throw new IllegalArgumentException("You can't leave a review for this order.");
+        }
+
+        if (!order.getSeller().equals(seller)) {
+            throw new IllegalArgumentException("This order does not belong to this seller");
+        }
+
+        if (order.getReview() != null) {
+            throw new IllegalArgumentException("This order already has a review");
+        }
+
+        return order;
+    }
+
+    public Order getById(Long orderId) {
+        return orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("Order not found"));
+    }
+
+    private void sendOrderEmailToSellers(OrderCreateRequest dto, User user, String fullAddress, String fullPhoneNumber) {
+        user.getShoppingCart()
+                .getProducts()
+                .stream()
+                .map(Product::getSeller)
+                .forEach(seller -> notificationService.sendNewOrderEmail(seller.getId(),
+                        dto.getPurchaserFullName(), fullAddress, fullPhoneNumber,
+                        dto.getOrderDeliveryCourier().name(), dto.getOrderPayment().name()));
+    }
 
     private List<Order> initializeOrdersPerUser(OrderCreateRequest dto, User purchaser) {
         Map<User, List<Product>> productsBySeller = purchaser.getShoppingCart().getProducts().stream()
@@ -126,7 +180,6 @@ public class OrderService {
                 .purchaser(purchaser)
                 .seller(seller)
                 .purchaserFullName(dto.getPurchaserFullName())
-                .purchaserEmail(dto.getPurchaserEmail())
                 .purchaserAddress(dto.getPurchaserAddress())
                 .purchaserPhoneNumber(dto.getPurchaserPhoneNumber())
                 .country(dto.getCountry())
@@ -134,43 +187,12 @@ public class OrderService {
                 .orderPayment(dto.getOrderPayment())
                 .orderDeliveryCourier(dto.getOrderDeliveryCourier())
                 .status(OrderStatus.PENDING)
-                .createdOn(LocalDate.now())
+                .createdOn(LocalDateTime.now())
                 .build();
     }
 
 
-    public void changeOrderStatus(User user, Long orderId, OrderStatus orderStatus) {
-        Order order = getById(orderId);
 
-        if (order.getSeller() != user && order.getPurchaser() != user) {
-            throw new IllegalArgumentException("You can't change the order status of this order.");
-        }
-
-        order.setStatus(orderStatus);
-        orderRepository.save(order);
-    }
-
-    public Order validateOrderAccess(User seller, User purchaser, Long orderId) {
-        Order order = getById(orderId);
-
-        if (!order.getPurchaser().equals(purchaser)) {
-            throw new IllegalArgumentException("You can't leave a review for this order.");
-        }
-
-        if (!order.getSeller().equals(seller)) {
-            throw new IllegalArgumentException("This order does not belong to this seller");
-        }
-
-        if (order.getReview() != null) {
-            throw new IllegalArgumentException("This order already has a review");
-        }
-
-        return order;
-    }
-
-    public Order getById(Long orderId) {
-        return orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("Order not found"));
-    }
 
 
 }

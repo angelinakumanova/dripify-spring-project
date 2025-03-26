@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +50,7 @@ public class OrderController {
         ModelAndView modelAndView = new ModelAndView("/user/orders-sales");
 
         User user = userService.getById(authenticationMetadata.getUserId());
-        Map<LocalDate, List<Order>> sellerOrdersGroupedByDate = orderService.getProductsBySeller(user);
+        Map<LocalDate, List<Order>> sellerOrdersGroupedByDate = orderService.getSoldByUser(user);
         modelAndView.addObject("ordersByDate", sellerOrdersGroupedByDate);
 
         return modelAndView;

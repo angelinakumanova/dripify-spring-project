@@ -1,5 +1,6 @@
 package com.dripify.web;
 
+import com.dripify.notification.service.NotificationService;
 import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
 import com.dripify.user.service.UserService;
@@ -23,9 +24,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ProfileSettingsController {
 
     private final UserService userService;
+    private final NotificationService notificationService;
 
-    public ProfileSettingsController(UserService userService) {
+    public ProfileSettingsController(UserService userService, NotificationService notificationService) {
         this.userService = userService;
+        this.notificationService = notificationService;
     }
 
 
@@ -33,6 +36,7 @@ public class ProfileSettingsController {
     public ModelAndView getEditProfilePage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
         ModelAndView modelAndView = new ModelAndView("/user/edit-profile");
         modelAndView.addObject("userEditRequest", DtoMapper.mapUserToEditRequest(userService.getById(authenticationMetadata.getUserId())));
+
 
         return modelAndView;
     }
@@ -56,6 +60,7 @@ public class ProfileSettingsController {
 
     @GetMapping
     public String getSettingsPage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata, Model model) {
+        model.addAttribute("notificationPreference", notificationService.getNotificationPreference(authenticationMetadata.getUserId()));
 
         if (!model.containsAttribute("passwordUpdateRequest")) {
             model.addAttribute("passwordUpdateRequest", new PasswordUpdateRequest());
@@ -137,5 +142,13 @@ public class ProfileSettingsController {
         userService.deactivateUser(userService.getById(authenticationMetadata.getUserId()));
 
         return "leave-page";
+    }
+
+    @PutMapping("/notifications/preference")
+    public String updateNotificationPreference(@RequestParam boolean enabled,
+                                               @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
+        notificationService.updateNotificationPreference(authenticationMetadata.getUserId(), enabled);
+
+        return "redirect:/settings/profile";
     }
 }

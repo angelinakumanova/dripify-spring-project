@@ -26,7 +26,7 @@
                     <ul class="hidden space-y-2 text-base font-semibold uppercase">
                         <hr>
 
-                        <li th:each="category: ${categories}">
+                        <li th:each="category: ${mainCategories}">
 
                             <a th:href="@{'/products/women/' + ${category.name}}"
                                th:text="${category.name}"
@@ -44,7 +44,7 @@
                     <ul class="hidden space-y-2 text-base font-semibold uppercase">
                         <hr>
 
-                        <li th:each="category: ${categories}">
+                        <li th:each="category: ${mainCategories}">
                             <a th:href="@{'/products/men/' + ${category.name}}"
                                th:text="${category.name}"
                                class="uppercase text-zinc-600 transition duration-200 ease-in hover:text-white
@@ -62,7 +62,7 @@
                     <ul class="hidden space-y-2 text-base font-semibold uppercase">
                         <hr>
 
-                        <li th:each="category: ${categories}">
+                        <li th:each="category: ${mainCategories}">
 
                             <a th:href="@{'/products/unisex/' + ${category.name}}"
                                th:text="${category.name}"

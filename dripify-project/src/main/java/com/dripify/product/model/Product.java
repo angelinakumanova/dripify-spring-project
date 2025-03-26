@@ -7,6 +7,7 @@ import com.dripify.shared.enums.Gender;
 import com.dripify.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -26,9 +27,6 @@ public class Product {
 
     @Column(nullable = false)
     private boolean isActive;
-
-    @ManyToOne
-    private Order order;
 
     @OneToMany(mappedBy = "product")
     @OrderBy(value = "imageUrl")
@@ -79,17 +77,5 @@ public class Product {
     @Column(nullable = false)
     private LocalDateTime updatedOn;
 
-    //TODO: IN SERVICE FOR CHECK
-    @PrePersist
-    @PreUpdate
-    public void validateSize() {
-        if ("clothing".equalsIgnoreCase(category.getParentCategory().getName()) && SizeCategory.SHOES.equals(size.getCategory())) {
-            throw new IllegalArgumentException("Invalid clothing size: " + size);
-        } else if ("shoes".equalsIgnoreCase(category.getParentCategory().getName()) && SizeCategory.CLOTHING.equals(size.getCategory())) {
-            throw new IllegalArgumentException("Invalid shoe size: " + size);
-        } else if ("accessories".equalsIgnoreCase(category.getParentCategory().getName()) && size != null) {
-            throw new IllegalArgumentException("Product of type accessories must NOT have size.");
-        }
-    }
 
 }

@@ -163,7 +163,6 @@ public class ProductController {
         modelAndView.addObject("currentCategory", category);
         modelAndView.addObject("currentPath", request.getRequestURI());
 
-        // ToDO: Implement query string in another way
         String filters = request.getQueryString() == null ? "" : request.getQueryString();
         filters = "?" + filters;
         filters = filters.replaceAll("&?page=\\d+", "");

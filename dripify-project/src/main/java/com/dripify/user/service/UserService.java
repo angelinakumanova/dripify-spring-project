@@ -49,7 +49,7 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User user = userRepository.getUserByUsername(username).orElseThrow(() ->
-                new DomainException("User with username %s does not exist!".formatted(username)));
+                new IllegalArgumentException("User with username %s does not exist!".formatted(username)));
 
 
         return new AuthenticationMetadata(user.getId(), user.getUsername(), user.getPassword(), user.getRole(), user.isActive());
@@ -196,6 +196,12 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
 
         SecurityContextHolder.getContext().setAuthentication(null);
+    }
+
+    @Transactional
+    public void removeInactiveProducts(Product product) {
+        userRepository.removeFavouriteProduct(product.getId());
+        userRepository.removeShoppingCartProduct(product.getId());
     }
 
     private void updateAuthentication(User user) {

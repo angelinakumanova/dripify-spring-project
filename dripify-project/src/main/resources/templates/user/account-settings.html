@@ -87,14 +87,15 @@
             </form>
 
             <!-- Email Notifications with sliding toggle -->
-            <form id="notifications-form">
+            <form th:method="PUT" th:action="@{/settings/profile/notifications/preference(enabled = ${!notificationPreference.isNewsletterEnabled()})}"
+                  id="notifications-form">
               <div class="flex items-center justify-between mt-12">
                 <div>
                   <h3 class="text-sm font-medium text-gray-800">Email Notifications</h3>
                   <p class="text-sm text-gray-600">Receive newsletters via email.</p>
                 </div>
                 <label class="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" value="" class="sr-only peer" id="notifications-toggle" checked>
+                  <input type="checkbox" value="" class="sr-only peer" id="notifications-toggle" th:checked="${notificationPreference.isNewsletterEnabled()}">
                   <div class="w-11 h-6 rounded-full peer bg-gray-700 peer-checked:bg-pink-600 peer-focus:outline-none">
                   </div>
                   <div
@@ -167,7 +168,14 @@
     </section>
   </div>
 
+<script>
+  const notificationsToggleElement = document.getElementById("notifications-toggle");
 
+  if (notificationsToggleElement) {
+    notificationsToggleElement.addEventListener('change', () => {
+      notificationsToggleElement.closest('form').submit();
+    });
+  }
+</script>
 </body>
-
 </html>

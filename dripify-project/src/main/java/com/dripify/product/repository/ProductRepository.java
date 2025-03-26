@@ -43,17 +43,17 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
                                                     String fieldSort,
                                                     Pageable pageable);
 
-    Optional<Product> getProductByIdAndIsActive(UUID id, boolean active);
+    Optional<Product> getProductByIdAndIsActiveTrue(UUID id);
 
 
-    Page<Product> getProductsBySellerAndIsActive(User seller, Pageable pageable, boolean active);
+    Page<Product> getProductsBySellerAndIsActiveTrue(User seller, Pageable pageable);
 
     @Query("SELECT p FROM Product p WHERE p.isActive = true AND p.category = :category AND p.gender = :gender AND " +
             "NOT p.id = :currentProductId ORDER BY p.createdOn DESC LIMIT :limit")
     List<Product> getProductsByCategoryOrderByCreatedOnDesc(Category category, Gender gender, UUID currentProductId, int limit);
 
 
-    List<Product> getProductsBySellerAndIdNotAndIsActiveOrderByCreatedOnDesc(User seller, UUID id, boolean active);
+    List<Product> getProductsBySellerAndIdNotAndIsActiveTrueOrderByCreatedOnDesc(User seller, UUID id);
 
     Page<Product> getAllByIsActiveTrueOrderByCreatedOnDesc(Pageable pageable);
 }

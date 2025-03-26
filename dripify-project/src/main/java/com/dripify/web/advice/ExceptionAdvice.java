@@ -3,12 +3,13 @@ package com.dripify.web.advice;
 import com.dripify.exception.ShoppingCartException;
 import com.dripify.exception.UserRegistrationException;
 import com.dripify.exception.UserUpdateException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,6 +31,13 @@ public class ExceptionAdvice {
         redirectAttributes.addFlashAttribute(e.getField() + "Error", e.getMessage());
 
         return "redirect:/register";
+    }
+
+    @ExceptionHandler(ShoppingCartException.class)
+    public String handleShoppingCartException(ShoppingCartException e, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+        redirectAttributes.addFlashAttribute("productExistsError", "You already have this product in your cart.");
+
+        return "redirect:/" + request.getHeader("Referer").replace("http://localhost:8080/", "");
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)

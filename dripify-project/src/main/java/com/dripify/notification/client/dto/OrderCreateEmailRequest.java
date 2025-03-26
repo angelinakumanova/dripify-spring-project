@@ -7,11 +7,11 @@ import java.util.UUID;
 
 @Data
 @Builder
-public class OrderConfirmationEmailRequest {
+public class OrderCreateEmailRequest {
 
     private String subject;
 
-    private String bodyTemplate;
+    private String emailType;
 
     private UUID userId;
 

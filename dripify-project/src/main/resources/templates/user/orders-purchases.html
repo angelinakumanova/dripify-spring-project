@@ -55,15 +55,16 @@
                     <span th:text="${'Order #' + order.id}"></span>
                     <span> | Seller: </span>
                     <a class="hover:underline" th:href="@{/users/{username}/profile/products(username=${order.seller.username})}"
-                       th:text="${order.seller.username}"></a></h5>
+                       th:text="${order.seller.username}"></a>
+                  </h5>
 
                   <p class="mt-2 text-sm text-zinc-600 upper font-semibold">Full Name: <span class="font-normal" th:text="${order.purchaserFullName}"> </span> </p>
                   <p class="mt-2 text-sm text-zinc-600 upper font-semibold">Phone Number:
                     <span class="font-normal" th:text="${'+359 ' + order.purchaserPhoneNumber}"></span>
                   </p>
-                  <p class="mt-2 text-sm text-zinc-600 upper font-semibold">Address: <span class="font-normal" th:text="${order.purchaserAddress + ', ' + order.city + ', ' + order.country}"></span></p>
+                  <p class="mt-2 text-sm text-zinc-600 upper font-semibold">Address: <span class="font-normal" th:text="${order.purchaserAddress + ', ' + order.city.toString() + ', ' + order.country}"></span></p>
                   <p class="mt-2 text-sm text-zinc-600 upper font-semibold">Delivery Courier: <span class="font-normal" th:text="${order.orderDeliveryCourier.name()}"></span></p>
-                  <p class="mt-2 text-lg text-zinc-800 font-bold uppercase">Total: <span th:text="${order.totalPrice + ' BGN'}"></span>
+                  <p class="mt-2 text-lg text-zinc-800 font-bold uppercase">Total: <span th:text="${order.totalPrice + 7 + ' BGN (Delivery Fee Included)'}"></span>
                   </p>
 
                   <p class="mt-2 text-sm text-zinc-900 text-lg">Status: <span

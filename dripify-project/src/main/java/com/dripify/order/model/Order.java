@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder
@@ -70,5 +71,5 @@ public class Order {
     private OrderDeliveryCourier orderDeliveryCourier;
 
     @Column(nullable = false)
-    private LocalDate createdOn;
+    private LocalDateTime createdOn;
 }

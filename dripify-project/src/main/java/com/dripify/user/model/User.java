@@ -5,6 +5,10 @@ import com.dripify.product.model.Product;
 import com.dripify.review.model.Review;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLJoinTableRestriction;
+import org.hibernate.annotations.SQLRestriction;
+import org.hibernate.annotations.Where;
+import org.hibernate.annotations.WhereJoinTable;
 
 import java.time.LocalDate;
 import java.util.*;

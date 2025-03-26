@@ -21,7 +21,7 @@ public class ShoppingCartService {
 
     public ShoppingCart createNewCart(User user) {
         if (shoppingCartRepository.findByUser(user).isPresent()) {
-            throw new ShoppingCartException("Shopping cart for user with id: [%s] already exists".formatted(user.getId()));
+            throw new IllegalArgumentException("Shopping cart for user with id: [%s] already exists".formatted(user.getId()));
         }
 
         ShoppingCart newCart = ShoppingCart.builder()

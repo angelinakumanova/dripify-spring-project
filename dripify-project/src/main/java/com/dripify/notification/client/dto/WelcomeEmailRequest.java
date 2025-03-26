@@ -10,7 +10,7 @@ import java.util.UUID;
 public class WelcomeEmailRequest {
     private String subject;
 
-    private String bodyTemplate;
+    private String emailType;
 
     private UUID userId;
 

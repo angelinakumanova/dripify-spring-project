@@ -16,9 +16,9 @@ import java.util.UUID;
 public interface OrderRepository extends JpaRepository<Order, UUID> {
     List<Order> findBySellerAndStatus(User user, OrderStatus orderStatus);
 
-    List<Order> findByPurchaserOrderByCreatedOnDescIdDesc(User purchaser);
+    List<Order> findByPurchaserOrderByCreatedOnDesc(User purchaser);
 
-    List<Order> findBySellerOrderByCreatedOnDescIdDesc(User seller);
+    List<Order> findBySellerOrderByCreatedOnDesc(User seller);
 
     Optional<Order> findById(Long id);
 

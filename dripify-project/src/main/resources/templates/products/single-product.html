@@ -77,6 +77,7 @@
                 </div>
               </div>
             </div>
+            <p class="text-gray-600" th:text="${product.gender + ' | ' + product.category.name}"></p>
 
             <div class="mt-4 items-center gap-4 flex justify-between">
               <p class="text-2xl font-extrabold text-gray-900 sm:text-3xl" th:text="${product.price + 'BGN'}">
@@ -132,6 +133,9 @@
               </form>
 
             </div>
+
+            <span th:if="${productExistsError}" th:text="${productExistsError}"
+                  class="font-bold mt-2 ml-1 text-sm text-red-500"></span>
 
             <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
 

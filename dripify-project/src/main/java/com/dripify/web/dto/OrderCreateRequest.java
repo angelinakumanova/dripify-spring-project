@@ -15,10 +15,6 @@ public class OrderCreateRequest {
     @NotBlank(message = "Full name is required!")
     private String purchaserFullName;
 
-    @NotBlank(message = "Email is required!")
-    @Email(message = "Enter a valid email!")
-    private String purchaserEmail;
-
     @NotNull(message = "Address must NOT be null!")
     @NotBlank(message = "Address is required!!")
     private String purchaserAddress;

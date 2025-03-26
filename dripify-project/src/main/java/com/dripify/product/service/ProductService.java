@@ -5,6 +5,8 @@ import com.dripify.category.service.CategoryService;
 import com.dripify.cloudinary.service.CloudinaryService;
 import com.dripify.product.model.Product;
 import com.dripify.product.model.ProductImage;
+import com.dripify.product.model.enums.Size;
+import com.dripify.product.model.enums.SizeCategory;
 import com.dripify.product.repository.ProductImageRepository;
 import com.dripify.product.repository.ProductRepository;
 import com.dripify.shared.enums.Gender;
@@ -105,11 +107,13 @@ public class ProductService {
     }
 
     public List<Product> getUserLatestProducts(User user, UUID currentProductId) {
-        return productRepository.getProductsBySellerAndIdNotAndIsActiveOrderByCreatedOnDesc(user, currentProductId, true);
+        return productRepository.getProductsBySellerAndIdNotAndIsActiveTrueOrderByCreatedOnDesc(user, currentProductId);
     }
 
     @Transactional
     public void addNewProduct(CreateProductRequest createProductRequest, User user) {
+        validateSize(createProductRequest.getCategory(), createProductRequest.getSize());
+
         Product product = initializeProduct(createProductRequest, user);
         productRepository.save(product);
 
@@ -131,6 +135,7 @@ public class ProductService {
             throw new IllegalArgumentException("You are not allowed to edit this product.");
         }
 
+        validateSize(product.getCategory(), productEditRequest.getSize());
         Product editedProduct = editProductData(product, productEditRequest);
         productRepository.save(editedProduct);
     }
@@ -149,12 +154,25 @@ public class ProductService {
 
         Pageable pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE);
 
-        return productRepository.getProductsBySellerAndIsActive(user, pageable, true);
+        return productRepository.getProductsBySellerAndIsActiveTrue(user, pageable);
     }
 
 
     public Product getProductById(UUID id) {
-        return productRepository.getProductByIdAndIsActive(id, true).orElseThrow(() -> new IllegalArgumentException("Product does not exist"));
+        return productRepository.getProductByIdAndIsActiveTrue(id).orElseThrow(() -> new IllegalArgumentException("Product does not exist"));
+    }
+
+    private void validateSize(Category category, Size size) {
+        String parentCategory = category.getParentCategory().getName();
+        SizeCategory sizeCategory = size != null ? size.getCategory() : null;
+
+        if ("clothing".equalsIgnoreCase(parentCategory) && SizeCategory.SHOES.equals(sizeCategory)) {
+            throw new IllegalArgumentException("Invalid clothing size: " + size);
+        } else if ("shoes".equalsIgnoreCase(parentCategory) && SizeCategory.CLOTHING.equals(sizeCategory)) {
+            throw new IllegalArgumentException("Invalid shoe size: " + size);
+        } else if ("accessories".equalsIgnoreCase(parentCategory) && size != null) {
+            throw new IllegalArgumentException("Product of type accessories must NOT have size.");
+        }
     }
 
     private void validateGenderToCategory(Category category, Gender gender) {
