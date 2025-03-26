@@ -33,5 +33,5 @@ public interface NotificationClient {
     ResponseEntity<Void> sendShippedOrderEmail(@RequestBody OrderShippedEmailRequest orderShippedEmailRequest);
 
     @PostMapping("/emails/newsletter")
-    ResponseEntity<Void> sendNewsletter(@RequestBody NewsletterEmailRequest newsletterEmailRequest);
+    ResponseEntity<Void> sendNewsletter();
 }

@@ -156,24 +156,17 @@ public class NotificationService {
         }
     }
 
-    public void sendNewsletter(UUID userId, String firstName) {
-        NewsletterEmailRequest dto = NewsletterEmailRequest.builder()
-                .subject("Your weekly update is here!!!")
-                .emailType("NEWSLETTER")
-                .userId(userId)
-                .firstName(firstName)
-                .build();
-
+    public void sendNewsletter() {
 
         try {
 
-            ResponseEntity<Void> response = notificationClient.sendNewsletter(dto);
+            ResponseEntity<Void> response = notificationClient.sendNewsletter();
 
             if (!response.getStatusCode().is2xxSuccessful()) {
-                log.error("[Feign call to notification-svc] Could not send newsletter email to user with id: {}", userId);
+                log.error("[Feign call to notification-svc] An error occurred while sending newsletter email to a user.");
             }
         } catch (Exception e) {
-            log.warn("Can't send newsletter email to user with id [{}] due to 500 Internal Server Error.", userId);
+            log.warn("An error occurred with sending newsletter email due to 500 Internal Server Error");
         }
     }
 }
