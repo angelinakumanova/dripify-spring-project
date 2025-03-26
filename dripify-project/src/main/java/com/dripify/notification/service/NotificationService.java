@@ -155,4 +155,25 @@ public class NotificationService {
             log.warn("Can't update notification preferences for user with id = [{}].", userId);
         }
     }
+
+    public void sendNewsletter(UUID userId, String firstName) {
+        NewsletterEmailRequest dto = NewsletterEmailRequest.builder()
+                .subject("Your weekly update is here!!!")
+                .emailType("NEWSLETTER")
+                .userId(userId)
+                .firstName(firstName)
+                .build();
+
+
+        try {
+
+            ResponseEntity<Void> response = notificationClient.sendNewsletter(dto);
+
+            if (!response.getStatusCode().is2xxSuccessful()) {
+                log.error("[Feign call to notification-svc] Could not send newsletter email to user with id: {}", userId);
+            }
+        } catch (Exception e) {
+            log.warn("Can't send newsletter email to user with id [{}] due to 500 Internal Server Error.", userId);
+        }
+    }
 }
