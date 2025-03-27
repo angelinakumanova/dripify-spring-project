@@ -46,9 +46,6 @@ public class Order {
     private String purchaserFullName;
 
     @Column(nullable = false)
-    private String purchaserEmail;
-
-    @Column(nullable = false)
     private String purchaserAddress;
 
     @Enumerated(EnumType.STRING)

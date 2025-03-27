@@ -11,6 +11,7 @@ import org.hibernate.annotations.Where;
 import org.hibernate.annotations.WhereJoinTable;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Builder
@@ -47,10 +48,10 @@ public class User {
 
     private String description;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private ShoppingCart shoppingCart;
 
-    @OneToMany(mappedBy = "seller")
+    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products = new ArrayList<>();
 
     @ManyToMany
@@ -60,7 +61,7 @@ public class User {
     )
     private Set<Product> favoriteProducts = new HashSet<>();
 
-    @OneToMany(mappedBy = "reviewee")
+    @OneToMany(mappedBy = "reviewee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
     @Column(nullable = false)
@@ -71,5 +72,9 @@ public class User {
     private LocalDate lastModifiedEmail;
 
     private LocalDate lastModifiedPassword;
+
+    private LocalDateTime createdOn;
+
+    private LocalDateTime updatedOn;
 
 }

@@ -57,8 +57,7 @@ public class OrderController {
     }
 
     @GetMapping("/checkout")
-    public ModelAndView getCheckoutPage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata,
-                                        @RequestHeader(value = "Referer", required = false) String referer) {
+    public ModelAndView getCheckoutPage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
         User user = userService.getById(authenticationMetadata.getUserId());
 
         if (user.getShoppingCart().getProducts().isEmpty()) {

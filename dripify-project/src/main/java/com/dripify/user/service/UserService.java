@@ -6,6 +6,7 @@ import com.dripify.cloudinary.service.CloudinaryService;
 import com.dripify.exception.*;
 import com.dripify.notification.service.NotificationService;
 import com.dripify.product.model.Product;
+import com.dripify.review.service.ReviewService;
 import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
 import com.dripify.user.model.UserRole;
@@ -13,6 +14,7 @@ import com.dripify.user.repository.UserRepository;
 import com.dripify.web.dto.RegisterRequest;
 import com.dripify.web.dto.UserEditRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,7 +26,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -32,12 +36,15 @@ import java.util.UUID;
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final CloudinaryService cloudinaryService;
     private final NotificationService notificationService;
     private final ShoppingCartService shoppingCartService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, CloudinaryService cloudinaryService, NotificationService notificationService, ShoppingCartService shoppingCartService) {
+    private final CloudinaryService cloudinaryService;
+    private final PasswordEncoder passwordEncoder;
+
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, CloudinaryService cloudinaryService,
+                       NotificationService notificationService, ShoppingCartService shoppingCartService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.cloudinaryService = cloudinaryService;
@@ -48,7 +55,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userRepository.getUserByUsername(username).orElseThrow(() ->
+        User user = userRepository.findByUsernameAndIsActiveTrue(username).orElseThrow(() ->
                 new IllegalArgumentException("User with username %s does not exist!".formatted(username)));
 
 
@@ -99,6 +106,7 @@ public class UserService implements UserDetailsService {
         user.setFirstName(userEditRequest.getFirstName());
         user.setLastName(userEditRequest.getLastName());
         user.setDescription(userEditRequest.getDescription().isEmpty() ? null : userEditRequest.getDescription());
+        user.setUpdatedOn(LocalDateTime.now());
 
         userRepository.save(user);
     }
@@ -123,6 +131,7 @@ public class UserService implements UserDetailsService {
 
         user.setUsername(newUsername);
         user.setLastModifiedUsername(LocalDate.now());
+        user.setUpdatedOn(LocalDateTime.now());
         userRepository.save(user);
 
         updateAuthentication(user);
@@ -144,6 +153,7 @@ public class UserService implements UserDetailsService {
 
         user.setEmail(newEmail);
         user.setLastModifiedEmail(LocalDate.now());
+        user.setUpdatedOn(LocalDateTime.now());
         userRepository.save(user);
     }
 
@@ -161,6 +171,7 @@ public class UserService implements UserDetailsService {
         String newEncodedPassword = passwordEncoder.encode(newPassword);
         user.setPassword(newEncodedPassword);
         user.setLastModifiedPassword(LocalDate.now());
+        user.setUpdatedOn(LocalDateTime.now());
         userRepository.save(user);
 
         updateAuthentication(user);
@@ -172,7 +183,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User getByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(() -> new IllegalArgumentException("User with username %s does not exist".formatted(username)));
+        return userRepository.findByUsernameAndIsActiveTrue(username).orElseThrow(() -> new IllegalArgumentException("User with username %s does not exist".formatted(username)));
     }
 
     public void favoriteProduct(Product product, User user) {
@@ -191,8 +202,8 @@ public class UserService implements UserDetailsService {
 
     public void deactivateUser(User user) {
         user.setActive(false);
-        user.setUsername("inactive_" + user.getUsername());
-        user.setEmail("inactive_" + user.getEmail());
+        user.setUpdatedOn(LocalDateTime.now());
+        notificationService.updateNotificationPreference(user.getId(), false);
         userRepository.save(user);
 
         SecurityContextHolder.getContext().setAuthentication(null);
@@ -203,6 +214,7 @@ public class UserService implements UserDetailsService {
         userRepository.removeFavouriteProduct(product.getId());
         userRepository.removeShoppingCartProduct(product.getId());
     }
+
 
     private void updateAuthentication(User user) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -221,6 +233,8 @@ public class UserService implements UserDetailsService {
                 password(passwordEncoder.encode(registerRequest.getPassword())).
                 role(UserRole.USER).
                 isActive(true).
+                createdOn(LocalDateTime.now()).
+                updatedOn(LocalDateTime.now()).
                 build();
     }
 

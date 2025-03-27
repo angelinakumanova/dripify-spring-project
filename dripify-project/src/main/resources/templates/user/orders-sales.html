@@ -62,8 +62,9 @@
                                 </p>
                                 <p class="mt-2 text-sm text-zinc-600 upper font-semibold">Address: <span class="font-normal" th:text="${order.purchaserAddress + ', ' + order.city.toString() + ', ' + order.country}"></span></p>
                                 <p class="mt-2 text-sm text-zinc-600 upper font-semibold">Delivery Courier: <span class="font-normal" th:text="${order.orderDeliveryCourier.name()}"></span></p>
-                                <p class="mt-2 text-lg text-zinc-800 font-bold uppercase">Total: <span th:text="${order.totalPrice + 7 + ' BGN (DELIVERY FEE INCLUDED)'}"></span>
+                                <p class="mt-2 text-lg text-zinc-800 font-bold uppercase">Total: <span th:text="${order.totalPrice + ' BGN'}"></span>
                                 </p>
+                                <small>Additional fees not included!</small>
 
                                 <p class="mt-2 text-sm text-zinc-900 text-lg">Status: <span
                                         th:classappend="${order.status.name() == 'DELIVERED' ? 'text-green-600' :

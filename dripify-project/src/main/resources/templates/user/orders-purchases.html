@@ -64,8 +64,9 @@
                   </p>
                   <p class="mt-2 text-sm text-zinc-600 upper font-semibold">Address: <span class="font-normal" th:text="${order.purchaserAddress + ', ' + order.city.toString() + ', ' + order.country}"></span></p>
                   <p class="mt-2 text-sm text-zinc-600 upper font-semibold">Delivery Courier: <span class="font-normal" th:text="${order.orderDeliveryCourier.name()}"></span></p>
-                  <p class="mt-2 text-lg text-zinc-800 font-bold uppercase">Total: <span th:text="${order.totalPrice + 7 + ' BGN (Delivery Fee Included)'}"></span>
+                  <p class="mt-2 text-lg text-zinc-800 font-bold uppercase">Total: <span th:text="${order.totalPrice + ' BGN'}"></span>
                   </p>
+                  <small>Additional fees not included!</small>
 
                   <p class="mt-2 text-sm text-zinc-900 text-lg">Status: <span
                           th:classappend="${order.status.name() == 'DELIVERED' ? 'text-green-600' :
@@ -84,7 +85,7 @@
                            transition-all duration-300 focus:outline-none">
                     Mark as Received
                   </button>
-                    <a th:if="${order.status.name() == 'DELIVERED' and order.review == null}"
+                    <a th:if="${(order.status.name() == 'DELIVERED' and order.review == null) and order.seller.isActive()}"
                        th:href="@{/reviews/{username}(username=${order.seller.username}, orderId=${order.id})}"
                             class="leave-review-btn mt-4 px-4 py-2.5 bg-pink-600 text-white rounded-lg
                              hover:bg-pink-700 transition-all duration-300 focus:outline-none">

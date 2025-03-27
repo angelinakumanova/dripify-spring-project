@@ -12,4 +12,5 @@ import java.util.UUID;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, UUID> {
     Page<Review> findByReviewee(User user, Pageable pageable);
+
 }
