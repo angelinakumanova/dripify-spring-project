@@ -413,6 +413,8 @@
                          class="opacity-0 pointer-events-none transition ease-in duration-300 absolute top-16 right-2 z-10 w-40 divide-y divide-gray-100 rounded-md bg-white shadow-lg border border-black border-opacity-30"
                          role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                         <div class="py-1" role="none">
+
+
                             <a th:href="@{/users/{username}/profile/products(username=${user.username})}"
                                class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
                                role="menuitem" tabindex="-1">my profile</a>
@@ -429,6 +431,13 @@
                                class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
                                role="menuitem" tabindex="-1" >wishlist</a>
                         </div>
+
+                        <div th:if="${user.role.name() == 'ADMIN'}"  class="py-1" role="none">
+                            <a th:href="@{/users}"
+                               class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
+                               role="menuitem" tabindex="-1">All Users</a>
+                        </div>
+
                         <div class="py-1" role="none">
                             <a th:href="@{/settings/profile}"
                                class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
@@ -437,6 +446,8 @@
                                class="block px-4 py-2 text-sm text-gray-700 uppercase hover:bg-slate-600 hover:bg-opacity-15 hover:font-bold"
                                role="menuitem" tabindex="-1" id="menu-item-0">log out</a>
                         </div>
+
+
                     </div>
 
                 </div>
@@ -531,6 +542,9 @@
 
                                 <div id="mobile-profile-dropdown" class="hidden indent-3 my-6 flow-root">
                                     <div class="-my-6 divide-y divide-gray-500/10">
+                                        <a th:if="${user.role.name() == 'ADMIN'}" th:href="@{/users}"
+                                           class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">All Users</a>
+
                                         <div class="flex flex-col">
                                             <a th:href="@{/users/{username}/profile/products(username=${user.username})}"
                                                class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">my
@@ -547,8 +561,11 @@
                                             <a th:href="@{/wishlist}"
                                                class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">wishlist</a>
 
+
+
                                             <a th:href="@{/settings/profile}"
                                                class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 uppercase">settings</a>
+
 
                                         </div>
                                     </div>

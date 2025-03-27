@@ -5,6 +5,7 @@ import com.dripify.exception.UserRegistrationException;
 import com.dripify.exception.UserUpdateException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -42,7 +43,7 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({IllegalArgumentException.class, NoResourceFoundException.class,
             MethodArgumentTypeMismatchException.class, HttpRequestMethodNotSupportedException.class,
-            MissingServletRequestParameterException.class})
+            MissingServletRequestParameterException.class, AuthorizationDeniedException.class})
     public ModelAndView handleNotFoundException(Exception e) {
 
         return new ModelAndView("404-error-page");

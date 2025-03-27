@@ -1,18 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" style="font-size: 16px;">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel | DRIPIFY</title>
-    <link rel="stylesheet" href="/src/output.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <!-- TODO: add aos to package -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link rel="shortcut icon" href="/static/images/favicon.ico" />
-</head>
+
+<head th:replace="~{fragments/head::head(pageName = 'Admin Panel')}"></head>
 <body>
 
-<a th:href="@{/orders/purchases}" class="absolute left-4 top-4">
+<a th:href="@{/}" class="absolute left-4 top-4">
     <div class="flex gap-2 items-center">
         <svg  height="50px" width="50px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#000000;" d="M256,0C114.608,0,0,114.608,0,256c0,141.376,114.608,256,256,256s256-114.624,256-256 C512,114.608,397.392,0,256,0z"></path> <g style="opacity:0.2;"> <polygon points="322.8,376.048 249.776,304.8 426.016,304.8 426.016,238.352 249.776,238.352 322.8,167.12 276.288,119.696 120.576,271.584 276.288,423.472 "></polygon> </g> <polygon style="fill:#FFFFFF;" points="306.8,360.048 233.776,288.8 410.016,288.8 410.016,222.352 233.776,222.352 306.8,151.12 260.288,103.696 104.576,255.584 260.288,407.472 "></polygon> </g></svg>
         <h1 class="font-bold text-xl">Return To Home</h1>
@@ -21,6 +13,8 @@
 </a>
 
 <div class="max-w-7xl mx-auto mt-24">
+
+    <p class="font-bold text-2xl ml-1 mb-1 uppercase" th:text="${'Total Users: ' + users.getTotalElements()}"></p>
     <div class="relative shadow-md sm:rounded-lg border-2 border-zinc-900 overflow-hidden">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
             <thead class="text-base text-white font-bold uppercase bg-zinc-900">
@@ -40,28 +34,33 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="bg-white border-b border-gray-200 text-zinc-900">
-                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-base">
-                    angiek
+            <tr th:each="user: ${users.getContent()}" class="bg-white border-b border-gray-200 text-zinc-900">
+                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-base" th:text="${user.username}">
                 </th>
                 <td class="px-6 py-4">
-                    <span class="p-1 px-2 bg-green-600 border-4 border-green-300 rounded-lg font-semibold text-white">ACTIVE</span>
-                    <span class="hidden p-1 px-2 bg-red-600 border-4 border-red-300 rounded-lg font-semibold text-white">INACTIVE</span>
+                    <span th:classappend="${user.isActive() == true ? 'bg-green-600 border-green-300' : 'bg-red-600 border-red-300'}"
+                          th:text="${user.isActive() == true ? 'ACTIVE' : 'INACTIVE'}"
+                          class="p-1 px-2 border-4 rounded-lg font-semibold text-white"></span>
                 </td>
                 <td class="px-6 py-4">
-                    <span class="p-1 px-2 bg-orange-600 border-4 border-orange-300 rounded-lg font-semibold text-white">USER</span>
-                    <span class="hidden p-1 px-2 bg-pink-600 border-4 border-pink-300 rounded-lg font-semibold text-white">ADMIN</span>
+                    <span th:classappend="${user.role.name() == 'USER' ?
+                     'bg-orange-600 border-orange-300' : 'bg-pink-600 border-pink-300'}"
+                          th:text="${user.role}"
+                          class="p-1 px-2 border-4 rounded-lg font-semibold text-white"></span>
                 </td>
                 <td class="flex gap-2 justify-end px-6 py-4">
-                    <form>
-                        <button class="bg-white p-2 text-zinc-900 font-bold rounded-lg
-                             hover:text-white hover:bg-zinc-900 border-2 border-zinc-900
-                            transition duration-300 ease-in-out">Deactivate</button>
+                    <form th:method="PUT" th:action="@{/users/{id}/status(id=${user.id})}">
+                        <button th:text="${user.isActive() == true ? 'Deactivate' : 'Activate'}"
+                            class="bg-white p-2 text-zinc-900 font-bold rounded-lg
+                            hover:text-white hover:bg-zinc-900 border-2 border-zinc-900
+                            transition duration-300 ease-in-out"></button>
                     </form>
-                    <form>
-                        <button class="bg-white p-2 text-zinc-900 font-bold rounded-lg
+                    <form th:method="PUT" th:action="@{/users/{id}/role(id=${user.id})}">
+                        <button th:text="${user.role.name() == 'USER' ?
+                             'Switch To Admin' : 'Switch To User'}"
+                             class="bg-white p-2 text-zinc-900 font-bold rounded-lg
                              hover:text-white hover:bg-zinc-900 border-2 border-zinc-900
-                             transition duration-300 ease-in-out">Switch To Admin</button>
+                             transition duration-300 ease-in-out"></button>
                     </form>
                 </td>
             </tr>
@@ -69,6 +68,23 @@
         </table>
     </div>
 
+    <div th:with="currentPage = ${users.getNumber()}" th:if="${users.getTotalPages() > 1}" class="flex items-baseline justify-center gap-2 mt-20">
+        <a th:href="@{${currentPath}(page=${currentPage - 1})}"
+           th:classappend="${currentPage == 0} ? 'pointer-events-none opacity-50' : ''"
+           class="mt-6 bg-black bg-opacity-50 text-white p-2 px-4 rounded-full">
+            ❮
+        </a>
+
+        <!-- Pages Info -->
+        <h2 class="font-bold"
+            th:text="${currentPage + 1} + '/' + ${users.getTotalPages()} + ' Pages'"></h2>
+
+        <a th:href="@{${currentPath}(page=${currentPage + 1})}"
+           th:classappend="${currentPage + 1 >= users.getTotalPages()} ? 'pointer-events-none opacity-50' : ''"
+           class="mt-6 bg-black bg-opacity-50 text-white p-2 px-4 rounded-full">
+            ❯
+        </a>
+    </div>
 </div>
 
 

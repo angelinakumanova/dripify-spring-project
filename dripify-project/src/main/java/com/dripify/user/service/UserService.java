@@ -14,7 +14,11 @@ import com.dripify.user.repository.UserRepository;
 import com.dripify.web.dto.RegisterRequest;
 import com.dripify.web.dto.UserEditRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Lazy;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,12 +32,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 import java.util.UUID;
 
 @Slf4j
 @Service
 public class UserService implements UserDetailsService {
+    private static final int DEFAULT_PAGE_SIZE = 30;
 
     private final UserRepository userRepository;
     private final NotificationService notificationService;
@@ -206,13 +210,46 @@ public class UserService implements UserDetailsService {
         notificationService.updateNotificationPreference(user.getId(), false);
         userRepository.save(user);
 
-        SecurityContextHolder.getContext().setAuthentication(null);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof User authenticatedUser) {
+            if (authenticatedUser.getId().equals(user.getId())) {
+                SecurityContextHolder.getContext().setAuthentication(null);
+            }
+        }
+    }
+
+    public Page<User> getAllUsers(User user, int page) {
+        Pageable pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE);
+
+        return userRepository.getAllByUsernameIsNot(user.getUsername(), pageable);
     }
 
     @Transactional
     public void removeInactiveProducts(Product product) {
         userRepository.removeFavouriteProduct(product.getId());
         userRepository.removeShoppingCartProduct(product.getId());
+    }
+
+    public void changeStatus(User target) {
+
+        if (target.isActive()) {
+            deactivateUser(target);
+        } else {
+            target.setActive(true);
+        }
+
+        userRepository.save(target);
+    }
+
+    public void switchRole(User target) {
+
+        if (target.getRole().equals(UserRole.ADMIN)) {
+            target.setRole(UserRole.USER);
+        } else {
+            target.setRole(UserRole.ADMIN);
+        }
+
+        userRepository.save(target);
     }
 
 
