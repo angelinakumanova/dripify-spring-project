@@ -11,6 +11,7 @@ import com.dripify.user.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -56,4 +57,13 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
     List<Product> getProductsBySellerAndIdNotAndIsActiveTrueOrderByCreatedOnDesc(User seller, UUID id);
 
     Page<Product> getAllByIsActiveTrueOrderByCreatedOnDesc(Pageable pageable);
+
+    @Query("SELECT p.id FROM Product p WHERE p.isActive = false")
+    List<UUID> getIdsByIsActiveFalse();
+
+    void deleteAllByIsActiveFalse();
+
+    @Modifying
+    @Query("UPDATE Product p SET p.isActive = false WHERE p.seller = :seller")
+    void deactivateUserProducts(User seller);
 }

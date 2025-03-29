@@ -3,6 +3,7 @@ package com.dripify.product.service;
 import com.dripify.category.model.Category;
 import com.dripify.category.service.CategoryService;
 import com.dripify.cloudinary.service.CloudinaryService;
+import com.dripify.product.event.ProductDeactivationEvent;
 import com.dripify.product.model.Product;
 import com.dripify.product.model.ProductImage;
 import com.dripify.product.model.enums.Size;
@@ -10,17 +11,19 @@ import com.dripify.product.model.enums.SizeCategory;
 import com.dripify.product.repository.ProductImageRepository;
 import com.dripify.product.repository.ProductRepository;
 import com.dripify.shared.enums.Gender;
+import com.dripify.user.event.UserDeactivationEvent;
 import com.dripify.user.model.User;
-import com.dripify.user.service.UserService;
-import com.dripify.web.dto.CreateProductRequest;
-import com.dripify.web.dto.ProductEditRequest;
-import com.dripify.web.dto.ProductFilter;
+import com.dripify.web.dto.*;
 import jakarta.transaction.Transactional;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.event.EventListener;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,17 +34,19 @@ public class ProductService {
     private static final int DEFAULT_PAGE_SIZE = 20;
 
     private final ProductRepository productRepository;
-    private final CategoryService categoryService;
-    private final UserService userService;
-    private final CloudinaryService cloudinaryService;
     private final ProductImageRepository productImageRepository;
 
-    public ProductService(ProductRepository productRepository, CategoryService categoryService, UserService userService, CloudinaryService cloudinaryService, ProductImageRepository productImageRepository) {
+    private final CategoryService categoryService;
+    private final CloudinaryService cloudinaryService;
+
+    private final ApplicationEventPublisher eventPublisher;
+
+    public ProductService(ProductRepository productRepository, CategoryService categoryService, CloudinaryService cloudinaryService, ProductImageRepository productImageRepository, ApplicationEventPublisher eventPublisher) {
         this.productRepository = productRepository;
         this.categoryService = categoryService;
-        this.userService = userService;
         this.cloudinaryService = cloudinaryService;
         this.productImageRepository = productImageRepository;
+        this.eventPublisher = eventPublisher;
     }
 
     public Page<Product> getFilteredProducts(String gender, String categoryName, String subcategoryName,
@@ -147,11 +152,11 @@ public class ProductService {
 
         product.setActive(false);
         productRepository.save(product);
+
+        eventPublisher.publishEvent(new ProductDeactivationEvent(product.getId()));
     }
 
-    public Page<Product> getProductsByUsername(String username, int page) {
-        User user = userService.getByUsername(username);
-
+    public Page<Product> getProductsByUsername(User user, int page) {
         Pageable pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE);
 
         return productRepository.getProductsBySellerAndIsActiveTrue(user, pageable);
@@ -160,6 +165,24 @@ public class ProductService {
 
     public Product getProductById(UUID id) {
         return productRepository.getProductByIdAndIsActiveTrue(id).orElseThrow(() -> new IllegalArgumentException("Product does not exist"));
+    }
+
+    @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+    public void deactivateProductsByUser(UserDeactivationEvent event) {
+        productRepository.deactivateUserProducts(event.getUser());
+    }
+
+    @Transactional
+    public void deleteInactiveProducts() {
+        List<UUID> inactiveProductsIds = productRepository.getIdsByIsActiveFalse();
+        inactiveProductsIds.forEach(this::deleteProductImagesFromCloud);
+
+        productImageRepository.deleteAllInactiveProductsImages();
+        productRepository.deleteAllByIsActiveFalse();
+    }
+
+    private void deleteProductImagesFromCloud(UUID productId) {
+        cloudinaryService.deleteProductImages(productId);
     }
 
     private void validateSize(Category category, Size size) {
@@ -215,6 +238,7 @@ public class ProductService {
                 .updatedOn(LocalDateTime.now())
                 .build();
     }
+
 
 
 }

@@ -4,12 +4,15 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
 import com.dripify.exception.CloudinaryException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.UUID;
 
+@Slf4j
 @Service
 public class CloudinaryService {
 
@@ -56,6 +59,29 @@ public class CloudinaryService {
         }
 
         return uploadResult.get("url").toString();
+    }
+
+    public String copyImageForOrder(String productImageUrl) {
+
+        Map uploadResult = Map.of();
+        try {
+            uploadResult = cloudinary.uploader().upload(productImageUrl, ObjectUtils.asMap(
+                    "folder", "orders"
+            ));
+
+        } catch (Exception e) {
+            log.error("Error while copying for product image with url [{}]", productImageUrl);
+        }
+        return uploadResult.get("url").toString();
+    }
+
+    public void deleteProductImages(UUID productId) {
+        try {
+            cloudinary.api().deleteResourcesByPrefix("products/" + productId, ObjectUtils.asMap("all", true));
+            cloudinary.api().deleteFolder("products/" + productId, ObjectUtils.emptyMap());
+        } catch (Exception e) {
+            log.error("Error while deleting images for product with id [{}]", productId);
+        }
     }
 
     public void deleteImage(String imageUrl) {

@@ -1,6 +1,7 @@
 package com.dripify.order.service;
 
 import com.dripify.cart.service.ShoppingCartService;
+import com.dripify.cloudinary.service.CloudinaryService;
 import com.dripify.notification.service.NotificationService;
 import com.dripify.order.model.Order;
 import com.dripify.order.model.OrderItem;
@@ -30,13 +31,15 @@ public class OrderService {
     private final ShoppingCartService shoppingCartService;
     private final ProductService productService;
     private final NotificationService notificationService;
+    private final CloudinaryService cloudinaryService;
 
-    public OrderService(OrderRepository orderRepository, OrderItemRepository orderItemRepository, ShoppingCartService shoppingCartService, ProductService productService, NotificationService notificationService) {
+    public OrderService(OrderRepository orderRepository, OrderItemRepository orderItemRepository, ShoppingCartService shoppingCartService, ProductService productService, NotificationService notificationService, CloudinaryService cloudinaryService) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.shoppingCartService = shoppingCartService;
         this.productService = productService;
         this.notificationService = notificationService;
+        this.cloudinaryService = cloudinaryService;
     }
 
     public List<Order> getAllDeliveredOrdersByUserSeller(User user) {
@@ -149,15 +152,17 @@ public class OrderService {
             List<Product> products = entry.getValue();
 
             Order order = initializeOrder(dto, purchaser, sellerUser);
+
             BigDecimal totalPrice = products.stream().map(Product::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
             order.setTotalPrice(totalPrice);
 
             List<OrderItem> orderItemList = products.stream().map(p -> {
                 productService.deactivateProduct(p, sellerUser);
+                String imageUrl = cloudinaryService.copyImageForOrder(p.getImages().getFirst().getImageUrl());
 
                 OrderItem orderItem = OrderItem.builder()
                         .order(order)
-                        .mainImageUrl(p.getImages().getFirst().getImageUrl())
+                        .imageUrl(imageUrl)
                         .name(p.getName())
                         .price(p.getPrice())
                         .gender(p.getGender())

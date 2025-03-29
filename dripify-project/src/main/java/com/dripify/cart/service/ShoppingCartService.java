@@ -5,7 +5,10 @@ import com.dripify.cart.repository.ShoppingCartRepository;
 import com.dripify.exception.ShoppingCartException;
 import com.dripify.product.model.Product;
 import com.dripify.user.model.User;
+import com.dripify.product.event.ProductDeactivationEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -64,5 +67,11 @@ public class ShoppingCartService {
     public void clearCart(ShoppingCart shoppingCart) {
         shoppingCart.getProducts().clear();
         shoppingCartRepository.save(shoppingCart);
+    }
+
+    @EventListener
+    @Transactional
+    public void removeInactiveProduct(ProductDeactivationEvent event) {
+        shoppingCartRepository.removeInactiveProduct(event.getProductId());
     }
 }

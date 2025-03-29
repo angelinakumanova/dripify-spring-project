@@ -23,9 +23,10 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     @Query(value = "DELETE FROM user_favorite_products ufp WHERE ufp.product_id = :productId", nativeQuery = true)
     void removeFavouriteProduct(UUID productId);
 
-    @Modifying
-    @Query(value = "DELETE FROM shopping_cart_products scp WHERE scp.products_id = :productId", nativeQuery = true)
-    void removeShoppingCartProduct(UUID productId);
 
     Page<User> getAllByUsernameIsNot(String username, Pageable pageable);
+
+    @Modifying
+    @Query("UPDATE Product p SET p.isActive = false WHERE p.seller = :user")
+    void deactivateProductsByUser(User user);
 }

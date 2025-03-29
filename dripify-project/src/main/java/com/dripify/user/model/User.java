@@ -5,10 +5,6 @@ import com.dripify.product.model.Product;
 import com.dripify.review.model.Review;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.SQLJoinTableRestriction;
-import org.hibernate.annotations.SQLRestriction;
-import org.hibernate.annotations.Where;
-import org.hibernate.annotations.WhereJoinTable;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -48,10 +44,10 @@ public class User {
 
     private String description;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "user")
     private ShoppingCart shoppingCart;
 
-    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "seller")
     private List<Product> products = new ArrayList<>();
 
     @ManyToMany
@@ -61,7 +57,7 @@ public class User {
     )
     private Set<Product> favoriteProducts = new HashSet<>();
 
-    @OneToMany(mappedBy = "reviewee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "reviewee")
     private List<Review> reviews = new ArrayList<>();
 
     @Column(nullable = false)

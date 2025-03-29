@@ -1,6 +1,7 @@
 package com.dripify.scheduler;
 
 import com.dripify.notification.service.NotificationService;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,7 @@ public class NotificationScheduler {
         this.notificationService = notificationService;
     }
 
+    @Async
     @Scheduled(cron = "0 0 0 * * 1")
     public void sendWeeklyNewsletterToUsers() {
         notificationService.sendNewsletter();

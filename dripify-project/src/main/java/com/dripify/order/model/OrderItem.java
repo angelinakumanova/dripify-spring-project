@@ -26,7 +26,7 @@ public class OrderItem {
     private Order order;
 
     @Column(nullable = false)
-    private String mainImageUrl;
+    private String imageUrl;
 
     @Column(nullable = false)
     private String name;

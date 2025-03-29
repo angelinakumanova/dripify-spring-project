@@ -7,7 +7,6 @@ import com.dripify.product.service.ProductService;
 import com.dripify.security.AuthenticationMetadata;
 import com.dripify.user.model.User;
 import com.dripify.user.service.UserService;
-import com.dripify.web.dto.CreateProductRequest;
 import com.dripify.web.dto.ProductEditRequest;
 import com.dripify.web.dto.ProductFilter;
 import com.dripify.web.mapper.DtoMapper;

@@ -28,7 +28,7 @@ public class Product {
     @Column(nullable = false)
     private boolean isActive;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "product")
     @OrderBy(value = "imageUrl")
     private List<ProductImage> images;
 

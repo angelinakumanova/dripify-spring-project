@@ -77,7 +77,8 @@ public class UserController {
         User profileUser = userService.getByUsername(username);
         modelAndView.addObject("profileUser", profileUser);
 
-        modelAndView.addObject("productPage", productService.getProductsByUsername(username, page));
+
+        modelAndView.addObject("productPage", productService.getProductsByUsername(profileUser, page));
         modelAndView.addObject("totalReviews", reviewService.getUserReviews(profileUser, 0).getTotalElements());
         modelAndView.addObject("totalOrders", orderService.getAllDeliveredOrdersByUserSeller(profileUser).size());
 
@@ -93,7 +94,7 @@ public class UserController {
         modelAndView.addObject("profileUser", profileUser);
 
         modelAndView.addObject("reviewsPage", reviewService.getUserReviews(profileUser, page));
-        modelAndView.addObject("totalProducts", productService.getProductsByUsername(username, 0).getTotalElements());
+        modelAndView.addObject("totalProducts", productService.getProductsByUsername(profileUser, 0).getTotalElements());
         modelAndView.addObject("totalOrders", orderService.getAllDeliveredOrdersByUserSeller(profileUser).size());
 
 

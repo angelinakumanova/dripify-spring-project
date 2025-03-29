@@ -5,20 +5,20 @@ import com.dripify.cart.service.ShoppingCartService;
 import com.dripify.cloudinary.service.CloudinaryService;
 import com.dripify.exception.*;
 import com.dripify.notification.service.NotificationService;
+import com.dripify.product.event.ProductDeactivationEvent;
 import com.dripify.product.model.Product;
-import com.dripify.review.service.ReviewService;
 import com.dripify.security.AuthenticationMetadata;
+import com.dripify.user.event.UserDeactivationEvent;
 import com.dripify.user.model.User;
 import com.dripify.user.model.UserRole;
 import com.dripify.user.repository.UserRepository;
-import com.dripify.web.dto.RegisterRequest;
-import com.dripify.web.dto.UserEditRequest;
+import com.dripify.web.dto.*;
 import lombok.extern.slf4j.Slf4j;
-
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.event.EventListener;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,20 +40,23 @@ public class UserService implements UserDetailsService {
     private static final int DEFAULT_PAGE_SIZE = 30;
 
     private final UserRepository userRepository;
+
     private final NotificationService notificationService;
     private final ShoppingCartService shoppingCartService;
-
     private final CloudinaryService cloudinaryService;
     private final PasswordEncoder passwordEncoder;
 
+    private final ApplicationEventPublisher eventPublisher;
+
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, CloudinaryService cloudinaryService,
-                       NotificationService notificationService, ShoppingCartService shoppingCartService) {
+                       NotificationService notificationService, ShoppingCartService shoppingCartService, ApplicationEventPublisher eventPublisher) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.cloudinaryService = cloudinaryService;
         this.notificationService = notificationService;
         this.shoppingCartService = shoppingCartService;
+        this.eventPublisher = eventPublisher;
     }
 
     @Override
@@ -204,18 +207,22 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    @Transactional
     public void deactivateUser(User user) {
         user.setActive(false);
         user.setUpdatedOn(LocalDateTime.now());
+        shoppingCartService.clearCart(user.getShoppingCart());
         notificationService.updateNotificationPreference(user.getId(), false);
         userRepository.save(user);
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() instanceof User authenticatedUser) {
-            if (authenticatedUser.getId().equals(user.getId())) {
-                SecurityContextHolder.getContext().setAuthentication(null);
-            }
-        }
+        eventPublisher.publishEvent(new UserDeactivationEvent(user));
+    }
+
+    public void activateUser(User user) {
+        user.setActive(true);
+        user.setUpdatedOn(LocalDateTime.now());
+        userRepository.save(user);
+
     }
 
     public Page<User> getAllUsers(User user, int page) {
@@ -224,21 +231,19 @@ public class UserService implements UserDetailsService {
         return userRepository.getAllByUsernameIsNot(user.getUsername(), pageable);
     }
 
+    @EventListener
     @Transactional
-    public void removeInactiveProducts(Product product) {
-        userRepository.removeFavouriteProduct(product.getId());
-        userRepository.removeShoppingCartProduct(product.getId());
+    public void unlinkProductFromFavourites(ProductDeactivationEvent event) {
+        userRepository.removeFavouriteProduct(event.getProductId());
     }
 
+    @Transactional
     public void changeStatus(User target) {
-
         if (target.isActive()) {
             deactivateUser(target);
         } else {
-            target.setActive(true);
+            activateUser(target);
         }
-
-        userRepository.save(target);
     }
 
     public void switchRole(User target) {
@@ -249,6 +254,7 @@ public class UserService implements UserDetailsService {
             target.setRole(UserRole.ADMIN);
         }
 
+        target.setUpdatedOn(LocalDateTime.now());
         userRepository.save(target);
     }
 

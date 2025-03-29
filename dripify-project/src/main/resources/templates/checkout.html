@@ -169,8 +169,11 @@
                                         <input th:id="${courier.name().toLowerCase()}"
                                                th:field="*{orderDeliveryCourier}"
                                                th:value="${courier}"
-                                               aria-describedby="dhl-text" type="radio" name="delivery-method"
+                                               type="radio" name="delivery-method"
                                          class="h-4 w-4 border-gray-300 bg-white text-primary-600" />
+                                    </div>
+                                    <div class="ms-4 text-sm">
+                                        <span class="font-medium leading-none text-gray-900" th:text="${courier}"></span>
                                     </div>
                                 </div>
                             </label>
@@ -217,15 +220,12 @@
                             </div>
 
                             <dl class="flex items-center justify-between gap-4 py-3">
-                                <dt class="text-base font-bold text-gray-900 ">Delivery Tax</dt>
-                                <dd class="text-base font-bold text-gray-900 ">7 BGN</dd>
-                            </dl>
-
-                            <dl class="flex items-center justify-between gap-4 py-3">
                                 <dt class="text-base font-bold text-gray-900 ">Total</dt>
-                                <dd class="total-price text-base font-bold text-gray-900 ">27 BGN</dd>
+                                <dd class="total-price text-base font-bold text-gray-900 ">0 BGN</dd>
                             </dl>
                         </div>
+                        <small class="block text-right">Delivery fee not included!</small>
+
                     </div>
 
                     <button type="submit"
@@ -255,7 +255,7 @@
             }
         });
 
-        document.querySelector('.total-price').textContent = `${totalPrice + 7} BGN`;
+        document.querySelector('.total-price').textContent = `${totalPrice} BGN`;
     }
 </script>
 </body>

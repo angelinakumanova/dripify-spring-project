@@ -25,6 +25,10 @@ public class ShoppingCart {
     private User user;
 
     @ManyToMany
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "shopping_cart_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
     private List<Product> products = new ArrayList<>();
 
     @Column(nullable = false)

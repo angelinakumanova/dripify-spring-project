@@ -1,5 +1,6 @@
 package com.dripify.notification.service;
 
+import com.dripify.exception.NotificationFeignException;
 import com.dripify.notification.client.NotificationClient;
 import com.dripify.notification.client.dto.*;
 import lombok.extern.slf4j.Slf4j;
@@ -139,20 +140,24 @@ public class NotificationService {
 
     public NotificationPreference getNotificationPreference(UUID userId) {
 
-        ResponseEntity<NotificationPreference> httpResponse = notificationClient.getNotificationPreferenceByUser(userId);
+        try {
+            ResponseEntity<NotificationPreference> httpResponse = notificationClient.getNotificationPreferenceByUser(userId);
 
-        if (!httpResponse.getStatusCode().is2xxSuccessful()) {
-            throw new RuntimeException("Notification preference for user [%s] not found.".formatted(userId));
+            return httpResponse.getBody();
+
+        } catch (Exception e) {
+            log.error("There was a problem with getting notification preference for user with id [{}] due to 500 Internal Server Error.", userId);
         }
 
-        return httpResponse.getBody();
+
+        return new NotificationPreference();
     }
 
     public void updateNotificationPreference(UUID userId, boolean enabled) {
         try {
             notificationClient.changeNotificationPreference(userId, enabled);
         } catch (Exception e) {
-            log.warn("Can't update notification preferences for user with id = [{}].", userId);
+            throw new NotificationFeignException("Can't update notification preferences for user with id = [%s].".formatted(userId));
         }
     }
 
