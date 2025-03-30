@@ -119,8 +119,7 @@ public class ProductService {
     public void addNewProduct(CreateProductRequest createProductRequest, User user) {
         validateSize(createProductRequest.getCategory(), createProductRequest.getSize());
 
-        Product product = initializeProduct(createProductRequest, user);
-        productRepository.save(product);
+        Product product = productRepository.save(initializeProduct(createProductRequest, user));
 
 
         createProductRequest.getImages().forEach(image -> {
@@ -135,14 +134,13 @@ public class ProductService {
         });
     }
 
-    public void editProduct(Product product, ProductEditRequest productEditRequest, User user) {
+    public Product editProduct(Product product, ProductEditRequest productEditRequest, User user) {
         if (product.getSeller() != user) {
             throw new IllegalArgumentException("You are not allowed to edit this product.");
         }
 
         validateSize(product.getCategory(), productEditRequest.getSize());
-        Product editedProduct = editProductData(product, productEditRequest);
-        productRepository.save(editedProduct);
+        return productRepository.save(editProductData(product, productEditRequest));
     }
 
     public void deactivateProduct(Product product, User user) {
@@ -167,10 +165,6 @@ public class ProductService {
         return productRepository.getProductByIdAndIsActiveTrue(id).orElseThrow(() -> new IllegalArgumentException("Product does not exist"));
     }
 
-    @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
-    public void deactivateProductsByUser(UserDeactivationEvent event) {
-        productRepository.deactivateUserProducts(event.getUser());
-    }
 
     @Transactional
     public void deleteInactiveProducts() {
@@ -179,6 +173,11 @@ public class ProductService {
 
         productImageRepository.deleteAllInactiveProductsImages();
         productRepository.deleteAllByIsActiveFalse();
+    }
+
+    @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+    public void deactivateProductsByUser(UserDeactivationEvent event) {
+        productRepository.deactivateUserProducts(event.getUser());
     }
 
     private void deleteProductImagesFromCloud(UUID productId) {
