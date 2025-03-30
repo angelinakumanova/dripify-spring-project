@@ -31,6 +31,24 @@ public class ProfileSettingsController {
         this.notificationService = notificationService;
     }
 
+    @GetMapping
+    public String getSettingsPage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata, Model model) {
+        model.addAttribute("notificationPreference", notificationService.getNotificationPreference(authenticationMetadata.getUserId()));
+
+        if (!model.containsAttribute("passwordUpdateRequest")) {
+            model.addAttribute("passwordUpdateRequest", new PasswordUpdateRequest());
+        }
+
+        if (!model.containsAttribute("usernameUpdateRequest") && !model.containsAttribute("emailUpdateRequest")) {
+            User user = userService.getById(authenticationMetadata.getUserId());
+
+            model.addAttribute("usernameUpdateRequest", DtoMapper.mapToUsernameUpdateRequest(user));
+            model.addAttribute("emailUpdateRequest", DtoMapper.mapToEmailUpdateRequest(user));
+        }
+
+        return "user/account-settings";
+    }
+
 
     @GetMapping("/edit")
     public ModelAndView getEditProfilePage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
@@ -58,23 +76,7 @@ public class ProfileSettingsController {
     }
 
 
-    @GetMapping
-    public String getSettingsPage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata, Model model) {
-        model.addAttribute("notificationPreference", notificationService.getNotificationPreference(authenticationMetadata.getUserId()));
 
-        if (!model.containsAttribute("passwordUpdateRequest")) {
-            model.addAttribute("passwordUpdateRequest", new PasswordUpdateRequest());
-        }
-
-        if (!model.containsAttribute("usernameUpdateRequest") && !model.containsAttribute("emailUpdateRequest")) {
-            User user = userService.getById(authenticationMetadata.getUserId());
-
-            model.addAttribute("usernameUpdateRequest", DtoMapper.mapToUsernameUpdateRequest(user));
-            model.addAttribute("emailUpdateRequest", DtoMapper.mapToEmailUpdateRequest(user));
-        }
-
-        return "user/account-settings";
-    }
 
     @PutMapping("/username")
     public String updateUsername(@Valid UsernameUpdateRequest usernameUpdateRequest,
@@ -137,11 +139,13 @@ public class ProfileSettingsController {
         return "redirect:/settings/profile";
     }
 
-    @PutMapping("/active")
-    public String deactivateProfile(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
-        userService.deactivateUser(userService.getById(authenticationMetadata.getUserId()));
+    @PutMapping("/user-status")
+    public String deactivateProfile(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata,
+                                    RedirectAttributes redirectAttributes) {
+        userService.changeStatus(userService.getById(authenticationMetadata.getUserId()));
 
-        return "leave-page";
+        redirectAttributes.addFlashAttribute("successUserDeactivation", "User deactivated successfully!");
+        return "redirect:/";
     }
 
     @PutMapping("/notifications/preference")

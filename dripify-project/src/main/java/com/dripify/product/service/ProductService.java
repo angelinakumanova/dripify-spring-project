@@ -31,7 +31,7 @@ import java.util.UUID;
 
 @Service
 public class ProductService {
-    private static final int DEFAULT_PAGE_SIZE = 20;
+    public static final int DEFAULT_PAGE_SIZE = 20;
 
     private final ProductRepository productRepository;
     private final ProductImageRepository productImageRepository;

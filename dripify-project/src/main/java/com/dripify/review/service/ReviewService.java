@@ -33,7 +33,7 @@ public class ReviewService {
     }
 
     @Transactional
-    public void createNewReview(Long orderId, User reviewer, User reviewee, ReviewCreateRequest dto) {
+    public Review createNewReview(Long orderId, User reviewer, User reviewee, ReviewCreateRequest dto) {
 
         Order order = orderService.validateOrderAccess(reviewee, reviewer, orderId);
 
@@ -47,8 +47,10 @@ public class ReviewService {
                 .createdOn(LocalDate.now())
                 .build();
 
-        reviewRepository.save(review);
+       reviewRepository.save(review);
         orderService.addReviewToOrder(order, review);
+
+        return review;
     }
 
 }

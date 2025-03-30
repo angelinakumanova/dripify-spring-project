@@ -79,8 +79,8 @@ public class UserService implements UserDetailsService {
             throw new UserRegistrationException("email", "Email is already in use");
         }
 
-        User user = createNewUser(registerRequest);
-        userRepository.save(user);
+        User user = userRepository.save(createNewUser(registerRequest));
+
 
         ShoppingCart shoppingCart = shoppingCartService.createNewCart(user);
         user.setShoppingCart(shoppingCart);
@@ -207,23 +207,8 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    @Transactional
-    public void deactivateUser(User user) {
-        user.setActive(false);
-        user.setUpdatedOn(LocalDateTime.now());
-        shoppingCartService.clearCart(user.getShoppingCart());
-        notificationService.updateNotificationPreference(user.getId(), false);
-        userRepository.save(user);
 
-        eventPublisher.publishEvent(new UserDeactivationEvent(user));
-    }
 
-    public void activateUser(User user) {
-        user.setActive(true);
-        user.setUpdatedOn(LocalDateTime.now());
-        userRepository.save(user);
-
-    }
 
     public Page<User> getAllUsers(User user, int page) {
         Pageable pageable = PageRequest.of(page, DEFAULT_PAGE_SIZE);
@@ -256,6 +241,22 @@ public class UserService implements UserDetailsService {
 
         target.setUpdatedOn(LocalDateTime.now());
         userRepository.save(target);
+    }
+
+    private void deactivateUser(User user) {
+        user.setActive(false);
+        user.setUpdatedOn(LocalDateTime.now());
+        shoppingCartService.clearCart(user.getShoppingCart());
+        notificationService.updateNotificationPreference(user.getId(), false);
+        userRepository.save(user);
+
+        eventPublisher.publishEvent(new UserDeactivationEvent(user));
+    }
+
+    private void activateUser(User user) {
+        user.setActive(true);
+        user.setUpdatedOn(LocalDateTime.now());
+        userRepository.save(user);
     }
 
 

@@ -1,6 +1,5 @@
 package com.dripify.notification.service;
 
-import com.dripify.exception.NotificationFeignException;
 import com.dripify.notification.client.NotificationClient;
 import com.dripify.notification.client.dto.*;
 import lombok.extern.slf4j.Slf4j;
@@ -157,7 +156,7 @@ public class NotificationService {
         try {
             notificationClient.changeNotificationPreference(userId, enabled);
         } catch (Exception e) {
-            throw new NotificationFeignException("Can't update notification preferences for user with id = [%s].".formatted(userId));
+            log.error("Can't update notification preferences for user with id = [{}].",userId);
         }
     }
 

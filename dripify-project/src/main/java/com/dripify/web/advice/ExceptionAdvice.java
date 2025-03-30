@@ -1,6 +1,5 @@
 package com.dripify.web.advice;
 
-import com.dripify.exception.NotificationFeignException;
 import com.dripify.exception.ShoppingCartException;
 import com.dripify.exception.UserRegistrationException;
 import com.dripify.exception.UserUpdateException;
@@ -39,13 +38,6 @@ public class ExceptionAdvice {
         redirectAttributes.addFlashAttribute("productExistsError", "You already have this product in your cart.");
 
         return "redirect:/" + request.getHeader("Referer").replace("http://localhost:8080/", "");
-    }
-
-    @ExceptionHandler(NotificationFeignException.class)
-    public String handleNotificationFeignException(NotificationFeignException e, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("notificationServiceError", "There is currently problem with the notification service.");
-
-        return "redirect:/settings/profile";
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)

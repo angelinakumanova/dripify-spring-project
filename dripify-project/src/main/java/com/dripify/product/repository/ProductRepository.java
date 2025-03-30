@@ -66,4 +66,6 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
     @Modifying
     @Query("UPDATE Product p SET p.isActive = false WHERE p.seller = :seller")
     void deactivateUserProducts(User seller);
+
+    List<Product> Size(Size size);
 }

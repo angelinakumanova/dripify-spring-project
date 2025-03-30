@@ -4,8 +4,8 @@ spring:
   datasource:
     driver-class-name: "com.mysql.cj.jdbc.Driver"
     url: "jdbc:mysql://localhost:3306/dripify_app?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
-    username: ${dbName}
-    password: ${dbPassword}
+    username: root
+    password: 123456aK
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:

@@ -9,6 +9,18 @@
     <div th:replace="~{fragments/nav::nav}"></div>
 
 
+    <section th:if="${successUserDeactivation}"
+             id="deactivation-window-message"
+             class="fixed bg-white w-full h-full z-50 flex flex-col justify-center items-center flex-grow text-center">
+      <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+        <div class="mx-auto max-w-screen-sm text-center">
+          <h1 class="mb-4 text-7xl tracking-tight font-extrabold lg:text-4xl text-pink-600">Sad to See You Go! 😢</h1>
+          <p class="mb-4 text-lg font-semibold text-gray-500">We're sorry to see you leave. Your account has been deactivated, but if you ever decide to return, we’ll be here. Thank you for being a part of our community!</p>
+
+        </div>
+      </div>
+    </section>
+
     <div class="relative isolate pt-14">
       <div class="overflow-hidden mt-8 bg-black py-2 opacity-90">
         <div class="marquee-container animate-marquee flex h-[350px] md:h-[400px] lg:h-[550px] "
@@ -282,6 +294,11 @@
     class="hidden sm:block fixed bottom-5 right-5 bg-black text-white text-4xl rounded-full p-5 px-8 shadow-lg opacity-0 transition-opacity duration-300">↑</button>
 
 
-
+<script>
+  setTimeout(function() {
+    const deactivationWindowElement = document.getElementById('deactivation-window-message');
+    deactivationWindowElement.classList.add('hidden');
+  }, 6000);
+</script>
 </body>
 </html>
