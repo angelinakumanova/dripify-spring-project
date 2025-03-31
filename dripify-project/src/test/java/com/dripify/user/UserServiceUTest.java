@@ -1,4 +1,4 @@
-package com.dripify.service;
+package com.dripify.user;
 
 import com.dripify.cart.model.ShoppingCart;
 import com.dripify.cart.service.ShoppingCartService;

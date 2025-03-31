@@ -1,4 +1,4 @@
-package com.dripify.service;
+package com.dripify.cloudinary;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.Uploader;
@@ -78,7 +78,7 @@ public class CloudinaryServiceUTest {
     @Test
     void givenFileLargerThan1MB_whenUploadProductImage_thenThrowsException() {
         Mockito.reset(cloudinary);
-        
+
         // Given
         MultipartFile file = mock(MultipartFile.class);
         when(file.getSize()).thenReturn(1024L * 1024 * 500);

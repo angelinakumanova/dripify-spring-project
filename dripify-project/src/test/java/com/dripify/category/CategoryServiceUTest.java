@@ -1,4 +1,4 @@
-package com.dripify.service;
+package com.dripify.category;
 
 import com.dripify.category.model.Category;
 import com.dripify.category.repository.CategoryRepository;

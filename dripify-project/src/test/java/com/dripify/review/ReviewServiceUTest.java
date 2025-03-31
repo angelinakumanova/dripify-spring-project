@@ -1,4 +1,4 @@
-package com.dripify.service;
+package com.dripify.review;
 
 import com.dripify.order.model.Order;
 import com.dripify.order.service.OrderService;

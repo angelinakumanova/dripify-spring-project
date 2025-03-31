@@ -1,4 +1,4 @@
-package com.dripify.service;
+package com.dripify.product;
 
 import com.dripify.category.model.Category;
 import com.dripify.category.service.CategoryService;
@@ -10,7 +10,6 @@ import com.dripify.product.model.enums.*;
 import com.dripify.product.repository.ProductImageRepository;
 import com.dripify.product.repository.ProductRepository;
 import com.dripify.product.service.ProductService;
-import com.dripify.review.model.Review;
 import com.dripify.shared.enums.Gender;
 import com.dripify.user.model.User;
 import com.dripify.web.dto.CreateProductRequest;
