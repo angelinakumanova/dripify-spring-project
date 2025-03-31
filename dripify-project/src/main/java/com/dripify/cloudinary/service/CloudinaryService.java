@@ -63,7 +63,7 @@ public class CloudinaryService {
 
     public String copyImageForOrder(String productImageUrl) {
 
-        Map uploadResult = Map.of();
+        Map uploadResult;
         try {
             uploadResult = cloudinary.uploader().upload(productImageUrl, ObjectUtils.asMap(
                     "folder", "orders"
@@ -71,6 +71,7 @@ public class CloudinaryService {
 
         } catch (Exception e) {
             log.error("Error while copying for product image with url [{}]", productImageUrl);
+            return null;
         }
         return uploadResult.get("url").toString();
     }

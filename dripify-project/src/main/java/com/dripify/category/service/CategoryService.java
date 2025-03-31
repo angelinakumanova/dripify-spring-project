@@ -32,8 +32,8 @@ public class CategoryService {
         return categoryRepository.findAllByParentCategoryIsNull();
     }
 
-    public Category getByName(String category) {
-        return categoryRepository.findByName(category).orElseThrow(() -> new IllegalArgumentException("Category [%s] not found".formatted(category)));
+    public Category getByName(String categoryName) {
+        return categoryRepository.findByName(categoryName).orElseThrow(() -> new IllegalArgumentException("Category [%s] not found".formatted(categoryName)));
     }
 
     public Category getByNameAndParentCategory(String categoryName, String parentCategoryName) {

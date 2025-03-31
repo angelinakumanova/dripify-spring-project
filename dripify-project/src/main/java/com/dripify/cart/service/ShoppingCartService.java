@@ -27,17 +27,11 @@ public class ShoppingCartService {
             throw new IllegalArgumentException("Shopping cart for user with id: [%s] already exists".formatted(user.getId()));
         }
 
-        ShoppingCart newCart = ShoppingCart.builder()
+        return shoppingCartRepository.save(ShoppingCart.builder()
                 .user(user)
                 .createdOn(LocalDateTime.now())
                 .updatedOn(LocalDateTime.now())
-                .build();
-
-        return shoppingCartRepository.save(newCart);
-    }
-
-    public ShoppingCart getCart(User user) {
-        return shoppingCartRepository.findByUser(user).orElseGet(() -> createNewCart(user));
+                .build());
     }
 
     public void addProduct(User user, Product product) {
@@ -73,5 +67,17 @@ public class ShoppingCartService {
     @Transactional
     public void removeInactiveProduct(ProductDeactivationEvent event) {
         shoppingCartRepository.removeInactiveProduct(event.getProductId());
+    }
+
+    public ShoppingCart getCart(User user) {
+        return shoppingCartRepository.findByUser(user).orElseGet(() -> {
+            ShoppingCart build = ShoppingCart.builder()
+                    .user(user)
+                    .createdOn(LocalDateTime.now())
+                    .updatedOn(LocalDateTime.now())
+                    .build();
+
+            return shoppingCartRepository.save(build);
+        });
     }
 }
