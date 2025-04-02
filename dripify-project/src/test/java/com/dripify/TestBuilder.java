@@ -50,6 +50,6 @@ public final class TestBuilder {
     }
 
     public static AuthenticationMetadata principal(User user) {
-        return new AuthenticationMetadata(user.getId(), user.getUsername(), user.getPassword(), UserRole.USER, true);
+        return new AuthenticationMetadata(user.getId(), user.getUsername(), user.getPassword(), user.getRole(), user.isActive());
     }
 }
