@@ -7,11 +7,13 @@ import com.dripify.product.model.Product;
 import com.dripify.user.model.User;
 import com.dripify.product.event.ProductDeactivationEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ShoppingCartService {
@@ -79,5 +81,13 @@ public class ShoppingCartService {
 
             return shoppingCartRepository.save(build);
         });
+    }
+
+    public void validateCartNotEmpty(User user) {
+        Optional<ShoppingCart> cart = shoppingCartRepository.findByUser(user);
+
+        if (cart.isEmpty() || cart.get().getProducts().isEmpty()) {
+            throw new AccessDeniedException("Shopping cart is empty.");
+        }
     }
 }

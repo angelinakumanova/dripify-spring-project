@@ -13,7 +13,6 @@ import java.util.*;
 @Builder
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 public class User {
@@ -48,17 +47,17 @@ public class User {
     private ShoppingCart shoppingCart;
 
     @OneToMany(mappedBy = "seller")
-    private List<Product> products = new ArrayList<>();
+    private List<Product> products;
 
     @ManyToMany
     @JoinTable(
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private Set<Product> favoriteProducts = new HashSet<>();
+    private Set<Product> favoriteProducts;
 
     @OneToMany(mappedBy = "reviewee")
-    private List<Review> reviews = new ArrayList<>();
+    private List<Review> reviews;
 
     @Column(nullable = false)
     private boolean isActive;
@@ -72,5 +71,11 @@ public class User {
     private LocalDateTime createdOn;
 
     private LocalDateTime updatedOn;
+
+    public User() {
+        this.products = new ArrayList<>();
+        this.reviews = new ArrayList<>();
+        this.favoriteProducts = new HashSet<>();
+    }
 
 }

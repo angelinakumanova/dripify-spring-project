@@ -32,9 +32,9 @@
                         <hr>
 
                         <li th:each="category: ${mainCategories}"
-                            th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/women/' + category.name)}">
+                            th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/women/' + category.name.toLowerCase())}">
 
-                            <a th:href="@{'/products/women/' + ${category.name}}"
+                            <a th:href="@{'/products/women/' + ${category.name.toLowerCase()}}"
                                th:classappend="${isActivePath} ?'font-bold text-zinc-800' : 'text-zinc-600'"
                                th:text="${category.name}"
                                class="uppercase transition duration-200 ease-in hover:text-white
@@ -47,11 +47,11 @@
                                 <li th:each="subcategory: ${category.subcategories}"
                                     th:if="${subcategory.gender.equals(T(com.dripify.shared.enums.Gender).WOMEN)
                                    || subcategory.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}"
-                                    th:with="subcategoryPath=${'/products/women/' + category.name + '/' + subcategory.name}"
+                                    th:with="subcategoryPath=${'/products/women/' + category.name.toLowerCase() + '/' + subcategory.name.toLowerCase()}"
                                     class="indent-3 mt-2">
 
                                     <a th:href="@{${subcategoryPath}}"
-                                       th:classappend="${#uris.unescapePath(currentPath).equals(subcategoryPath)} ?
+                                       th:classappend="${#uris.unescapePath(currentPath).equalsIgnoreCase(subcategoryPath)} ?
                                              'font-bold text-gray-800' : 'text-gray-600'"
                                        th:text="${subcategory.name}"
                                        class="uppercase transition duration-200 ease-in hover:text-white
@@ -75,9 +75,9 @@
                         <hr>
 
                         <li th:each="category: ${mainCategories}"
-                            th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/men/' + category.name)}">
+                            th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/men/' + category.name.toLowerCase())}">
 
-                            <a th:href="@{'/products/men/' + ${category.name}}"
+                            <a th:href="@{'/products/men/' + ${category.name.toLowerCase()}}"
                                th:classappend="${isActivePath} ?'font-bold text-zinc-800' : 'text-zinc-600'"
                                th:text="${category.name}"
                                class="uppercase transition duration-200 ease-in hover:text-white
@@ -90,11 +90,11 @@
                                 <li th:each="subcategory: ${category.subcategories}"
                                     th:if="${subcategory.gender.equals(T(com.dripify.shared.enums.Gender).MEN)
                                    || subcategory.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}"
-                                    th:with="subcategoryPath=${'/products/men/' + category.name + '/' + subcategory.name}"
+                                    th:with="subcategoryPath=${'/products/men/' + category.name.toLowerCase() + '/' + subcategory.name.toLowerCase()}"
                                     class="indent-3 mt-2">
 
                                     <a th:href="@{${subcategoryPath}}"
-                                       th:classappend="${#uris.unescapePath(currentPath).equals(subcategoryPath)} ?
+                                       th:classappend="${#uris.unescapePath(currentPath).equalsIgnoreCase(subcategoryPath)} ?
                                              'font-bold text-gray-800' : 'text-gray-600'"
                                        th:text="${subcategory.name}"
                                        class="uppercase transition duration-200 ease-in hover:text-white
@@ -118,9 +118,9 @@
                         <hr>
 
                         <li th:each="category: ${mainCategories}"
-                            th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/unisex/' + category.name)}">
+                            th:with="isActivePath=${#uris.unescapePath(currentPath).contains('/products/unisex/' + category.name.toLowerCase())}">
 
-                            <a th:href="@{'/products/unisex/' + ${category.name}}"
+                            <a th:href="@{'/products/unisex/' + ${category.name.toLowerCase()}}"
                                th:classappend="${isActivePath} ?'font-bold text-zinc-800' : 'text-zinc-600'"
                                th:text="${category.name}"
                                class="uppercase transition duration-200 ease-in hover:text-white
@@ -131,12 +131,12 @@
                                 class="mt-1">
 
                                 <li th:each="subcategory: ${category.subcategories}"
-                                    th:with="subcategoryPath=${'/products/unisex/' + category.name + '/' + subcategory.name}"
+                                    th:with="subcategoryPath=${'/products/unisex/' + category.name.toLowerCase() + '/' + subcategory.name.toLowerCase()}"
                                     th:if="${subcategory.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX)}"
                                     class="indent-3 mt-2">
 
                                     <a th:href="@{${subcategoryPath}}"
-                                       th:classappend="${#uris.unescapePath(currentPath).equals(subcategoryPath)} ?
+                                       th:classappend="${#uris.unescapePath(currentPath).equalsIgnoreCase(subcategoryPath)} ?
                                              'font-bold text-gray-800' : 'text-gray-600'"
                                        th:text="${subcategory.name}"
                                        class="uppercase transition duration-200 ease-in hover:text-white

@@ -201,7 +201,7 @@
                                             || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX))
                                             and category.parentCategory != null}"
                                    th:href="@{/products/{gender}/{parentCategory}/{category}(gender='women',
-                                    parentCategory = ${category.parentCategory.name}, category=${category.name})}">
+                                    parentCategory = ${category.parentCategory.name.toLowerCase()}, category=${category.name.toLowerCase()})}">
                                     <div class="rounded-lg p-4 hover:bg-gray-50">
                                         <p class="font-semibold text-gray-700 uppercase" th:text="${category.name}"></p>
                                     </div>
@@ -211,7 +211,7 @@
                                    th:if="${(category.gender.equals(T(com.dripify.shared.enums.Gender).WOMEN)
                                             || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX))
                                             and category.parentCategory == null}"
-                                   th:href="@{/products/{gender}/{category}(gender='women', category=${category.name})}">
+                                   th:href="@{/products/{gender}/{category}(gender='women', category=${category.name.toLowerCase()})}">
                                     <div class="rounded-lg p-4 hover:bg-gray-50">
                                         <p class="font-semibold text-gray-700 uppercase" th:text="${category.name}"></p>
                                     </div>
@@ -229,8 +229,8 @@
                                    || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX))
                                    and category.parentCategory != null}"
                                    th:href="@{/products/{gender}/{parentCategory}/{category}(gender='men',
-                                    parentCategory=${category.parentCategory.name},
-                                    category=${category.name})}">
+                                    parentCategory=${category.parentCategory.name.toLowerCase()},
+                                    category=${category.name.toLowerCase()})}">
                                     <div class="rounded-lg p-4 hover:bg-gray-50">
                                         <p class="font-semibold text-gray-700 uppercase" th:text="${category.name}"></p>
                                     </div>
@@ -241,7 +241,7 @@
                                    || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX))
                                    and category.parentCategory == null}"
                                    th:href="@{/products/{gender}/{category}(gender='men',
-                                    category=${category.name})}">
+                                    category=${category.name.toLowerCase()})}">
                                     <div class="rounded-lg p-4 hover:bg-gray-50">
                                         <p class="font-semibold text-gray-700 uppercase" th:text="${category.name}"></p>
                                     </div>
@@ -506,7 +506,7 @@
 
 
 
-                            <a th:href="@{/products/sell-product}"
+                            <a th:href="@{/products/new}"
                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">SELL
                                 YOUR DRIP</a>
                             <a th:href="@{/about-us}"
@@ -605,7 +605,7 @@
                                             || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX))
                                             and category.parentCategory != null}"
                                th:href="@{/products/{gender}/{parentCategory}/{category}(gender='women',
-                                    parentCategory = ${category.parentCategory.name}, category=${category.name})}">
+                                    parentCategory = ${category.parentCategory.name.toLowerCase()}, category=${category.name.toLowerCase()})}">
                                 <div class="rounded-lg p-4 hover:bg-gray-50">
                                     <p class="font-semibold text-gray-700 uppercase" th:text="${category.name}"></p>
                                 </div>
@@ -616,7 +616,7 @@
                                             || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX))
                                             and category.parentCategory == null}"
                                th:href="@{/products/{gender}/{category}(gender='women',
-                                    category=${category.name})}">
+                                    category=${category.name.toLowerCase()})}">
                                 <div class="rounded-lg p-4 hover:bg-gray-50">
                                     <p class="font-semibold text-gray-700 uppercase" th:text="${category.name}"></p>
                                 </div>
@@ -630,8 +630,8 @@
                                    || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX))
                                    and category.parentCategory != null}"
                                th:href="@{/products/{gender}/{parentCategory}/{category}(gender='men',
-                                    parentCategory=${category.parentCategory.name},
-                                    category=${category.name})}">
+                                    parentCategory=${category.parentCategory.name.toLowerCase()},
+                                    category=${category.name.toLowerCase()})}">
                                 <div class="rounded-lg p-4 hover:bg-gray-50">
                                     <p class="font-semibold text-gray-700 uppercase" th:text="${category.name}"></p>
                                 </div>
@@ -642,7 +642,7 @@
                                    || category.gender.equals(T(com.dripify.shared.enums.Gender).UNISEX))
                                    and category.parentCategory == null}"
                                th:href="@{/products/{gender}/{category}(gender='men',
-                                    category=${category.name})}">
+                                    category=${category.name.toLowerCase()})}">
                                 <div class="rounded-lg p-4 hover:bg-gray-50">
                                     <p class="font-semibold text-gray-700 uppercase" th:text="${category.name}"></p>
                                 </div>

@@ -1,5 +1,6 @@
 package com.dripify.web;
 
+import com.dripify.cart.service.ShoppingCartService;
 import com.dripify.order.model.Order;
 import com.dripify.order.model.OrderStatus;
 import com.dripify.order.service.OrderService;
@@ -26,16 +27,18 @@ public class OrderController {
 
     private final OrderService orderService;
     private final UserService userService;
+    private final ShoppingCartService shoppingCartService;
 
-    public OrderController(OrderService orderService, UserService userService) {
+    public OrderController(OrderService orderService, UserService userService, ShoppingCartService shoppingCartService) {
         this.orderService = orderService;
         this.userService = userService;
+        this.shoppingCartService = shoppingCartService;
     }
 
 
     @GetMapping("/purchases")
     public ModelAndView getsOrdersPage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
-        ModelAndView modelAndView = new ModelAndView("/user/orders-purchases");
+        ModelAndView modelAndView = new ModelAndView("user/orders-purchases");
 
         User user = userService.getById(authenticationMetadata.getUserId());
         Map<LocalDate, List<Order>> userOrdersGroupedByDate = orderService.getPurchasedByUser(user);
@@ -47,7 +50,7 @@ public class OrderController {
 
     @GetMapping("/sales")
     public ModelAndView getsSalesPage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
-        ModelAndView modelAndView = new ModelAndView("/user/orders-sales");
+        ModelAndView modelAndView = new ModelAndView("user/orders-sales");
 
         User user = userService.getById(authenticationMetadata.getUserId());
         Map<LocalDate, List<Order>> sellerOrdersGroupedByDate = orderService.getSoldByUser(user);
@@ -60,9 +63,7 @@ public class OrderController {
     public ModelAndView getCheckoutPage(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
         User user = userService.getById(authenticationMetadata.getUserId());
 
-        if (user.getShoppingCart().getProducts().isEmpty()) {
-            return new ModelAndView("redirect:/");
-        }
+        shoppingCartService.validateCartNotEmpty(user);
 
         ModelAndView modelAndView = new ModelAndView("checkout");
         modelAndView.addObject("orderCreateRequest", new OrderCreateRequest());

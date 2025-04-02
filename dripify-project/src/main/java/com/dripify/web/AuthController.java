@@ -35,7 +35,7 @@ public class AuthController {
     @GetMapping("/login")
     public ModelAndView getLoginPage(@RequestParam(required = false, value = "error") String errorParam,
                                      @AuthenticationPrincipal AuthenticationMetadata authenticationMetadata) {
-        ModelAndView modelAndView = new ModelAndView("/login");
+        ModelAndView modelAndView = new ModelAndView("login");
 
         if (authenticationMetadata != null) {
             return new ModelAndView("redirect:/");
