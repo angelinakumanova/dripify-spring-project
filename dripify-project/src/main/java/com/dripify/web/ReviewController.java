@@ -1,6 +1,5 @@
 package com.dripify.web;
 
-import com.dripify.order.model.Order;
 import com.dripify.order.service.OrderService;
 import com.dripify.review.service.ReviewService;
 import com.dripify.security.AuthenticationMetadata;
