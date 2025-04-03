@@ -20,7 +20,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     Optional<User> findByUsernameAndIsActiveTrue(String username);
 
     @Modifying
-    @Query(value = "DELETE FROM user_favorite_products ufp WHERE ufp.product_id = :productId", nativeQuery = true)
+    @Query(value = "DELETE FROM users_favorite_products ufp WHERE ufp.product_id = :productId", nativeQuery = true)
     void removeFavouriteProduct(UUID productId);
 
 
