@@ -37,7 +37,7 @@ Dripify is an online marketplace where users can buy and sell clothing items. It
 ## Upon joining, you will receive a welcome email and be ready to immerse yourself in the world of Dripify!
 ![image](https://github.com/user-attachments/assets/3ed7afb5-d432-4c2d-b859-89e0df26fd7f)
 
-## The intuitive listing page where users can easily browse and manage products
+## The intuitive listing page where users can effortlessly post their products for sale
 ![ezgif com-video-to-gif-converter (3)](https://github.com/user-attachments/assets/60e1c958-2814-44f3-aed6-582d9422cd39)
 
 ## The personalised page for your product
