@@ -6,30 +6,40 @@
 Dripify is an online marketplace where users can buy and sell clothing items. It provides an easy-to-use interface for listing products, browsing categories, and managing orders. The platform is designed with a modern UI and a secure backend to ensure a smooth experience for buyers and sellers.
 
 ### 💡 Features 
-- 🔑 User Authentication – Secure login and registration system
+- 🔑 **User Authentication** – Secure login and registration system
 
-- 🛍️ Product Listings – Users can list, edit, and delete clothing items
+- 🛍️ **Product Listings** – Users can list, edit, and delete clothing items
 
-- 🔍 Advanced Filtering – Filter products by categories, price range, and more
+- 🔍 **Advanced Filtering** – Filter products by categories, price range, and more, with pagination for easier navigation through the listings.
 
-- 📦 Order Management – Buyers can place orders and track their status; Sellers can view, process, and update order statuses
+- 📦 **Order Management** – Buyers can place orders and track their status; Sellers can view, process, and update order statuses
 
-- 🎛 Admin Panel – Admins can manage users
+- 🎛 **Admin Panel** – Admins can manage users
 
 
 ## 🛠 Tech Stack
  - 🖥 **Backend**: Spring Boot, Java, MySQL
+ - 🏚 **Architecture**:
+   - Monolithic architecture for core functionality (user authentication, product management, order processing).
+   - [Notification Microservice](https://github.com/angelinakumanova/notification-svc) for sending email alerts (order confirmations, newsletter).
  - ☁ **File storage cloud API**: Cloudinary
- - 🌐 **Frontend**: Thymeleaf, Preline UI, Tailwind UI, JavaScript
  - 🔐 **Security**: Spring Security for Authorization & Authentication
+ - 🌐 **Frontend**: Thymeleaf, Preline UI, Tailwind UI, JavaScript
+
 
 ## Showcase
+To test the app as an admin, use the following credentials:
+- Username: admin
+- Password: admin123
+  
+If not, enjoy your shopping experience! 😁
 
 ### Home Page (The Cost of Fast Fashion on Earth, Customer Reviews, and more)
 
 ![screencapture-localhost-8080-2025-04-03-22_36_50](https://github.com/user-attachments/assets/508fa04a-88a9-475c-9463-77c9403f0e9b)
 
 ## Login & Register (So you can join the cool community ;) )
+
 #### Your account security is a top priority, safeguarded by Spring Security’s reliable authentication and protection mechanisms.
 ![image](https://github.com/user-attachments/assets/5d54df0b-f500-4991-8f98-f38ff7aedad0)
 ![image](https://github.com/user-attachments/assets/01f2e9f7-3bda-41dd-ae9b-399f83f41d58)
@@ -47,14 +57,13 @@ Dripify is an online marketplace where users can buy and sell clothing items. It
 ![image](https://github.com/user-attachments/assets/7320d9cf-698d-4694-a959-27b591f73eaa)
 
 
-
 ## The Products page is designed for seamless navigation, allowing users to easily view, filter, and manage listings
 ![image](https://github.com/user-attachments/assets/59184e8b-08fa-4b50-b09f-e858d91af616)
 
 ## First order is secured!!
 ![image](https://github.com/user-attachments/assets/e59398da-3644-480c-a920-a64458dd215d)
 
-## Yes, david45678 has been notified about his new order on site and on email
+## Yes, david45678 has been notified about his new order both on the website and via email
 ![image](https://github.com/user-attachments/assets/3b70a83c-24f8-4b2c-8fda-a0b0bf36c47b)
 
 
@@ -71,9 +80,12 @@ Dripify is an online marketplace where users can buy and sell clothing items. It
 ## You have a favourite product? You can save it!
 ![image](https://github.com/user-attachments/assets/17e94cd3-b865-45a9-a0dd-a6d52aabb21f)
 
+## As an admin, you have the power to deactivate users or even promote someone else to admin – it's all part of the job! 😄
+![screencapture-localhost-8080-users-2025-04-03-23_19_38](https://github.com/user-attachments/assets/2e744eeb-a9c9-4024-a815-f5a5dd7fb9c9)
 
 
 
 
 
-
+# 🚀 Dripify - Elevate Your Fashion Game!
+### Thank you for checking out Dripify! I appreciate your interest and hope you enjoy using the platform.
