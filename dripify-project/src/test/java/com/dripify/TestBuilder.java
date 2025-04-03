@@ -10,10 +10,15 @@ import com.dripify.security.AuthenticationMetadata;
 import com.dripify.shared.enums.Gender;
 import com.dripify.user.model.User;
 import com.dripify.user.model.UserRole;
+import com.dripify.web.dto.CreateProductRequest;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+
+import static org.mockito.Mockito.mock;
 
 
 public final class TestBuilder {
@@ -51,5 +56,21 @@ public final class TestBuilder {
 
     public static AuthenticationMetadata principal(User user) {
         return new AuthenticationMetadata(user.getId(), user.getUsername(), user.getPassword(), user.getRole(), user.isActive());
+    }
+
+    public static CreateProductRequest createProductRequest() {
+        CreateProductRequest createProductRequest = new CreateProductRequest();
+        createProductRequest.setImages(List.of(mock(MultipartFile.class), mock(MultipartFile.class)));
+        createProductRequest.setTitle("Title Test Title Test");
+        createProductRequest.setDescription("Description Description Description Description Description");
+        createProductRequest.setBrand(Brand.LOUIS_VUITTON);
+        createProductRequest.setSize(Size.M);
+        createProductRequest.setCategory(new Category());
+        createProductRequest.setGender(Gender.WOMEN);
+        createProductRequest.setColor(Color.BLUE);
+        createProductRequest.setPrice(BigDecimal.TEN);
+        createProductRequest.setCondition(Condition.NEW);
+        createProductRequest.setMaterial(Material.COTTON);
+        return createProductRequest;
     }
 }

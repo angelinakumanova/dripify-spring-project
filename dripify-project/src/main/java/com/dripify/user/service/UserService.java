@@ -243,7 +243,8 @@ public class UserService implements UserDetailsService {
         userRepository.save(target);
     }
 
-    private void deactivateUser(User user) {
+    @Transactional
+    public void deactivateUser(User user) {
         user.setActive(false);
         user.setUpdatedOn(LocalDateTime.now());
         shoppingCartService.clearCart(user.getShoppingCart());

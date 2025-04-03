@@ -42,7 +42,8 @@ dependencies {
     // https://mvnrepository.com/artifact/com.cloudinary/cloudinary-taglib
     implementation 'com.cloudinary:cloudinary-taglib:2.2.0'
     // https://mvnrepository.com/artifact/io.github.cdimascio/java-dotenv
-        implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+    implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+    runtimeOnly 'com.h2database:h2'
     }
 
     dependencyManagement {

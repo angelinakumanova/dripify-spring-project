@@ -36,8 +36,7 @@ public class ProductRestController {
             Map<String, Map<String, String>> errors = Map.of("errors", bindingResult.getFieldErrors().stream()
                     .collect(Collectors.toMap(
                             error -> error.getField() + "-error",
-                            FieldError::getDefaultMessage,
-                            (existing, replacement) -> existing
+                            FieldError::getDefaultMessage
                     )));
 
 

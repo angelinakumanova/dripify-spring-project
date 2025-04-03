@@ -142,7 +142,7 @@ public class ProfileSettingsController {
     @PutMapping("/user-status")
     public String deactivateProfile(@AuthenticationPrincipal AuthenticationMetadata authenticationMetadata,
                                     RedirectAttributes redirectAttributes) {
-        userService.changeStatus(userService.getById(authenticationMetadata.getUserId()));
+        userService.deactivateUser(userService.getById(authenticationMetadata.getUserId()));
 
         redirectAttributes.addFlashAttribute("successUserDeactivation", "User deactivated successfully!");
         return "redirect:/";
