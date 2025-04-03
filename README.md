@@ -14,13 +14,14 @@ Dripify is an online marketplace where users can buy and sell clothing items. It
 
 - 📦 Order Management – Buyers can place orders and track their status; Sellers can view, process, and update order statuses
 
-- 🎛 Admin Panel – Admins can manage categories, users, and reported items
+- 🎛 Admin Panel – Admins can manage users
 
 
 ## 🛠 Tech Stack
  - 🖥 **Backend**: Spring Boot, Java, MySQL
+ - ☁ **File storage cloud API**: Cloudinary
  - 🌐 **Frontend**: Thymeleaf, Preline UI, Tailwind UI, JavaScript
- - 🔐 **Security**: Spring Security for Authorization && Authentication
+ - 🔐 **Security**: Spring Security for Authorization & Authentication
 
 ## Showcase
 
@@ -38,5 +39,41 @@ Dripify is an online marketplace where users can buy and sell clothing items. It
 
 ## The intuitive listing page where users can easily browse and manage products
 ![ezgif com-video-to-gif-converter (3)](https://github.com/user-attachments/assets/60e1c958-2814-44f3-aed6-582d9422cd39)
+
+## The personalised page for your product
+![image](https://github.com/user-attachments/assets/0bbc9196-203e-43b3-b078-213da2883a6f)
+
+## You mispelled something? Don't worry, you can edit your product!
+![image](https://github.com/user-attachments/assets/7320d9cf-698d-4694-a959-27b591f73eaa)
+
+
+
+## The Products page is designed for seamless navigation, allowing users to easily view, filter, and manage listings
+![image](https://github.com/user-attachments/assets/59184e8b-08fa-4b50-b09f-e858d91af616)
+
+## First order is secured!!
+![image](https://github.com/user-attachments/assets/e59398da-3644-480c-a920-a64458dd215d)
+
+## Yes, david45678 has been notified about his new order on site and on email
+![image](https://github.com/user-attachments/assets/3b70a83c-24f8-4b2c-8fda-a0b0bf36c47b)
+
+
+## As a user, you have your own profile page, and you can also explore the profiles of other users
+![image](https://github.com/user-attachments/assets/65abacf5-578b-4bb5-9778-98477547dbc7)
+
+## And you can edit your data!
+![image](https://github.com/user-attachments/assets/f572059d-9787-4900-af2e-18e686fb9255)
+![image](https://github.com/user-attachments/assets/9a5d5f90-e222-47fe-954c-b4d64efbc5eb)
+
+## You can manage your purchases and sales!
+![image](https://github.com/user-attachments/assets/74430900-364e-4d81-9182-92a8d0e5c0b4)
+
+## You have a favourite product? You can save it!
+![image](https://github.com/user-attachments/assets/17e94cd3-b865-45a9-a0dd-a6d52aabb21f)
+
+
+
+
+
 
 
