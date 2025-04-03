@@ -68,4 +68,6 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
     void deactivateUserProducts(User seller);
 
     List<Product> Size(Size size);
+
+    List<Product> findBySeller(User seller);
 }

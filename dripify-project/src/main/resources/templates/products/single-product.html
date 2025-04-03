@@ -292,7 +292,7 @@
 
             <div>
               <h3 class="text-sm text-gray-700">
-                <a th:href="@{/products/{id}/product(id = ${extraProduct.id})}">
+                <a th:href="@{/products/{id}(id = ${extraProduct.id})}">
                   <span aria-hidden="true" class="absolute inset-0"></span>
                   <span th:text="${extraProduct.name}"></span>
                 </a>
@@ -329,7 +329,7 @@
 
             <div>
               <h3 class="text-sm text-gray-700">
-                <a th:href="@{/products/{id}/product(id = ${similarProduct.id})}">
+                <a th:href="@{/products/{id}(id = ${similarProduct.id})}">
                   <span aria-hidden="true" class="absolute inset-0"></span>
                   <span th:text="${similarProduct.name}"></span>
                 </a>

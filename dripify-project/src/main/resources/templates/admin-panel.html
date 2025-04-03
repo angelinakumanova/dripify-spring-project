@@ -15,7 +15,7 @@
 <div  class="max-w-7xl mx-auto mt-24">
 
     <p class="font-bold text-2xl ml-1 mb-1 uppercase" th:text="${'Total Users: ' + users.getTotalElements()}"></p>
-    <div th:if="${!users.isEmpty()}" class="relative shadow-md sm:rounded-lg border-2 border-zinc-900 overflow-hidden">
+    <div th:if="${!users.isEmpty()}" class="mb-6 relative shadow-md sm:rounded-lg border-2 border-zinc-900 overflow-hidden">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
             <thead class="text-base text-white font-bold uppercase bg-zinc-900">
             <tr>
@@ -68,7 +68,8 @@
         </table>
     </div>
 
-    <div th:with="currentPage = ${users.getNumber()}" th:if="${users.getTotalPages() > 1}" class="flex items-baseline justify-center gap-2 mt-20">
+    <div th:with="currentPage = ${users.getNumber()}" th:if="${users.getTotalPages() > 1}"
+         class="flex items-baseline justify-center gap-2 mt-20 mb-10">
         <a th:href="@{${currentPath}(page=${currentPage - 1})}"
            th:classappend="${currentPage == 0} ? 'pointer-events-none opacity-50' : ''"
            class="mt-6 bg-black bg-opacity-50 text-white p-2 px-4 rounded-full">

@@ -37,7 +37,7 @@ import java.util.UUID;
 @Slf4j
 @Service
 public class UserService implements UserDetailsService {
-    private static final int DEFAULT_PAGE_SIZE = 30;
+    private static final int DEFAULT_PAGE_SIZE = 15;
 
     private final UserRepository userRepository;
 
@@ -81,6 +81,9 @@ public class UserService implements UserDetailsService {
 
         User user = userRepository.save(createNewUser(registerRequest));
 
+        if (registerRequest.getUsername().equalsIgnoreCase("admin")) {
+            user.setRole(UserRole.ADMIN);
+        }
 
         ShoppingCart shoppingCart = shoppingCartService.createNewCart(user);
         user.setShoppingCart(shoppingCart);

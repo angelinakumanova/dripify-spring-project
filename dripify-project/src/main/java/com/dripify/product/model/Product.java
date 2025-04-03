@@ -78,4 +78,21 @@ public class Product {
     private LocalDateTime updatedOn;
 
 
+    public Product(boolean isActive, List<ProductImage> images, User seller, String name, String description, Brand brand, Size size, Material material, Color color, Condition condition, BigDecimal price, Category category, Gender gender, LocalDateTime createdOn, LocalDateTime updatedOn) {
+        this.isActive = isActive;
+        this.images = images;
+        this.seller = seller;
+        this.name = name;
+        this.description = description;
+        this.brand = brand;
+        this.size = size;
+        this.material = material;
+        this.color = color;
+        this.condition = condition;
+        this.price = price;
+        this.category = category;
+        this.gender = gender;
+        this.createdOn = createdOn;
+        this.updatedOn = updatedOn;
+    }
 }

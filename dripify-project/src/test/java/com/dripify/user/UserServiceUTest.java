@@ -554,7 +554,7 @@ public class UserServiceUTest {
         user.setUsername("currentUser");
 
         int page = 0;
-        Pageable pageable = PageRequest.of(page, 30);
+        Pageable pageable = PageRequest.of(page, 15);
         List<User> users = List.of(new User(), new User());
         Page<User> expectedPage = new PageImpl<>(users, pageable, users.size());
 

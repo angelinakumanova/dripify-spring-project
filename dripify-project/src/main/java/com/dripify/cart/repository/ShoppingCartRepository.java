@@ -2,6 +2,7 @@ package com.dripify.cart.repository;
 
 import com.dripify.cart.model.ShoppingCart;
 import com.dripify.user.model.User;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,6 +13,7 @@ import java.util.UUID;
 
 @Repository
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, UUID> {
+    @EntityGraph(attributePaths = "products")
     Optional<ShoppingCart> findByUser(User user);
 
     @Modifying

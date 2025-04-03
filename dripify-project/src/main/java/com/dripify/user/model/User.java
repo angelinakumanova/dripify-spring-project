@@ -14,7 +14,9 @@ import java.util.*;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -43,21 +45,24 @@ public class User {
 
     private String description;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
 
-    @OneToMany(mappedBy = "seller")
-    private List<Product> products;
+    @Builder.Default
+    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
+    private List<Product> products = new ArrayList<>();
 
+    @Builder.Default
     @ManyToMany
     @JoinTable(
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private Set<Product> favoriteProducts;
+    private Set<Product> favoriteProducts = new HashSet<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "reviewee")
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<>();
 
     @Column(nullable = false)
     private boolean isActive;
@@ -71,11 +76,5 @@ public class User {
     private LocalDateTime createdOn;
 
     private LocalDateTime updatedOn;
-
-    public User() {
-        this.products = new ArrayList<>();
-        this.reviews = new ArrayList<>();
-        this.favoriteProducts = new HashSet<>();
-    }
 
 }

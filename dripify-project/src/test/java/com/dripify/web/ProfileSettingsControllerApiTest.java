@@ -255,7 +255,7 @@ public class ProfileSettingsControllerApiTest extends BaseApiTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/"))
                 .andExpect(flash().attributeExists("successUserDeactivation"));
-        verify(userService, times(1)).changeStatus(user);
+        verify(userService, times(1)).deactivateUser(user);
 
     }
 

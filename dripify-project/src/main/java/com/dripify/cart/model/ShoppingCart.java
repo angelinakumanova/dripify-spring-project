@@ -8,9 +8,10 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
-@Builder
+@Builder()
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 public class ShoppingCart {
@@ -23,20 +24,17 @@ public class ShoppingCart {
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
+    @Builder.Default
     @ManyToMany
     @JoinTable(
             joinColumns = @JoinColumn(name = "shopping_cart_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
     @Column(nullable = false)
     private LocalDateTime createdOn;
 
     @Column(nullable = false)
     private LocalDateTime updatedOn;
-
-    public ShoppingCart() {
-        this.products = new ArrayList<>();
-    }
 }
